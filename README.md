@@ -2,7 +2,7 @@
 
 Gulps lets you track your daily water intake in a simple and intuitive way: set your goal, set your usual portion, and start keeping track from within the app or the widget in your notification center.  
 
-This app is available in the AppStore. Learn more here.
+This app is available in the [AppStore](https://itunes.apple.com/us/app/gulps/id979057304?ls=1&mt=8). Learn more [here](http://www.fancypixel.it/gulps/index.html).
 
 #Screenshot
 ![Gulps](https://raw.githubusercontent.com/FancyPixel/gulps/master/assets/screenshot.png)
