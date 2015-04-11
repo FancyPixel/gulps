@@ -1,0 +1,16 @@
+{
+    "aps": {
+        "alert": {
+            "body": "Remember to drink some water!",
+            "title": "Time to drink!"
+        },
+        "category": "GULP_CATEGORY"
+    },
+    
+    "WatchKit Simulator Actions": [
+        {
+            "title": "Add Gulp",
+            "identifier": "GULP_ACTION"
+        }
+    ]
+}

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14D105g" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="M4Y-Lb-cyx">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+    </dependencies>
+    <scenes>
+        <!--Today View Controller-->
+        <scene sceneID="cwh-vc-ff4">
+            <objects>
+                <viewController id="M4Y-Lb-cyx" customClass="TodayViewController" customModule="Gulps_Today" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ft6-oW-KC0"/>
+                        <viewControllerLayoutGuide type="bottom" id="FKl-LY-JtV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" simulatedAppContext="notificationCenter" id="S3S-Oj-5AN">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="108"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Keeping healthy!" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="GcN-lo-r42">
+                                <rect key="frame" x="20" y="8" width="280" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="p6x-mT-tdY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6uS-2w-0pZ" userLabel="Big gulp button">
+                                <rect key="frame" x="200" y="37" width="40" height="40"/>
+                                <color key="backgroundColor" red="0.21960784310000001" green="0.49019607840000001" blue="0.81176470590000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="0Yz-T1-sY8"/>
+                                    <constraint firstAttribute="width" constant="40" id="HJ1-NS-xTL"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                <state key="normal" image="big-tiny-icon">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="bigGulp:" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="qzb-Xc-lQg"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0,5 L" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XYo-e7-dzi" userLabel="Big label">
+                                <rect key="frame" x="206" y="79" width="28" height="15"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y3l-b0-FmP" userLabel="Small gulp button">
+                                <rect key="frame" x="80" y="37" width="40" height="40"/>
+                                <color key="backgroundColor" red="0.21960784310000001" green="0.49019607840000001" blue="0.81176470590000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="tg5-zZ-1d3"/>
+                                    <constraint firstAttribute="height" constant="40" id="xBZ-Db-vxN"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                <state key="normal" image="small-tiny-icon">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="smallGulp:" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="O4V-HR-BBf"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0,2 L" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="di7-sK-aUc" userLabel="Small Label">
+                                <rect key="frame" x="86" y="79" width="28" height="15"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GQV-Dk-jL8" userLabel="Small Confirm">
+                                <rect key="frame" x="80" y="37" width="40" height="40"/>
+                                <color key="backgroundColor" red="0.41568627450000001" green="0.69803921570000005" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="EoO-IY-tI5"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="Ta1-3c-a0Q"/>
+                                    <constraint firstAttribute="width" constant="40" id="r8c-q3-M7d"/>
+                                    <constraint firstAttribute="height" constant="40" id="sMg-VD-6iN"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                <state key="normal" image="tiny-check">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="smallConfirmAction" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="JbO-dn-YP2"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CA2-9X-2XM" userLabel="Big Confirm">
+                                <rect key="frame" x="200" y="37" width="40" height="40"/>
+                                <color key="backgroundColor" red="0.41568627450000001" green="0.69803921570000005" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="AWs-my-qVN"/>
+                                    <constraint firstAttribute="height" constant="40" id="XCF-lo-ohg"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                <state key="normal" image="tiny-check">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="bigConfirmAction" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="NMV-eV-0kz"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="di7-sK-aUc" firstAttribute="centerX" secondItem="Y3l-b0-FmP" secondAttribute="centerX" id="5fU-P2-cge"/>
+                            <constraint firstAttribute="trailing" secondItem="CA2-9X-2XM" secondAttribute="trailing" constant="80" id="7lU-Xl-ADi"/>
+                            <constraint firstItem="XYo-e7-dzi" firstAttribute="centerX" secondItem="6uS-2w-0pZ" secondAttribute="centerX" id="8lr-QV-XJR"/>
+                            <constraint firstItem="Y3l-b0-FmP" firstAttribute="top" secondItem="GcN-lo-r42" secondAttribute="bottom" constant="8" id="In5-cG-n5W"/>
+                            <constraint firstItem="GQV-Dk-jL8" firstAttribute="top" secondItem="GcN-lo-r42" secondAttribute="bottom" constant="8" id="Jom-PJ-79K"/>
+                            <constraint firstAttribute="trailing" secondItem="6uS-2w-0pZ" secondAttribute="trailing" constant="80" id="Mzy-Z6-eg7"/>
+                            <constraint firstItem="GcN-lo-r42" firstAttribute="top" secondItem="Ft6-oW-KC0" secondAttribute="bottom" constant="8" id="RDz-0K-2Ek"/>
+                            <constraint firstItem="GcN-lo-r42" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leading" constant="20" id="SAp-Ye-TBq"/>
+                            <constraint firstItem="di7-sK-aUc" firstAttribute="top" secondItem="Y3l-b0-FmP" secondAttribute="bottom" constant="2" id="VMz-jB-EPs"/>
+                            <constraint firstItem="XYo-e7-dzi" firstAttribute="top" secondItem="6uS-2w-0pZ" secondAttribute="bottom" constant="2" id="YwQ-sC-Pwk"/>
+                            <constraint firstItem="6uS-2w-0pZ" firstAttribute="top" secondItem="GcN-lo-r42" secondAttribute="bottom" constant="8" id="evQ-yc-hvT"/>
+                            <constraint firstItem="CA2-9X-2XM" firstAttribute="top" secondItem="GcN-lo-r42" secondAttribute="bottom" constant="8" id="kuR-5g-y3X"/>
+                            <constraint firstItem="Y3l-b0-FmP" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leading" constant="80" id="l72-KI-kpc"/>
+                            <constraint firstAttribute="trailing" secondItem="GcN-lo-r42" secondAttribute="trailing" constant="20" id="tBi-7d-Jdw"/>
+                            <constraint firstItem="GQV-Dk-jL8" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leading" constant="80" id="uO1-7H-akY"/>
+                        </constraints>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="108"/>
+                    <connections>
+                        <outlet property="bigConfirmButton" destination="CA2-9X-2XM" id="miF-TP-Rap"/>
+                        <outlet property="bigGulpButton" destination="6uS-2w-0pZ" id="FEP-M8-Hze"/>
+                        <outlet property="bigLabel" destination="XYo-e7-dzi" id="2Po-bK-fmh"/>
+                        <outlet property="entryHandler" destination="dKN-ch-ZKo" id="VAJ-d0-vtf"/>
+                        <outlet property="smallConfirmButton" destination="GQV-Dk-jL8" id="SUg-fe-nOQ"/>
+                        <outlet property="smallGulpButton" destination="Y3l-b0-FmP" id="aeD-YA-Of4"/>
+                        <outlet property="smallLabel" destination="di7-sK-aUc" id="CRo-n9-RdN"/>
+                        <outlet property="summaryLabel" destination="GcN-lo-r42" id="qiQ-kM-aq1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vXp-U4-Rya" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="dKN-ch-ZKo" customClass="EntryHandler" customModule="Gulps_Today"/>
+            </objects>
+            <point key="canvasLocation" x="3" y="309"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="big-tiny-icon" width="19" height="19"/>
+        <image name="small-tiny-icon" width="19" height="19"/>
+        <image name="tiny-check" width="19" height="19"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

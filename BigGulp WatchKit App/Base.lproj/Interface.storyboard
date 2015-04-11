@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="6751" systemVersion="14D127a" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="3737"/>
+    </dependencies>
+    <scenes>
+        <!--Interface Controller-->
+        <scene sceneID="aou-V4-d1y">
+            <objects>
+                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="Gulps_WatchKit_Extension">
+                    <items>
+                        <group width="1" height="1" alignment="left" backgroundImage="progress-0-watch" layout="vertical" id="djR-KX-Wvu">
+                            <items>
+                                <label width="1" alignment="left" text="DAILY GOAL: 0%" textAlignment="center" id="jsO-fa-6Yq">
+                                    <color key="textColor" red="0.15686274510000001" green="0.3921568627" blue="0.7725490196" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
+                                </label>
+                            </items>
+                        </group>
+                    </items>
+                    <menu key="menu" id="asB-vX-JfW">
+                        <items>
+                            <menuItem title="Add gulp" icon="add" id="r1C-zz-ync">
+                                <connections>
+                                    <action selector="addMenuAction" destination="AgC-eL-Hgc" id="MzE-3h-5x9"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                    <connections>
+                        <outlet property="goalLabel" destination="jsO-fa-6Yq" id="d8F-pP-AFM"/>
+                        <outlet property="interfaceGroup" destination="djR-KX-Wvu" id="Wmj-cd-kWw"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="235" y="347"/>
+        </scene>
+        <!--Add gulp-->
+        <scene sceneID="AoI-BB-Zra">
+            <objects>
+                <controller identifier="ActionInterfaceController" title="Add gulp" id="pyk-7v-GvS" customClass="ActionInterfaceController" customModule="Gulps_WatchKit_Extension">
+                    <items>
+                        <group width="1" height="1" alignment="left" layout="vertical" spacing="12" id="ddu-3k-t8e">
+                            <items>
+                                <button width="60" height="60" alignment="center" backgroundImage="button-small" id="lr6-Gi-wYm">
+                                    <connections>
+                                        <action selector="smallButtonAction" destination="pyk-7v-GvS" id="RTR-B0-naw"/>
+                                    </connections>
+                                </button>
+                                <button width="60" height="60" alignment="center" backgroundImage="button-big" id="89x-JP-IIy">
+                                    <connections>
+                                        <action selector="bigButtonAction" destination="pyk-7v-GvS" id="gKr-mK-Dsn"/>
+                                    </connections>
+                                </button>
+                            </items>
+                            <edgeInsets key="margins" left="0.0" right="0.0" top="10" bottom="0.0"/>
+                            <variation key="device=watch38mm" spacing="12"/>
+                            <variation key="device=watch42mm" spacing="20"/>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="bigButton" destination="89x-JP-IIy" id="PTJ-Z1-WXo"/>
+                        <outlet property="smallButton" destination="lr6-Gi-wYm" id="5bO-SK-Mbw"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="450" y="347"/>
+        </scene>
+        <!--Glance Interface Controller-->
+        <scene sceneID="BOz-TT-tkC">
+            <objects>
+                <glanceController spacing="0.0" id="0uZ-2p-rRc" customClass="GlanceController" customModule="Gulps_WatchKit_Extension">
+                    <items>
+                        <group alignment="left" id="t8f-Gd-c4y">
+                            <items>
+                                <imageView alignment="left" verticalAlignment="center" image="gulp" id="uwO-ne-ckB"/>
+                                <label alignment="left" verticalAlignment="center" text="BigGulp" id="3Gi-pF-rdn"/>
+                            </items>
+                            <edgeInsets key="margins" left="5" right="0.0" top="0.0" bottom="0.0"/>
+                        </group>
+                        <group alignment="left" layout="vertical" id="uCw-4Q-Ouw">
+                            <items>
+                                <label width="1" alignment="left" text="0%" textAlignment="center" id="fos-hc-9XJ">
+                                    <color key="textColor" red="0.15686274510000001" green="0.3921568627" blue="0.7725490196" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" type="system" pointSize="36"/>
+                                </label>
+                                <label width="1" alignment="left" text="of your daily goal" textAlignment="center" id="x2p-3r-dBm">
+                                    <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                </label>
+                            </items>
+                        </group>
+                    </items>
+                    <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="14"/>
+                    <connections>
+                        <outlet property="percentageLabel" destination="fos-hc-9XJ" id="Z9b-s0-txG"/>
+                    </connections>
+                </glanceController>
+            </objects>
+            <point key="canvasLocation" x="235" y="672"/>
+        </scene>
+        <!--Static Notification Interface Controller-->
+        <scene sceneID="AEw-b0-oYE">
+            <objects>
+                <notificationController id="YCC-NB-fut">
+                    <items>
+                        <label width="0.90000000000000002" alignment="center" text="Remember to drink some water!" textAlignment="center" numberOfLines="0" id="XkS-y5-khE">
+                            <color key="textColor" red="0.92424242420000002" green="0.92424242420000002" blue="0.92424242420000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                        </label>
+                    </items>
+                    <notificationCategory key="notificationCategory" identifier="GULP_CATEGORY" id="JfB-70-Muf">
+                        <color key="sashColor" red="0.15686274510000001" green="0.3921568627" blue="0.7725490196" alpha="1" colorSpace="calibratedRGB"/>
+                    </notificationCategory>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="notificationAlertLabel" destination="XkS-y5-khE" id="49B-RR-99y"/>
+                    </connections>
+                </notificationController>
+            </objects>
+            <point key="canvasLocation" x="235" y="1001"/>
+        </scene>
+    </scenes>
+</document>
