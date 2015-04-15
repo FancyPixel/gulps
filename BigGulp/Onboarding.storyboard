@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14D105g" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="By6-Ql-uIz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="By6-Ql-uIz">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -105,7 +105,7 @@
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aNx-Gk-pr3" userLabel="Header">
                                 <rect key="frame" x="16" y="40" width="288" height="66"/>
-                                <string key="text">A couple of question first:
+                                <string key="text">A couple of questions first:
 what measurement system do you prefer?</string>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -286,7 +286,7 @@ what measurement system do you prefer?</string>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JSe-R9-wt9" userLabel="Header">
                                 <rect key="frame" x="16" y="40" width="288" height="110"/>
-                                <string key="text">I’ll keep track of your water consumption through gulps, you just need to set up you usual small gulp (a glass of water, usually 0,2 L or 8 oz) and big gulp (let’s say a bottle)</string>
+                                <string key="text">I’ll keep track of your water consumption through gulps, you just need to set up your usual small gulp (a glass of water, usually 0,2 L or 8 oz) and big gulp (let’s say a bottle)</string>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -460,9 +460,11 @@ what measurement system do you prefer?</string>
                     <navigationItem key="navigationItem" id="41t-VR-ovH"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="bigBackgroundView" destination="plP-Gr-jkv" id="Se9-tP-YMW"/>
                         <outlet property="bigGulpText" destination="gFP-R6-3l1" id="TMj-Dt-afJ"/>
                         <outlet property="bigSuffixLabel" destination="s4e-zS-DTj" id="ps4-9W-Sls"/>
                         <outlet property="headerLabel" destination="JSe-R9-wt9" id="Nqd-pL-tXb"/>
+                        <outlet property="smallBackgroundView" destination="Xto-Uc-SOf" id="0jp-8i-LAd"/>
                         <outlet property="smallGulpText" destination="e8D-nG-89R" id="qTw-4Q-9sJ"/>
                         <outlet property="smallSuffixLabel" destination="wIJ-Qh-sXS" id="MgS-5T-ssD"/>
                         <outletCollection property="viewArray" destination="JSe-R9-wt9" collectionClass="NSMutableArray" id="hVz-TU-olM"/>
@@ -602,6 +604,7 @@ what measurement system do you prefer?</string>
                     <navigationItem key="navigationItem" id="TGo-FN-uza"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="goalBackgroundView" destination="xdk-cL-gdm" id="iOy-4a-ADy"/>
                         <outlet property="goalSuffixLabel" destination="OlE-qk-N7s" id="E1u-Wl-qhV"/>
                         <outlet property="goalTextField" destination="S54-HU-dVI" id="pzk-fq-WJg"/>
                         <outlet property="headerLabel" destination="nbv-Ph-Ogi" id="ZSU-ZD-lhT"/>
@@ -626,7 +629,7 @@ what measurement system do you prefer?</string>
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I can remmind you to drink every once in a while. Since I don’t want to nag you, you’ll decide when:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T9n-t2-EOq" userLabel="Header">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I can remind you to drink every once in a while. Since I don’t want to nag you, you’ll decide when:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T9n-t2-EOq" userLabel="Header">
                                 <rect key="frame" x="16" y="40" width="288" height="66"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

@@ -51,6 +51,9 @@ class Entry: RLMObject {
         if (self.percentage < 0) {
             self.percentage = 0
         }
+        if (self.percentage > 100) {
+            self.percentage = 100
+        }
         self.gulps.removeLastObject()
         realm.commitWriteTransaction()
     }

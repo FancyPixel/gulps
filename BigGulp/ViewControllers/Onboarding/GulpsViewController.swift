@@ -7,6 +7,8 @@ class GulpsViewController: OnboardingViewController, UITextFieldDelegate {
     @IBOutlet weak var smallSuffixLabel: UILabel!
     @IBOutlet weak var bigSuffixLabel: UILabel!
     @IBOutlet weak var headerLabel: UILabel!
+    @IBOutlet weak var smallBackgroundView: UIView!
+    @IBOutlet weak var bigBackgroundView: UIView!
     
     let userDefaults = NSUserDefaults.groupUserDefaults()
 
@@ -15,6 +17,9 @@ class GulpsViewController: OnboardingViewController, UITextFieldDelegate {
 
         self.smallGulpText.inputAccessoryView = Globals.numericToolbar(self, selector: Selector("dismissAndSave"))
         self.bigGulpText.inputAccessoryView = Globals.numericToolbar(self, selector: Selector("dismissAndSave"))
+
+        self.smallBackgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self.smallGulpText, action: Selector("becomeFirstResponder")))
+        self.bigBackgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self.bigGulpText, action: Selector("becomeFirstResponder")))
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
