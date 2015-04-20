@@ -1,4 +1,5 @@
 import Foundation
+import Realm
 
 class Gulp: RLMObject {
     dynamic var date = NSDate()

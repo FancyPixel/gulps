@@ -1,4 +1,5 @@
 import Foundation
+import Realm
 
 class EntryHandler: NSObject {
     func currentEntry() -> Entry {

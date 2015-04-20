@@ -1,4 +1,5 @@
 import Foundation
+import Realm
 
 class Entry: RLMObject {
     dynamic var date = Entry.defaultDate()

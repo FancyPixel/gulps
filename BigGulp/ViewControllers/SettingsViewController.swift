@@ -1,4 +1,5 @@
 import UIKit
+import AHKActionSheet
 
 class SettingsViewController: UITableViewController, UIAlertViewDelegate, UITextFieldDelegate {
 
