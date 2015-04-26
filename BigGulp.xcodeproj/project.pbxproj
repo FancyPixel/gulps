@@ -64,6 +64,7 @@
 		65F295DD1AA3B314003D4016 /* NSUserDefaults-BigGulp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F295DB1AA3B311003D4016 /* NSUserDefaults-BigGulp.swift */; };
 		65F295E31AA61F4B003D4016 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65F295E21AA61F4B003D4016 /* Onboarding.storyboard */; };
 		696B3059AB57E24FA7EEA307 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9472BDFA39F9529F02380169 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		7BBBDA1EA024CAEDA92009EA /* Pods_BigGulpTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A01D32D47AD6F4810507097 /* Pods_BigGulpTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		D4CE697120972CE291433FD5 /* Pods_BigGulpTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A01D32D47AD6F4810507097 /* Pods_BigGulpTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		D8974C0C139A1D0A12CAE27A /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9472BDFA39F9529F02380169 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
@@ -201,6 +202,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				696B3059AB57E24FA7EEA307 /* Pods.framework in Frameworks */,
+				7BBBDA1EA024CAEDA92009EA /* Pods_BigGulpTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,9 +344,9 @@
 			children = (
 				65B67E5F1A924BCC000A3CCD /* BigGulp */,
 				6567DAF31A97A43C00857A43 /* BigGulpToday */,
-				65B67E771A924BCC000A3CCD /* BigGulpTests */,
 				6585CFA81AAC9A8300CA27F3 /* BigGulp WatchKit Extension */,
 				6585CFBA1AAC9A8300CA27F3 /* BigGulp WatchKit App */,
+				65B67E771A924BCC000A3CCD /* BigGulpTests */,
 				65B67E5E1A924BCC000A3CCD /* Products */,
 				BF687DAEDF50F34E88CA7A48 /* Pods */,
 				67E925FAFF6ADF6DA2BD003B /* Frameworks */,
@@ -750,7 +752,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BigGulpTests/Pods-BigGulpTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D3F03390AD26351258934912 /* Embed Pods Frameworks */ = {
@@ -1105,6 +1107,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				DEFINES_MODULE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1160,6 +1163,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				DEFINES_MODULE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1191,12 +1195,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5940FD500B5BF8735B6311F3 /* Pods.debug.xcconfig */;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = BigGulp/BigGulp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEFINES_MODULE = NO;
+				DEFINES_MODULE = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = BigGulp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1212,12 +1217,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6903FDD88E08C7ECB5026E69 /* Pods.release.xcconfig */;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = BigGulp/BigGulp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEFINES_MODULE = NO;
+				DEFINES_MODULE = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = BigGulp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

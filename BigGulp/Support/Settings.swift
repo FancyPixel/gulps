@@ -22,12 +22,12 @@ enum UnitsOfMeasure: Int {
     }
 }
 
-class Settings {
+public class Settings {
 
-    enum General: Int {
+    public enum General: Int {
         case UnitOfMeasure, OnboardingShown
 
-        func key() -> String {
+        public func key() -> String {
             switch self {
             case .UnitOfMeasure:
                 return "UNIT_OF_MEASURE"
@@ -37,9 +37,9 @@ class Settings {
         }
     }
 
-    enum Gulp: Int {
+    public enum Gulp: Int {
         case Big, Small, Goal
-        func key() -> String {
+        public func key() -> String {
             switch self {
             case .Big:
                 return "GULP_BIG"
@@ -51,9 +51,9 @@ class Settings {
         }
     }
 
-    enum Notification: Int {
+    public enum Notification: Int {
         case On, From, To, Interval
-        func key() -> String {
+        public func key() -> String {
             switch self {
             case .On:
                 return "NOTIFICATION_ON"
@@ -67,7 +67,7 @@ class Settings {
         }
     }
 
-    class func registerDefaults() {
+    public class func registerDefaults() {
         let userDefaults = NSUserDefaults.groupUserDefaults()
 
         // The defaults registered with registerDefaults are ignore by the Today Extension. :/
@@ -85,7 +85,7 @@ class Settings {
         userDefaults.synchronize()
     }
     
-    class func registerDefaultsForLiter() {
+    public class func registerDefaultsForLiter() {
         let userDefaults = NSUserDefaults.groupUserDefaults()
         userDefaults.setDouble(0.5, forKey: Gulp.Big.key())
         userDefaults.setDouble(0.2, forKey: Gulp.Small.key())
@@ -93,7 +93,7 @@ class Settings {
         userDefaults.synchronize()
     }
     
-    class func registerDefaultsForOunces() {
+    public class func registerDefaultsForOunces() {
         let userDefaults = NSUserDefaults.groupUserDefaults()
         userDefaults.setDouble(16, forKey: Gulp.Big.key())
         userDefaults.setDouble(8, forKey: Gulp.Small.key())

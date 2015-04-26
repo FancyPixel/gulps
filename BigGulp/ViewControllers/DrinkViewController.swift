@@ -4,20 +4,20 @@ import UICountingLabel
 import MMWormhole
 import AMPopTip
 
-class DrinkViewController: UIViewController, UIAlertViewDelegate {
+public class DrinkViewController: UIViewController, UIAlertViewDelegate {
 
-    @IBOutlet weak var progressMeter: DPMeterView!
-    @IBOutlet weak var percentageLabel: UICountingLabel!
-    @IBOutlet weak var addButton: UIButton!
-    @IBOutlet weak var smallButton: UIButton!
-    @IBOutlet weak var largeButton: UIButton!
-    @IBOutlet weak var minusButton: UIButton!
-    @IBOutlet var entryHandler: EntryHandler!
-    let userDefaults = NSUserDefaults.groupUserDefaults()
+    @IBOutlet public weak var progressMeter: DPMeterView!
+    @IBOutlet public weak var percentageLabel: UICountingLabel!
+    @IBOutlet public weak var addButton: UIButton!
+    @IBOutlet public weak var smallButton: UIButton!
+    @IBOutlet public weak var largeButton: UIButton!
+    @IBOutlet public weak var minusButton: UIButton!
+    @IBOutlet public var entryHandler: EntryHandler!
+    public var userDefaults = NSUserDefaults.groupUserDefaults()
     var expanded = false
     let wormhole = MMWormhole(applicationGroupIdentifier: "group.it.fancypixel.BigGulp", optionalDirectory: "biggulp")
 
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
 
         self.title = "Drink!"   
@@ -38,17 +38,17 @@ class DrinkViewController: UIViewController, UIAlertViewDelegate {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateUI", name: UIApplicationDidBecomeActiveNotification, object: nil)
     }
 
-    override func viewDidLayoutSubviews() {
+    public override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.progressMeter.setShape(ProgressMeter.pathFromRect(self.progressMeter.frame))
     }
 
-    override func viewWillAppear(animated: Bool) {
+    public override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         updateUI()
     }
 
-    override func viewDidAppear(animated: Bool) {
+    public override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
     }
 
@@ -60,7 +60,7 @@ class DrinkViewController: UIViewController, UIAlertViewDelegate {
 
     func updateUI() {
         self.percentageLabel.countFromCurrentValueTo(Float(ceil(self.entryHandler.currentEntry().percentage)))
-        self.progressMeter.setProgress(CGFloat(self.entryHandler.currentEntry().percentage / 100.0), duration: 2)
+        self.progressMeter.setProgress(CGFloat(self.entryHandler.currentEntry().percentage / 100.0), duration: 1.5)
     }
 
     @IBAction func addButtonAction(sender: UIButton) {
@@ -71,7 +71,7 @@ class DrinkViewController: UIViewController, UIAlertViewDelegate {
         }
     }
 
-    @IBAction func selectionButtonAction(sender: UIButton) {
+    @IBAction public func selectionButtonAction(sender: UIButton) {
         contractAddButton()
         if (!self.userDefaults.boolForKey("UNDO_HINT")) {
             self.userDefaults.setBool(true, forKey: "UNDO_HINT")
@@ -93,7 +93,7 @@ class DrinkViewController: UIViewController, UIAlertViewDelegate {
         alert.show()
     }
 
-    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
+    public func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
         if (buttonIndex > 0) {
             self.entryHandler.removeLastGulp()
             updateUI()
