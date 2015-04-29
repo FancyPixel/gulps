@@ -37,7 +37,7 @@ class InterfaceController: WKInterfaceController {
         let percentage = Int(ceil(entry.percentage / 10.0))
         let image = "progress-\(percentage)-watch"
         self.interfaceGroup.setBackgroundImageNamed(image)
-        self.goalLabel.setText("DAILY GOAL: \(entry.percentage)%")
+        self.goalLabel.setText("DAILY GOAL: \(entry.formattedPercentage())")
     }
 
     @IBAction func addMenuAction() {

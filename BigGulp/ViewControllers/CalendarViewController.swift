@@ -47,7 +47,7 @@ class CalendarViewController: UIViewController, JTCalendarDataSource {
             if (entry.percentage >= 100) {
                 self.dailyLabel.text = "Goal Met!"
             } else {
-                self.dailyLabel.text = "\(Int(ceil(entry.percentage)))%"
+                self.dailyLabel.text = entry.formattedPercentage()
             }
         } else {
             self.dailyLabel.text = ""
