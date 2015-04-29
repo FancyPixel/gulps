@@ -57,4 +57,10 @@ class Entry: RLMObject {
         self.gulps.removeLastObject()
         realm.commitWriteTransaction()
     }
+    
+    func formattedPercentage() -> String {
+        let percentageFormatter = NSNumberFormatter()
+        percentageFormatter.numberStyle = .PercentStyle
+        return percentageFormatter.stringFromNumber(percentage / 100.0) ?? "\(percentage)%"
+    }
 }
