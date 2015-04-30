@@ -1,0 +1,1292 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		00612DD0922770ADF791FB36 /* Pods_GulpsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A4925FCD5463140CD8FE9BC /* Pods_GulpsTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		5E4469D077A66ADEA309FA4C /* Pods_Gulps_WatchKit_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A223BA8DAB2EF6307E53D3BE /* Pods_Gulps_WatchKit_Extension.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		6537A80D1AF24CA700EC16E9 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6537A80B1AF24CA700EC16E9 /* Onboarding.storyboard */; };
+		6537A8291AF24CC800EC16E9 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A8101AF24CC800EC16E9 /* Entry.swift */; };
+		6537A82A1AF24CC800EC16E9 /* EntryHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A8111AF24CC800EC16E9 /* EntryHandler.swift */; };
+		6537A82B1AF24CC800EC16E9 /* Gulp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A8121AF24CC800EC16E9 /* Gulp.swift */; };
+		6537A82C1AF24CC800EC16E9 /* KaushanScript.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6537A8151AF24CC800EC16E9 /* KaushanScript.ttf */; };
+		6537A82D1AF24CC800EC16E9 /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6537A8161AF24CC800EC16E9 /* Lato-Light.ttf */; };
+		6537A82E1AF24CC800EC16E9 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A8181AF24CC800EC16E9 /* Colors.swift */; };
+		6537A82F1AF24CC800EC16E9 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A8191AF24CC800EC16E9 /* Globals.swift */; };
+		6537A8301AF24CC800EC16E9 /* NotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A81A1AF24CC800EC16E9 /* NotificationHelper.swift */; };
+		6537A8311AF24CC800EC16E9 /* NSUserDefaults-BigGulp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A81B1AF24CC800EC16E9 /* NSUserDefaults-BigGulp.swift */; };
+		6537A8321AF24CC800EC16E9 /* ProgressMeter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A81C1AF24CC800EC16E9 /* ProgressMeter.swift */; };
+		6537A8331AF24CC800EC16E9 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A81D1AF24CC800EC16E9 /* Settings.swift */; };
+		6537A8341AF24CC800EC16E9 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A81F1AF24CC800EC16E9 /* CalendarViewController.swift */; };
+		6537A8351AF24CC800EC16E9 /* DrinkViewController+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A8201AF24CC800EC16E9 /* DrinkViewController+Animations.swift */; };
+		6537A8361AF24CC800EC16E9 /* DrinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A8211AF24CC800EC16E9 /* DrinkViewController.swift */; };
+		6537A8371AF24CC800EC16E9 /* GoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A8231AF24CC800EC16E9 /* GoalViewController.swift */; };
+		6537A8381AF24CC800EC16E9 /* GulpsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A8241AF24CC800EC16E9 /* GulpsViewController.swift */; };
+		6537A8391AF24CC800EC16E9 /* MeasureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A8251AF24CC800EC16E9 /* MeasureViewController.swift */; };
+		6537A83A1AF24CC800EC16E9 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A8261AF24CC800EC16E9 /* NotificationViewController.swift */; };
+		6537A83B1AF24CC800EC16E9 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A8271AF24CC800EC16E9 /* OnboardingViewController.swift */; };
+		6537A83C1AF24CC800EC16E9 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A8281AF24CC800EC16E9 /* SettingsViewController.swift */; };
+		6537A83D1AF24CE100EC16E9 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A8181AF24CC800EC16E9 /* Colors.swift */; };
+		6537A83E1AF24CE800EC16E9 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A81D1AF24CC800EC16E9 /* Settings.swift */; };
+		6537A83F1AF24CE900EC16E9 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A81D1AF24CC800EC16E9 /* Settings.swift */; };
+		6537A8401AF24CEF00EC16E9 /* NSUserDefaults-BigGulp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A81B1AF24CC800EC16E9 /* NSUserDefaults-BigGulp.swift */; };
+		6537A8411AF24CEF00EC16E9 /* NSUserDefaults-BigGulp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A81B1AF24CC800EC16E9 /* NSUserDefaults-BigGulp.swift */; };
+		6537A8421AF24CFC00EC16E9 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A8101AF24CC800EC16E9 /* Entry.swift */; };
+		6537A8431AF24CFD00EC16E9 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A8101AF24CC800EC16E9 /* Entry.swift */; };
+		6537A8441AF24CFF00EC16E9 /* EntryHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A8111AF24CC800EC16E9 /* EntryHandler.swift */; };
+		6537A8451AF24CFF00EC16E9 /* EntryHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A8111AF24CC800EC16E9 /* EntryHandler.swift */; };
+		6537A8461AF24D0200EC16E9 /* Gulp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A8121AF24CC800EC16E9 /* Gulp.swift */; };
+		6537A8471AF24D0200EC16E9 /* Gulp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A8121AF24CC800EC16E9 /* Gulp.swift */; };
+		6591D8C61AF2684A0069E198 /* DrinkViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6591D8C51AF2684A0069E198 /* DrinkViewControllerTests.swift */; };
+		65A234FF1AF253D1002A35F3 /* TodayViewController+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A234FE1AF253D1002A35F3 /* TodayViewController+Animation.swift */; };
+		65A235011AF25422002A35F3 /* ActionInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A235001AF25422002A35F3 /* ActionInterfaceController.swift */; };
+		65F44C211AF24B440093A3E9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F44C201AF24B440093A3E9 /* AppDelegate.swift */; };
+		65F44C261AF24B440093A3E9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65F44C241AF24B440093A3E9 /* Main.storyboard */; };
+		65F44C281AF24B440093A3E9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65F44C271AF24B440093A3E9 /* Images.xcassets */; };
+		65F44C2B1AF24B440093A3E9 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65F44C291AF24B440093A3E9 /* LaunchScreen.xib */; };
+		65F44C471AF24B770093A3E9 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F44C461AF24B770093A3E9 /* NotificationCenter.framework */; };
+		65F44C4C1AF24B780093A3E9 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F44C4B1AF24B770093A3E9 /* TodayViewController.swift */; };
+		65F44C4E1AF24B780093A3E9 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65F44C4D1AF24B780093A3E9 /* MainInterface.storyboard */; };
+		65F44C511AF24B780093A3E9 /* GulpsToday.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 65F44C441AF24B770093A3E9 /* GulpsToday.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		65F44C601AF24B8A0093A3E9 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F44C5F1AF24B8A0093A3E9 /* InterfaceController.swift */; };
+		65F44C621AF24B8A0093A3E9 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F44C611AF24B8A0093A3E9 /* NotificationController.swift */; };
+		65F44C641AF24B8A0093A3E9 /* GlanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F44C631AF24B8A0093A3E9 /* GlanceController.swift */; };
+		65F44C661AF24B8A0093A3E9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65F44C651AF24B8A0093A3E9 /* Images.xcassets */; };
+		65F44C6A1AF24B8A0093A3E9 /* Gulps WatchKit App.app in Resources */ = {isa = PBXBuildFile; fileRef = 65F44C691AF24B8A0093A3E9 /* Gulps WatchKit App.app */; };
+		65F44C721AF24B8A0093A3E9 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65F44C701AF24B8A0093A3E9 /* Interface.storyboard */; };
+		65F44C741AF24B8A0093A3E9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65F44C731AF24B8A0093A3E9 /* Images.xcassets */; };
+		65F44C771AF24B8A0093A3E9 /* Gulps WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 65F44C5A1AF24B8A0093A3E9 /* Gulps WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		68E60B8EFF8DE0CF3FBDEDE6 /* Pods_GulpsToday.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA8387913D2ED60BBFB252AB /* Pods_GulpsToday.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		800E72B73F54FA65CABC4BD6 /* Pods_Gulps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A701E98A87809500CB34BF4 /* Pods_Gulps.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		654764BA1AF267D100C68C2A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65F44C131AF24B440093A3E9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 65F44C1A1AF24B440093A3E9;
+			remoteInfo = Gulps;
+		};
+		65F44C4F1AF24B780093A3E9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65F44C131AF24B440093A3E9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 65F44C431AF24B770093A3E9;
+			remoteInfo = GulpsToday;
+		};
+		65F44C6B1AF24B8A0093A3E9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65F44C131AF24B440093A3E9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 65F44C681AF24B8A0093A3E9;
+			remoteInfo = "Gulps WatchKit App";
+		};
+		65F44C751AF24B8A0093A3E9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65F44C131AF24B440093A3E9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 65F44C591AF24B8A0093A3E9;
+			remoteInfo = "Gulps WatchKit Extension";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		65F44C551AF24B780093A3E9 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				65F44C511AF24B780093A3E9 /* GulpsToday.appex in Embed App Extensions */,
+				65F44C771AF24B8A0093A3E9 /* Gulps WatchKit Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		285054092056F8C15C023459 /* Pods-Gulps WatchKit Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gulps WatchKit Extension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Gulps WatchKit Extension/Pods-Gulps WatchKit Extension.debug.xcconfig"; sourceTree = "<group>"; };
+		2895AC59AC7E84643B88E562 /* Pods-GulpsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GulpsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GulpsTests/Pods-GulpsTests.debug.xcconfig"; sourceTree = "<group>"; };
+		2F55270E9B720F5F8B911EBA /* Pods-Gulps.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gulps.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Gulps/Pods-Gulps.debug.xcconfig"; sourceTree = "<group>"; };
+		4A4925FCD5463140CD8FE9BC /* Pods_GulpsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GulpsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5A701E98A87809500CB34BF4 /* Pods_Gulps.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gulps.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6537A80C1AF24CA700EC16E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Onboarding.storyboard; sourceTree = "<group>"; };
+		6537A8101AF24CC800EC16E9 /* Entry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
+		6537A8111AF24CC800EC16E9 /* EntryHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryHandler.swift; sourceTree = "<group>"; };
+		6537A8121AF24CC800EC16E9 /* Gulp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gulp.swift; sourceTree = "<group>"; };
+		6537A8151AF24CC800EC16E9 /* KaushanScript.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = KaushanScript.ttf; sourceTree = "<group>"; };
+		6537A8161AF24CC800EC16E9 /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Light.ttf"; sourceTree = "<group>"; };
+		6537A8181AF24CC800EC16E9 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		6537A8191AF24CC800EC16E9 /* Globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
+		6537A81A1AF24CC800EC16E9 /* NotificationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationHelper.swift; sourceTree = "<group>"; };
+		6537A81B1AF24CC800EC16E9 /* NSUserDefaults-BigGulp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSUserDefaults-BigGulp.swift"; sourceTree = "<group>"; };
+		6537A81C1AF24CC800EC16E9 /* ProgressMeter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressMeter.swift; sourceTree = "<group>"; };
+		6537A81D1AF24CC800EC16E9 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		6537A81F1AF24CC800EC16E9 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		6537A8201AF24CC800EC16E9 /* DrinkViewController+Animations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DrinkViewController+Animations.swift"; sourceTree = "<group>"; };
+		6537A8211AF24CC800EC16E9 /* DrinkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrinkViewController.swift; sourceTree = "<group>"; };
+		6537A8231AF24CC800EC16E9 /* GoalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalViewController.swift; sourceTree = "<group>"; };
+		6537A8241AF24CC800EC16E9 /* GulpsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GulpsViewController.swift; sourceTree = "<group>"; };
+		6537A8251AF24CC800EC16E9 /* MeasureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeasureViewController.swift; sourceTree = "<group>"; };
+		6537A8261AF24CC800EC16E9 /* NotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		6537A8271AF24CC800EC16E9 /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		6537A8281AF24CC800EC16E9 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		6537A8481AF24D2000EC16E9 /* Gulps.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Gulps.entitlements; sourceTree = "<group>"; };
+		654764B41AF267D100C68C2A /* GulpsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GulpsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		654764B71AF267D100C68C2A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6591D8C51AF2684A0069E198 /* DrinkViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrinkViewControllerTests.swift; sourceTree = "<group>"; };
+		65A234FD1AF25376002A35F3 /* GulpsToday.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = GulpsToday.entitlements; sourceTree = "<group>"; };
+		65A234FE1AF253D1002A35F3 /* TodayViewController+Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TodayViewController+Animation.swift"; sourceTree = "<group>"; };
+		65A235001AF25422002A35F3 /* ActionInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionInterfaceController.swift; sourceTree = "<group>"; };
+		65A235021AF2543B002A35F3 /* Gulps WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Gulps WatchKit Extension.entitlements"; sourceTree = "<group>"; };
+		65F44C1B1AF24B440093A3E9 /* Gulps.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gulps.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		65F44C1F1AF24B440093A3E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		65F44C201AF24B440093A3E9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		65F44C251AF24B440093A3E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		65F44C271AF24B440093A3E9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		65F44C2A1AF24B440093A3E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		65F44C441AF24B770093A3E9 /* GulpsToday.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = GulpsToday.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		65F44C461AF24B770093A3E9 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		65F44C4A1AF24B770093A3E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		65F44C4B1AF24B770093A3E9 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
+		65F44C4D1AF24B780093A3E9 /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
+		65F44C5A1AF24B8A0093A3E9 /* Gulps WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Gulps WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		65F44C5D1AF24B8A0093A3E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		65F44C5E1AF24B8A0093A3E9 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		65F44C5F1AF24B8A0093A3E9 /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		65F44C611AF24B8A0093A3E9 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		65F44C631AF24B8A0093A3E9 /* GlanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlanceController.swift; sourceTree = "<group>"; };
+		65F44C651AF24B8A0093A3E9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		65F44C691AF24B8A0093A3E9 /* Gulps WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gulps WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		65F44C6F1AF24B8A0093A3E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		65F44C711AF24B8A0093A3E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		65F44C731AF24B8A0093A3E9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		8339035B8C2DA7AA7C151C33 /* Pods-GulpsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GulpsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GulpsTests/Pods-GulpsTests.release.xcconfig"; sourceTree = "<group>"; };
+		8DBD3FD569F60612DAAFEA5D /* Pods-GulpsToday.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GulpsToday.release.xcconfig"; path = "Pods/Target Support Files/Pods-GulpsToday/Pods-GulpsToday.release.xcconfig"; sourceTree = "<group>"; };
+		A223BA8DAB2EF6307E53D3BE /* Pods_Gulps_WatchKit_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gulps_WatchKit_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA8387913D2ED60BBFB252AB /* Pods_GulpsToday.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GulpsToday.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C916E6FEBE9F3B2034FA5E16 /* Pods-Gulps.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gulps.release.xcconfig"; path = "Pods/Target Support Files/Pods-Gulps/Pods-Gulps.release.xcconfig"; sourceTree = "<group>"; };
+		DE2874C8F5031CE649AEE26F /* Pods-Gulps WatchKit Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gulps WatchKit Extension.release.xcconfig"; path = "Pods/Target Support Files/Pods-Gulps WatchKit Extension/Pods-Gulps WatchKit Extension.release.xcconfig"; sourceTree = "<group>"; };
+		F66B6A3F01F3E088F4039DAB /* Pods-GulpsToday.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GulpsToday.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GulpsToday/Pods-GulpsToday.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		654764B11AF267D100C68C2A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				00612DD0922770ADF791FB36 /* Pods_GulpsTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		65F44C181AF24B440093A3E9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				800E72B73F54FA65CABC4BD6 /* Pods_Gulps.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		65F44C411AF24B770093A3E9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				65F44C471AF24B770093A3E9 /* NotificationCenter.framework in Frameworks */,
+				68E60B8EFF8DE0CF3FBDEDE6 /* Pods_GulpsToday.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		65F44C571AF24B8A0093A3E9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5E4469D077A66ADEA309FA4C /* Pods_Gulps_WatchKit_Extension.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		22F2459053E11D898935B997 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2F55270E9B720F5F8B911EBA /* Pods-Gulps.debug.xcconfig */,
+				C916E6FEBE9F3B2034FA5E16 /* Pods-Gulps.release.xcconfig */,
+				285054092056F8C15C023459 /* Pods-Gulps WatchKit Extension.debug.xcconfig */,
+				DE2874C8F5031CE649AEE26F /* Pods-Gulps WatchKit Extension.release.xcconfig */,
+				2895AC59AC7E84643B88E562 /* Pods-GulpsTests.debug.xcconfig */,
+				8339035B8C2DA7AA7C151C33 /* Pods-GulpsTests.release.xcconfig */,
+				F66B6A3F01F3E088F4039DAB /* Pods-GulpsToday.debug.xcconfig */,
+				8DBD3FD569F60612DAAFEA5D /* Pods-GulpsToday.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		6537A80E1AF24CAB00EC16E9 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				65F44C241AF24B440093A3E9 /* Main.storyboard */,
+				65F44C291AF24B440093A3E9 /* LaunchScreen.xib */,
+				6537A80B1AF24CA700EC16E9 /* Onboarding.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		6537A80F1AF24CC800EC16E9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6537A8101AF24CC800EC16E9 /* Entry.swift */,
+				6537A8111AF24CC800EC16E9 /* EntryHandler.swift */,
+				6537A8121AF24CC800EC16E9 /* Gulp.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		6537A8131AF24CC800EC16E9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6537A8141AF24CC800EC16E9 /* Fonts */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		6537A8141AF24CC800EC16E9 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				6537A8151AF24CC800EC16E9 /* KaushanScript.ttf */,
+				6537A8161AF24CC800EC16E9 /* Lato-Light.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		6537A8171AF24CC800EC16E9 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				6537A8181AF24CC800EC16E9 /* Colors.swift */,
+				6537A8191AF24CC800EC16E9 /* Globals.swift */,
+				6537A81A1AF24CC800EC16E9 /* NotificationHelper.swift */,
+				6537A81B1AF24CC800EC16E9 /* NSUserDefaults-BigGulp.swift */,
+				6537A81C1AF24CC800EC16E9 /* ProgressMeter.swift */,
+				6537A81D1AF24CC800EC16E9 /* Settings.swift */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		6537A81E1AF24CC800EC16E9 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				6537A81F1AF24CC800EC16E9 /* CalendarViewController.swift */,
+				6537A8201AF24CC800EC16E9 /* DrinkViewController+Animations.swift */,
+				6537A8211AF24CC800EC16E9 /* DrinkViewController.swift */,
+				6537A8221AF24CC800EC16E9 /* Onboarding */,
+				6537A8281AF24CC800EC16E9 /* SettingsViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		6537A8221AF24CC800EC16E9 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				6537A8231AF24CC800EC16E9 /* GoalViewController.swift */,
+				6537A8241AF24CC800EC16E9 /* GulpsViewController.swift */,
+				6537A8251AF24CC800EC16E9 /* MeasureViewController.swift */,
+				6537A8261AF24CC800EC16E9 /* NotificationViewController.swift */,
+				6537A8271AF24CC800EC16E9 /* OnboardingViewController.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		654764B51AF267D100C68C2A /* GulpsTests */ = {
+			isa = PBXGroup;
+			children = (
+				6591D8C51AF2684A0069E198 /* DrinkViewControllerTests.swift */,
+				654764B61AF267D100C68C2A /* Supporting Files */,
+			);
+			path = GulpsTests;
+			sourceTree = "<group>";
+		};
+		654764B61AF267D100C68C2A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				654764B71AF267D100C68C2A /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		65F44C121AF24B440093A3E9 = {
+			isa = PBXGroup;
+			children = (
+				65F44C1D1AF24B440093A3E9 /* Gulps */,
+				65F44C481AF24B770093A3E9 /* GulpsToday */,
+				65F44C5B1AF24B8A0093A3E9 /* Gulps WatchKit Extension */,
+				65F44C6D1AF24B8A0093A3E9 /* Gulps WatchKit App */,
+				654764B51AF267D100C68C2A /* GulpsTests */,
+				65F44C451AF24B770093A3E9 /* Frameworks */,
+				65F44C1C1AF24B440093A3E9 /* Products */,
+				22F2459053E11D898935B997 /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		65F44C1C1AF24B440093A3E9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				65F44C1B1AF24B440093A3E9 /* Gulps.app */,
+				65F44C441AF24B770093A3E9 /* GulpsToday.appex */,
+				65F44C5A1AF24B8A0093A3E9 /* Gulps WatchKit Extension.appex */,
+				65F44C691AF24B8A0093A3E9 /* Gulps WatchKit App.app */,
+				654764B41AF267D100C68C2A /* GulpsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		65F44C1D1AF24B440093A3E9 /* Gulps */ = {
+			isa = PBXGroup;
+			children = (
+				6537A80F1AF24CC800EC16E9 /* Model */,
+				6537A8131AF24CC800EC16E9 /* Resources */,
+				6537A8171AF24CC800EC16E9 /* Support */,
+				6537A81E1AF24CC800EC16E9 /* ViewControllers */,
+				6537A80E1AF24CAB00EC16E9 /* Storyboards */,
+				65F44C201AF24B440093A3E9 /* AppDelegate.swift */,
+				65F44C271AF24B440093A3E9 /* Images.xcassets */,
+				65F44C1E1AF24B440093A3E9 /* Supporting Files */,
+			);
+			path = Gulps;
+			sourceTree = "<group>";
+		};
+		65F44C1E1AF24B440093A3E9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6537A8481AF24D2000EC16E9 /* Gulps.entitlements */,
+				65F44C1F1AF24B440093A3E9 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		65F44C451AF24B770093A3E9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				65F44C461AF24B770093A3E9 /* NotificationCenter.framework */,
+				5A701E98A87809500CB34BF4 /* Pods_Gulps.framework */,
+				A223BA8DAB2EF6307E53D3BE /* Pods_Gulps_WatchKit_Extension.framework */,
+				4A4925FCD5463140CD8FE9BC /* Pods_GulpsTests.framework */,
+				BA8387913D2ED60BBFB252AB /* Pods_GulpsToday.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		65F44C481AF24B770093A3E9 /* GulpsToday */ = {
+			isa = PBXGroup;
+			children = (
+				65F44C4B1AF24B770093A3E9 /* TodayViewController.swift */,
+				65A234FE1AF253D1002A35F3 /* TodayViewController+Animation.swift */,
+				65F44C4D1AF24B780093A3E9 /* MainInterface.storyboard */,
+				65F44C491AF24B770093A3E9 /* Supporting Files */,
+			);
+			path = GulpsToday;
+			sourceTree = "<group>";
+		};
+		65F44C491AF24B770093A3E9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				65A234FD1AF25376002A35F3 /* GulpsToday.entitlements */,
+				65F44C4A1AF24B770093A3E9 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		65F44C5B1AF24B8A0093A3E9 /* Gulps WatchKit Extension */ = {
+			isa = PBXGroup;
+			children = (
+				65A235001AF25422002A35F3 /* ActionInterfaceController.swift */,
+				65F44C5F1AF24B8A0093A3E9 /* InterfaceController.swift */,
+				65F44C611AF24B8A0093A3E9 /* NotificationController.swift */,
+				65F44C631AF24B8A0093A3E9 /* GlanceController.swift */,
+				65F44C651AF24B8A0093A3E9 /* Images.xcassets */,
+				65F44C5C1AF24B8A0093A3E9 /* Supporting Files */,
+			);
+			path = "Gulps WatchKit Extension";
+			sourceTree = "<group>";
+		};
+		65F44C5C1AF24B8A0093A3E9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				65A235021AF2543B002A35F3 /* Gulps WatchKit Extension.entitlements */,
+				65F44C5D1AF24B8A0093A3E9 /* Info.plist */,
+				65F44C5E1AF24B8A0093A3E9 /* PushNotificationPayload.apns */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		65F44C6D1AF24B8A0093A3E9 /* Gulps WatchKit App */ = {
+			isa = PBXGroup;
+			children = (
+				65F44C701AF24B8A0093A3E9 /* Interface.storyboard */,
+				65F44C731AF24B8A0093A3E9 /* Images.xcassets */,
+				65F44C6E1AF24B8A0093A3E9 /* Supporting Files */,
+			);
+			path = "Gulps WatchKit App";
+			sourceTree = "<group>";
+		};
+		65F44C6E1AF24B8A0093A3E9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				65F44C6F1AF24B8A0093A3E9 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		654764B31AF267D100C68C2A /* GulpsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 654764BE1AF267D100C68C2A /* Build configuration list for PBXNativeTarget "GulpsTests" */;
+			buildPhases = (
+				4DD97826222A172759061B06 /* Check Pods Manifest.lock */,
+				654764B01AF267D100C68C2A /* Sources */,
+				654764B11AF267D100C68C2A /* Frameworks */,
+				654764B21AF267D100C68C2A /* Resources */,
+				370ADBA65A9592D39680DCF5 /* Embed Pods Frameworks */,
+				AD0AAEF0A3C6E92AC4A7BD92 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				654764BB1AF267D100C68C2A /* PBXTargetDependency */,
+			);
+			name = GulpsTests;
+			productName = GulpsTests;
+			productReference = 654764B41AF267D100C68C2A /* GulpsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		65F44C1A1AF24B440093A3E9 /* Gulps */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 65F44C3A1AF24B440093A3E9 /* Build configuration list for PBXNativeTarget "Gulps" */;
+			buildPhases = (
+				3B2C47B134CBDFB7BE3B3335 /* Check Pods Manifest.lock */,
+				65F44C171AF24B440093A3E9 /* Sources */,
+				65F44C181AF24B440093A3E9 /* Frameworks */,
+				65F44C191AF24B440093A3E9 /* Resources */,
+				65F44C551AF24B780093A3E9 /* Embed App Extensions */,
+				6B6AF88C106CF70B20D20372 /* Embed Pods Frameworks */,
+				06E6943317C6B36A9014DF37 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				65F44C501AF24B780093A3E9 /* PBXTargetDependency */,
+				65F44C761AF24B8A0093A3E9 /* PBXTargetDependency */,
+			);
+			name = Gulps;
+			productName = Gulps;
+			productReference = 65F44C1B1AF24B440093A3E9 /* Gulps.app */;
+			productType = "com.apple.product-type.application";
+		};
+		65F44C431AF24B770093A3E9 /* GulpsToday */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 65F44C521AF24B780093A3E9 /* Build configuration list for PBXNativeTarget "GulpsToday" */;
+			buildPhases = (
+				3229446692910C3DA02166E8 /* Check Pods Manifest.lock */,
+				65F44C401AF24B770093A3E9 /* Sources */,
+				65F44C411AF24B770093A3E9 /* Frameworks */,
+				65F44C421AF24B770093A3E9 /* Resources */,
+				99E24DEB7A72A662525AE6D7 /* Embed Pods Frameworks */,
+				3E9C1CF45C28E7EE2768E103 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GulpsToday;
+			productName = GulpsToday;
+			productReference = 65F44C441AF24B770093A3E9 /* GulpsToday.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		65F44C591AF24B8A0093A3E9 /* Gulps WatchKit Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 65F44C7B1AF24B8A0093A3E9 /* Build configuration list for PBXNativeTarget "Gulps WatchKit Extension" */;
+			buildPhases = (
+				BE3941FA658F9540A32337EC /* Check Pods Manifest.lock */,
+				65F44C561AF24B8A0093A3E9 /* Sources */,
+				65F44C571AF24B8A0093A3E9 /* Frameworks */,
+				65F44C581AF24B8A0093A3E9 /* Resources */,
+				69F67248221C2B22F4646EE5 /* Embed Pods Frameworks */,
+				C96120B894EB7988530A0A12 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				65F44C6C1AF24B8A0093A3E9 /* PBXTargetDependency */,
+			);
+			name = "Gulps WatchKit Extension";
+			productName = "Gulps WatchKit Extension";
+			productReference = 65F44C5A1AF24B8A0093A3E9 /* Gulps WatchKit Extension.appex */;
+			productType = "com.apple.product-type.watchkit-extension";
+		};
+		65F44C681AF24B8A0093A3E9 /* Gulps WatchKit App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 65F44C781AF24B8A0093A3E9 /* Build configuration list for PBXNativeTarget "Gulps WatchKit App" */;
+			buildPhases = (
+				65F44C671AF24B8A0093A3E9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Gulps WatchKit App";
+			productName = "Gulps WatchKit App";
+			productReference = 65F44C691AF24B8A0093A3E9 /* Gulps WatchKit App.app */;
+			productType = "com.apple.product-type.application.watchapp";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		65F44C131AF24B440093A3E9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = "Fancy Pixel";
+				TargetAttributes = {
+					654764B31AF267D100C68C2A = {
+						CreatedOnToolsVersion = 6.3.1;
+						TestTargetID = 65F44C1A1AF24B440093A3E9;
+					};
+					65F44C1A1AF24B440093A3E9 = {
+						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = H72GR44F4M;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
+					};
+					65F44C431AF24B770093A3E9 = {
+						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = H72GR44F4M;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
+					};
+					65F44C591AF24B8A0093A3E9 = {
+						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = H72GR44F4M;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
+					};
+					65F44C681AF24B8A0093A3E9 = {
+						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = H72GR44F4M;
+					};
+				};
+			};
+			buildConfigurationList = 65F44C161AF24B440093A3E9 /* Build configuration list for PBXProject "Gulps" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 65F44C121AF24B440093A3E9;
+			productRefGroup = 65F44C1C1AF24B440093A3E9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				65F44C1A1AF24B440093A3E9 /* Gulps */,
+				65F44C431AF24B770093A3E9 /* GulpsToday */,
+				65F44C591AF24B8A0093A3E9 /* Gulps WatchKit Extension */,
+				65F44C681AF24B8A0093A3E9 /* Gulps WatchKit App */,
+				654764B31AF267D100C68C2A /* GulpsTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		654764B21AF267D100C68C2A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		65F44C191AF24B440093A3E9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				65F44C261AF24B440093A3E9 /* Main.storyboard in Resources */,
+				65F44C2B1AF24B440093A3E9 /* LaunchScreen.xib in Resources */,
+				6537A82C1AF24CC800EC16E9 /* KaushanScript.ttf in Resources */,
+				6537A82D1AF24CC800EC16E9 /* Lato-Light.ttf in Resources */,
+				65F44C281AF24B440093A3E9 /* Images.xcassets in Resources */,
+				6537A80D1AF24CA700EC16E9 /* Onboarding.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		65F44C421AF24B770093A3E9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				65F44C4E1AF24B780093A3E9 /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		65F44C581AF24B8A0093A3E9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				65F44C6A1AF24B8A0093A3E9 /* Gulps WatchKit App.app in Resources */,
+				65F44C661AF24B8A0093A3E9 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		65F44C671AF24B8A0093A3E9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				65F44C721AF24B8A0093A3E9 /* Interface.storyboard in Resources */,
+				65F44C741AF24B8A0093A3E9 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		06E6943317C6B36A9014DF37 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Gulps/Pods-Gulps-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3229446692910C3DA02166E8 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		370ADBA65A9592D39680DCF5 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GulpsTests/Pods-GulpsTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3B2C47B134CBDFB7BE3B3335 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		3E9C1CF45C28E7EE2768E103 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GulpsToday/Pods-GulpsToday-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4DD97826222A172759061B06 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		69F67248221C2B22F4646EE5 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Gulps WatchKit Extension/Pods-Gulps WatchKit Extension-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6B6AF88C106CF70B20D20372 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Gulps/Pods-Gulps-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		99E24DEB7A72A662525AE6D7 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GulpsToday/Pods-GulpsToday-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AD0AAEF0A3C6E92AC4A7BD92 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GulpsTests/Pods-GulpsTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BE3941FA658F9540A32337EC /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		C96120B894EB7988530A0A12 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Gulps WatchKit Extension/Pods-Gulps WatchKit Extension-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		654764B01AF267D100C68C2A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6591D8C61AF2684A0069E198 /* DrinkViewControllerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		65F44C171AF24B440093A3E9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6537A8351AF24CC800EC16E9 /* DrinkViewController+Animations.swift in Sources */,
+				6537A8381AF24CC800EC16E9 /* GulpsViewController.swift in Sources */,
+				6537A8291AF24CC800EC16E9 /* Entry.swift in Sources */,
+				6537A82E1AF24CC800EC16E9 /* Colors.swift in Sources */,
+				6537A82F1AF24CC800EC16E9 /* Globals.swift in Sources */,
+				6537A83C1AF24CC800EC16E9 /* SettingsViewController.swift in Sources */,
+				6537A8341AF24CC800EC16E9 /* CalendarViewController.swift in Sources */,
+				6537A82B1AF24CC800EC16E9 /* Gulp.swift in Sources */,
+				6537A83B1AF24CC800EC16E9 /* OnboardingViewController.swift in Sources */,
+				6537A8391AF24CC800EC16E9 /* MeasureViewController.swift in Sources */,
+				6537A8331AF24CC800EC16E9 /* Settings.swift in Sources */,
+				6537A8371AF24CC800EC16E9 /* GoalViewController.swift in Sources */,
+				6537A82A1AF24CC800EC16E9 /* EntryHandler.swift in Sources */,
+				65F44C211AF24B440093A3E9 /* AppDelegate.swift in Sources */,
+				6537A83A1AF24CC800EC16E9 /* NotificationViewController.swift in Sources */,
+				6537A8311AF24CC800EC16E9 /* NSUserDefaults-BigGulp.swift in Sources */,
+				6537A8361AF24CC800EC16E9 /* DrinkViewController.swift in Sources */,
+				6537A8321AF24CC800EC16E9 /* ProgressMeter.swift in Sources */,
+				6537A8301AF24CC800EC16E9 /* NotificationHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		65F44C401AF24B770093A3E9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6537A8461AF24D0200EC16E9 /* Gulp.swift in Sources */,
+				65A234FF1AF253D1002A35F3 /* TodayViewController+Animation.swift in Sources */,
+				6537A8431AF24CFD00EC16E9 /* Entry.swift in Sources */,
+				6537A8441AF24CFF00EC16E9 /* EntryHandler.swift in Sources */,
+				6537A83E1AF24CE800EC16E9 /* Settings.swift in Sources */,
+				65F44C4C1AF24B780093A3E9 /* TodayViewController.swift in Sources */,
+				6537A8411AF24CEF00EC16E9 /* NSUserDefaults-BigGulp.swift in Sources */,
+				6537A83D1AF24CE100EC16E9 /* Colors.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		65F44C561AF24B8A0093A3E9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6537A8421AF24CFC00EC16E9 /* Entry.swift in Sources */,
+				6537A8401AF24CEF00EC16E9 /* NSUserDefaults-BigGulp.swift in Sources */,
+				65F44C621AF24B8A0093A3E9 /* NotificationController.swift in Sources */,
+				6537A8451AF24CFF00EC16E9 /* EntryHandler.swift in Sources */,
+				65F44C601AF24B8A0093A3E9 /* InterfaceController.swift in Sources */,
+				6537A8471AF24D0200EC16E9 /* Gulp.swift in Sources */,
+				65A235011AF25422002A35F3 /* ActionInterfaceController.swift in Sources */,
+				6537A83F1AF24CE900EC16E9 /* Settings.swift in Sources */,
+				65F44C641AF24B8A0093A3E9 /* GlanceController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		654764BB1AF267D100C68C2A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 65F44C1A1AF24B440093A3E9 /* Gulps */;
+			targetProxy = 654764BA1AF267D100C68C2A /* PBXContainerItemProxy */;
+		};
+		65F44C501AF24B780093A3E9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 65F44C431AF24B770093A3E9 /* GulpsToday */;
+			targetProxy = 65F44C4F1AF24B780093A3E9 /* PBXContainerItemProxy */;
+		};
+		65F44C6C1AF24B8A0093A3E9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 65F44C681AF24B8A0093A3E9 /* Gulps WatchKit App */;
+			targetProxy = 65F44C6B1AF24B8A0093A3E9 /* PBXContainerItemProxy */;
+		};
+		65F44C761AF24B8A0093A3E9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 65F44C591AF24B8A0093A3E9 /* Gulps WatchKit Extension */;
+			targetProxy = 65F44C751AF24B8A0093A3E9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		6537A80B1AF24CA700EC16E9 /* Onboarding.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6537A80C1AF24CA700EC16E9 /* Base */,
+			);
+			name = Onboarding.storyboard;
+			sourceTree = "<group>";
+		};
+		65F44C241AF24B440093A3E9 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				65F44C251AF24B440093A3E9 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		65F44C291AF24B440093A3E9 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				65F44C2A1AF24B440093A3E9 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		65F44C701AF24B8A0093A3E9 /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				65F44C711AF24B8A0093A3E9 /* Base */,
+			);
+			name = Interface.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		654764BC1AF267D100C68C2A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2895AC59AC7E84643B88E562 /* Pods-GulpsTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = GulpsTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Gulps.app/Gulps";
+			};
+			name = Debug;
+		};
+		654764BD1AF267D100C68C2A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8339035B8C2DA7AA7C151C33 /* Pods-GulpsTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = GulpsTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Gulps.app/Gulps";
+			};
+			name = Release;
+		};
+		65F44C381AF24B440093A3E9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		65F44C391AF24B440093A3E9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		65F44C3B1AF24B440093A3E9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2F55270E9B720F5F8B911EBA /* Pods-Gulps.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Gulps/Gulps.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				INFOPLIST_FILE = Gulps/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Debug;
+		};
+		65F44C3C1AF24B440093A3E9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C916E6FEBE9F3B2034FA5E16 /* Pods-Gulps.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Gulps/Gulps.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				INFOPLIST_FILE = Gulps/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Release;
+		};
+		65F44C531AF24B780093A3E9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F66B6A3F01F3E088F4039DAB /* Pods-GulpsToday.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = GulpsToday/GulpsToday.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = GulpsToday/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		65F44C541AF24B780093A3E9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8DBD3FD569F60612DAAFEA5D /* Pods-GulpsToday.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = GulpsToday/GulpsToday.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = GulpsToday/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		65F44C791AF24B8A0093A3E9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IBSC_MODULE = Gulps_WatchKit_Extension;
+				INFOPLIST_FILE = "Gulps WatchKit App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+			};
+			name = Debug;
+		};
+		65F44C7A1AF24B8A0093A3E9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				IBSC_MODULE = Gulps_WatchKit_Extension;
+				INFOPLIST_FILE = "Gulps WatchKit App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+			};
+			name = Release;
+		};
+		65F44C7C1AF24B8A0093A3E9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 285054092056F8C15C023459 /* Pods-Gulps WatchKit Extension.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Gulps WatchKit Extension/Gulps WatchKit Extension.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Gulps WatchKit Extension/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		65F44C7D1AF24B8A0093A3E9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DE2874C8F5031CE649AEE26F /* Pods-Gulps WatchKit Extension.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Gulps WatchKit Extension/Gulps WatchKit Extension.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = "Gulps WatchKit Extension/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		654764BE1AF267D100C68C2A /* Build configuration list for PBXNativeTarget "GulpsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				654764BC1AF267D100C68C2A /* Debug */,
+				654764BD1AF267D100C68C2A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		65F44C161AF24B440093A3E9 /* Build configuration list for PBXProject "Gulps" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				65F44C381AF24B440093A3E9 /* Debug */,
+				65F44C391AF24B440093A3E9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		65F44C3A1AF24B440093A3E9 /* Build configuration list for PBXNativeTarget "Gulps" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				65F44C3B1AF24B440093A3E9 /* Debug */,
+				65F44C3C1AF24B440093A3E9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		65F44C521AF24B780093A3E9 /* Build configuration list for PBXNativeTarget "GulpsToday" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				65F44C531AF24B780093A3E9 /* Debug */,
+				65F44C541AF24B780093A3E9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		65F44C781AF24B8A0093A3E9 /* Build configuration list for PBXNativeTarget "Gulps WatchKit App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				65F44C791AF24B8A0093A3E9 /* Debug */,
+				65F44C7A1AF24B8A0093A3E9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		65F44C7B1AF24B8A0093A3E9 /* Build configuration list for PBXNativeTarget "Gulps WatchKit Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				65F44C7C1AF24B8A0093A3E9 /* Debug */,
+				65F44C7D1AF24B8A0093A3E9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 65F44C131AF24B440093A3E9 /* Project object */;
+}
