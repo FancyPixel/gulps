@@ -1,0 +1,8 @@
+platform :ios, '6.0'
+
+use_frameworks!
+
+target 'GulpsAnimation' do
+  pod 'DPMeterView', git: 'https://github.com/andreamazz/DPMeterView'
+end
+

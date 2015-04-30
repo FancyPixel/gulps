@@ -1,0 +1,515 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6536264D1AF289B0001991D2 /* Meter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6536264C1AF289B0001991D2 /* Meter.swift */; };
+		6536264F1AF28EE2001991D2 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6536264E1AF28EE2001991D2 /* Colors.swift */; };
+		653626511AF28F68001991D2 /* Flipbook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653626501AF28F68001991D2 /* Flipbook.swift */; };
+		65EF92D51AF287B300F85988 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EF92D41AF287B300F85988 /* AppDelegate.swift */; };
+		65EF92D71AF287B300F85988 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EF92D61AF287B300F85988 /* ViewController.swift */; };
+		65EF92DA1AF287B300F85988 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65EF92D81AF287B300F85988 /* Main.storyboard */; };
+		65EF92DC1AF287B300F85988 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65EF92DB1AF287B300F85988 /* Images.xcassets */; };
+		65EF92DF1AF287B300F85988 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65EF92DD1AF287B300F85988 /* LaunchScreen.xib */; };
+		65EF92EB1AF287B300F85988 /* GulpsAnimationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EF92EA1AF287B300F85988 /* GulpsAnimationTests.swift */; };
+		8C9A9C0624FB571B564E0F9F /* Pods_GulpsAnimation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 699CCD531FD936CAA0CAD8B7 /* Pods_GulpsAnimation.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		65EF92E51AF287B300F85988 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65EF92C71AF287B300F85988 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 65EF92CE1AF287B300F85988;
+			remoteInfo = GulpsAnimation;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		6536264C1AF289B0001991D2 /* Meter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meter.swift; sourceTree = "<group>"; };
+		6536264E1AF28EE2001991D2 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		653626501AF28F68001991D2 /* Flipbook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Flipbook.swift; sourceTree = "<group>"; };
+		65EF92CF1AF287B300F85988 /* GulpsAnimation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GulpsAnimation.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		65EF92D31AF287B300F85988 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		65EF92D41AF287B300F85988 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		65EF92D61AF287B300F85988 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		65EF92D91AF287B300F85988 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		65EF92DB1AF287B300F85988 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		65EF92DE1AF287B300F85988 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		65EF92E41AF287B300F85988 /* GulpsAnimationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GulpsAnimationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		65EF92E91AF287B300F85988 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		65EF92EA1AF287B300F85988 /* GulpsAnimationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GulpsAnimationTests.swift; sourceTree = "<group>"; };
+		699CCD531FD936CAA0CAD8B7 /* Pods_GulpsAnimation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GulpsAnimation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B81C9B6511FA0D3C7F999DA /* Pods-GulpsAnimation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GulpsAnimation.release.xcconfig"; path = "Pods/Target Support Files/Pods-GulpsAnimation/Pods-GulpsAnimation.release.xcconfig"; sourceTree = "<group>"; };
+		D959250C8C10E09D468675C5 /* Pods-GulpsAnimation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GulpsAnimation.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GulpsAnimation/Pods-GulpsAnimation.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		65EF92CC1AF287B300F85988 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8C9A9C0624FB571B564E0F9F /* Pods_GulpsAnimation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		65EF92E11AF287B300F85988 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3FAE811B068701F466672E36 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D959250C8C10E09D468675C5 /* Pods-GulpsAnimation.debug.xcconfig */,
+				7B81C9B6511FA0D3C7F999DA /* Pods-GulpsAnimation.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		447E576465B694102940EDF7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				699CCD531FD936CAA0CAD8B7 /* Pods_GulpsAnimation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		65EF92C61AF287B300F85988 = {
+			isa = PBXGroup;
+			children = (
+				65EF92D11AF287B300F85988 /* GulpsAnimation */,
+				65EF92E71AF287B300F85988 /* GulpsAnimationTests */,
+				65EF92D01AF287B300F85988 /* Products */,
+				3FAE811B068701F466672E36 /* Pods */,
+				447E576465B694102940EDF7 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		65EF92D01AF287B300F85988 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				65EF92CF1AF287B300F85988 /* GulpsAnimation.app */,
+				65EF92E41AF287B300F85988 /* GulpsAnimationTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		65EF92D11AF287B300F85988 /* GulpsAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				6536264E1AF28EE2001991D2 /* Colors.swift */,
+				653626501AF28F68001991D2 /* Flipbook.swift */,
+				65EF92D41AF287B300F85988 /* AppDelegate.swift */,
+				65EF92D61AF287B300F85988 /* ViewController.swift */,
+				6536264C1AF289B0001991D2 /* Meter.swift */,
+				65EF92D81AF287B300F85988 /* Main.storyboard */,
+				65EF92DB1AF287B300F85988 /* Images.xcassets */,
+				65EF92DD1AF287B300F85988 /* LaunchScreen.xib */,
+				65EF92D21AF287B300F85988 /* Supporting Files */,
+			);
+			path = GulpsAnimation;
+			sourceTree = "<group>";
+		};
+		65EF92D21AF287B300F85988 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				65EF92D31AF287B300F85988 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		65EF92E71AF287B300F85988 /* GulpsAnimationTests */ = {
+			isa = PBXGroup;
+			children = (
+				65EF92EA1AF287B300F85988 /* GulpsAnimationTests.swift */,
+				65EF92E81AF287B300F85988 /* Supporting Files */,
+			);
+			path = GulpsAnimationTests;
+			sourceTree = "<group>";
+		};
+		65EF92E81AF287B300F85988 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				65EF92E91AF287B300F85988 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		65EF92CE1AF287B300F85988 /* GulpsAnimation */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 65EF92EE1AF287B300F85988 /* Build configuration list for PBXNativeTarget "GulpsAnimation" */;
+			buildPhases = (
+				3CE8D1F28C37F5AAD3C9B894 /* Check Pods Manifest.lock */,
+				65EF92CB1AF287B300F85988 /* Sources */,
+				65EF92CC1AF287B300F85988 /* Frameworks */,
+				65EF92CD1AF287B300F85988 /* Resources */,
+				EDC1307F5F0F026809F45932 /* Embed Pods Frameworks */,
+				43E32C4DAC1AB0493730A19E /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GulpsAnimation;
+			productName = GulpsAnimation;
+			productReference = 65EF92CF1AF287B300F85988 /* GulpsAnimation.app */;
+			productType = "com.apple.product-type.application";
+		};
+		65EF92E31AF287B300F85988 /* GulpsAnimationTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 65EF92F11AF287B300F85988 /* Build configuration list for PBXNativeTarget "GulpsAnimationTests" */;
+			buildPhases = (
+				65EF92E01AF287B300F85988 /* Sources */,
+				65EF92E11AF287B300F85988 /* Frameworks */,
+				65EF92E21AF287B300F85988 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				65EF92E61AF287B300F85988 /* PBXTargetDependency */,
+			);
+			name = GulpsAnimationTests;
+			productName = GulpsAnimationTests;
+			productReference = 65EF92E41AF287B300F85988 /* GulpsAnimationTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		65EF92C71AF287B300F85988 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = "Fancy Pixel";
+				TargetAttributes = {
+					65EF92CE1AF287B300F85988 = {
+						CreatedOnToolsVersion = 6.3.1;
+					};
+					65EF92E31AF287B300F85988 = {
+						CreatedOnToolsVersion = 6.3.1;
+						TestTargetID = 65EF92CE1AF287B300F85988;
+					};
+				};
+			};
+			buildConfigurationList = 65EF92CA1AF287B300F85988 /* Build configuration list for PBXProject "GulpsAnimation" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 65EF92C61AF287B300F85988;
+			productRefGroup = 65EF92D01AF287B300F85988 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				65EF92CE1AF287B300F85988 /* GulpsAnimation */,
+				65EF92E31AF287B300F85988 /* GulpsAnimationTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		65EF92CD1AF287B300F85988 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				65EF92DA1AF287B300F85988 /* Main.storyboard in Resources */,
+				65EF92DF1AF287B300F85988 /* LaunchScreen.xib in Resources */,
+				65EF92DC1AF287B300F85988 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		65EF92E21AF287B300F85988 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3CE8D1F28C37F5AAD3C9B894 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		43E32C4DAC1AB0493730A19E /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GulpsAnimation/Pods-GulpsAnimation-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EDC1307F5F0F026809F45932 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GulpsAnimation/Pods-GulpsAnimation-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		65EF92CB1AF287B300F85988 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6536264D1AF289B0001991D2 /* Meter.swift in Sources */,
+				6536264F1AF28EE2001991D2 /* Colors.swift in Sources */,
+				653626511AF28F68001991D2 /* Flipbook.swift in Sources */,
+				65EF92D71AF287B300F85988 /* ViewController.swift in Sources */,
+				65EF92D51AF287B300F85988 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		65EF92E01AF287B300F85988 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				65EF92EB1AF287B300F85988 /* GulpsAnimationTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		65EF92E61AF287B300F85988 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 65EF92CE1AF287B300F85988 /* GulpsAnimation */;
+			targetProxy = 65EF92E51AF287B300F85988 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		65EF92D81AF287B300F85988 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				65EF92D91AF287B300F85988 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		65EF92DD1AF287B300F85988 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				65EF92DE1AF287B300F85988 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		65EF92EC1AF287B300F85988 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		65EF92ED1AF287B300F85988 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		65EF92EF1AF287B300F85988 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D959250C8C10E09D468675C5 /* Pods-GulpsAnimation.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = GulpsAnimation/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		65EF92F01AF287B300F85988 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7B81C9B6511FA0D3C7F999DA /* Pods-GulpsAnimation.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = GulpsAnimation/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		65EF92F21AF287B300F85988 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = GulpsAnimationTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GulpsAnimation.app/GulpsAnimation";
+			};
+			name = Debug;
+		};
+		65EF92F31AF287B300F85988 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = GulpsAnimationTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GulpsAnimation.app/GulpsAnimation";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		65EF92CA1AF287B300F85988 /* Build configuration list for PBXProject "GulpsAnimation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				65EF92EC1AF287B300F85988 /* Debug */,
+				65EF92ED1AF287B300F85988 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		65EF92EE1AF287B300F85988 /* Build configuration list for PBXNativeTarget "GulpsAnimation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				65EF92EF1AF287B300F85988 /* Debug */,
+				65EF92F01AF287B300F85988 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		65EF92F11AF287B300F85988 /* Build configuration list for PBXNativeTarget "GulpsAnimationTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				65EF92F21AF287B300F85988 /* Debug */,
+				65EF92F31AF287B300F85988 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 65EF92C71AF287B300F85988 /* Project object */;
+}

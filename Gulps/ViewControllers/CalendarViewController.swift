@@ -27,6 +27,8 @@ class CalendarViewController: UIViewController, JTCalendarDataSource {
             self.calendar.calendarAppearance.menuMonthTextFont = font
         }
         self.calendarMenu.reloadAppearance()
+
+        updateLabelWithDate(NSDate())
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -44,6 +46,10 @@ class CalendarViewController: UIViewController, JTCalendarDataSource {
     }
 
     func calendar(calendar: JTCalendar!, didSelectDate date: NSDate!) {
+        updateLabelWithDate(date)
+    }
+
+    func updateLabelWithDate(date: NSDate!) {
         if let entry = Entry.entryForDate(date) {
             if (entry.percentage >= 100) {
                 self.dailyLabel.text = "Goal Met!"
