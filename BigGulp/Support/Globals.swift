@@ -1,4 +1,5 @@
 import UIKit
+import AHKActionSheet
 
 class Globals {
     class func numericToolbar(target: AnyObject, selector: Selector, barColor: UIColor = UIColor.whiteColor(), textColor: UIColor = UIColor.mainColor()) -> UIToolbar {

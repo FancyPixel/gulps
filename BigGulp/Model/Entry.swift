@@ -1,11 +1,12 @@
 import Foundation
+import Realm
 
-class Entry: RLMObject {
-    dynamic var date = Entry.defaultDate()
-    dynamic var quantity = 0.0
-    dynamic var percentage = 0.0
-    dynamic var goal = 0.0
-    dynamic var gulps = RLMArray(objectClassName: Gulp.className())
+public class Entry: RLMObject {
+    dynamic public var date = Entry.defaultDate()
+    dynamic public var quantity = 0.0
+    dynamic public var percentage = 0.0
+    dynamic public var goal = 0.0
+    dynamic public var gulps = RLMArray(objectClassName: Gulp.className())
 
     class func defaultDate() -> String {
         let dateFormat = NSDateFormatter()
@@ -13,7 +14,7 @@ class Entry: RLMObject {
         return dateFormat.stringFromDate(NSDate())
     }
 
-    override class func primaryKey() -> String {
+    override public class func primaryKey() -> String {
         return "date"
     }
 

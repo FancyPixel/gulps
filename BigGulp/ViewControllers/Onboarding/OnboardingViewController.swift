@@ -1,4 +1,5 @@
 import UIKit
+import AMWaveTransition
 
 class OnboardingViewController: AMWaveViewController {
 

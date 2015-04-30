@@ -1,4 +1,6 @@
 import UIKit
+import MMWormhole
+import DPMeterView
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -7,8 +9,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let wormhole = MMWormhole(applicationGroupIdentifier: "group.it.fancypixel.BigGulp", optionalDirectory: "biggulp")
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        GAI.sharedInstance().trackerWithTrackingId("UA-XXXXXXXX-X")
-        GAI.sharedInstance().trackUncaughtExceptions = true
 
         DPMeterView.appearance().trackTintColor = UIColor.lightGray()
         DPMeterView.appearance().progressTintColor = UIColor.mainColor()

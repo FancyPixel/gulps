@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1002AAD1B758CC26EAA995C0 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9472BDFA39F9529F02380169 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		6514FA0F1AAAFEE500339AF6 /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6514FA0E1AAAFD0B00339AF6 /* Lato-Light.ttf */; };
 		6514FA101AAAFF2100339AF6 /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6514FA0E1AAAFD0B00339AF6 /* Lato-Light.ttf */; };
 		6514FA111AAAFF2100339AF6 /* KaushanScript.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 65B392D01A93593C008AC618 /* KaushanScript.ttf */; };
@@ -17,6 +18,7 @@
 		652FAAF71A9B8CAC00E21BAD /* EntryHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652FAAF61A9B8CAC00E21BAD /* EntryHandler.swift */; };
 		652FAAF81A9B8CB400E21BAD /* EntryHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652FAAF61A9B8CAC00E21BAD /* EntryHandler.swift */; };
 		652FAAFA1A9B919700E21BAD /* DrinkViewController+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652FAAF91A9B919700E21BAD /* DrinkViewController+Animations.swift */; };
+		6536BD131ADEB7E600615D1F /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6536BD121ADEB7E600615D1F /* Pods.framework */; };
 		6544D9631AAC8CEB001DCB1D /* NotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6544D9621AAC8CEB001DCB1D /* NotificationHelper.swift */; };
 		654A79DB1AACB89D007F607E /* ActionInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654A79DA1AACB89D007F607E /* ActionInterfaceController.swift */; };
 		654E94231AB9EEFB007CDCD8 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B392CC1A935226008AC618 /* Colors.swift */; };
@@ -25,7 +27,6 @@
 		6567DAF71A97A43C00857A43 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6567DAF61A97A43C00857A43 /* TodayViewController.swift */; };
 		6567DAF91A97A43C00857A43 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6567DAF81A97A43C00857A43 /* MainInterface.storyboard */; };
 		6567DAFC1A97A43C00857A43 /* Gulps Today.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6567DAF01A97A43C00857A43 /* Gulps Today.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		6567DB021A97A56D00857A43 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6567DB011A97A56D00857A43 /* libPods.a */; };
 		6567DB051A9A114D00857A43 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A5FF481A9633AE00389E56 /* Entry.swift */; };
 		6585CFAD1AAC9A8300CA27F3 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6585CFAC1AAC9A8300CA27F3 /* InterfaceController.swift */; };
 		6585CFAF1AAC9A8300CA27F3 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6585CFAE1AAC9A8300CA27F3 /* NotificationController.swift */; };
@@ -38,7 +39,6 @@
 		6585CFCC1AACA34800CA27F3 /* EntryHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652FAAF61A9B8CAC00E21BAD /* EntryHandler.swift */; };
 		6585CFCD1AACA3B100CA27F3 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A5FF481A9633AE00389E56 /* Entry.swift */; };
 		6585CFCE1AACA3B800CA27F3 /* Gulp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F295D01AA0C245003D4016 /* Gulp.swift */; };
-		6585CFD21AACA6CD00CA27F3 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6585CFD11AACA6CD00CA27F3 /* libPods.a */; };
 		6585CFD31AACA6F900CA27F3 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F295D81AA357FC003D4016 /* Settings.swift */; };
 		6585CFD41AACA70500CA27F3 /* NSUserDefaults-BigGulp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F295DB1AA3B311003D4016 /* NSUserDefaults-BigGulp.swift */; };
 		6594CD5A1AA7A1D9008C608B /* GoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6594CD591AA7A1D9008C608B /* GoalViewController.swift */; };
@@ -52,7 +52,6 @@
 		65B67E6F1A924BCC000A3CCD /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65B67E6D1A924BCC000A3CCD /* LaunchScreen.xib */; };
 		65B67E8E1A924FCB000A3CCD /* DrinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B67E8D1A924FCB000A3CCD /* DrinkViewController.swift */; };
 		65D8EACD1AAB52FA006E0075 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D8EACC1AAB52FA006E0075 /* NotificationViewController.swift */; };
-		65E833941A9A1A3C004A7811 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E833931A9A1A3C004A7811 /* libPods.a */; };
 		65ED06321ABDAE15004CD2A4 /* TodayViewController+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65ED06311ABDAE15004CD2A4 /* TodayViewController+Animation.swift */; };
 		65F295D11AA0C245003D4016 /* Gulp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F295D01AA0C245003D4016 /* Gulp.swift */; };
 		65F295D21AA0CC44003D4016 /* Gulp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F295D01AA0C245003D4016 /* Gulp.swift */; };
@@ -64,7 +63,10 @@
 		65F295DC1AA3B311003D4016 /* NSUserDefaults-BigGulp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F295DB1AA3B311003D4016 /* NSUserDefaults-BigGulp.swift */; };
 		65F295DD1AA3B314003D4016 /* NSUserDefaults-BigGulp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F295DB1AA3B311003D4016 /* NSUserDefaults-BigGulp.swift */; };
 		65F295E31AA61F4B003D4016 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65F295E21AA61F4B003D4016 /* Onboarding.storyboard */; };
-		9292E5A381FAAABCCAE23564 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B8561FA7458BCC56F29D585E /* libPods.a */; };
+		696B3059AB57E24FA7EEA307 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9472BDFA39F9529F02380169 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		7BBBDA1EA024CAEDA92009EA /* Pods_BigGulpTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A01D32D47AD6F4810507097 /* Pods_BigGulpTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		D4CE697120972CE291433FD5 /* Pods_BigGulpTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A01D32D47AD6F4810507097 /* Pods_BigGulpTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		D8974C0C139A1D0A12CAE27A /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9472BDFA39F9529F02380169 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,6 +120,7 @@
 		0A01D32D47AD6F4810507097 /* Pods_BigGulpTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BigGulpTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		58AB27D7468E633B126B8A48 /* Pods-BigGulp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BigGulp.release.xcconfig"; path = "Pods/Target Support Files/Pods-BigGulp/Pods-BigGulp.release.xcconfig"; sourceTree = "<group>"; };
 		5940FD500B5BF8735B6311F3 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		5A47CF6C28B4BDE235682A07 /* Pods_BigGulp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BigGulp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6514FA0E1AAAFD0B00339AF6 /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Light.ttf"; sourceTree = "<group>"; };
 		6514FA141AAB37BD00339AF6 /* Globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
 		652D99901AA650B80059C03F /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
@@ -125,6 +128,7 @@
 		652D99941AA70CC70059C03F /* GulpsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GulpsViewController.swift; sourceTree = "<group>"; };
 		652FAAF61A9B8CAC00E21BAD /* EntryHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryHandler.swift; sourceTree = "<group>"; };
 		652FAAF91A9B919700E21BAD /* DrinkViewController+Animations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DrinkViewController+Animations.swift"; sourceTree = "<group>"; };
+		6536BD121ADEB7E600615D1F /* Pods.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods.framework; path = "Pods/../build/Debug-iphoneos/Pods.framework"; sourceTree = "<group>"; };
 		6544D9621AAC8CEB001DCB1D /* NotificationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationHelper.swift; sourceTree = "<group>"; };
 		654A79DA1AACB89D007F607E /* ActionInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionInterfaceController.swift; sourceTree = "<group>"; };
 		65524D281A9622AB00B1A5D4 /* DrinkViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrinkViewControllerTests.swift; sourceTree = "<group>"; };
@@ -133,7 +137,6 @@
 		6567DAF51A97A43C00857A43 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6567DAF61A97A43C00857A43 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		6567DAF81A97A43C00857A43 /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
-		6567DB011A97A56D00857A43 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		6585CFA71AAC9A8300CA27F3 /* Gulps WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Gulps WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6585CFAA1AAC9A8300CA27F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6585CFAB1AAC9A8300CA27F3 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
@@ -146,12 +149,9 @@
 		6585CFBE1AAC9A8300CA27F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		6585CFC01AAC9A8300CA27F3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6585CFCB1AAC9B1100CA27F3 /* BigGulp WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "BigGulp WatchKit Extension.entitlements"; sourceTree = "<group>"; };
-		6585CFCF1AACA48000CA27F3 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
-		6585CFD11AACA6CD00CA27F3 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		6594CD591AA7A1D9008C608B /* GoalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalViewController.swift; sourceTree = "<group>"; };
 		65A493BF1A92564A00E6C0DD /* ProgressMeter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressMeter.swift; sourceTree = "<group>"; };
 		65A5FF481A9633AE00389E56 /* Entry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
-		65AEB4EB1A962344001FDFFC /* BigGulp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BigGulp-Bridging-Header.h"; sourceTree = "<group>"; };
 		65B291AF1A94DFF100417472 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		65B392CC1A935226008AC618 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		65B392D01A93593C008AC618 /* KaushanScript.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = KaushanScript.ttf; sourceTree = "<group>"; };
@@ -165,7 +165,6 @@
 		65B67E861A924C0A000A3CCD /* BigGulp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = BigGulp.entitlements; sourceTree = "<group>"; };
 		65B67E8D1A924FCB000A3CCD /* DrinkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrinkViewController.swift; sourceTree = "<group>"; };
 		65D8EACC1AAB52FA006E0075 /* NotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
-		65E833931A9A1A3C004A7811 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		65E833961A9A244F004A7811 /* BigGulpToday.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = BigGulpToday.entitlements; sourceTree = "<group>"; };
 		65ED06311ABDAE15004CD2A4 /* TodayViewController+Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TodayViewController+Animation.swift"; sourceTree = "<group>"; };
 		65F295D01AA0C245003D4016 /* Gulp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gulp.swift; sourceTree = "<group>"; };
@@ -175,10 +174,9 @@
 		65F295DB1AA3B311003D4016 /* NSUserDefaults-BigGulp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSUserDefaults-BigGulp.swift"; sourceTree = "<group>"; };
 		65F295E21AA61F4B003D4016 /* Onboarding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		6903FDD88E08C7ECB5026E69 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		9472BDFA39F9529F02380169 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD4572870E1E7EEF908017CB /* Pods-BigGulpTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BigGulpTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BigGulpTests/Pods-BigGulpTests.debug.xcconfig"; sourceTree = "<group>"; };
 		AF38EFF963D2CCF7F3D83870 /* Pods-BigGulpTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BigGulpTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BigGulpTests/Pods-BigGulpTests.release.xcconfig"; sourceTree = "<group>"; };
-		B8561FA7458BCC56F29D585E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		EAAD21AE0B17D79D1F2C3483 /* libPods-BigGulp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BigGulp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,8 +184,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6567DB021A97A56D00857A43 /* libPods.a in Frameworks */,
 				6567DAF21A97A43C00857A43 /* NotificationCenter.framework in Frameworks */,
+				1002AAD1B758CC26EAA995C0 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,7 +193,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6585CFD21AACA6CD00CA27F3 /* libPods.a in Frameworks */,
+				6536BD131ADEB7E600615D1F /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -203,7 +201,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9292E5A381FAAABCCAE23564 /* libPods.a in Frameworks */,
+				696B3059AB57E24FA7EEA307 /* Pods.framework in Frameworks */,
+				7BBBDA1EA024CAEDA92009EA /* Pods_BigGulpTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,7 +210,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65E833941A9A1A3C004A7811 /* libPods.a in Frameworks */,
+				D4CE697120972CE291433FD5 /* Pods_BigGulpTests.framework in Frameworks */,
+				D8974C0C139A1D0A12CAE27A /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,9 +344,9 @@
 			children = (
 				65B67E5F1A924BCC000A3CCD /* BigGulp */,
 				6567DAF31A97A43C00857A43 /* BigGulpToday */,
-				65B67E771A924BCC000A3CCD /* BigGulpTests */,
 				6585CFA81AAC9A8300CA27F3 /* BigGulp WatchKit Extension */,
 				6585CFBA1AAC9A8300CA27F3 /* BigGulp WatchKit App */,
+				65B67E771A924BCC000A3CCD /* BigGulpTests */,
 				65B67E5E1A924BCC000A3CCD /* Products */,
 				BF687DAEDF50F34E88CA7A48 /* Pods */,
 				67E925FAFF6ADF6DA2BD003B /* Frameworks */,
@@ -388,7 +388,6 @@
 			children = (
 				65B67E861A924C0A000A3CCD /* BigGulp.entitlements */,
 				65B67E611A924BCC000A3CCD /* Info.plist */,
-				65AEB4EB1A962344001FDFFC /* BigGulp-Bridging-Header.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -435,14 +434,11 @@
 		67E925FAFF6ADF6DA2BD003B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6585CFD11AACA6CD00CA27F3 /* libPods.a */,
-				6585CFCF1AACA48000CA27F3 /* libPods.a */,
-				65E833931A9A1A3C004A7811 /* libPods.a */,
-				6567DB011A97A56D00857A43 /* libPods.a */,
-				EAAD21AE0B17D79D1F2C3483 /* libPods-BigGulp.a */,
-				B8561FA7458BCC56F29D585E /* libPods.a */,
+				6536BD121ADEB7E600615D1F /* Pods.framework */,
 				0A01D32D47AD6F4810507097 /* Pods_BigGulpTests.framework */,
 				6567DAF11A97A43C00857A43 /* NotificationCenter.framework */,
+				9472BDFA39F9529F02380169 /* Pods.framework */,
+				5A47CF6C28B4BDE235682A07 /* Pods_BigGulp.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -467,9 +463,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6567DAFF1A97A43C00857A43 /* Build configuration list for PBXNativeTarget "BigGulpToday" */;
 			buildPhases = (
+				FE5DC006DD8ACACF4B2B8882 /* Check Pods Manifest.lock */,
 				6567DAEC1A97A43C00857A43 /* Sources */,
 				6567DAED1A97A43C00857A43 /* Frameworks */,
 				6567DAEE1A97A43C00857A43 /* Resources */,
+				D3F03390AD26351258934912 /* Embed Pods Frameworks */,
+				F665A0D09994FEF24C4A3975 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -524,6 +523,7 @@
 				54745AB3D06C4990A4A2D8FA /* Warn for TODO and FIXME comments */,
 				37A5321102C4D2FCE133B496 /* Copy Pods Resources */,
 				6567DB001A97A43C00857A43 /* Embed App Extensions */,
+				7BA0F169C72020B06C785884 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -545,6 +545,7 @@
 				65B67E711A924BCC000A3CCD /* Frameworks */,
 				65B67E721A924BCC000A3CCD /* Resources */,
 				D61F2A53F4C2A69FDFA40F51 /* Copy Pods Resources */,
+				135FB6970BCB865B974166DB /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -680,6 +681,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		135FB6970BCB865B974166DB /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		37A5321102C4D2FCE133B496 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -724,7 +740,67 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		7BA0F169C72020B06C785884 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BigGulpTests/Pods-BigGulpTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D3F03390AD26351258934912 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		D61F2A53F4C2A69FDFA40F51 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BigGulpTests/Pods-BigGulpTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D6B2BF979E448F86A07C479F /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F665A0D09994FEF24C4A3975 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -739,7 +815,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D6B2BF979E448F86A07C479F /* Check Pods Manifest.lock */ = {
+		FE5DC006DD8ACACF4B2B8882 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -875,153 +951,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		650C35851AC01071001798CD /* Distribution */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iOS Distribution: Fancy Pixel S.r.l.";
-				COPY_PHASE_STRIP = YES;
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
-				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
-				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
-				GCC_WARN_MISSING_PARENTHESES = YES;
-				GCC_WARN_SHADOW = YES;
-				GCC_WARN_SIGN_COMPARE = YES;
-				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = YES;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_LABEL = YES;
-				GCC_WARN_UNUSED_VALUE = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "14f6246d-357d-406a-9083-42ac101ce4fe";
-				RUN_CLANG_STATIC_ANALYZER = YES;
-				SDKROOT = iphoneos;
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Distribution;
-		};
-		650C35861AC01071001798CD /* Distribution */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6903FDD88E08C7ECB5026E69 /* Pods.release.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = BigGulp/BigGulp.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEFINES_MODULE = NO;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
-				INFOPLIST_FILE = BigGulp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = Gulps;
-				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "BigGulp/BigGulp-Bridging-Header.h";
-			};
-			name = Distribution;
-		};
-		650C35871AC01071001798CD /* Distribution */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6903FDD88E08C7ECB5026E69 /* Pods.release.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ENABLE_MODULES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = BigGulpTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Gulps.app/Gulps";
-			};
-			name = Distribution;
-		};
-		650C35881AC01071001798CD /* Distribution */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6903FDD88E08C7ECB5026E69 /* Pods.release.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = BigGulpToday/BigGulpToday.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				INFOPLIST_FILE = BigGulpToday/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_NAME = "Gulps Today";
-				PROVISIONING_PROFILE = "";
-				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "BigGulp/BigGulp-Bridging-Header.h";
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Distribution;
-		};
-		650C35891AC01071001798CD /* Distribution */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5940FD500B5BF8735B6311F3 /* Pods.debug.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "BigGulp WatchKit Extension/BigGulp WatchKit Extension.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				INFOPLIST_FILE = "BigGulp WatchKit Extension/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_NAME = "Gulps WatchKit Extension";
-				PROVISIONING_PROFILE = "";
-				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "BigGulp/BigGulp-Bridging-Header.h";
-			};
-			name = Distribution;
-		};
-		650C358A1AC01071001798CD /* Distribution */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				IBSC_MODULE = BigGulp_WatchKit_Extension;
-				INFOPLIST_FILE = "BigGulp WatchKit App/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = 4;
-				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
-			};
-			name = Distribution;
-		};
 		6567DAFD1A97A43C00857A43 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5940FD500B5BF8735B6311F3 /* Pods.debug.xcconfig */;
@@ -1042,7 +971,7 @@
 				PRODUCT_NAME = "Gulps Today";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "BigGulp/BigGulp-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1064,7 +993,7 @@
 				PRODUCT_NAME = "Gulps Today";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "BigGulp/BigGulp-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -1076,6 +1005,10 @@
 				CODE_SIGN_ENTITLEMENTS = "BigGulp WatchKit Extension/BigGulp WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1088,18 +1021,22 @@
 				PRODUCT_NAME = "Gulps WatchKit Extension";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "BigGulp/BigGulp-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Debug;
 		};
 		6585CFC61AAC9A8300CA27F3 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5940FD500B5BF8735B6311F3 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 6903FDD88E08C7ECB5026E69 /* Pods.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "BigGulp WatchKit Extension/BigGulp WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				INFOPLIST_FILE = "BigGulp WatchKit Extension/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
@@ -1108,7 +1045,7 @@
 				PRODUCT_NAME = "Gulps WatchKit Extension";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "BigGulp/BigGulp-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Release;
 		};
@@ -1170,6 +1107,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				DEFINES_MODULE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1225,6 +1163,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				DEFINES_MODULE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1256,19 +1195,20 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5940FD500B5BF8735B6311F3 /* Pods.debug.xcconfig */;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = BigGulp/BigGulp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEFINES_MODULE = NO;
+				DEFINES_MODULE = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = BigGulp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = Gulps;
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "BigGulp/BigGulp-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -1277,25 +1217,26 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6903FDD88E08C7ECB5026E69 /* Pods.release.xcconfig */;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = BigGulp/BigGulp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEFINES_MODULE = NO;
+				DEFINES_MODULE = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = BigGulp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = Gulps;
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "BigGulp/BigGulp-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Release;
 		};
 		65B67E821A924BCC000A3CCD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5940FD500B5BF8735B6311F3 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = AD4572870E1E7EEF908017CB /* Pods-BigGulpTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
@@ -1319,7 +1260,7 @@
 		};
 		65B67E831A924BCC000A3CCD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6903FDD88E08C7ECB5026E69 /* Pods.release.xcconfig */;
+			baseConfigurationReference = AF38EFF963D2CCF7F3D83870 /* Pods-BigGulpTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
@@ -1344,7 +1285,6 @@
 			buildConfigurations = (
 				6567DAFD1A97A43C00857A43 /* Debug */,
 				6567DAFE1A97A43C00857A43 /* Release */,
-				650C35881AC01071001798CD /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1354,7 +1294,6 @@
 			buildConfigurations = (
 				6585CFC71AAC9A8300CA27F3 /* Debug */,
 				6585CFC81AAC9A8300CA27F3 /* Release */,
-				650C358A1AC01071001798CD /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1364,7 +1303,6 @@
 			buildConfigurations = (
 				6585CFC51AAC9A8300CA27F3 /* Debug */,
 				6585CFC61AAC9A8300CA27F3 /* Release */,
-				650C35891AC01071001798CD /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1374,7 +1312,6 @@
 			buildConfigurations = (
 				65B67E7C1A924BCC000A3CCD /* Debug */,
 				65B67E7D1A924BCC000A3CCD /* Release */,
-				650C35851AC01071001798CD /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1384,7 +1321,6 @@
 			buildConfigurations = (
 				65B67E7F1A924BCC000A3CCD /* Debug */,
 				65B67E801A924BCC000A3CCD /* Release */,
-				650C35861AC01071001798CD /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1394,7 +1330,6 @@
 			buildConfigurations = (
 				65B67E821A924BCC000A3CCD /* Debug */,
 				65B67E831A924BCC000A3CCD /* Release */,
-				650C35871AC01071001798CD /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

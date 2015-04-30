@@ -1,7 +1,8 @@
 import Foundation
+import Realm
 
-class EntryHandler: NSObject {
-    func currentEntry() -> Entry {
+public class EntryHandler: NSObject {
+    public func currentEntry() -> Entry {
         let directory: NSURL = NSFileManager.defaultManager().containerURLForSecurityApplicationGroupIdentifier("group.it.fancypixel.BigGulp")!
         let realmPath = directory.path!.stringByAppendingPathComponent("db.realm")
         RLMRealm.setDefaultRealmPath(realmPath)
@@ -20,12 +21,12 @@ class EntryHandler: NSObject {
         }
     }
 
-    func addGulp(quantity: Double) {
+    public func addGulp(quantity: Double) {
         let entry = currentEntry()
         entry.addGulp(quantity, goal: NSUserDefaults.groupUserDefaults().doubleForKey(Settings.Gulp.Goal.key()), realm: RLMRealm.defaultRealm())
     }
 
-    func removeLastGulp() {
+    public func removeLastGulp() {
         let realm = RLMRealm.defaultRealm()
         let entry = currentEntry()
         if let gulp = entry.gulps.lastObject() as? Gulp {

@@ -1,7 +1,10 @@
+import pop
+
 extension DrinkViewController {
 
     func initAnimation() {
-        [self.smallButton, self.largeButton].map({$0.alpha = 0})
+        self.smallButton.alpha = 0
+        self.largeButton.alpha = 0
     }
 
     func expandAddButton() {
