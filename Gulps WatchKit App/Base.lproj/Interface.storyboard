@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="6751" systemVersion="14D127a" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="7702" systemVersion="14E7f" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="3737"/>
     </dependencies>
     <scenes>
@@ -10,12 +10,13 @@
             <objects>
                 <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="Gulps_WatchKit_Extension">
                     <items>
-                        <group width="1" height="1" alignment="left" backgroundImage="progress-0-watch" layout="vertical" id="djR-KX-Wvu">
+                        <group width="1" height="1" alignment="left" layout="vertical" id="djR-KX-Wvu">
                             <items>
                                 <label width="1" alignment="left" text="DAILY GOAL: 0%" textAlignment="center" id="jsO-fa-6Yq">
                                     <color key="textColor" red="0.15686274510000001" green="0.3921568627" blue="0.7725490196" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
                                 </label>
+                                <imageView width="1" height="0.70000000000000007" alignment="left" verticalAlignment="center" image="activity-0" contentMode="scaleAspectFit" id="fDE-BM-tlV"/>
                             </items>
                         </group>
                     </items>
@@ -30,7 +31,7 @@
                     </menu>
                     <connections>
                         <outlet property="goalLabel" destination="jsO-fa-6Yq" id="d8F-pP-AFM"/>
-                        <outlet property="interfaceGroup" destination="djR-KX-Wvu" id="Wmj-cd-kWw"/>
+                        <outlet property="progressImage" destination="fDE-BM-tlV" id="l9i-8h-fcf"/>
                     </connections>
                 </controller>
             </objects>

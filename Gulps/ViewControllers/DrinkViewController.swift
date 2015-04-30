@@ -97,6 +97,7 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate {
         if (buttonIndex > 0) {
             self.entryHandler.removeLastGulp()
             updateUI()
+            self.wormhole.passMessageObject("update", identifier: "mainUpdate")
         }
     }
 }
