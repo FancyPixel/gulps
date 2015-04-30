@@ -9,11 +9,11 @@ This app is available in the [AppStore](https://itunes.apple.com/us/app/gulps/id
 
 #Description
 You can learn how to share data between an iOS app and its extension using Realm.  
-Please note that currently the test suite was crashing the compiler, so we pulled it for the moment, we'll add it back soon.
 
 #Setup
 * Run ```pod install```
-* Run ```open BigGulp.xcworkspace```
+* Run ```open Gulps.xcworkspace```
+* Replace the app group in the project with your own as described [here](http://realm.io/news/tutorial-sharing-data-between-watchkit-and-your-app/) 
 
 #MIT License
 
