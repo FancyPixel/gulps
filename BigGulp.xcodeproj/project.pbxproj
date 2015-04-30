@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1002AAD1B758CC26EAA995C0 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9472BDFA39F9529F02380169 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		6514FA0F1AAAFEE500339AF6 /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6514FA0E1AAAFD0B00339AF6 /* Lato-Light.ttf */; };
 		6514FA101AAAFF2100339AF6 /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6514FA0E1AAAFD0B00339AF6 /* Lato-Light.ttf */; };
 		6514FA111AAAFF2100339AF6 /* KaushanScript.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 65B392D01A93593C008AC618 /* KaushanScript.ttf */; };
@@ -63,10 +62,8 @@
 		65F295DC1AA3B311003D4016 /* NSUserDefaults-BigGulp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F295DB1AA3B311003D4016 /* NSUserDefaults-BigGulp.swift */; };
 		65F295DD1AA3B314003D4016 /* NSUserDefaults-BigGulp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F295DB1AA3B311003D4016 /* NSUserDefaults-BigGulp.swift */; };
 		65F295E31AA61F4B003D4016 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65F295E21AA61F4B003D4016 /* Onboarding.storyboard */; };
-		696B3059AB57E24FA7EEA307 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9472BDFA39F9529F02380169 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		7BBBDA1EA024CAEDA92009EA /* Pods_BigGulpTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A01D32D47AD6F4810507097 /* Pods_BigGulpTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		D4CE697120972CE291433FD5 /* Pods_BigGulpTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A01D32D47AD6F4810507097 /* Pods_BigGulpTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		D8974C0C139A1D0A12CAE27A /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9472BDFA39F9529F02380169 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,11 +113,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		04781F81C8F4A250F28B00FC /* Pods-BigGulp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BigGulp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BigGulp/Pods-BigGulp.debug.xcconfig"; sourceTree = "<group>"; };
 		0A01D32D47AD6F4810507097 /* Pods_BigGulpTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BigGulpTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		58AB27D7468E633B126B8A48 /* Pods-BigGulp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BigGulp.release.xcconfig"; path = "Pods/Target Support Files/Pods-BigGulp/Pods-BigGulp.release.xcconfig"; sourceTree = "<group>"; };
 		5940FD500B5BF8735B6311F3 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		5A47CF6C28B4BDE235682A07 /* Pods_BigGulp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BigGulp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6514FA0E1AAAFD0B00339AF6 /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Light.ttf"; sourceTree = "<group>"; };
 		6514FA141AAB37BD00339AF6 /* Globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
 		652D99901AA650B80059C03F /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
@@ -174,7 +168,6 @@
 		65F295DB1AA3B311003D4016 /* NSUserDefaults-BigGulp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSUserDefaults-BigGulp.swift"; sourceTree = "<group>"; };
 		65F295E21AA61F4B003D4016 /* Onboarding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		6903FDD88E08C7ECB5026E69 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		9472BDFA39F9529F02380169 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD4572870E1E7EEF908017CB /* Pods-BigGulpTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BigGulpTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BigGulpTests/Pods-BigGulpTests.debug.xcconfig"; sourceTree = "<group>"; };
 		AF38EFF963D2CCF7F3D83870 /* Pods-BigGulpTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BigGulpTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BigGulpTests/Pods-BigGulpTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -185,7 +178,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6567DAF21A97A43C00857A43 /* NotificationCenter.framework in Frameworks */,
-				1002AAD1B758CC26EAA995C0 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,7 +193,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				696B3059AB57E24FA7EEA307 /* Pods.framework in Frameworks */,
 				7BBBDA1EA024CAEDA92009EA /* Pods_BigGulpTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -211,7 +202,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4CE697120972CE291433FD5 /* Pods_BigGulpTests.framework in Frameworks */,
-				D8974C0C139A1D0A12CAE27A /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -437,8 +427,6 @@
 				6536BD121ADEB7E600615D1F /* Pods.framework */,
 				0A01D32D47AD6F4810507097 /* Pods_BigGulpTests.framework */,
 				6567DAF11A97A43C00857A43 /* NotificationCenter.framework */,
-				9472BDFA39F9529F02380169 /* Pods.framework */,
-				5A47CF6C28B4BDE235682A07 /* Pods_BigGulp.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -446,8 +434,6 @@
 		BF687DAEDF50F34E88CA7A48 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				04781F81C8F4A250F28B00FC /* Pods-BigGulp.debug.xcconfig */,
-				58AB27D7468E633B126B8A48 /* Pods-BigGulp.release.xcconfig */,
 				AD4572870E1E7EEF908017CB /* Pods-BigGulpTests.debug.xcconfig */,
 				AF38EFF963D2CCF7F3D83870 /* Pods-BigGulpTests.release.xcconfig */,
 				5940FD500B5BF8735B6311F3 /* Pods.debug.xcconfig */,

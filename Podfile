@@ -10,8 +10,13 @@ pod 'Realm', '~> 0.91'
 pod 'JTCalendar', git: 'https://github.com/andreamazz/JTCalendar', branch: 'develop'
 pod 'AMWaveTransition', '~> 0.5'
 pod 'AHKActionSheet', '~> 0.5'
-pod 'JTCalendar', git: 'https://github.com/andreamazz/JTCalendar', branch: 'develop'
 pod 'DPMeterView', git: 'https://github.com/andreamazz/DPMeterView'
+
+target 'BigGulpTests', exclusive: true do
+  pod 'Nimble'
+  pod 'Quick'
+  pod 'Nimble-Snapshots'
+end
 
 inhibit_all_warnings!
 use_frameworks!
