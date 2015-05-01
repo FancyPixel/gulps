@@ -65,8 +65,8 @@ private extension InterfaceController {
         let entry = EntryHandler().currentEntry() as Entry
         var delta = Int(entry.percentage - previousPercentage)
         if (delta < 0) {
-            // can't animate backwards
-            progressImage.startAnimatingWithImagesInRange(NSMakeRange(0, Int(entry.percentage)), duration: 1.0, repeatCount: 1)
+            // animate in reverse using negative duration
+            progressImage.startAnimatingWithImagesInRange(NSMakeRange(Int(entry.percentage), -delta), duration: -1.0, repeatCount: 1)
         } else {
             if (delta == 0) {
                 // if the range's length is 0, no image is loaded
