@@ -37,3 +37,4 @@ Podfile.lock
 # AppCode specific files
 .idea/
 *.iml
+KEYS.md

@@ -7,7 +7,7 @@ import Crashlytics
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    let wormhole = MMWormhole(applicationGroupIdentifier: "group.it.fancypixel.BigGulp", optionalDirectory: "biggulp")
+    var wormhole: MMWormhole?
     var crashlyticsAPI: String?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -15,6 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let apiKey = crashlyticsAPI {
             Crashlytics.startWithAPIKey(apiKey)
         }
+
+        wormhole = MMWormhole(applicationGroupIdentifier: "group.\(Constants.bundle())", optionalDirectory: "biggulp")
 
         DPMeterView.appearance().trackTintColor = .lightGray()
         DPMeterView.appearance().progressTintColor = .mainColor()

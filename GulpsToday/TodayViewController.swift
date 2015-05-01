@@ -1,11 +1,3 @@
-//
-//  TodayViewController.swift
-//  BigGulpToday
-//
-//  Created by Andrea Mazzini on 20/02/15.
-//  Copyright (c) 2015 Fancy Pixel. All rights reserved.
-//
-
 import UIKit
 import NotificationCenter
 import MMWormhole
@@ -22,7 +14,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     @IBOutlet var entryHandler: EntryHandler!
     
     var gulpSize = Settings.Gulp.Small
-    let wormhole = MMWormhole(applicationGroupIdentifier: "group.it.fancypixel.BigGulp", optionalDirectory: "biggulp")
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -105,9 +96,9 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
     
     func addGulp(quantity: Double) {
-        self.entryHandler.addGulp(quantity)
-        self.summaryLabel.text = "Way to go!"
-        self.wormhole.passMessageObject("update", identifier: "todayUpdate")
+        entryHandler.addGulp(quantity)
+        summaryLabel.text = "Way to go!"
+        MMWormhole(applicationGroupIdentifier: "group.\(Constants.bundle())", optionalDirectory: "biggulp").passMessageObject("update", identifier: "todayUpdate")
         updateLabels()
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { () -> Void in

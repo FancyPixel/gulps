@@ -16,16 +16,17 @@ class InterfaceController: WKInterfaceController {
     @IBOutlet weak var progressImage: WKInterfaceImage!
 
     let entryHandler = EntryHandler()
-    let wormhole = MMWormhole(applicationGroupIdentifier: "group.it.fancypixel.BigGulp", optionalDirectory: "biggulp")
+    var wormhole: MMWormhole?
     var previousPercentage = 0.0
 
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
 
-        wormhole.listenForMessageWithIdentifier("mainUpdate") { (_) -> Void in
+        wormhole = MMWormhole(applicationGroupIdentifier: "group.\(Constants.bundle())", optionalDirectory: "biggulp")
+        wormhole!.listenForMessageWithIdentifier("mainUpdate") { (_) -> Void in
             self.reloadAndUpdateUI()
         }
-        wormhole.listenForMessageWithIdentifier("todayUpdate") { (_) -> Void in
+        wormhole!.listenForMessageWithIdentifier("todayUpdate") { (_) -> Void in
             self.reloadAndUpdateUI()
         }
 
@@ -79,8 +80,8 @@ private extension InterfaceController {
     }
     
     func updateWithGulp(gulp: String) {
-        self.entryHandler.addGulp(NSUserDefaults.groupUserDefaults().doubleForKey(gulp))
-        self.wormhole.passMessageObject("update", identifier: "watchUpdate")
+        entryHandler.addGulp(NSUserDefaults.groupUserDefaults().doubleForKey(gulp))
+        wormhole!.passMessageObject("update", identifier: "watchUpdate")
         reloadAndUpdateUI()
     }
 }

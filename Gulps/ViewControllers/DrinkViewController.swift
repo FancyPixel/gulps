@@ -15,32 +15,34 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate {
     @IBOutlet public var entryHandler: EntryHandler!
     public var userDefaults = NSUserDefaults.groupUserDefaults()
     var expanded = false
-    let wormhole = MMWormhole(applicationGroupIdentifier: "group.it.fancypixel.BigGulp", optionalDirectory: "biggulp")
+    var wormhole: MMWormhole?
 
     public override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = "Drink!"   
+        self.title = "Drink!"
 
         initAnimation()
 
-        self.percentageLabel.animationDuration = 1.5
-        self.percentageLabel.format = "%d%%";
-        self.progressMeter.startGravity()
+        percentageLabel.animationDuration = 1.5
+        percentageLabel.format = "%d%%";
+        progressMeter.startGravity()
 
-        self.wormhole.listenForMessageWithIdentifier("watchUpdate", listener: { (_) -> Void in
+
+        wormhole = MMWormhole(applicationGroupIdentifier: "group.\(Constants.bundle())", optionalDirectory: "biggulp")
+        wormhole!.listenForMessageWithIdentifier("watchUpdate") { (_) -> Void in
             self.updateUI()
-        })
-        self.wormhole.listenForMessageWithIdentifier("todayUpdate", listener: { (_) -> Void in
+        }
+        wormhole!.listenForMessageWithIdentifier("todayUpdate") { (_) -> Void in
             self.updateUI()
-        })
+        }
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateUI", name: UIApplicationDidBecomeActiveNotification, object: nil)
     }
 
     public override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.progressMeter.setShape(ProgressMeter.pathFromRect(self.progressMeter.frame))
+        progressMeter.setShape(ProgressMeter.pathFromRect(self.progressMeter.frame))
     }
 
     public override func viewWillAppear(animated: Bool) {
@@ -53,19 +55,19 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate {
     }
 
     func updateCurrentEntry(delta: Double) {
-        self.entryHandler.addGulp(delta)
-        self.wormhole.passMessageObject("update", identifier: "mainUpdate")
+        entryHandler.addGulp(delta)
+        wormhole!.passMessageObject("update", identifier: "mainUpdate")
         updateUI()
     }
 
     func updateUI() {
         let percentage = self.entryHandler.currentEntry().percentage
-        self.percentageLabel.countFromCurrentValueTo(Float(round(percentage)))
-        self.progressMeter.setProgress(CGFloat(percentage / 100.0), duration: 1.5)
+        percentageLabel.countFromCurrentValueTo(Float(round(percentage)))
+        progressMeter.setProgress(CGFloat(percentage / 100.0), duration: 1.5)
     }
 
     @IBAction func addButtonAction(sender: UIButton) {
-        if (self.expanded) {
+        if (expanded) {
             contractAddButton()
         } else {
             expandAddButton()
@@ -74,18 +76,18 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate {
 
     @IBAction public func selectionButtonAction(sender: UIButton) {
         contractAddButton()
-        if (!self.userDefaults.boolForKey("UNDO_HINT")) {
-            self.userDefaults.setBool(true, forKey: "UNDO_HINT")
-            self.userDefaults.synchronize()
-            AMPopTip.appearance().popoverColor = UIColor.mainColor()
+        if (!userDefaults.boolForKey("UNDO_HINT")) {
+            userDefaults.setBool(true, forKey: "UNDO_HINT")
+            userDefaults.synchronize()
+            AMPopTip.appearance().popoverColor = .mainColor()
             AMPopTip.appearance().offset = 10
             let popTip = AMPopTip()
             popTip.showText("Tap here to undo your latest action", direction: .Down, maxWidth: 200, inView: self.view, fromFrame: self.minusButton.frame)
         }
-        if (self.smallButton == sender) {
-            updateCurrentEntry(self.userDefaults.doubleForKey(Settings.Gulp.Small.key()))
+        if (smallButton == sender) {
+            updateCurrentEntry(userDefaults.doubleForKey(Settings.Gulp.Small.key()))
         } else {
-            updateCurrentEntry(self.userDefaults.doubleForKey(Settings.Gulp.Big.key()))
+            updateCurrentEntry(userDefaults.doubleForKey(Settings.Gulp.Big.key()))
         }
     }
 
@@ -96,9 +98,9 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate {
 
     public func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
         if (buttonIndex > 0) {
-            self.entryHandler.removeLastGulp()
+            entryHandler.removeLastGulp()
             updateUI()
-            self.wormhole.passMessageObject("update", identifier: "mainUpdate")
+            wormhole!.passMessageObject("update", identifier: "mainUpdate")
         }
     }
 }
