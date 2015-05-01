@@ -27,13 +27,16 @@ class CalendarViewController: UIViewController, JTCalendarDataSource {
             self.calendar.calendarAppearance.menuMonthTextFont = font
         }
         self.calendarMenu.reloadAppearance()
-
-        updateLabelWithDate(NSDate())
     }
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         self.calendar.reloadData()
+        if let date = calendar.currentDateSelected {
+            updateLabelWithDate(date)
+        } else {
+            updateLabelWithDate(NSDate())
+        }
     }
 
     func calendar(calendar: JTCalendar!, dataForDate date: NSDate!) -> AnyObject? {
