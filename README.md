@@ -10,7 +10,9 @@ You can learn how to share data between an iOS app and its extension using Realm
 #Setup
 * Run ```pod install```
 * Run ```open Gulps.xcworkspace```
-* Replace the app group in the project with your own as described [here](http://realm.io/news/tutorial-sharing-data-between-watchkit-and-your-app/) 
+* Run `bundle`
+* Run `ruby change_bundle.rb your.bundle.identifier.BigGulp`
+* Match the bundle identifier in `Constants.swift`
 
 #MIT License
 
