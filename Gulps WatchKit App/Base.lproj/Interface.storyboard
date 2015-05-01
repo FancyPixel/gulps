@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="7702" systemVersion="14E7f" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="7531" systemVersion="14C109" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="3737"/>
     </dependencies>
     <scenes>
@@ -22,9 +22,14 @@
                     </items>
                     <menu key="menu" id="asB-vX-JfW">
                         <items>
-                            <menuItem title="Add gulp" icon="add" id="r1C-zz-ync">
+                            <menuItem title="+ Small Gulp" image="button-small" id="bMN-XA-clU">
                                 <connections>
-                                    <action selector="addMenuAction" destination="AgC-eL-Hgc" id="MzE-3h-5x9"/>
+                                    <action selector="addSmallGulpAction" destination="AgC-eL-Hgc" id="qQJ-Xd-e6Q"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="+ Big Gulp" image="button-big" id="d2z-2A-k0p">
+                                <connections>
+                                    <action selector="addBigGulpAction" destination="AgC-eL-Hgc" id="jQa-rn-rd2"/>
                                 </connections>
                             </menuItem>
                         </items>
@@ -36,37 +41,6 @@
                 </controller>
             </objects>
             <point key="canvasLocation" x="235" y="347"/>
-        </scene>
-        <!--Add gulp-->
-        <scene sceneID="AoI-BB-Zra">
-            <objects>
-                <controller identifier="ActionInterfaceController" title="Add gulp" id="pyk-7v-GvS" customClass="ActionInterfaceController" customModule="Gulps_WatchKit_Extension">
-                    <items>
-                        <group width="1" height="1" alignment="left" layout="vertical" spacing="12" id="ddu-3k-t8e">
-                            <items>
-                                <button width="60" height="60" alignment="center" backgroundImage="button-small" id="lr6-Gi-wYm">
-                                    <connections>
-                                        <action selector="smallButtonAction" destination="pyk-7v-GvS" id="RTR-B0-naw"/>
-                                    </connections>
-                                </button>
-                                <button width="60" height="60" alignment="center" backgroundImage="button-big" id="89x-JP-IIy">
-                                    <connections>
-                                        <action selector="bigButtonAction" destination="pyk-7v-GvS" id="gKr-mK-Dsn"/>
-                                    </connections>
-                                </button>
-                            </items>
-                            <edgeInsets key="margins" left="0.0" right="0.0" top="10" bottom="0.0"/>
-                            <variation key="device=watch38mm" spacing="12"/>
-                            <variation key="device=watch42mm" spacing="20"/>
-                        </group>
-                    </items>
-                    <connections>
-                        <outlet property="bigButton" destination="89x-JP-IIy" id="PTJ-Z1-WXo"/>
-                        <outlet property="smallButton" destination="lr6-Gi-wYm" id="5bO-SK-Mbw"/>
-                    </connections>
-                </controller>
-            </objects>
-            <point key="canvasLocation" x="450" y="347"/>
         </scene>
         <!--Glance Interface Controller-->
         <scene sceneID="BOz-TT-tkC">

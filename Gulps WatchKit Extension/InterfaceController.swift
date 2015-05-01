@@ -38,6 +38,29 @@ class InterfaceController: WKInterfaceController {
 
     }
 
+    @IBAction func addSmallGulpAction() {
+        updateWithGulp(Settings.Gulp.Small.key())
+    }
+
+    @IBAction func addBigGulpAction() {
+        updateWithGulp(Settings.Gulp.Big.key())
+    }
+
+    override func willActivate() {
+        super.willActivate()
+        reloadAndUpdateUI()
+    }
+
+    override func didDeactivate() {
+        super.didDeactivate()
+    }
+
+}
+
+// MARK: Private Helper Methods
+
+private extension InterfaceController {
+    
     func reloadAndUpdateUI() {
         let entry = EntryHandler().currentEntry() as Entry
         var delta = Int(entry.percentage - previousPercentage)
@@ -54,18 +77,10 @@ class InterfaceController: WKInterfaceController {
         goalLabel.setText("DAILY GOAL: \(entry.formattedPercentage())")
         previousPercentage = entry.percentage
     }
-
-    @IBAction func addMenuAction() {
-        self.presentControllerWithName("ActionInterfaceController", context:nil)
-    }
-
-    override func willActivate() {
-        super.willActivate()
+    
+    func updateWithGulp(gulp: String) {
+        self.entryHandler.addGulp(NSUserDefaults.groupUserDefaults().doubleForKey(gulp))
+        self.wormhole.passMessageObject("update", identifier: "watchUpdate")
         reloadAndUpdateUI()
     }
-
-    override func didDeactivate() {
-        super.didDeactivate()
-    }
-
 }
