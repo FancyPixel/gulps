@@ -29,15 +29,18 @@ public class EntryHandler: NSObject {
 
     public func addGulp(quantity: Double) {
         let entry = currentEntry()
-        entry.addGulp(quantity, goal: NSUserDefaults.groupUserDefaults().doubleForKey(Settings.Gulp.Goal.key()), realm: RLMRealm.defaultRealm())
+        let realm = RLMRealm.defaultRealm()
+        realm.beginWriteTransaction()
+        entry.addGulp(quantity, goal: NSUserDefaults.groupUserDefaults().doubleForKey(Settings.Gulp.Goal.key()))
+        realm.commitWriteTransaction()
     }
 
     public func removeLastGulp() {
         let realm = RLMRealm.defaultRealm()
         let entry = currentEntry()
         if let gulp = entry.gulps.lastObject() as? Gulp {
-            entry.removeLastGulp(realm)
             realm.beginWriteTransaction()
+            entry.removeLastGulp()
             realm.deleteObject(gulp)
             realm.commitWriteTransaction()
         }

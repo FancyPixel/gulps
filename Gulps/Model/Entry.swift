@@ -30,8 +30,7 @@ public class Entry: RLMObject {
         return objects.firstObject() as? Entry
     }
 
-    func addGulp(quantity: Double, goal: Double, realm: RLMRealm) {
-        realm.beginWriteTransaction()
+    func addGulp(quantity: Double, goal: Double) {
         let gulp = Gulp()
         gulp.quantity = quantity
         self.gulps.addObject(gulp)
@@ -41,11 +40,9 @@ public class Entry: RLMObject {
         if (self.percentage > 100) {
             self.percentage = 100
         }
-        realm.commitWriteTransaction()
     }
 
-    func removeLastGulp(realm: RLMRealm) {
-        realm.beginWriteTransaction()
+    func removeLastGulp() {
         let gulp = self.gulps.lastObject() as! Gulp
         self.quantity -= gulp.quantity
         self.percentage = self.quantity / self.goal * 100.0
@@ -56,7 +53,6 @@ public class Entry: RLMObject {
             self.percentage = 100
         }
         self.gulps.removeLastObject()
-        realm.commitWriteTransaction()
     }
     
     func formattedPercentage() -> String {
