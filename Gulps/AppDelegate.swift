@@ -1,29 +1,35 @@
 import UIKit
 import MMWormhole
 import DPMeterView
+import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     let wormhole = MMWormhole(applicationGroupIdentifier: "group.it.fancypixel.BigGulp", optionalDirectory: "biggulp")
+    var crashlyticsAPI: String?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
-        DPMeterView.appearance().trackTintColor = UIColor.lightGray()
-        DPMeterView.appearance().progressTintColor = UIColor.mainColor()
+        if let apiKey = crashlyticsAPI {
+            Crashlytics.startWithAPIKey(apiKey)
+        }
+
+        DPMeterView.appearance().trackTintColor = .lightGray()
+        DPMeterView.appearance().progressTintColor = .mainColor()
 
         Globals.actionSheetAppearance()
         
-        UITabBar.appearance().tintColor = UIColor.mainColor()
+        UITabBar.appearance().tintColor = .mainColor()
 
         let font = UIFont(name: "KaushanScript-Regular", size: 22)
         if let font = font {
             UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName: font, NSForegroundColorAttributeName: UIColor.whiteColor()]
         }
 
-        UINavigationBar.appearance().barTintColor = UIColor.mainColor()
-        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
+        UINavigationBar.appearance().barTintColor = .mainColor()
+        UINavigationBar.appearance().tintColor = .whiteColor()
 
         Settings.registerDefaults()
 

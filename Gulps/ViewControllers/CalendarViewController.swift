@@ -13,20 +13,20 @@ class CalendarViewController: UIViewController, JTCalendarDataSource {
 
         self.title = "My progress"
 
-        self.dailyLabel.text = ""
+        dailyLabel.text = ""
 
         let font = UIFont(name: "KaushanScript-Regular", size: 16)
 
-        self.calendar = JTCalendar()
-        self.calendar.calendarAppearance.calendar().firstWeekday = 2
-        self.calendar.calendarAppearance.dayDotRatio = 1.0 / 7.0
-        self.calendar.menuMonthsView = self.calendarMenu
-        self.calendar.contentView = self.calendarContent
-        self.calendar.dataSource = self
+        calendar = JTCalendar()
+        calendar.calendarAppearance.calendar().firstWeekday = 2
+        calendar.calendarAppearance.dayDotRatio = 1.0 / 7.0
+        calendar.menuMonthsView = calendarMenu
+        calendar.contentView = calendarContent
+        calendar.dataSource = self
         if let font = font {
-            self.calendar.calendarAppearance.menuMonthTextFont = font
+            calendar.calendarAppearance.menuMonthTextFont = font
         }
-        self.calendarMenu.reloadAppearance()
+        calendarMenu.reloadAppearance()
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -55,12 +55,12 @@ class CalendarViewController: UIViewController, JTCalendarDataSource {
     func updateLabelWithDate(date: NSDate!) {
         if let entry = Entry.entryForDate(date) {
             if (entry.percentage >= 100) {
-                self.dailyLabel.text = "Goal Met!"
+                dailyLabel.text = "Goal Met!"
             } else {
-                self.dailyLabel.text = entry.formattedPercentage()
+                dailyLabel.text = entry.formattedPercentage()
             }
         } else {
-            self.dailyLabel.text = ""
+            dailyLabel.text = ""
         }
     }
 }
