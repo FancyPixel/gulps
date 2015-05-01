@@ -46,7 +46,6 @@
 		6537A8471AF24D0200EC16E9 /* Gulp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A8121AF24CC800EC16E9 /* Gulp.swift */; };
 		6591D8C61AF2684A0069E198 /* DrinkViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6591D8C51AF2684A0069E198 /* DrinkViewControllerTests.swift */; };
 		65A234FF1AF253D1002A35F3 /* TodayViewController+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A234FE1AF253D1002A35F3 /* TodayViewController+Animation.swift */; };
-		65EB2CEC1AF3A770001F1DD2 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65EB2CEB1AF3A770001F1DD2 /* Crashlytics.framework */; };
 		65F44C211AF24B440093A3E9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F44C201AF24B440093A3E9 /* AppDelegate.swift */; };
 		65F44C261AF24B440093A3E9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65F44C241AF24B440093A3E9 /* Main.storyboard */; };
 		65F44C281AF24B440093A3E9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65F44C271AF24B440093A3E9 /* Images.xcassets */; };
@@ -148,7 +147,6 @@
 		65A234FD1AF25376002A35F3 /* GulpsToday.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = GulpsToday.entitlements; sourceTree = "<group>"; };
 		65A234FE1AF253D1002A35F3 /* TodayViewController+Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TodayViewController+Animation.swift"; sourceTree = "<group>"; };
 		65A235021AF2543B002A35F3 /* Gulps WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Gulps WatchKit Extension.entitlements"; sourceTree = "<group>"; };
-		65EB2CEB1AF3A770001F1DD2 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		65F44C1B1AF24B440093A3E9 /* Gulps.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gulps.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65F44C1F1AF24B440093A3E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		65F44C201AF24B440093A3E9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -193,7 +191,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65EB2CEC1AF3A770001F1DD2 /* Crashlytics.framework in Frameworks */,
 				800E72B73F54FA65CABC4BD6 /* Pods_Gulps.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -378,7 +375,6 @@
 		65F44C451AF24B770093A3E9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				65EB2CEB1AF3A770001F1DD2 /* Crashlytics.framework */,
 				65F44C461AF24B770093A3E9 /* NotificationCenter.framework */,
 				5A701E98A87809500CB34BF4 /* Pods_Gulps.framework */,
 				A223BA8DAB2EF6307E53D3BE /* Pods_Gulps_WatchKit_Extension.framework */,
@@ -483,7 +479,6 @@
 				65F44C551AF24B780093A3E9 /* Embed App Extensions */,
 				6B6AF88C106CF70B20D20372 /* Embed Pods Frameworks */,
 				06E6943317C6B36A9014DF37 /* Copy Pods Resources */,
-				65EB2CEA1AF3A748001F1DD2 /* Setup Crashlytics */,
 			);
 			buildRules = (
 			);
@@ -759,20 +754,6 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
-		};
-		65EB2CEA1AF3A748001F1DD2 /* Setup Crashlytics */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Setup Crashlytics";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "./Crashlytics.framework/run 65fc85c5973428ede27b1592103a1741e0bef9a5 93d44c80de0ed674b0b3f8a5b62d0d0514dbb48324a9317156e75b6dc1f0b251";
 		};
 		69F67248221C2B22F4646EE5 /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;

@@ -1,24 +1,14 @@
 import UIKit
-import MMWormhole
 import DPMeterView
-import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var wormhole: MMWormhole?
-    var crashlyticsAPI: String?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
-        if let apiKey = crashlyticsAPI {
-            Crashlytics.startWithAPIKey(apiKey)
-        }
-
         EntryHandler.bootstrapRealm()
-
-        wormhole = MMWormhole(applicationGroupIdentifier: "group.\(Constants.bundle())", optionalDirectory: "biggulp")
 
         DPMeterView.appearance().trackTintColor = .lightGray()
         DPMeterView.appearance().progressTintColor = .mainColor()
