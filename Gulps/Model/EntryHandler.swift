@@ -2,14 +2,17 @@ import Foundation
 import Realm
 
 public class EntryHandler: NSObject {
-    public func currentEntry() -> Entry {
+
+    public class func bootstrapRealm() {
         if let directory: NSURL = NSFileManager.defaultManager().containerURLForSecurityApplicationGroupIdentifier("group.\(Constants.bundle())") {
             let realmPath = directory.path!.stringByAppendingPathComponent("db.realm")
             RLMRealm.setDefaultRealmPath(realmPath)
         } else {
             assertionFailure("Unable to setup Realm. Make sure to setup your app group in the developer portal")
         }
+    }
 
+    public func currentEntry() -> Entry {
         if let entry = Entry.entryForToday() {
             return entry
         } else {

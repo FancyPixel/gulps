@@ -1,8 +1,8 @@
 import UIKit
 import DPMeterView
 import UICountingLabel
-import MMWormhole
 import AMPopTip
+import Realm
 
 public class DrinkViewController: UIViewController, UIAlertViewDelegate {
 
@@ -15,7 +15,7 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate {
     @IBOutlet public var entryHandler: EntryHandler!
     public var userDefaults = NSUserDefaults.groupUserDefaults()
     var expanded = false
-    var wormhole: MMWormhole?
+    var realmToken: RLMNotificationToken?
 
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,12 +28,7 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate {
         percentageLabel.format = "%d%%";
         progressMeter.startGravity()
 
-
-        wormhole = MMWormhole(applicationGroupIdentifier: "group.\(Constants.bundle())", optionalDirectory: "biggulp")
-        wormhole!.listenForMessageWithIdentifier("watchUpdate") { (_) -> Void in
-            self.updateUI()
-        }
-        wormhole!.listenForMessageWithIdentifier("todayUpdate") { (_) -> Void in
+        realmToken = RLMRealm.defaultRealm().addNotificationBlock { note, realm in
             self.updateUI()
         }
 
@@ -56,14 +51,14 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate {
 
     func updateCurrentEntry(delta: Double) {
         entryHandler.addGulp(delta)
-        wormhole!.passMessageObject("update", identifier: "mainUpdate")
-        updateUI()
     }
 
     func updateUI() {
         let percentage = self.entryHandler.currentEntry().percentage
         percentageLabel.countFromCurrentValueTo(Float(round(percentage)))
-        progressMeter.setProgress(CGFloat(percentage / 100.0), duration: 1.5)
+        if (!progressMeter.isAnimating) {
+            progressMeter.setProgress(CGFloat(percentage / 100.0), duration: 1.5)
+        }
     }
 
     @IBAction func addButtonAction(sender: UIButton) {
@@ -99,8 +94,6 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate {
     public func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
         if (buttonIndex > 0) {
             entryHandler.removeLastGulp()
-            updateUI()
-            wormhole!.passMessageObject("update", identifier: "mainUpdate")
         }
     }
 }

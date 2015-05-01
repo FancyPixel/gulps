@@ -16,6 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Crashlytics.startWithAPIKey(apiKey)
         }
 
+        EntryHandler.bootstrapRealm()
+
         wormhole = MMWormhole(applicationGroupIdentifier: "group.\(Constants.bundle())", optionalDirectory: "biggulp")
 
         DPMeterView.appearance().trackTintColor = .lightGray()

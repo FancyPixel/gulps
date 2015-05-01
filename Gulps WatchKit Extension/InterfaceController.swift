@@ -1,14 +1,6 @@
-//
-//  InterfaceController.swift
-//  BigGulp WatchKit Extension
-//
-//  Created by Andrea Mazzini on 08/03/15.
-//  Copyright (c) 2015 Fancy Pixel. All rights reserved.
-//
-
 import WatchKit
 import Foundation
-import MMWormhole
+import Realm
 
 class InterfaceController: WKInterfaceController {
 
@@ -16,17 +8,14 @@ class InterfaceController: WKInterfaceController {
     @IBOutlet weak var progressImage: WKInterfaceImage!
 
     let entryHandler = EntryHandler()
-    var wormhole: MMWormhole?
+    var realmToken: RLMNotificationToken?
     var previousPercentage = 0.0
 
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
-
-        wormhole = MMWormhole(applicationGroupIdentifier: "group.\(Constants.bundle())", optionalDirectory: "biggulp")
-        wormhole!.listenForMessageWithIdentifier("mainUpdate") { (_) -> Void in
-            self.reloadAndUpdateUI()
-        }
-        wormhole!.listenForMessageWithIdentifier("todayUpdate") { (_) -> Void in
+        EntryHandler.bootstrapRealm()
+        
+        realmToken = RLMRealm.defaultRealm().addNotificationBlock { note, realm in
             self.reloadAndUpdateUI()
         }
 
@@ -81,7 +70,6 @@ private extension InterfaceController {
     
     func updateWithGulp(gulp: String) {
         entryHandler.addGulp(NSUserDefaults.groupUserDefaults().doubleForKey(gulp))
-        wormhole!.passMessageObject("update", identifier: "watchUpdate")
         reloadAndUpdateUI()
     }
 }

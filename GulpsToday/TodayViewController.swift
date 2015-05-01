@@ -1,6 +1,6 @@
 import UIKit
 import NotificationCenter
-import MMWormhole
+import Realm
 
 class TodayViewController: UIViewController, NCWidgetProviding {
         
@@ -12,11 +12,18 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     @IBOutlet weak var smallLabel: UILabel!
     @IBOutlet weak var bigLabel: UILabel!
     @IBOutlet var entryHandler: EntryHandler!
+    var realmToken: RLMNotificationToken?
     
     var gulpSize = Settings.Gulp.Small
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        EntryHandler.bootstrapRealm()
+
+        realmToken = RLMRealm.defaultRealm().addNotificationBlock { note, realm in
+            self.updateUI()
+        }
 
         [bigConfirmButton, smallConfirmButton].map({$0.transform = CGAffineTransformMakeScale(0.001, 0.001)})
         self.title = "Gulps"
@@ -98,7 +105,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     func addGulp(quantity: Double) {
         entryHandler.addGulp(quantity)
         summaryLabel.text = "Way to go!"
-        MMWormhole(applicationGroupIdentifier: "group.\(Constants.bundle())", optionalDirectory: "biggulp").passMessageObject("update", identifier: "todayUpdate")
         updateLabels()
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { () -> Void in
