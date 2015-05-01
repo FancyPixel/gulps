@@ -62,6 +62,6 @@ public class Entry: RLMObject {
     func formattedPercentage() -> String {
         let percentageFormatter = NSNumberFormatter()
         percentageFormatter.numberStyle = .PercentStyle
-        return percentageFormatter.stringFromNumber(percentage / 100.0) ?? "\(percentage)%"
+        return percentageFormatter.stringFromNumber(round(percentage) / 100.0) ?? "\(percentage)%"
     }
 }

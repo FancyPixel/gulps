@@ -60,7 +60,7 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate {
 
     func updateUI() {
         let percentage = self.entryHandler.currentEntry().percentage
-        self.percentageLabel.countFromCurrentValueTo(Float(nearbyint(percentage)))
+        self.percentageLabel.countFromCurrentValueTo(Float(round(percentage)))
         self.progressMeter.setProgress(CGFloat(percentage / 100.0), duration: 1.5)
     }
 
