@@ -1,15 +1,6 @@
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '8.0'
 
-# Not currently working on 0.37.rc.2
-# https://github.com/orta/cocoapods-keys/issues/64
-# plugin 'cocoapods-keys', {
-#   :project => "Gulps",
-#   :keys => [
-#     "CrashlyticsAPI"
-#   ]
-# }
-
 def common_pods
   pod 'Realm', '~> 0.91'
   pod 'AMWaveTransition', '~> 0.5'
