@@ -47,8 +47,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         numberFormatter.numberStyle = .DecimalStyle
         UIView.transitionWithView(self.summaryLabel, duration: 0.5, options: .TransitionCrossDissolve, animations: { () -> Void in
             let quantity = numberFormatter.stringFromNumber(self.entryHandler.currentEntry().quantity)!
-            let percentage = numberFormatter.stringFromNumber(ceil(self.entryHandler.currentEntry().percentage))!
-            self.summaryLabel.text = "\(quantity) liters drank today (\(percentage)% of your goal)"
+            let percentage = self.entryHandler.currentEntry().formattedPercentage()
+            self.summaryLabel.text = "\(quantity) liters drank today (\(percentage) of your goal)"
             }, completion: nil)
     }
     

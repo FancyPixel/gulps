@@ -44,6 +44,7 @@
 		6537A8451AF24CFF00EC16E9 /* EntryHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A8111AF24CC800EC16E9 /* EntryHandler.swift */; };
 		6537A8461AF24D0200EC16E9 /* Gulp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A8121AF24CC800EC16E9 /* Gulp.swift */; };
 		6537A8471AF24D0200EC16E9 /* Gulp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A8121AF24CC800EC16E9 /* Gulp.swift */; };
+		658DBFD01AF75D130094C0F1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65F44C271AF24B440093A3E9 /* Images.xcassets */; };
 		6591D8C61AF2684A0069E198 /* DrinkViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6591D8C51AF2684A0069E198 /* DrinkViewControllerTests.swift */; };
 		65A234FF1AF253D1002A35F3 /* TodayViewController+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A234FE1AF253D1002A35F3 /* TodayViewController+Animation.swift */; };
 		65F44C211AF24B440093A3E9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F44C201AF24B440093A3E9 /* AppDelegate.swift */; };
@@ -641,6 +642,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				65F44C4E1AF24B780093A3E9 /* MainInterface.storyboard in Resources */,
+				658DBFD01AF75D130094C0F1 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1144,6 +1146,7 @@
 				CODE_SIGN_ENTITLEMENTS = GulpsToday/GulpsToday.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1163,6 +1166,7 @@
 				CODE_SIGN_ENTITLEMENTS = GulpsToday/GulpsToday.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = GulpsToday/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
