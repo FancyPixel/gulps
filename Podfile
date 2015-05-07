@@ -2,7 +2,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '8.0'
 
 def common_pods
-  pod 'Realm', '~> 0.92'
+#  pod 'Realm', '~> 0.92'
   pod 'AMWaveTransition', '~> 0.5'
   pod 'AHKActionSheet', '~> 0.5'
   pod 'pop', '~> 1.0'
@@ -23,13 +23,13 @@ target 'GulpsTests' do
   pod 'Nimble-Snapshots'
 end
 
-target 'GulpsToday' do
-  pod 'Realm', '~> 0.92'
-end
+# target 'GulpsToday' do
+#   pod 'Realm', '~> 0.92'
+# end
 
-target 'Gulps WatchKit Extension' do
-  pod 'Realm', '~> 0.92'
-end
+# target 'Gulps WatchKit Extension' do
+#   pod 'Realm', '~> 0.92'
+# end
 
 inhibit_all_warnings!
 use_frameworks!

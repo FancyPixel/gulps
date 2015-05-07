@@ -71,7 +71,7 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate {
 
     @IBAction public func selectionButtonAction(sender: UIButton) {
         contractAddButton()
-        if (userDefaults.boolForKey("UNDO_HINT")) {
+        if (!userDefaults.boolForKey("UNDO_HINT")) {
             userDefaults.setBool(true, forKey: "UNDO_HINT")
             userDefaults.synchronize()
             AMPopTip.appearance().popoverColor = .mainColor()
