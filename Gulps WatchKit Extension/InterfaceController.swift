@@ -70,6 +70,5 @@ private extension InterfaceController {
     
     func updateWithGulp(gulp: String) {
         entryHandler.addGulp(NSUserDefaults.groupUserDefaults().doubleForKey(gulp))
-        reloadAndUpdateUI()
     }
 }
