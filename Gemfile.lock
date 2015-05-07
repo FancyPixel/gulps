@@ -1,9 +1,6 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    RubyInline (3.12.4)
-      ZenTest (~> 4.3)
-    ZenTest (4.11.0)
     activesupport (4.2.1)
       i18n (~> 0.7)
       json (~> 1.7, >= 1.7.7)
@@ -11,32 +8,30 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     claide (0.8.1)
-    cocoapods (0.37.0)
+    cocoapods (0.37.1)
       activesupport (>= 3.2.15)
       claide (~> 0.8.1)
-      cocoapods-core (= 0.37.0)
+      cocoapods-core (= 0.37.1)
       cocoapods-downloader (~> 0.9.0)
       cocoapods-plugins (~> 0.4.2)
       cocoapods-trunk (~> 0.6.0)
-      cocoapods-try (~> 0.4.3)
+      cocoapods-try (~> 0.4.4)
       colored (~> 1.2)
       escape (~> 0.0.4)
       molinillo (~> 0.2.3)
       nap (~> 0.8)
       xcodeproj (~> 0.24.1)
-    cocoapods-core (0.37.0)
+    cocoapods-core (0.37.1)
       activesupport (>= 3.2.15)
       fuzzy_match (~> 2.0.4)
       nap (~> 0.8.0)
     cocoapods-downloader (0.9.0)
-    cocoapods-keys (1.1.0)
-      osx_keychain
     cocoapods-plugins (0.4.2)
       nap
     cocoapods-trunk (0.6.0)
       nap (>= 0.8)
       netrc (= 0.7.8)
-    cocoapods-try (0.4.3)
+    cocoapods-try (0.4.4)
     colored (1.2)
     escape (0.0.4)
     fuzzy_match (2.0.4)
@@ -46,8 +41,6 @@ GEM
     molinillo (0.2.3)
     nap (0.8.0)
     netrc (0.7.8)
-    osx_keychain (1.0.0)
-      RubyInline (~> 3)
     plist (3.1.0)
     thread_safe (0.3.5)
     tzinfo (1.2.2)
@@ -61,7 +54,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  cocoapods (= 0.37)
-  cocoapods-keys
+  cocoapods (~> 0.37)
   plist
   xcpretty

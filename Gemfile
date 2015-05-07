@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-gem 'cocoapods', '0.37'
-gem 'cocoapods-keys'
+gem 'cocoapods', '~> 0.37'
 gem 'xcpretty'
 gem 'plist'
