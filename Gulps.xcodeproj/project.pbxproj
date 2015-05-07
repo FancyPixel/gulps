@@ -131,7 +131,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		285054092056F8C15C023459 /* Pods-Gulps WatchKit Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gulps WatchKit Extension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Gulps WatchKit Extension/Pods-Gulps WatchKit Extension.debug.xcconfig"; sourceTree = "<group>"; };
 		2895AC59AC7E84643B88E562 /* Pods-GulpsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GulpsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GulpsTests/Pods-GulpsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		2F55270E9B720F5F8B911EBA /* Pods-Gulps.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gulps.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Gulps/Pods-Gulps.debug.xcconfig"; sourceTree = "<group>"; };
 		4A4925FCD5463140CD8FE9BC /* Pods_GulpsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GulpsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -190,12 +189,7 @@
 		65F44C711AF24B8A0093A3E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		65F44C731AF24B8A0093A3E9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8339035B8C2DA7AA7C151C33 /* Pods-GulpsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GulpsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GulpsTests/Pods-GulpsTests.release.xcconfig"; sourceTree = "<group>"; };
-		8DBD3FD569F60612DAAFEA5D /* Pods-GulpsToday.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GulpsToday.release.xcconfig"; path = "Pods/Target Support Files/Pods-GulpsToday/Pods-GulpsToday.release.xcconfig"; sourceTree = "<group>"; };
-		A223BA8DAB2EF6307E53D3BE /* Pods_Gulps_WatchKit_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gulps_WatchKit_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BA8387913D2ED60BBFB252AB /* Pods_GulpsToday.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GulpsToday.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C916E6FEBE9F3B2034FA5E16 /* Pods-Gulps.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gulps.release.xcconfig"; path = "Pods/Target Support Files/Pods-Gulps/Pods-Gulps.release.xcconfig"; sourceTree = "<group>"; };
-		DE2874C8F5031CE649AEE26F /* Pods-Gulps WatchKit Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gulps WatchKit Extension.release.xcconfig"; path = "Pods/Target Support Files/Pods-Gulps WatchKit Extension/Pods-Gulps WatchKit Extension.release.xcconfig"; sourceTree = "<group>"; };
-		F66B6A3F01F3E088F4039DAB /* Pods-GulpsToday.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GulpsToday.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GulpsToday/Pods-GulpsToday.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -242,12 +236,8 @@
 			children = (
 				2F55270E9B720F5F8B911EBA /* Pods-Gulps.debug.xcconfig */,
 				C916E6FEBE9F3B2034FA5E16 /* Pods-Gulps.release.xcconfig */,
-				285054092056F8C15C023459 /* Pods-Gulps WatchKit Extension.debug.xcconfig */,
-				DE2874C8F5031CE649AEE26F /* Pods-Gulps WatchKit Extension.release.xcconfig */,
 				2895AC59AC7E84643B88E562 /* Pods-GulpsTests.debug.xcconfig */,
 				8339035B8C2DA7AA7C151C33 /* Pods-GulpsTests.release.xcconfig */,
-				F66B6A3F01F3E088F4039DAB /* Pods-GulpsToday.debug.xcconfig */,
-				8DBD3FD569F60612DAAFEA5D /* Pods-GulpsToday.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -401,9 +391,7 @@
 				65AADD101AFBAD7B0039EE4C /* Realm.framework */,
 				65F44C461AF24B770093A3E9 /* NotificationCenter.framework */,
 				5A701E98A87809500CB34BF4 /* Pods_Gulps.framework */,
-				A223BA8DAB2EF6307E53D3BE /* Pods_Gulps_WatchKit_Extension.framework */,
 				4A4925FCD5463140CD8FE9BC /* Pods_GulpsTests.framework */,
-				BA8387913D2ED60BBFB252AB /* Pods_GulpsToday.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -758,7 +746,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework/strip-frameworks.sh";
+			shellScript = "${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework/strip-frameworks.sh\nrm ${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework/strip-frameworks.sh";
 		};
 		6B6AF88C106CF70B20D20372 /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1026,7 +1014,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
@@ -1073,8 +1061,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Gulps/Gulps.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1093,7 +1081,7 @@
 				CODE_SIGN_ENTITLEMENTS = GulpsToday/GulpsToday.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1114,9 +1102,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = GulpsToday/GulpsToday.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1152,7 +1140,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				IBSC_MODULE = Gulps_WatchKit_Extension;
 				INFOPLIST_FILE = "Gulps WatchKit App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
@@ -1190,8 +1178,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Gulps WatchKit Extension/Gulps WatchKit Extension.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
