@@ -52,7 +52,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             let percentage = self.entryHandler.currentEntry().formattedPercentage()
             if let unit = UnitsOfMeasure(rawValue: userDefaults.integerForKey(Settings.General.UnitOfMeasure.key())) {
                 let unitName = unit.nameForUnitOfMeasure()
-                quantityDescriptionLabel.text = "\(unitName) drank"
                 self.summaryLabel.text = "\(quantity) \(unitName) drank today (\(percentage) of your goal)"
             }
             }, completion: nil)
