@@ -3,7 +3,7 @@ import NotificationCenter
 import Realm
 
 class TodayViewController: UIViewController, NCWidgetProviding {
-        
+
     @IBOutlet weak var bigGulpButton: UIButton!
     @IBOutlet weak var smallGulpButton: UIButton!
     @IBOutlet weak var smallConfirmButton: UIButton!
@@ -13,7 +13,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     @IBOutlet weak var bigLabel: UILabel!
     @IBOutlet var entryHandler: EntryHandler!
     var realmToken: RLMNotificationToken?
-    
+
     var gulpSize = Settings.Gulp.Small
 
     override func viewDidLoad() {
@@ -44,24 +44,30 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 
     func updateUI() {
         let numberFormatter = NSNumberFormatter()
+        let userDefaults = NSUserDefaults.groupUserDefaults()
+
         numberFormatter.numberStyle = .DecimalStyle
         UIView.transitionWithView(self.summaryLabel, duration: 0.5, options: .TransitionCrossDissolve, animations: { () -> Void in
             let quantity = numberFormatter.stringFromNumber(self.entryHandler.currentEntry().quantity)!
             let percentage = self.entryHandler.currentEntry().formattedPercentage()
-            self.summaryLabel.text = "\(quantity) liters drank today (\(percentage) of your goal)"
+            if let unit = UnitsOfMeasure(rawValue: userDefaults.integerForKey(Settings.General.UnitOfMeasure.key())) {
+                let unitName = unit.nameForUnitOfMeasure()
+                quantityDescriptionLabel.text = "\(unitName) drank"
+                self.summaryLabel.text = "\(quantity) \(unitName) drank today (\(percentage) of your goal)"
+            }
             }, completion: nil)
     }
-    
+
     func updateLabels() {
         let numberFormatter = NSNumberFormatter()
         numberFormatter.numberStyle = .DecimalStyle
         let userDefaults = NSUserDefaults.groupUserDefaults()
-        
+
         var suffix = ""
         if let unit = UnitsOfMeasure(rawValue: userDefaults.integerForKey(Settings.General.UnitOfMeasure.key())) {
             suffix = unit.suffixForUnitOfMeasure()
         }
-        
+
         self.smallLabel.text = "\(numberFormatter.stringFromNumber(userDefaults.doubleForKey(Settings.Gulp.Small.key()))!)\(suffix)"
         self.bigLabel.text = "\(numberFormatter.stringFromNumber(userDefaults.doubleForKey(Settings.Gulp.Big.key()))!)\(suffix)"
     }
@@ -93,7 +99,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         hideConfirmButtons()
         updateLabels()
     }
-    
+
     @IBAction func bigConfirmAction() {
         if (self.gulpSize == .Big) {
             addGulp(NSUserDefaults.groupUserDefaults().doubleForKey(Settings.Gulp.Big.key()))
@@ -101,12 +107,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         updateLabels()
         hideConfirmButtons()
     }
-    
+
     func addGulp(quantity: Double) {
         entryHandler.addGulp(quantity)
         summaryLabel.text = "Way to go!"
         updateLabels()
-        
+
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { () -> Void in
             self.updateUI()
         }

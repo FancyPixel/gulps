@@ -41,14 +41,14 @@ class NotificationHelper {
         smallAction.identifier = "SMALL_ACTION"
         smallAction.title = "Small Gulp"
         smallAction.activationMode = .Background
-        smallAction.authenticationRequired = true
+        smallAction.authenticationRequired = false
         smallAction.destructive = false
 
         let bigAction = UIMutableUserNotificationAction()
         bigAction.identifier = "BIG_ACTION"
         bigAction.title = "Big Gulp"
         bigAction.activationMode = .Background
-        bigAction.authenticationRequired = true
+        bigAction.authenticationRequired = false
         bigAction.destructive = false
 
         let gulpCategory = UIMutableUserNotificationCategory()

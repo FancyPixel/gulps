@@ -45,4 +45,12 @@ public class EntryHandler: NSObject {
             realm.commitWriteTransaction()
         }
     }
+
+    public class func overallQuantity() -> Double {
+        return Entry.allObjects().sumOfProperty("quantity") as Double
+    }
+
+    public class func daysTracked() -> UInt {
+        return Entry.allObjects().count as UInt
+    }
 }
