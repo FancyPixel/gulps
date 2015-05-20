@@ -24,7 +24,6 @@
 		6537A8321AF24CC800EC16E9 /* ProgressMeter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A81C1AF24CC800EC16E9 /* ProgressMeter.swift */; };
 		6537A8331AF24CC800EC16E9 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A81D1AF24CC800EC16E9 /* Settings.swift */; };
 		6537A8341AF24CC800EC16E9 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A81F1AF24CC800EC16E9 /* CalendarViewController.swift */; };
-		6537A8351AF24CC800EC16E9 /* DrinkViewController+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A8201AF24CC800EC16E9 /* DrinkViewController+Animations.swift */; };
 		6537A8361AF24CC800EC16E9 /* DrinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A8211AF24CC800EC16E9 /* DrinkViewController.swift */; };
 		6537A8371AF24CC800EC16E9 /* GoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A8231AF24CC800EC16E9 /* GoalViewController.swift */; };
 		6537A8381AF24CC800EC16E9 /* GulpsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A8241AF24CC800EC16E9 /* GulpsViewController.swift */; };
@@ -44,6 +43,8 @@
 		6537A8461AF24D0200EC16E9 /* Gulp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A8121AF24CC800EC16E9 /* Gulp.swift */; };
 		6537A8471AF24D0200EC16E9 /* Gulp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A8121AF24CC800EC16E9 /* Gulp.swift */; };
 		6555BB681B0CAE1700CE436A /* AnimatedShareButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6555BB671B0CAE1700CE436A /* AnimatedShareButton.swift */; };
+		6555BB6B1B0CB90A00CE436A /* DrinkViewController+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6555BB6A1B0CB90A00CE436A /* DrinkViewController+Animations.swift */; };
+		6555BB6D1B0CB93100CE436A /* CalendarViewController+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6555BB6C1B0CB93100CE436A /* CalendarViewController+Animations.swift */; };
 		658DBFD01AF75D130094C0F1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65F44C271AF24B440093A3E9 /* Images.xcassets */; };
 		6591D8C61AF2684A0069E198 /* DrinkViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6591D8C51AF2684A0069E198 /* DrinkViewControllerTests.swift */; };
 		65A234FF1AF253D1002A35F3 /* TodayViewController+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A234FE1AF253D1002A35F3 /* TodayViewController+Animation.swift */; };
@@ -150,7 +151,6 @@
 		6537A81C1AF24CC800EC16E9 /* ProgressMeter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressMeter.swift; sourceTree = "<group>"; };
 		6537A81D1AF24CC800EC16E9 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		6537A81F1AF24CC800EC16E9 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
-		6537A8201AF24CC800EC16E9 /* DrinkViewController+Animations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DrinkViewController+Animations.swift"; sourceTree = "<group>"; };
 		6537A8211AF24CC800EC16E9 /* DrinkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrinkViewController.swift; sourceTree = "<group>"; };
 		6537A8231AF24CC800EC16E9 /* GoalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalViewController.swift; sourceTree = "<group>"; };
 		6537A8241AF24CC800EC16E9 /* GulpsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GulpsViewController.swift; sourceTree = "<group>"; };
@@ -162,6 +162,8 @@
 		654764B41AF267D100C68C2A /* GulpsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GulpsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		654764B71AF267D100C68C2A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6555BB671B0CAE1700CE436A /* AnimatedShareButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatedShareButton.swift; sourceTree = "<group>"; };
+		6555BB6A1B0CB90A00CE436A /* DrinkViewController+Animations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DrinkViewController+Animations.swift"; sourceTree = "<group>"; };
+		6555BB6C1B0CB93100CE436A /* CalendarViewController+Animations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CalendarViewController+Animations.swift"; sourceTree = "<group>"; };
 		6591D8C51AF2684A0069E198 /* DrinkViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrinkViewControllerTests.swift; sourceTree = "<group>"; };
 		65A234FD1AF25376002A35F3 /* GulpsToday.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = GulpsToday.entitlements; sourceTree = "<group>"; };
 		65A234FE1AF253D1002A35F3 /* TodayViewController+Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TodayViewController+Animation.swift"; sourceTree = "<group>"; };
@@ -300,7 +302,7 @@
 		6537A81E1AF24CC800EC16E9 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				6537A8201AF24CC800EC16E9 /* DrinkViewController+Animations.swift */,
+				6555BB691B0CB90A00CE436A /* Support */,
 				6537A8211AF24CC800EC16E9 /* DrinkViewController.swift */,
 				6537A81F1AF24CC800EC16E9 /* CalendarViewController.swift */,
 				6537A8281AF24CC800EC16E9 /* SettingsViewController.swift */,
@@ -336,6 +338,15 @@
 				654764B71AF267D100C68C2A /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6555BB691B0CB90A00CE436A /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				6555BB6A1B0CB90A00CE436A /* DrinkViewController+Animations.swift */,
+				6555BB6C1B0CB93100CE436A /* CalendarViewController+Animations.swift */,
+			);
+			path = Support;
 			sourceTree = "<group>";
 		};
 		65F44C121AF24B440093A3E9 = {
@@ -796,10 +807,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6537A8351AF24CC800EC16E9 /* DrinkViewController+Animations.swift in Sources */,
 				6537A8381AF24CC800EC16E9 /* GulpsViewController.swift in Sources */,
+				6555BB6B1B0CB90A00CE436A /* DrinkViewController+Animations.swift in Sources */,
 				6537A8291AF24CC800EC16E9 /* Entry.swift in Sources */,
 				6537A82E1AF24CC800EC16E9 /* Colors.swift in Sources */,
+				6555BB6D1B0CB93100CE436A /* CalendarViewController+Animations.swift in Sources */,
 				6537A82F1AF24CC800EC16E9 /* Globals.swift in Sources */,
 				6537A83C1AF24CC800EC16E9 /* SettingsViewController.swift in Sources */,
 				6537A8341AF24CC800EC16E9 /* CalendarViewController.swift in Sources */,
