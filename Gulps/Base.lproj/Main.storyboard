@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7703" systemVersion="14E11f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E17e" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6711"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="KaushanScript.ttf">
+            <string>KaushanScript-Regular</string>
+            <string>KaushanScript-Regular</string>
+            <string>KaushanScript-Regular</string>
+            <string>KaushanScript-Regular</string>
             <string>KaushanScript-Regular</string>
             <string>KaushanScript-Regular</string>
         </mutableArray>
@@ -227,26 +231,69 @@
                                 <color key="textColor" red="0.21960784310000001" green="0.49019607840000001" blue="0.81176470590000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Liters drank in the last" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4E2-NO-CiF">
+                                <rect key="frame" x="16" y="133" width="288" height="25"/>
+                                <fontDescription key="fontDescription" name="KaushanScript-Regular" family="Kaushan Script" pointSize="17"/>
+                                <color key="textColor" red="0.21960784310000001" green="0.49019607840000001" blue="0.81176470590000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="200" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="lon-Jb-3Cm" customClass="UICountingLabel">
+                                <rect key="frame" x="16" y="40" width="288" height="93"/>
+                                <fontDescription key="fontDescription" name="KaushanScript-Regular" family="Kaushan Script" pointSize="64"/>
+                                <color key="textColor" red="0.21960784310000001" green="0.49019607840000001" blue="0.81176470590000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="days" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jpZ-Ht-zcx">
+                                <rect key="frame" x="16" y="263" width="288" height="25"/>
+                                <fontDescription key="fontDescription" name="KaushanScript-Regular" family="Kaushan Script" pointSize="17"/>
+                                <color key="textColor" red="0.21960784310000001" green="0.49019607840000001" blue="0.81176470590000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="200" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="R2u-Oc-VLI" customClass="UICountingLabel">
+                                <rect key="frame" x="16" y="170" width="288" height="93"/>
+                                <fontDescription key="fontDescription" name="KaushanScript-Regular" family="Kaushan Script" pointSize="64"/>
+                                <color key="textColor" red="0.21960784310000001" green="0.49019607840000001" blue="0.81176470590000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Nja-Uo-jJw" firstAttribute="leading" secondItem="qyp-gc-0kQ" secondAttribute="leadingMargin" id="3cW-EI-RHb"/>
+                            <constraint firstAttribute="trailing" secondItem="jpZ-Ht-zcx" secondAttribute="trailing" constant="16" id="3h0-rH-bgl"/>
                             <constraint firstAttribute="trailing" secondItem="6kF-sJ-gnc" secondAttribute="trailing" id="48A-Xp-gJd"/>
+                            <constraint firstAttribute="trailing" secondItem="lon-Jb-3Cm" secondAttribute="trailing" constant="16" id="4ok-kh-18w"/>
+                            <constraint firstItem="jpZ-Ht-zcx" firstAttribute="leading" secondItem="qyp-gc-0kQ" secondAttribute="leading" constant="16" id="EKe-le-ZNs"/>
+                            <constraint firstItem="4E2-NO-CiF" firstAttribute="top" secondItem="lon-Jb-3Cm" secondAttribute="bottom" id="FBc-uZ-Wzf"/>
                             <constraint firstItem="3gz-XS-2c7" firstAttribute="top" secondItem="6kF-sJ-gnc" secondAttribute="bottom" id="Nfh-yh-JXo"/>
+                            <constraint firstAttribute="trailing" secondItem="4E2-NO-CiF" secondAttribute="trailing" constant="16" id="TlK-nq-QTC"/>
                             <constraint firstItem="Nja-Uo-jJw" firstAttribute="trailing" secondItem="qyp-gc-0kQ" secondAttribute="trailingMargin" id="Yda-cw-XgW"/>
+                            <constraint firstItem="lon-Jb-3Cm" firstAttribute="top" secondItem="7Gy-oT-4T2" secondAttribute="bottom" constant="40" id="YlX-5M-AXr"/>
+                            <constraint firstItem="jpZ-Ht-zcx" firstAttribute="top" secondItem="R2u-Oc-VLI" secondAttribute="bottom" id="ZlJ-67-A2a"/>
                             <constraint firstAttribute="trailing" secondItem="3gz-XS-2c7" secondAttribute="trailing" id="cxL-YF-gS5"/>
+                            <constraint firstItem="4E2-NO-CiF" firstAttribute="leading" secondItem="qyp-gc-0kQ" secondAttribute="leading" constant="16" id="e0Q-1l-M4n"/>
                             <constraint firstItem="Nja-Uo-jJw" firstAttribute="top" secondItem="3gz-XS-2c7" secondAttribute="bottom" constant="8" id="iD4-YK-7sY"/>
+                            <constraint firstAttribute="trailing" secondItem="R2u-Oc-VLI" secondAttribute="trailing" constant="16" id="j8a-ZS-aWY"/>
+                            <constraint firstItem="R2u-Oc-VLI" firstAttribute="leading" secondItem="qyp-gc-0kQ" secondAttribute="leading" constant="16" id="lm1-WP-0mZ"/>
                             <constraint firstItem="3gz-XS-2c7" firstAttribute="leading" secondItem="qyp-gc-0kQ" secondAttribute="leading" id="ogi-43-EGf"/>
                             <constraint firstItem="6kF-sJ-gnc" firstAttribute="top" secondItem="7Gy-oT-4T2" secondAttribute="bottom" id="qPj-vX-v3s"/>
+                            <constraint firstItem="jpZ-Ht-zcx" firstAttribute="top" secondItem="R2u-Oc-VLI" secondAttribute="bottom" id="qtK-fc-vo7"/>
                             <constraint firstAttribute="centerX" secondItem="Nja-Uo-jJw" secondAttribute="centerX" id="we6-Gv-tIF"/>
+                            <constraint firstItem="R2u-Oc-VLI" firstAttribute="top" secondItem="7Gy-oT-4T2" secondAttribute="bottom" constant="170" id="y8i-V9-KVl"/>
                             <constraint firstItem="6kF-sJ-gnc" firstAttribute="leading" secondItem="qyp-gc-0kQ" secondAttribute="leading" id="yjb-Yz-TNd"/>
+                            <constraint firstItem="lon-Jb-3Cm" firstAttribute="leading" secondItem="qyp-gc-0kQ" secondAttribute="leading" constant="16" id="ylL-6X-iYT"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Ico-aI-BpK"/>
                     <connections>
+                        <outlet property="calendarConstraint" destination="qPj-vX-v3s" id="n2K-uZ-EDI"/>
                         <outlet property="calendarContent" destination="3gz-XS-2c7" id="ICO-Uh-WtF"/>
                         <outlet property="calendarMenu" destination="6kF-sJ-gnc" id="nMw-He-j0i"/>
                         <outlet property="dailyLabel" destination="Nja-Uo-jJw" id="Z5H-ce-i45"/>
+                        <outlet property="daysLabel" destination="R2u-Oc-VLI" id="dQR-AI-juD"/>
+                        <outlet property="daysLabelConstraint" destination="y8i-V9-KVl" id="emg-uy-ZYk"/>
+                        <outlet property="measureLabel" destination="4E2-NO-CiF" id="3Id-mJ-Jiz"/>
+                        <outlet property="quantityLabel" destination="lon-Jb-3Cm" id="5Vt-Se-wz6"/>
+                        <outlet property="quantityLabelConstraint" destination="YlX-5M-AXr" id="9aU-fL-M7Q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KLz-Ir-9US" userLabel="First Responder" sceneMemberID="firstResponder"/>
