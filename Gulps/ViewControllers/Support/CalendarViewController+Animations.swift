@@ -2,6 +2,14 @@ import pop
 
 extension CalendarViewController {
 
+    func initAnimations() {
+        quantityLabelStartingConstant = Double(quantityLabelConstraint.constant)
+        quantityLabelConstraint.constant = view.frame.size.height
+
+        daysLabelStartingConstant = Double(daysLabelConstraint.constant)
+        daysLabelConstraint.constant = view.frame.size.height
+    }
+    
     func animateShareView() {
         if animating == true {
             return

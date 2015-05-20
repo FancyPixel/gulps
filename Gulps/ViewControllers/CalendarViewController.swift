@@ -26,19 +26,16 @@ class CalendarViewController: UIViewController, JTCalendarDataSource {
         self.title = "My progress"
 
         dailyLabel.text = ""
+        [daysLabel, quantityLabel].map { $0.format = "%d" }
 
         let animatedButton = AnimatedShareButton(frame: CGRect(x: 0, y: 0, width: 22, height: 22))
         animatedButton.addTarget(self, action: Selector("presentStats:"), forControlEvents: .TouchUpInside)
         let button = UIBarButtonItem(customView: animatedButton)
-        self.navigationItem.rightBarButtonItem = button // UIBarButtonItem(image: UIImage(named: "stats-icon"), style: .Plain, target: self, action: Selector("presentStats:"))
+        self.navigationItem.rightBarButtonItem = button
         
         setupCalendar()
 
-        quantityLabelStartingConstant = Double(quantityLabelConstraint.constant)
-        quantityLabelConstraint.constant = view.frame.size.height
-
-        daysLabelStartingConstant = Double(daysLabelConstraint.constant)
-        daysLabelConstraint.constant = view.frame.size.height
+        initAnimations()
     }
 
     func presentStats(sender: UIBarButtonItem) {
@@ -59,7 +56,6 @@ class CalendarViewController: UIViewController, JTCalendarDataSource {
     }
 
     func updateStats() {
-        [daysLabel, quantityLabel].map { $0.format = "%d" }
         daysLabel.countFromZeroTo(Float(EntryHandler.overallQuantity()))
         quantityLabel.countFromZeroTo(Float(EntryHandler.daysTracked()))
         if let unit = UnitsOfMeasure(rawValue: NSUserDefaults.groupUserDefaults().integerForKey(Settings.General.UnitOfMeasure.key())) {
