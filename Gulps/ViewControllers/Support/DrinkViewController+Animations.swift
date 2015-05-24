@@ -3,12 +3,12 @@ import pop
 extension DrinkViewController {
 
     func initAnimation() {
-        self.smallButton.alpha = 0
-        self.largeButton.alpha = 0
+        smallButton.alpha = 0
+        largeButton.alpha = 0
     }
 
     func expandAddButton() {
-        self.addButton.userInteractionEnabled = false
+        addButton.userInteractionEnabled = false
 
         let rotate = POPSpringAnimation(propertyNamed: kPOPLayerRotation)
         rotate.fromValue = 0
@@ -38,13 +38,13 @@ extension DrinkViewController {
         color.springBounciness = 5
         color.removedOnCompletion = true
 
-        self.addButton.layer.pop_addAnimation(rotate, forKey: "rotate")
-        self.addButton.pop_addAnimation(scale, forKey: "scale")
-        self.addButton.pop_addAnimation(color, forKey: "color")
-        self.minusButton.pop_addAnimation(scaleMinus, forKey: "scaleMinus")
+        addButton.layer.pop_addAnimation(rotate, forKey: "rotate")
+        addButton.pop_addAnimation(scale, forKey: "scale")
+        addButton.pop_addAnimation(color, forKey: "color")
+        minusButton.pop_addAnimation(scaleMinus, forKey: "scaleMinus")
 
-        [self.smallButton, self.largeButton].map({$0.alpha = 1})
-        for button in [self.smallButton, self.largeButton] {
+        [smallButton, largeButton].map({$0.alpha = 1})
+        for button in [smallButton, largeButton] {
             let pop = POPSpringAnimation(propertyNamed: kPOPViewScaleXY)
             pop.fromValue = NSValue(CGPoint: CGPointMake(0.1, 0.1))
             pop.toValue = NSValue(CGPoint: CGPointMake(1, 1))
@@ -57,18 +57,18 @@ extension DrinkViewController {
         left.springBounciness = 5
         left.fromValue = 0
         left.toValue = -100
-        self.smallButton.layer.pop_addAnimation(left, forKey: "left")
+        smallButton.layer.pop_addAnimation(left, forKey: "left")
 
         let right = POPSpringAnimation(propertyNamed: kPOPLayerTranslationX)
         right.springBounciness = 5
         right.fromValue = 0
         right.toValue = 100
-        self.largeButton.layer.pop_addAnimation(right, forKey: "right")
+        largeButton.layer.pop_addAnimation(right, forKey: "right")
     }
 
     func contractAddButton() {
-        [self.smallButton, self.largeButton].map({$0.userInteractionEnabled = false})
-        self.addButton.userInteractionEnabled = false
+        [smallButton, largeButton].map({$0.userInteractionEnabled = false})
+        addButton.userInteractionEnabled = false
 
         let rotate = POPSpringAnimation(propertyNamed: kPOPLayerRotation)
         rotate.fromValue = -M_PI + M_PI_4
@@ -95,12 +95,12 @@ extension DrinkViewController {
         scaleMinus.toValue = NSValue(CGPoint: CGPointMake(1, 1))
         scaleMinus.removedOnCompletion = true
         
-        self.addButton.layer.pop_addAnimation(rotate, forKey: "rotate")
-        self.addButton.pop_addAnimation(scale, forKey: "scale")
-        self.addButton.pop_addAnimation(color, forKey: "color")
-        self.minusButton.pop_addAnimation(scaleMinus, forKey: "scaleMinus")
+        addButton.layer.pop_addAnimation(rotate, forKey: "rotate")
+        addButton.pop_addAnimation(scale, forKey: "scale")
+        addButton.pop_addAnimation(color, forKey: "color")
+        minusButton.pop_addAnimation(scaleMinus, forKey: "scaleMinus")
 
-        for button in [self.smallButton, self.largeButton] {
+        for button in [smallButton, largeButton] {
             let pop = POPSpringAnimation(propertyNamed: kPOPViewScaleXY)
             pop.fromValue = NSValue(CGPoint: CGPointMake(1, 1))
             pop.toValue = NSValue(CGPoint: CGPointMake(0.1, 0.1))
@@ -113,12 +113,12 @@ extension DrinkViewController {
         left.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
         left.fromValue = -100
         left.toValue = 0
-        self.smallButton.layer.pop_addAnimation(left, forKey: "left")
+        smallButton.layer.pop_addAnimation(left, forKey: "left")
 
         let right = POPBasicAnimation(propertyNamed: kPOPLayerTranslationX)
         right.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
         right.fromValue = 100
         right.toValue = 0
-        self.largeButton.layer.pop_addAnimation(right, forKey: "right")
+        largeButton.layer.pop_addAnimation(right, forKey: "right")
     }
 }

@@ -15,14 +15,20 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
 
     let userDefaults = NSUserDefaults.groupUserDefaults()
 
+    let numberFormatter: NSNumberFormatter = {
+        let formatter = NSNumberFormatter()
+        formatter.numberStyle = .DecimalStyle
+        return formatter
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Preferences"
-        for element in [self.smallPortionText, self.largePortionText, self.dailyGoalText] {
+        for element in [smallPortionText, largePortionText, dailyGoalText] {
             element.inputAccessoryView = Globals.numericToolbar(element,
                 selector: Selector("resignFirstResponder"),
-                barColor: UIColor.mainColor(),
-                textColor: UIColor.whiteColor())
+                barColor: .mainColor(),
+                textColor: .whiteColor())
         }
     }
 
@@ -35,24 +41,24 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
         let numberFormatter = NSNumberFormatter()
         numberFormatter.numberStyle = .DecimalStyle
         var suffix = ""
-        if let unit = UnitsOfMeasure(rawValue: self.userDefaults.integerForKey(Settings.General.UnitOfMeasure.key())) {
-            self.unitOfMesureLabel.text = unit.nameForUnitOfMeasure()
+        if let unit = UnitsOfMeasure(rawValue: userDefaults.integerForKey(Settings.General.UnitOfMeasure.key())) {
+            unitOfMesureLabel.text = unit.nameForUnitOfMeasure()
             suffix = unit.suffixForUnitOfMeasure()
         }
 
-        self.uomLabels.map({$0.text = suffix})
-        self.largePortionText.text = numberFormatter.stringFromNumber(self.userDefaults.doubleForKey(Settings.Gulp.Big.key()))
-        self.smallPortionText.text = numberFormatter.stringFromNumber(self.userDefaults.doubleForKey(Settings.Gulp.Small.key()))
-        self.dailyGoalText.text = numberFormatter.stringFromNumber(self.userDefaults.doubleForKey(Settings.Gulp.Goal.key()))
+        uomLabels.map({$0.text = suffix})
+        largePortionText.text = numberFormatter.stringFromNumber(userDefaults.doubleForKey(Settings.Gulp.Big.key()))
+        smallPortionText.text = numberFormatter.stringFromNumber(userDefaults.doubleForKey(Settings.Gulp.Small.key()))
+        dailyGoalText.text = numberFormatter.stringFromNumber(userDefaults.doubleForKey(Settings.Gulp.Goal.key()))
 
-        self.notificationSwitch.on = self.userDefaults.boolForKey(Settings.Notification.On.key())
-        self.notificationFromLabel.text = "\(self.userDefaults.integerForKey(Settings.Notification.From.key())):00"
-        self.notificationToLabel.text = "\(self.userDefaults.integerForKey(Settings.Notification.To.key())):00"
-        self.notificationIntervalLabel.text = "\(self.userDefaults.integerForKey(Settings.Notification.Interval.key())) hours"
+        notificationSwitch.on = userDefaults.boolForKey(Settings.Notification.On.key())
+        notificationFromLabel.text = "\(userDefaults.integerForKey(Settings.Notification.From.key())):00"
+        notificationToLabel.text = "\(userDefaults.integerForKey(Settings.Notification.To.key())):00"
+        notificationIntervalLabel.text = "\(userDefaults.integerForKey(Settings.Notification.Interval.key())) hours"
     }
 
     func updateNotificationPreferences() {
-        if (self.notificationSwitch.on) {
+        if (notificationSwitch.on) {
             NotificationHelper.unscheduleNotifications()
             NotificationHelper.askPermission()
         } else {
@@ -121,8 +127,6 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
     }
 
     @IBAction func reminderAction(sender: UISwitch) {
-        let userDefaults = NSUserDefaults.groupUserDefaults()
-
         userDefaults.setBool(sender.on, forKey: Settings.Notification.On.key())
         userDefaults.synchronize()
         self.tableView.reloadData()
@@ -144,7 +148,7 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
         } else if (section == 1) {
             return 3
         } else {
-            if (NSUserDefaults.groupUserDefaults().boolForKey(Settings.Notification.On.key())) {
+            if NSUserDefaults.groupUserDefaults().boolForKey(Settings.Notification.On.key()) {
                 return 4
             } else {
                 return 1
@@ -153,32 +157,21 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
     }
 
     func textFieldDidEndEditing(textField: UITextField) {
-        let numberFormatter = NSNumberFormatter()
-        numberFormatter.numberStyle = .DecimalStyle
-        if (textField == self.smallPortionText) {
-            var small = 0.0
-            if let number = numberFormatter.numberFromString(self.smallPortionText.text) {
-                small = number as Double
-            }
-            self.userDefaults.setDouble(small, forKey: Settings.Gulp.Small.key())
-            self.userDefaults.synchronize()
+        if (textField == smallPortionText) {
+            storeText(smallPortionText, toKey: Settings.Gulp.Small.key())
         }
-        if (textField == self.largePortionText) {
-            var big = 0.0
-            if let number = numberFormatter.numberFromString(self.largePortionText.text) {
-                big = number as Double
-            }
-            self.userDefaults.setDouble(big, forKey: Settings.Gulp.Big.key())
-            self.userDefaults.synchronize()
+        if (textField == largePortionText) {
+            storeText(largePortionText, toKey: Settings.Gulp.Big.key())
         }
-        if (textField == self.dailyGoalText) {
-            var goal = 0.0
-            if let number = numberFormatter.numberFromString(self.dailyGoalText.text) {
-                goal = number as Double
-            }
-            self.userDefaults.setDouble(goal, forKey: Settings.Gulp.Goal.key())
-            self.userDefaults.synchronize()
+        if (textField == dailyGoalText) {
+            storeText(dailyGoalText, toKey: Settings.Gulp.Goal.key())
         }
+    }
+
+    func storeText(textField: UITextField, toKey key: String) {
+        let number = numberFormatter.numberFromString(textField.text) as? Double
+        userDefaults.setDouble(number ?? 0.0, forKey: key)
+        userDefaults.synchronize()
     }
 
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {

@@ -16,9 +16,8 @@ extension CalendarViewController {
         }
 
         animating = true
-        if let button = self.navigationItem.rightBarButtonItem {
-            let animatedButton: AnimatedShareButton = button.customView as! AnimatedShareButton
-            animatedButton.showsMenu = !animatedButton.showsMenu
+        if let button = self.navigationItem.rightBarButtonItem?.customView as? AnimatedShareButton {
+            button.showsMenu = !button.showsMenu
         }
         if (showingStats) {
             let slideIn = POPSpringAnimation(propertyNamed: kPOPLayoutConstraintConstant)
