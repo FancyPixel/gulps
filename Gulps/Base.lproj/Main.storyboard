@@ -13,6 +13,7 @@
             <string>KaushanScript-Regular</string>
             <string>KaushanScript-Regular</string>
             <string>KaushanScript-Regular</string>
+            <string>KaushanScript-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -231,7 +232,7 @@
                                 <color key="textColor" red="0.21960784310000001" green="0.49019607840000001" blue="0.81176470590000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Liters drank in the last" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4E2-NO-CiF">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Liters drank over" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4E2-NO-CiF">
                                 <rect key="frame" x="16" y="133" width="288" height="25"/>
                                 <fontDescription key="fontDescription" name="KaushanScript-Regular" family="Kaushan Script" pointSize="17"/>
                                 <color key="textColor" red="0.21960784310000001" green="0.49019607840000001" blue="0.81176470590000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -255,6 +256,26 @@
                                 <color key="textColor" red="0.21960784310000001" green="0.49019607840000001" blue="0.81176470590000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xk6-tX-JQH">
+                                <rect key="frame" x="16" y="330" width="288" height="44"/>
+                                <color key="backgroundColor" red="0.21960784310000001" green="0.49019607840000001" blue="0.81176470590000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="8yg-2q-j0h"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="KaushanScript-Regular" family="Kaushan Script" pointSize="16"/>
+                                <state key="normal" title="Share">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="shareAction:" destination="BxV-3X-jF2" eventType="touchUpInside" id="nWB-cz-1aF"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -265,6 +286,7 @@
                             <constraint firstItem="jpZ-Ht-zcx" firstAttribute="leading" secondItem="qyp-gc-0kQ" secondAttribute="leading" constant="16" id="EKe-le-ZNs"/>
                             <constraint firstItem="4E2-NO-CiF" firstAttribute="top" secondItem="lon-Jb-3Cm" secondAttribute="bottom" id="FBc-uZ-Wzf"/>
                             <constraint firstItem="3gz-XS-2c7" firstAttribute="top" secondItem="6kF-sJ-gnc" secondAttribute="bottom" id="Nfh-yh-JXo"/>
+                            <constraint firstAttribute="trailing" secondItem="xk6-tX-JQH" secondAttribute="trailing" constant="16" id="RFp-sV-jZE"/>
                             <constraint firstAttribute="trailing" secondItem="4E2-NO-CiF" secondAttribute="trailing" constant="16" id="TlK-nq-QTC"/>
                             <constraint firstItem="Nja-Uo-jJw" firstAttribute="trailing" secondItem="qyp-gc-0kQ" secondAttribute="trailingMargin" id="Yda-cw-XgW"/>
                             <constraint firstItem="lon-Jb-3Cm" firstAttribute="top" secondItem="7Gy-oT-4T2" secondAttribute="bottom" constant="40" id="YlX-5M-AXr"/>
@@ -273,7 +295,9 @@
                             <constraint firstItem="4E2-NO-CiF" firstAttribute="leading" secondItem="qyp-gc-0kQ" secondAttribute="leading" constant="16" id="e0Q-1l-M4n"/>
                             <constraint firstItem="Nja-Uo-jJw" firstAttribute="top" secondItem="3gz-XS-2c7" secondAttribute="bottom" constant="8" id="iD4-YK-7sY"/>
                             <constraint firstAttribute="trailing" secondItem="R2u-Oc-VLI" secondAttribute="trailing" constant="16" id="j8a-ZS-aWY"/>
+                            <constraint firstItem="xk6-tX-JQH" firstAttribute="leading" secondItem="qyp-gc-0kQ" secondAttribute="leading" constant="16" id="jTT-KW-GGz"/>
                             <constraint firstItem="R2u-Oc-VLI" firstAttribute="leading" secondItem="qyp-gc-0kQ" secondAttribute="leading" constant="16" id="lm1-WP-0mZ"/>
+                            <constraint firstItem="xk6-tX-JQH" firstAttribute="top" secondItem="7Gy-oT-4T2" secondAttribute="bottom" constant="330" id="nYW-3w-Rk0"/>
                             <constraint firstItem="3gz-XS-2c7" firstAttribute="leading" secondItem="qyp-gc-0kQ" secondAttribute="leading" id="ogi-43-EGf"/>
                             <constraint firstItem="6kF-sJ-gnc" firstAttribute="top" secondItem="7Gy-oT-4T2" secondAttribute="bottom" id="qPj-vX-v3s"/>
                             <constraint firstItem="jpZ-Ht-zcx" firstAttribute="top" secondItem="R2u-Oc-VLI" secondAttribute="bottom" id="qtK-fc-vo7"/>
@@ -289,11 +313,14 @@
                         <outlet property="calendarContent" destination="3gz-XS-2c7" id="ICO-Uh-WtF"/>
                         <outlet property="calendarMenu" destination="6kF-sJ-gnc" id="nMw-He-j0i"/>
                         <outlet property="dailyLabel" destination="Nja-Uo-jJw" id="Z5H-ce-i45"/>
-                        <outlet property="daysLabel" destination="R2u-Oc-VLI" id="dQR-AI-juD"/>
+                        <outlet property="daysCountLabel" destination="R2u-Oc-VLI" id="ARU-3U-ML9"/>
+                        <outlet property="daysLabel" destination="jpZ-Ht-zcx" id="Srn-dK-Gra"/>
                         <outlet property="daysLabelConstraint" destination="y8i-V9-KVl" id="emg-uy-ZYk"/>
                         <outlet property="measureLabel" destination="4E2-NO-CiF" id="3Id-mJ-Jiz"/>
                         <outlet property="quantityLabel" destination="lon-Jb-3Cm" id="5Vt-Se-wz6"/>
                         <outlet property="quantityLabelConstraint" destination="YlX-5M-AXr" id="9aU-fL-M7Q"/>
+                        <outlet property="shareButton" destination="xk6-tX-JQH" id="pcA-Cq-ugm"/>
+                        <outlet property="shareButtonConstraint" destination="nYW-3w-Rk0" id="Oh8-gE-klY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KLz-Ir-9US" userLabel="First Responder" sceneMemberID="firstResponder"/>

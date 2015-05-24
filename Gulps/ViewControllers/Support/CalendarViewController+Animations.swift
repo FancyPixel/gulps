@@ -8,8 +8,11 @@ extension CalendarViewController {
 
         daysLabelStartingConstant = Double(daysLabelConstraint.constant)
         daysLabelConstraint.constant = view.frame.size.height
+
+        shareButtonStartingConstant = Double(shareButtonConstraint.constant)
+        shareButtonConstraint.constant = view.frame.size.height
     }
-    
+
     func animateShareView() {
         if animating == true {
             return
@@ -31,10 +34,17 @@ extension CalendarViewController {
 
             var slideAway = POPBasicAnimation(propertyNamed: kPOPLayoutConstraintConstant)
             slideAway.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
+            slideAway.fromValue = shareButtonConstraint.constant
+            slideAway.toValue = view.frame.size.height
+            slideAway.removedOnCompletion = true
+            shareButtonConstraint.pop_addAnimation(slideAway, forKey: "slideInButton")
+
+            slideAway = POPBasicAnimation(propertyNamed: kPOPLayoutConstraintConstant)
+            slideAway.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
             slideAway.fromValue = quantityLabelConstraint.constant
             slideAway.toValue = view.frame.size.height
             slideAway.removedOnCompletion = true
-            slideAway.beginTime = CACurrentMediaTime() + 0.10
+            slideAway.beginTime = CACurrentMediaTime() + 0.20
             quantityLabelConstraint.pop_addAnimation(slideAway, forKey: "slideInQuantity")
 
             slideAway = POPBasicAnimation(propertyNamed: kPOPLayoutConstraintConstant)
@@ -42,7 +52,9 @@ extension CalendarViewController {
             slideAway.fromValue = daysLabelConstraint.constant
             slideAway.toValue = view.frame.size.height
             slideAway.removedOnCompletion = true
+            slideAway.beginTime = CACurrentMediaTime() + 0.10
             daysLabelConstraint.pop_addAnimation(slideAway, forKey: "slideInDays")
+
             slideAway.completionBlock = { (_, _) in
                 self.showingStats = false
                 self.animating = false
@@ -73,6 +85,16 @@ extension CalendarViewController {
             slideIn.removedOnCompletion = true
             slideIn.beginTime = CACurrentMediaTime() + 0.50
             daysLabelConstraint.pop_addAnimation(slideIn, forKey: "slideInDays")
+
+            slideIn = POPSpringAnimation(propertyNamed: kPOPLayoutConstraintConstant)
+            slideIn.springBounciness = 5
+            slideIn.springSpeed = 8
+            slideIn.fromValue = shareButtonConstraint.constant
+            slideIn.toValue = shareButtonStartingConstant
+            slideIn.removedOnCompletion = true
+            slideIn.beginTime = CACurrentMediaTime() + 0.65
+            shareButtonConstraint.pop_addAnimation(slideIn, forKey: "slideInButton")
+
             slideIn.completionBlock = { (_, _) in
                 self.showingStats = true
                 self.animating = false

@@ -9,13 +9,19 @@ class CalendarViewController: UIViewController, JTCalendarDataSource {
     @IBOutlet weak var calendarContent: JTCalendarContentView!
     @IBOutlet weak var dailyLabel: UILabel!
     @IBOutlet weak var calendarConstraint: NSLayoutConstraint!
+
     @IBOutlet weak var quantityLabelConstraint: NSLayoutConstraint!
     @IBOutlet weak var daysLabelConstraint: NSLayoutConstraint!
-    @IBOutlet weak var daysLabel: UICountingLabel!
+    @IBOutlet weak var shareButtonConstraint: NSLayoutConstraint!
+    @IBOutlet weak var daysCountLabel: UICountingLabel!
     @IBOutlet weak var quantityLabel: UICountingLabel!
     @IBOutlet weak var measureLabel: UILabel!
+    @IBOutlet weak var daysLabel: UILabel!
+    @IBOutlet weak var shareButton: UIButton!
+
     var quantityLabelStartingConstant = 0.0
     var daysLabelStartingConstant = 0.0
+    var shareButtonStartingConstant = 0.0
     var calendar: JTCalendar!
     var showingStats = false
     var animating = false
@@ -26,8 +32,10 @@ class CalendarViewController: UIViewController, JTCalendarDataSource {
         self.title = "My progress"
 
         dailyLabel.text = ""
-        [daysLabel, quantityLabel].map { $0.format = "%d" }
-
+        [daysCountLabel, quantityLabel].map { $0.format = "%d" }
+        [quantityLabel, daysLabel, daysCountLabel, measureLabel].map({ $0.textColor = .mainColor() })
+        shareButton.backgroundColor = .mainColor()
+        
         self.navigationItem.rightBarButtonItem = {
             let animatedButton = AnimatedShareButton(frame: CGRect(x: 0, y: 0, width: 22, height: 22))
             animatedButton.addTarget(self, action: Selector("presentStats:"), forControlEvents: .TouchUpInside)
@@ -99,11 +107,11 @@ private extension CalendarViewController {
     }
 
     func updateStats() {
-        daysLabel.countFromZeroTo(Float(EntryHandler.overallQuantity()))
+        daysCountLabel.countFromZeroTo(Float(EntryHandler.overallQuantity()))
         quantityLabel.countFromZeroTo(Float(EntryHandler.daysTracked()))
         if let unit = UnitsOfMeasure(rawValue: NSUserDefaults.groupUserDefaults().integerForKey(Settings.General.UnitOfMeasure.key())) {
             let unitName = unit.nameForUnitOfMeasure()
-            measureLabel.text = "\(unitName) drank in the last"
+            measureLabel.text = "\(unitName) drank over"
         }
     }
 
