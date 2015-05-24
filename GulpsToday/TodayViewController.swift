@@ -13,8 +13,14 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     @IBOutlet weak var bigLabel: UILabel!
     @IBOutlet var entryHandler: EntryHandler!
     var realmToken: RLMNotificationToken?
-
     var gulpSize = Settings.Gulp.Small
+
+    let userDefaults = NSUserDefaults.groupUserDefaults()
+    let numberFormatter: NSNumberFormatter = {
+        let formatter = NSNumberFormatter()
+        formatter.numberStyle = .DecimalStyle
+        return formatter
+        }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,14 +49,10 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
 
     func updateUI() {
-        let numberFormatter = NSNumberFormatter()
-        let userDefaults = NSUserDefaults.groupUserDefaults()
-
-        numberFormatter.numberStyle = .DecimalStyle
         UIView.transitionWithView(self.summaryLabel, duration: 0.5, options: .TransitionCrossDissolve, animations: { () -> Void in
-            let quantity = numberFormatter.stringFromNumber(self.entryHandler.currentEntry().quantity)!
+            let quantity = self.numberFormatter.stringFromNumber(self.entryHandler.currentEntry().quantity)!
             let percentage = self.entryHandler.currentEntry().formattedPercentage()
-            if let unit = UnitsOfMeasure(rawValue: userDefaults.integerForKey(Settings.General.UnitOfMeasure.key())) {
+            if let unit = UnitsOfMeasure(rawValue: self.userDefaults.integerForKey(Settings.General.UnitOfMeasure.key())) {
                 let unitName = unit.nameForUnitOfMeasure()
                 self.summaryLabel.text = "\(quantity) \(unitName) drank today (\(percentage) of your goal)"
             }
@@ -58,27 +60,23 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
 
     func updateLabels() {
-        let numberFormatter = NSNumberFormatter()
-        numberFormatter.numberStyle = .DecimalStyle
-        let userDefaults = NSUserDefaults.groupUserDefaults()
-
         var suffix = ""
         if let unit = UnitsOfMeasure(rawValue: userDefaults.integerForKey(Settings.General.UnitOfMeasure.key())) {
             suffix = unit.suffixForUnitOfMeasure()
         }
 
-        self.smallLabel.text = "\(numberFormatter.stringFromNumber(userDefaults.doubleForKey(Settings.Gulp.Small.key()))!)\(suffix)"
-        self.bigLabel.text = "\(numberFormatter.stringFromNumber(userDefaults.doubleForKey(Settings.Gulp.Big.key()))!)\(suffix)"
+        smallLabel.text = "\(numberFormatter.stringFromNumber(userDefaults.doubleForKey(Settings.Gulp.Small.key()))!)\(suffix)"
+        bigLabel.text = "\(numberFormatter.stringFromNumber(userDefaults.doubleForKey(Settings.Gulp.Big.key()))!)\(suffix)"
     }
 
     func confirmAction() {
-        self.smallConfirmButton.backgroundColor = (self.gulpSize == Settings.Gulp.Small) ? UIColor.confirmColor() : UIColor.destructiveColor()
-        self.bigConfirmButton.backgroundColor = (self.gulpSize == Settings.Gulp.Big) ? UIColor.confirmColor() : UIColor.destructiveColor()
-        self.smallConfirmButton.setImage(UIImage(named: (self.gulpSize == Settings.Gulp.Small) ? "tiny-check" : "tiny-x"), forState: .Normal)
-        self.bigConfirmButton.setImage(UIImage(named: (self.gulpSize == Settings.Gulp.Big) ? "tiny-check" : "tiny-x"), forState: .Normal)
-        self.smallLabel.text = (self.gulpSize == Settings.Gulp.Small) ? "Confirm" : "Never mind"
-        self.bigLabel.text = (self.gulpSize == Settings.Gulp.Small) ? "Never mind" : "Confirm"
-        self.showConfirmButtons()
+        smallConfirmButton.backgroundColor = (gulpSize == .Small) ? .confirmColor() : .destructiveColor()
+        bigConfirmButton.backgroundColor = (gulpSize == .Big) ? .confirmColor() : .destructiveColor()
+        smallConfirmButton.setImage(UIImage(named: (gulpSize == .Small) ? "tiny-check" : "tiny-x"), forState: .Normal)
+        bigConfirmButton.setImage(UIImage(named: (gulpSize == .Big) ? "tiny-check" : "tiny-x"), forState: .Normal)
+        smallLabel.text = (gulpSize == .Small) ? "Confirm" : "Never mind"
+        bigLabel.text = (gulpSize == .Small) ? "Never mind" : "Confirm"
+        showConfirmButtons()
     }
 
     @IBAction func smallGulp(sender: UIButton) {

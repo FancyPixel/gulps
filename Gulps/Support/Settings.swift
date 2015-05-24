@@ -23,7 +23,6 @@ enum UnitsOfMeasure: Int {
 }
 
 public class Settings {
-
     public enum General: Int {
         case UnitOfMeasure, OnboardingShown
 

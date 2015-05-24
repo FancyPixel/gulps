@@ -28,13 +28,14 @@ class CalendarViewController: UIViewController, JTCalendarDataSource {
         dailyLabel.text = ""
         [daysLabel, quantityLabel].map { $0.format = "%d" }
 
-        let animatedButton = AnimatedShareButton(frame: CGRect(x: 0, y: 0, width: 22, height: 22))
-        animatedButton.addTarget(self, action: Selector("presentStats:"), forControlEvents: .TouchUpInside)
-        let button = UIBarButtonItem(customView: animatedButton)
-        self.navigationItem.rightBarButtonItem = button
-        
-        setupCalendar()
+        self.navigationItem.rightBarButtonItem = {
+            let animatedButton = AnimatedShareButton(frame: CGRect(x: 0, y: 0, width: 22, height: 22))
+            animatedButton.addTarget(self, action: Selector("presentStats:"), forControlEvents: .TouchUpInside)
+            let button = UIBarButtonItem(customView: animatedButton)
+            return button
+            }()
 
+        setupCalendar()
         initAnimations()
     }
 
@@ -52,27 +53,6 @@ class CalendarViewController: UIViewController, JTCalendarDataSource {
             updateLabelWithDate(date)
         } else {
             updateLabelWithDate(NSDate())
-        }
-    }
-
-    func updateStats() {
-        daysLabel.countFromZeroTo(Float(EntryHandler.overallQuantity()))
-        quantityLabel.countFromZeroTo(Float(EntryHandler.daysTracked()))
-        if let unit = UnitsOfMeasure(rawValue: NSUserDefaults.groupUserDefaults().integerForKey(Settings.General.UnitOfMeasure.key())) {
-            let unitName = unit.nameForUnitOfMeasure()
-            measureLabel.text = "\(unitName) drank in the last"
-        }
-    }
-
-    func updateLabelWithDate(date: NSDate!) {
-        if let entry = Entry.entryForDate(date) {
-            if (entry.percentage >= 100) {
-                dailyLabel.text = "Goal Met!"
-            } else {
-                dailyLabel.text = entry.formattedPercentage()
-            }
-        } else {
-            dailyLabel.text = ""
         }
     }
 
@@ -103,7 +83,7 @@ class CalendarViewController: UIViewController, JTCalendarDataSource {
 }
 
 private extension CalendarViewController {
-    private func setupCalendar() {
+    func setupCalendar() {
         let font = UIFont(name: "KaushanScript-Regular", size: 16)
 
         calendar = JTCalendar()
@@ -116,5 +96,26 @@ private extension CalendarViewController {
             calendar.calendarAppearance.menuMonthTextFont = font
         }
         calendarMenu.reloadAppearance()
+    }
+
+    func updateStats() {
+        daysLabel.countFromZeroTo(Float(EntryHandler.overallQuantity()))
+        quantityLabel.countFromZeroTo(Float(EntryHandler.daysTracked()))
+        if let unit = UnitsOfMeasure(rawValue: NSUserDefaults.groupUserDefaults().integerForKey(Settings.General.UnitOfMeasure.key())) {
+            let unitName = unit.nameForUnitOfMeasure()
+            measureLabel.text = "\(unitName) drank in the last"
+        }
+    }
+
+    func updateLabelWithDate(date: NSDate!) {
+        if let entry = Entry.entryForDate(date) {
+            if (entry.percentage >= 100) {
+                dailyLabel.text = "Goal Met!"
+            } else {
+                dailyLabel.text = entry.formattedPercentage()
+            }
+        } else {
+            dailyLabel.text = ""
+        }
     }
 }

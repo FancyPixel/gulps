@@ -79,11 +79,8 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate {
             let popTip = AMPopTip()
             popTip.showText("Tap here to undo your latest action", direction: .Down, maxWidth: 200, inView: self.view, fromFrame: self.minusButton.frame)
         }
-        if (smallButton == sender) {
-            updateCurrentEntry(userDefaults.doubleForKey(Settings.Gulp.Small.key()))
-        } else {
-            updateCurrentEntry(userDefaults.doubleForKey(Settings.Gulp.Big.key()))
-        }
+        let portion = smallButton == sender ? Settings.Gulp.Small.key() : Settings.Gulp.Big.key()
+        updateCurrentEntry(userDefaults.doubleForKey(portion))
     }
 
     @IBAction func removeGulpAction() {
