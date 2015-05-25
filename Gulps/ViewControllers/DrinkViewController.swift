@@ -1,7 +1,6 @@
 import UIKit
 import DPMeterView
 import UICountingLabel
-import AMPopTip
 import Realm
 
 public class DrinkViewController: UIViewController, UIAlertViewDelegate {
@@ -71,14 +70,10 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate {
 
     @IBAction public func selectionButtonAction(sender: UIButton) {
         contractAddButton()
-        if (!userDefaults.boolForKey("UNDO_HINT")) {
-            userDefaults.setBool(true, forKey: "UNDO_HINT")
-            userDefaults.synchronize()
-            AMPopTip.appearance().popoverColor = .mainColor()
-            AMPopTip.appearance().offset = 10
-            let popTip = AMPopTip()
-            popTip.showText("Tap here to undo your latest action", direction: .Down, maxWidth: 200, inView: self.view, fromFrame: self.minusButton.frame)
-        }
+        Globals.showPopTipOnceForKey("UNDO_HINT", userDefaults: userDefaults,
+            popTipText: "Tap here to undo your latest action",
+            inView: view,
+            fromFrame: minusButton.frame)
         let portion = smallButton == sender ? Settings.Gulp.Small.key() : Settings.Gulp.Big.key()
         updateCurrentEntry(userDefaults.doubleForKey(portion))
     }

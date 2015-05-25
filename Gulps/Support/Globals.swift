@@ -1,5 +1,6 @@
 import UIKit
 import AHKActionSheet
+import AMPopTip
 
 class Globals {
     class func numericToolbar(target: AnyObject, selector: Selector, barColor: UIColor = UIColor.whiteColor(), textColor: UIColor = UIColor.mainColor()) -> UIToolbar {
@@ -38,6 +39,18 @@ class Globals {
         let numberFormatter = NSNumberFormatter()
         numberFormatter.numberStyle = .DecimalStyle
         return numberFormatter.numberFromString(newValue) != nil
+    }
+
+    class func showPopTipOnceForKey(key: String, userDefaults: NSUserDefaults, popTipText text: String, inView view: UIView, fromFrame frame: CGRect) {
+        if (!userDefaults.boolForKey(key)) {
+            userDefaults.setBool(true, forKey: key)
+            userDefaults.synchronize()
+            AMPopTip.appearance().popoverColor = .mainColor()
+            AMPopTip.appearance().offset = 10
+            AMPopTip.appearance().edgeMargin = 5
+            let popTip = AMPopTip()
+            popTip.showText(text, direction: .Down, maxWidth: 200, inView: view, fromFrame: frame)
+        }
     }
 }
 

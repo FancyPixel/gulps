@@ -5,6 +5,8 @@ import UICountingLabel
 
 class CalendarViewController: UIViewController, JTCalendarDataSource {
 
+    var userDefaults = NSUserDefaults.groupUserDefaults()
+
     @IBOutlet weak var calendarMenu: JTCalendarMenuView!
     @IBOutlet weak var calendarContent: JTCalendarContentView!
     @IBOutlet weak var dailyLabel: UILabel!
@@ -54,6 +56,11 @@ class CalendarViewController: UIViewController, JTCalendarDataSource {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 
+        Globals.showPopTipOnceForKey("SHARE_HINT", userDefaults: userDefaults,
+            popTipText: "Here you can checkout your overall progress",
+            inView: view,
+            fromFrame: CGRect(x: view.frame.size.width - 28, y: -10, width: 1, height: 1))
+
         updateStats()
 
         self.calendar.reloadData()
@@ -67,7 +74,7 @@ class CalendarViewController: UIViewController, JTCalendarDataSource {
     @IBAction func shareAction(sender: AnyObject) {
         let quantitiy = EntryHandler.overallQuantity()
         let days = EntryHandler.daysTracked()
-        let text = "Keeping healthy! I drank \(quantitiy) liters of water in the last \(days) days"
+        let text = "Keeping healthy! I drank \(quantitiy) liters of water over \(days) days. https://goo.gl/reTyQU"
         let items = [text]
         let activityController = UIActivityViewController(activityItems: items, applicationActivities: nil)
         activityController.excludedActivityTypes = [UIActivityTypeAirDrop, UIActivityTypeAssignToContact, UIActivityTypeAddToReadingList, UIActivityTypePrint, UIActivityTypePostToWeibo, UIActivityTypePostToVimeo, UIActivityTypePostToTencentWeibo]
