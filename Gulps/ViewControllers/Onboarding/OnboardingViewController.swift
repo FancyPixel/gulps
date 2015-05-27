@@ -10,7 +10,7 @@ class OnboardingViewController: AMWaveViewController {
 
         self.navigationController?.view.backgroundColor = UIColor.mainColor()
         self.view.backgroundColor = UIColor.clearColor()
-        
+
         updateUI()
     }
 

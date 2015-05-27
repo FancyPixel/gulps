@@ -37,7 +37,7 @@ class CalendarViewController: UIViewController, JTCalendarDataSource {
         [daysCountLabel, quantityLabel].map { $0.format = "%d" }
         [quantityLabel, daysLabel, daysCountLabel, measureLabel].map({ $0.textColor = .mainColor() })
         shareButton.backgroundColor = .mainColor()
-        
+
         self.navigationItem.rightBarButtonItem = {
             let animatedButton = AnimatedShareButton(frame: CGRect(x: 0, y: 0, width: 22, height: 22))
             animatedButton.addTarget(self, action: Selector("presentStats:"), forControlEvents: .TouchUpInside)
@@ -77,7 +77,11 @@ class CalendarViewController: UIViewController, JTCalendarDataSource {
         let text = "Keeping healthy! I drank \(quantitiy) liters of water over \(days) days. https://goo.gl/reTyQU"
         let items = [text]
         let activityController = UIActivityViewController(activityItems: items, applicationActivities: nil)
-        activityController.excludedActivityTypes = [UIActivityTypeAirDrop, UIActivityTypeAssignToContact, UIActivityTypeAddToReadingList, UIActivityTypePrint, UIActivityTypePostToWeibo, UIActivityTypePostToVimeo, UIActivityTypePostToTencentWeibo]
+        let exclusion = [
+            UIActivityTypeAirDrop, UIActivityTypeAssignToContact, UIActivityTypeAddToReadingList,
+            UIActivityTypePrint, UIActivityTypePostToWeibo, UIActivityTypePostToVimeo, UIActivityTypePostToTencentWeibo
+        ]
+        activityController.excludedActivityTypes = exclusion
         presentViewController(activityController, animated: true, completion: nil)
     }
 
@@ -116,7 +120,7 @@ private extension CalendarViewController {
     func updateStats() {
         daysCountLabel.countFromZeroTo(Float(EntryHandler.overallQuantity()))
         quantityLabel.countFromZeroTo(Float(EntryHandler.daysTracked()))
-        if let unit = UnitsOfMeasure(rawValue: NSUserDefaults.groupUserDefaults().integerForKey(Settings.General.UnitOfMeasure.key())) {
+        if let unit = UnitsOfMeasure(rawValue: userDefaults.integerForKey(Settings.General.UnitOfMeasure.key())) {
             let unitName = unit.nameForUnitOfMeasure()
             measureLabel.text = "\(unitName) drank over"
         }

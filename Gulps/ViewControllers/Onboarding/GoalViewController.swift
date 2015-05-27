@@ -18,7 +18,7 @@ class GoalViewController: OnboardingViewController, UITextFieldDelegate {
     func dismissAndSave() {
         let numberFormatter = NSNumberFormatter()
         numberFormatter.numberStyle = .DecimalStyle
-        
+
         self.goalTextField.resignFirstResponder()
 
         var goal = 0.0

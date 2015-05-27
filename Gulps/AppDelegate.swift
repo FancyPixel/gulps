@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DPMeterView.appearance().progressTintColor = .mainColor()
 
         Globals.actionSheetAppearance()
-        
+
         UITabBar.appearance().tintColor = .mainColor()
 
         let font = UIFont(name: "KaushanScript-Regular", size: 22)
@@ -40,15 +40,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func loadOnboardingInterface() {
         UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .Slide)
         let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
-        let controller = storyboard.instantiateInitialViewController() as! UIViewController
-        self.window?.rootViewController = controller
+        if let controller = storyboard.instantiateInitialViewController() as? UIViewController {
+            self.window?.rootViewController = controller
+        }
     }
 
     func loadMainInterface() {
         UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Slide)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let controller = storyboard.instantiateInitialViewController() as! UIViewController
-        self.window?.rootViewController = controller
+        if let controller = storyboard.instantiateInitialViewController() as? UIViewController {
+            self.window?.rootViewController = controller
+        }
     }
 
     func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, completionHandler: () -> Void) {
@@ -64,4 +66,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 }
-

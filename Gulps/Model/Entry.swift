@@ -25,7 +25,7 @@ public class Entry: RLMObject {
     class func entryForDate(date: NSDate) -> Entry? {
         let dateFormat = NSDateFormatter()
         dateFormat.dateFormat = "yyyy-MM-dd"
-        let p : NSPredicate = NSPredicate(format: "date = %@", argumentArray: [ dateFormat.stringFromDate(date) ])
+        let p: NSPredicate = NSPredicate(format: "date = %@", argumentArray: [ dateFormat.stringFromDate(date) ])
         let objects = Entry.objectsWithPredicate(p)
         return objects.firstObject() as? Entry
     }
@@ -43,18 +43,19 @@ public class Entry: RLMObject {
     }
 
     func removeLastGulp() {
-        let gulp = self.gulps.lastObject() as! Gulp
-        self.quantity -= gulp.quantity
-        self.percentage = self.quantity / self.goal * 100.0
-        if (self.percentage < 0) {
-            self.percentage = 0
+        if let gulp = self.gulps.lastObject() as? Gulp {
+            self.quantity -= gulp.quantity
+            self.percentage = self.quantity / self.goal * 100.0
+            if (self.percentage < 0) {
+                self.percentage = 0
+            }
+            if (self.percentage > 100) {
+                self.percentage = 100
+            }
+            self.gulps.removeLastObject()
         }
-        if (self.percentage > 100) {
-            self.percentage = 100
-        }
-        self.gulps.removeLastObject()
     }
-    
+
     func formattedPercentage() -> String {
         let percentageFormatter = NSNumberFormatter()
         percentageFormatter.numberStyle = .PercentStyle

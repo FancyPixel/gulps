@@ -179,13 +179,14 @@ class AnimatedShareButton: UIButton {
 extension CALayer {
     // Thanks to https://github.com/robb/hamburger-button
     func ocb_applyAnimation(animation: CABasicAnimation) {
-        let copy = animation.copy() as! CABasicAnimation
-        
-        if copy.fromValue == nil {
-            copy.fromValue = self.presentationLayer().valueForKeyPath(copy.keyPath)
+        if let copy = animation.copy() as? CABasicAnimation {
+
+            if copy.fromValue == nil {
+                copy.fromValue = self.presentationLayer().valueForKeyPath(copy.keyPath)
+            }
+
+            self.addAnimation(copy, forKey: copy.keyPath)
+            self.setValue(copy.toValue, forKeyPath:copy.keyPath)
         }
-        
-        self.addAnimation(copy, forKey: copy.keyPath)
-        self.setValue(copy.toValue, forKeyPath:copy.keyPath)
     }
 }

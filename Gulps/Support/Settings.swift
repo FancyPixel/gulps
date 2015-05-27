@@ -83,7 +83,7 @@ public class Settings {
         }
         userDefaults.synchronize()
     }
-    
+
     public class func registerDefaultsForLiter() {
         let userDefaults = NSUserDefaults.groupUserDefaults()
         userDefaults.setDouble(0.5, forKey: Gulp.Big.key())
@@ -91,7 +91,7 @@ public class Settings {
         userDefaults.setDouble(2, forKey: Gulp.Goal.key())
         userDefaults.synchronize()
     }
-    
+
     public class func registerDefaultsForOunces() {
         let userDefaults = NSUserDefaults.groupUserDefaults()
         userDefaults.setDouble(16, forKey: Gulp.Big.key())

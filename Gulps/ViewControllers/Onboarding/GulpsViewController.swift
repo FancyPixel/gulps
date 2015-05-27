@@ -10,7 +10,7 @@ class GulpsViewController: OnboardingViewController, UITextFieldDelegate {
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var smallBackgroundView: UIView!
     @IBOutlet weak var bigBackgroundView: UIView!
-    
+
     let userDefaults = NSUserDefaults.groupUserDefaults()
 
     override func viewDidLoad() {

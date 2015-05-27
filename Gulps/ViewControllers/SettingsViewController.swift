@@ -19,7 +19,7 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
         let formatter = NSNumberFormatter()
         formatter.numberStyle = .DecimalStyle
         return formatter
-    }()
+        }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,7 +67,7 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
     }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+
         if (indexPath.section == 0 && indexPath.row == 0) {
             let toActionSheet = AHKActionSheet(title: "Unit Of Measure:")
             toActionSheet!.addButtonWithTitle(UnitsOfMeasure.Liters.nameForUnitOfMeasure(), type: .Default, handler: { (actionSheet) -> Void in
@@ -131,14 +131,14 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
         userDefaults.synchronize()
         self.tableView.reloadData()
         // This crashes if you touch the switch and drag...
-//        let indexes = [NSIndexPath(forRow: 1, inSection: 2), NSIndexPath(forRow: 2, inSection: 2), NSIndexPath(forRow: 3, inSection: 2)]
-//        self.tableView.beginUpdates()
-//        if (sender.on) {
-//            self.tableView.insertRowsAtIndexPaths(indexes, withRowAnimation: .Automatic)
-//        } else {
-//            self.tableView.deleteRowsAtIndexPaths(indexes, withRowAnimation: .Automatic)
-//        }
-//        self.tableView.endUpdates()
+        //        let indexes = [NSIndexPath(forRow: 1, inSection: 2), NSIndexPath(forRow: 2, inSection: 2), NSIndexPath(forRow: 3, inSection: 2)]
+        //        self.tableView.beginUpdates()
+        //        if (sender.on) {
+        //            self.tableView.insertRowsAtIndexPaths(indexes, withRowAnimation: .Automatic)
+        //        } else {
+        //            self.tableView.deleteRowsAtIndexPaths(indexes, withRowAnimation: .Automatic)
+        //        }
+        //        self.tableView.endUpdates()
         updateNotificationPreferences()
     }
 

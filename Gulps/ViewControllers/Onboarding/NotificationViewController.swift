@@ -79,7 +79,8 @@ class NotificationViewController: OnboardingViewController, UIActionSheetDelegat
         NotificationHelper.unscheduleNotifications()
         NotificationHelper.askPermission()
 
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        appDelegate.loadMainInterface()
+        if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
+            appDelegate.loadMainInterface()
+        }
     }
 }
