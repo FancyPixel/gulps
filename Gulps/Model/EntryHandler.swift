@@ -1,12 +1,12 @@
 import Foundation
-import Realm
+import RealmSwift
 
 public class EntryHandler: NSObject {
 
     public class func bootstrapRealm() {
         if let directory: NSURL = NSFileManager.defaultManager().containerURLForSecurityApplicationGroupIdentifier("group.\(Constants.bundle())") {
             let realmPath = directory.path!.stringByAppendingPathComponent("db.realm")
-            RLMRealm.setDefaultRealmPath(realmPath)
+            Realm.defaultPath = realmPath
         } else {
             assertionFailure("Unable to setup Realm. Make sure to setup your app group in the developer portal")
         }
@@ -17,40 +17,40 @@ public class EntryHandler: NSObject {
             return entry
         } else {
             let newEntry = Entry()
-            let realm = RLMRealm.defaultRealm()
-            realm.beginWriteTransaction()
-            newEntry.percentage = 0
-            newEntry.quantity = 0
-            realm.addObject(newEntry)
-            realm.commitWriteTransaction()
+            let realm = Realm()
+            realm.write {
+                newEntry.percentage = 0
+                newEntry.quantity = 0
+                realm.add(newEntry)
+            }
             return newEntry
         }
     }
 
     public func addGulp(quantity: Double) {
         let entry = currentEntry()
-        let realm = RLMRealm.defaultRealm()
-        realm.beginWriteTransaction()
-        entry.addGulp(quantity, goal: NSUserDefaults.groupUserDefaults().doubleForKey(Settings.Gulp.Goal.key()))
-        realm.commitWriteTransaction()
+        let realm = Realm()
+        realm.write {
+            entry.addGulp(quantity, goal: NSUserDefaults.groupUserDefaults().doubleForKey(Settings.Gulp.Goal.key()))
+        }
     }
 
     public func removeLastGulp() {
-        let realm = RLMRealm.defaultRealm()
+        let realm = Realm()
         let entry = currentEntry()
-        if let gulp = entry.gulps.lastObject() as? Gulp {
-            realm.beginWriteTransaction()
-            entry.removeLastGulp()
-            realm.deleteObject(gulp)
-            realm.commitWriteTransaction()
+        if let gulp = entry.gulps.last {
+            realm.write {
+                entry.removeLastGulp()
+                realm.delete(gulp)
+            }
         }
     }
 
     public class func overallQuantity() -> Double {
-        return Entry.allObjects().sumOfProperty("quantity") as Double
+        return Realm().objects(Entry).sum("quantity") as Double
     }
 
-    public class func daysTracked() -> UInt {
-        return Entry.allObjects().count as UInt
+    public class func daysTracked() -> Int {
+        return Realm().objects(Entry).count
     }
 }

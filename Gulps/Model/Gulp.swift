@@ -1,7 +1,7 @@
 import Foundation
-import Realm
+import RealmSwift
 
-class Gulp: RLMObject {
+public class Gulp: Object {
     dynamic var date = NSDate()
     dynamic var quantity = 0.0
 }
