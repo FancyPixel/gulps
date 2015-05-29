@@ -5,6 +5,30 @@ extension DrinkViewController {
     func initAnimation() {
         smallButton.alpha = 0
         largeButton.alpha = 0
+        starButton.transform = CGAffineTransformMakeScale(0.0001, 0.0001)
+    }
+
+    func animateStarButton() {
+        let rotate = POPSpringAnimation(propertyNamed: kPOPLayerRotation)
+        rotate.toValue = 2 * M_PI - M_PI_4 / 2
+        rotate.springBounciness = 5
+        rotate.removedOnCompletion = true
+
+        let scale = POPSpringAnimation(propertyNamed: kPOPViewScaleXY)
+        scale.toValue = NSValue(CGPoint: CGPointMake(0.8, 0.8))
+        scale.removedOnCompletion = true
+        scale.completionBlock = {(_,_) in
+            let sway = POPBasicAnimation(propertyNamed: kPOPLayerRotation)
+            sway.fromValue = -M_PI_4 / 2
+            sway.toValue = M_PI_4 / 2
+            sway.duration = 0.75
+            sway.repeatForever = true
+            sway.autoreverses = true
+            self.starButton.layer.pop_addAnimation(sway, forKey: "sway")
+        }
+
+        starButton.pop_addAnimation(scale, forKey: "scale")
+        starButton.layer.pop_addAnimation(rotate, forKey: "rotate")
     }
 
     func expandAddButton() {
@@ -94,7 +118,7 @@ extension DrinkViewController {
         scaleMinus.fromValue = NSValue(CGPoint: CGPointMake(0, 0))
         scaleMinus.toValue = NSValue(CGPoint: CGPointMake(1, 1))
         scaleMinus.removedOnCompletion = true
-        
+
         addButton.layer.pop_addAnimation(rotate, forKey: "rotate")
         addButton.pop_addAnimation(scale, forKey: "scale")
         addButton.pop_addAnimation(color, forKey: "color")

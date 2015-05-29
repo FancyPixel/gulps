@@ -118,9 +118,23 @@
                                     <action selector="removeGulpAction" destination="9pv-A4-QxB" eventType="touchUpInside" id="dHe-Ob-mdh"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xap-Vb-CbA">
+                                <rect key="frame" x="10" y="10" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="7dc-b1-iEo"/>
+                                    <constraint firstAttribute="width" constant="50" id="lRF-8H-e5f"/>
+                                </constraints>
+                                <state key="normal" image="star">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="cZe-iA-KWC" kind="modal" id="aQp-BJ-jkw"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="xap-Vb-CbA" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" constant="10" id="0Kf-6v-f86"/>
                             <constraint firstItem="fW6-sm-t8g" firstAttribute="top" relation="greaterThanOrEqual" secondItem="mEa-Xq-QB6" secondAttribute="bottom" id="4AF-N9-UE2"/>
                             <constraint firstItem="mEa-Xq-QB6" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" id="5Kw-Si-2x9"/>
                             <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="fW6-sm-t8g" secondAttribute="bottom" priority="999" constant="30" id="6mW-Ks-Okm"/>
@@ -138,6 +152,7 @@
                             <constraint firstAttribute="centerX" secondItem="fW6-sm-t8g" secondAttribute="centerX" id="eai-hx-KLM"/>
                             <constraint firstItem="mEa-Xq-QB6" firstAttribute="trailing" secondItem="tsR-hK-woN" secondAttribute="trailingMargin" id="j6h-Zi-1LS"/>
                             <constraint firstAttribute="centerX" secondItem="mEa-Xq-QB6" secondAttribute="centerX" id="oP9-VY-fG7"/>
+                            <constraint firstItem="xap-Vb-CbA" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="10" id="pAa-mt-Iaf"/>
                             <constraint firstItem="uvx-n6-xp2" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="8" id="x61-hZ-WvW"/>
                             <constraint firstItem="fW6-sm-t8g" firstAttribute="centerY" secondItem="v5a-2l-qvB" secondAttribute="centerY" id="zwb-N5-8xQ"/>
                         </constraints>
@@ -151,12 +166,31 @@
                         <outlet property="percentageLabel" destination="mEa-Xq-QB6" id="VWN-Gf-0ip"/>
                         <outlet property="progressMeter" destination="mQX-uO-zkr" id="wZK-do-o20"/>
                         <outlet property="smallButton" destination="rSl-zs-C7Z" id="Eb6-qX-fT4"/>
+                        <outlet property="starButton" destination="xap-Vb-CbA" id="RjA-tl-1Yo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
                 <customObject id="YJs-c5-Aop" customClass="EntryHandler" customModule="Gulps"/>
             </objects>
             <point key="canvasLocation" x="833" y="-656"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="SYy-UA-vxC">
+            <objects>
+                <viewController id="cZe-iA-KWC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="02q-er-mJO"/>
+                        <viewControllerLayoutGuide type="bottom" id="xIr-rX-acu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Z7d-Wg-Hbc">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.96078431372549022" green="0.75294117647058822" blue="0.094117647058823528" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JK4-jm-Ngh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1257" y="-656"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -652,6 +686,7 @@
         <image name="plus-icon" width="40" height="40"/>
         <image name="settings-icon" width="30" height="30"/>
         <image name="small-icon" width="40" height="40"/>
+        <image name="star" width="50" height="50"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

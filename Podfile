@@ -10,6 +10,7 @@ def common_pods
   pod 'UICountingLabel', '~> 1.2'
   pod 'JTCalendar', git: 'https://github.com/andreamazz/JTCalendar', branch: 'develop'
   pod 'DPMeterView', git: 'https://github.com/andreamazz/DPMeterView'
+  pod 'BubbleTransition'
 #  pod 'BEMSimpleLineGraph'
 end
 

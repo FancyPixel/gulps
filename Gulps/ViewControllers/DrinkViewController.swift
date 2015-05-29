@@ -2,8 +2,9 @@ import UIKit
 import DPMeterView
 import UICountingLabel
 import Realm
+import BubbleTransition
 
-public class DrinkViewController: UIViewController, UIAlertViewDelegate {
+public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewControllerTransitioningDelegate {
 
     @IBOutlet public weak var progressMeter: DPMeterView!
     @IBOutlet public weak var percentageLabel: UICountingLabel!
@@ -12,9 +13,11 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate {
     @IBOutlet public weak var largeButton: UIButton!
     @IBOutlet public weak var minusButton: UIButton!
     @IBOutlet public var entryHandler: EntryHandler!
+    @IBOutlet weak var starButton: UIButton!
     public var userDefaults = NSUserDefaults.groupUserDefaults()
     var expanded = false
     var realmToken: RLMNotificationToken?
+    let transition = BubbleTransition()
 
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +45,8 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate {
     public override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         updateUI()
+
+//        animateStarButton()
     }
 
     public override func viewDidAppear(animated: Bool) {
@@ -57,6 +62,13 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate {
         percentageLabel.countFromCurrentValueTo(Float(round(percentage)))
         if (!progressMeter.isAnimating) {
             progressMeter.setProgress(CGFloat(percentage / 100.0), duration: 1.5)
+        }
+    }
+
+    override public func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let controller = segue.destinationViewController as? UIViewController {
+            controller.transitioningDelegate = self
+            controller.modalPresentationStyle = .Custom
         }
     }
 
@@ -87,5 +99,22 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate {
         if (buttonIndex > 0) {
             entryHandler.removeLastGulp()
         }
+    }
+
+    // MARK: UIViewControllerTransitioningDelegate
+
+    public func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        transition.transitionMode = .Present
+        let center = CGPoint(x: starButton.center.x, y: starButton.center.y + 64)
+        transition.startingPoint = center
+        transition.bubbleColor = UIColor(red: 245.0/255.0, green: 192.0/255.0, blue: 24.0/255.0, alpha: 1)
+        return transition
+    }
+
+    public func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        transition.transitionMode = .Dismiss
+        transition.startingPoint = starButton.center
+        transition.bubbleColor = UIColor(red: 245.0/255.0, green: 192.0/255.0, blue: 24.0/255.0, alpha: 1)
+        return transition
     }
 }
