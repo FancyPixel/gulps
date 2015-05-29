@@ -14,7 +14,7 @@
 		</data>
 		<key>Headers/RLMConstants.h</key>
 		<data>
-		JnMFXqbli6BJPlAw//62LNSx3Q8=
+		/eiYg+yhhoekTz6gsO8VoHSqE94=
 		</data>
 		<key>Headers/RLMMigration.h</key>
 		<data>
@@ -22,7 +22,7 @@
 		</data>
 		<key>Headers/RLMObject.h</key>
 		<data>
-		raLghq7ZvIbf0TKmfkA528ULSPA=
+		CmSn1Lbin8TVqhSRAFb5tgsBpVY=
 		</data>
 		<key>Headers/RLMObjectBase.h</key>
 		<data>
@@ -42,7 +42,7 @@
 		</data>
 		<key>Headers/RLMRealm.h</key>
 		<data>
-		/uZYk2UiowG5CF0Bk6NxcTpwMjM=
+		KMZtzfK3rzOY3PbG0CGVpxbgLBU=
 		</data>
 		<key>Headers/RLMResults.h</key>
 		<data>
@@ -58,7 +58,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		Vq9tGXerqwjHzSdtS5sL6RFN+30=
+		H5pZK9SGTa+Zj4LGZSC5ysXiW9I=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -110,11 +110,11 @@
 		</data>
 		<key>PrivateHeaders/RLMSchema_Private.h</key>
 		<data>
-		YLj3ckbr7vkmIFze+EHhcdYiw5M=
+		6RvYqZiBKYO1vEvLLCZOLNQ/AAM=
 		</data>
 		<key>strip-frameworks.sh</key>
 		<data>
-		KrLBl66eTeA5pAGw7pprSSDb9Xg=
+		yoFtYOltxi955+b1n7Zml9nNlkA=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -129,7 +129,7 @@
 		</data>
 		<key>Headers/RLMConstants.h</key>
 		<data>
-		JnMFXqbli6BJPlAw//62LNSx3Q8=
+		/eiYg+yhhoekTz6gsO8VoHSqE94=
 		</data>
 		<key>Headers/RLMMigration.h</key>
 		<data>
@@ -137,7 +137,7 @@
 		</data>
 		<key>Headers/RLMObject.h</key>
 		<data>
-		raLghq7ZvIbf0TKmfkA528ULSPA=
+		CmSn1Lbin8TVqhSRAFb5tgsBpVY=
 		</data>
 		<key>Headers/RLMObjectBase.h</key>
 		<data>
@@ -157,7 +157,7 @@
 		</data>
 		<key>Headers/RLMRealm.h</key>
 		<data>
-		/uZYk2UiowG5CF0Bk6NxcTpwMjM=
+		KMZtzfK3rzOY3PbG0CGVpxbgLBU=
 		</data>
 		<key>Headers/RLMResults.h</key>
 		<data>
@@ -221,11 +221,11 @@
 		</data>
 		<key>PrivateHeaders/RLMSchema_Private.h</key>
 		<data>
-		YLj3ckbr7vkmIFze+EHhcdYiw5M=
+		6RvYqZiBKYO1vEvLLCZOLNQ/AAM=
 		</data>
 		<key>strip-frameworks.sh</key>
 		<data>
-		KrLBl66eTeA5pAGw7pprSSDb9Xg=
+		yoFtYOltxi955+b1n7Zml9nNlkA=
 		</data>
 	</dict>
 	<key>rules</key>
