@@ -17,6 +17,16 @@ You can learn how to share data between an iOS app and its extension using Realm
 * Run `ruby change_bundle.rb your.bundle.identifier.BigGulp`
 * Match the bundle identifier in `Constants.swift`
 
+#Imitation is the sincerest form of flattery
+
+That's why we want to thank these fellow developers for the vote of confidence:  
+
+- [Water Meter for Apple Watch](https://itunes.apple.com/ca/app/water-meter-for-apple-watch/id989125882?mt=8)
+- [Coffee Meter for Apple Watch](https://itunes.apple.com/us/app/coffee-meter-for-apple-watch/id988805416?mt=8)
+- [Water Daily Free](https://itunes.apple.com/us/app/water-daily-free-drink-more/id995317367?mt=8)
+
+We are ok with that (hence the MIT license), but when cloning this we encourage you to take the [DBAA](http://urbandictionary.com/define.php?term=DBAA) clause in mind. 
+
 #MIT License
 
 	Copyright (c) 2015 Fancy Pixel S.r.l. All rights reserved.
