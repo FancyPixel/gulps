@@ -29,8 +29,7 @@ public class EntryHandler: NSObject {
 
     public func addGulp(quantity: Double) {
         let entry = currentEntry()
-        let realm = Realm()
-        realm.write {
+        Realm().write {
             entry.addGulp(quantity, goal: NSUserDefaults.groupUserDefaults().doubleForKey(Settings.Gulp.Goal.key()))
         }
     }

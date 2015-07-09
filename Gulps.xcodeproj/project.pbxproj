@@ -580,6 +580,7 @@
 		65F44C131AF24B440093A3E9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = "Fancy Pixel";
 				TargetAttributes = {

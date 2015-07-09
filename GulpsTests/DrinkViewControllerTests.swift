@@ -43,7 +43,7 @@ class DrinkViewControllerSpecs: QuickSpec {
             subject.entryHandler = MockEntryHandler()
             subject.userDefaults = MockUserDefaults()
             UIApplication.sharedApplication().keyWindow!.rootViewController = tabBarController
-            NSRunLoop.mainRunLoop().runUntilDate(NSDate())
+            NSRunLoop.mainRunLoop().runUntilDate(NSDate()) 
             subject.percentageLabel.animationDuration = 0.1 // makes testing easier
         }
 
