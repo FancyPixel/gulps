@@ -1,4 +1,4 @@
-import UIKit
+	import UIKit
 import DPMeterView
 
 @UIApplicationMain
@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().barTintColor = .mainColor()
         UINavigationBar.appearance().tintColor = .whiteColor()
 
-        Settings.registerDefaults()
+        Settings.registerDefaults()		
 
         let userDefaults = NSUserDefaults.groupUserDefaults()
         if (!userDefaults.boolForKey(Settings.General.OnboardingShown.key())) {

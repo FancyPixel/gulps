@@ -1,12 +1,12 @@
 import UIKit
-import DPMeterView
+import BAFluidView
 import UICountingLabel
 import Realm
 import BubbleTransition
 
 public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewControllerTransitioningDelegate {
 
-    @IBOutlet public weak var progressMeter: DPMeterView!
+    @IBOutlet public weak var progressMeterBackground: UIImageView!
     @IBOutlet public weak var percentageLabel: UICountingLabel!
     @IBOutlet public weak var addButton: UIButton!
     @IBOutlet public weak var smallButton: UIButton!
@@ -14,7 +14,9 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
     @IBOutlet public weak var minusButton: UIButton!
     @IBOutlet public var entryHandler: EntryHandler!
     @IBOutlet weak var starButton: UIButton!
+    @IBOutlet public weak var progressMeter: BAFluidView!
     public var userDefaults = NSUserDefaults.groupUserDefaults()
+    let mask = CALayer()
     var expanded = false
     var realmToken: RLMNotificationToken?
     let transition = BubbleTransition()
@@ -28,29 +30,46 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
 
         percentageLabel.animationDuration = 1.5
         percentageLabel.format = "%d%%";
-        progressMeter.startGravity()
 
         realmToken = RLMRealm.defaultRealm().addNotificationBlock { note, realm in
             self.updateUI()
         }
 
+        progressMeterBackground.image = UIImage(named: "drop-bg")
+        progressMeterBackground.contentMode = .Center
+        progressMeterBackground.backgroundColor = .clearColor()
+
+        progressMeter.backgroundColor = .clearColor()
+        progressMeter.fillColor = .mainColor()
+
+        progressMeter.fillAutoReverse = false
+        progressMeter.fillRepeatCount = 0;
+        progressMeter.amplitudeIncrement = 1
+
+        if let image = UIImage(named: "drop") {
+            mask.contents = image.CGImage
+            progressMeter.layer.mask = mask
+            mask.frame = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height)
+        }
+
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateUI", name: UIApplicationDidBecomeActiveNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(progressMeter, selector: "stopAnimation", name: UIApplicationWillResignActiveNotification, object: nil)
     }
 
     public override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        progressMeter.setShape(ProgressMeter.pathFromRect(self.progressMeter.frame))
+        mask.frame = CGRect(x: (progressMeter.frame.size.width - mask.frame.size.width) / 2, y: (progressMeter.frame.size.height - mask.frame.size.height) / 2, width: mask.frame.size.width, height: mask.frame.size.height)
     }
 
     public override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         updateUI()
-
 //        animateStarButton()
     }
 
-    public override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
+    public override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        progressMeter.stopAnimation()
     }
 
     func updateCurrentEntry(delta: Double) {
@@ -60,9 +79,8 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
     func updateUI() {
         let percentage = self.entryHandler.currentEntry().percentage
         percentageLabel.countFromCurrentValueTo(Float(round(percentage)))
-        if (!progressMeter.isAnimating) {
-            progressMeter.setProgress(CGFloat(percentage / 100.0), duration: 1.5)
-        }
+        progressMeter.fillTo(CGFloat(percentage / 100.0))
+        progressMeter.startAnimation()
     }
 
     override public func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

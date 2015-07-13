@@ -9,7 +9,7 @@ def common_pods
   pod 'AMPopTip', '~> 0.7'
   pod 'UICountingLabel', '~> 1.2'
   pod 'JTCalendar', git: 'https://github.com/andreamazz/JTCalendar', branch: 'develop'
-  pod 'DPMeterView', git: 'https://github.com/andreamazz/DPMeterView'
+  pod 'BAFluidView', git: 'https://github.com/andreamazz/BAFluidView', branch: 'fix-background-glitch'
   pod 'BubbleTransition'
 #  pod 'BEMSimpleLineGraph'
 end
@@ -21,7 +21,7 @@ end
 target 'GulpsTests' do
   common_pods
   pod 'Nimble'
-  pod 'Quick'
+  pod 'Quick', '~> 0.3.1'
   pod 'Nimble-Snapshots'
 end
 

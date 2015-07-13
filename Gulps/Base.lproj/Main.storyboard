@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E26a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -29,11 +29,21 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mQX-uO-zkr" customClass="DPMeterView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mQX-uO-zkr" customClass="UIImageView">
                                 <rect key="frame" x="50" y="20" width="220" height="220"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gso-Wp-gIg" customClass="BAFluidView">
+                                        <rect key="frame" x="0.0" y="0.0" width="220" height="220"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
                                 <color key="backgroundColor" white="0.96052631578947367" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="mQX-uO-zkr" secondAttribute="height" multiplier="1:1" id="KfC-cY-eVr"/>
+                                    <constraint firstItem="gso-Wp-gIg" firstAttribute="leading" secondItem="mQX-uO-zkr" secondAttribute="leading" id="Vkd-nk-EWI"/>
+                                    <constraint firstAttribute="trailing" secondItem="gso-Wp-gIg" secondAttribute="trailing" id="Wra-vm-nJh"/>
+                                    <constraint firstItem="gso-Wp-gIg" firstAttribute="top" secondItem="mQX-uO-zkr" secondAttribute="top" id="i7g-Fl-QF8"/>
+                                    <constraint firstAttribute="bottom" secondItem="gso-Wp-gIg" secondAttribute="bottom" id="pUr-pa-kmJ"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mEa-Xq-QB6" customClass="UICountingLabel">
@@ -164,7 +174,8 @@
                         <outlet property="largeButton" destination="v5a-2l-qvB" id="dvl-3k-q65"/>
                         <outlet property="minusButton" destination="uvx-n6-xp2" id="Id3-s0-QqO"/>
                         <outlet property="percentageLabel" destination="mEa-Xq-QB6" id="VWN-Gf-0ip"/>
-                        <outlet property="progressMeter" destination="mQX-uO-zkr" id="wZK-do-o20"/>
+                        <outlet property="progressMeter" destination="gso-Wp-gIg" id="Wvb-Hx-qae"/>
+                        <outlet property="progressMeterBackground" destination="mQX-uO-zkr" id="IUE-xh-lf1"/>
                         <outlet property="smallButton" destination="rSl-zs-C7Z" id="Eb6-qX-fT4"/>
                         <outlet property="starButton" destination="xap-Vb-CbA" id="RjA-tl-1Yo"/>
                     </connections>
