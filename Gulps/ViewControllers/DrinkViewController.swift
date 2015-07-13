@@ -21,6 +21,8 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
     var realmToken: RLMNotificationToken?
     let transition = BubbleTransition()
 
+    // MARK: - Life cycle
+
     public override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -72,6 +74,8 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
         progressMeter.stopAnimation()
     }
 
+    // MARK: - UI update
+
     func updateCurrentEntry(delta: Double) {
         entryHandler.addGulp(delta)
     }
@@ -89,6 +93,8 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
             controller.modalPresentationStyle = .Custom
         }
     }
+
+    // MARK: - Actions
 
     @IBAction func addButtonAction(sender: UIButton) {
         if (expanded) {
@@ -109,17 +115,16 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
     }
 
     @IBAction func removeGulpAction() {
-        let alert = UIAlertView(title: "Undo", message: "Undo latest action?", delegate: self, cancelButtonTitle:"No", otherButtonTitles:"Yes")
-        alert.show()
-    }
-
-    public func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
-        if (buttonIndex > 0) {
-            entryHandler.removeLastGulp()
+        let controller = UIAlertController(title: "Undo", message: "Undo latest action?", preferredStyle: .Alert)
+        let no = UIAlertAction(title: "No", style: .Default) { _ in }
+        let yes = UIAlertAction(title: "Yes", style: .Cancel) { _ in
+            self.entryHandler.removeLastGulp()
         }
+        [yes, no].map { controller.addAction($0) }
+        self.presentViewController(controller, animated: true) {}
     }
 
-    // MARK: UIViewControllerTransitioningDelegate
+    // MARK: - UIViewControllerTransitioningDelegate
 
     public func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         transition.transitionMode = .Present
@@ -134,5 +139,11 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
         transition.startingPoint = starButton.center
         transition.bubbleColor = UIColor(red: 245.0/255.0, green: 192.0/255.0, blue: 24.0/255.0, alpha: 1)
         return transition
+    }
+
+    // MARK: - Tear down
+
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 }
