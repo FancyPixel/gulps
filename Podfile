@@ -9,7 +9,7 @@ def common_pods
   pod 'AMPopTip', '~> 0.7'
   pod 'UICountingLabel', '~> 1.2'
   pod 'JTCalendar', git: 'https://github.com/andreamazz/JTCalendar', branch: 'develop'
-  pod 'BAFluidView', git: 'https://github.com/andreamazz/BAFluidView', branch: 'fix-background-glitch'
+  pod 'BAFluidView', git: 'https://github.com/antiguab/BAFluidView', branch: 'bug_15_fix'
   pod 'BubbleTransition'
 #  pod 'BEMSimpleLineGraph'
 end

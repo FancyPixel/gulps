@@ -55,7 +55,6 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
         }
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateUI", name: UIApplicationDidBecomeActiveNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(progressMeter, selector: "stopAnimation", name: UIApplicationWillResignActiveNotification, object: nil)
     }
 
     public override func viewDidLayoutSubviews() {
@@ -84,7 +83,6 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
         let percentage = self.entryHandler.currentEntry().percentage
         percentageLabel.countFromCurrentValueTo(Float(round(percentage)))
         progressMeter.fillTo(CGFloat(percentage / 100.0))
-        progressMeter.startAnimation()
     }
 
     override public func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
