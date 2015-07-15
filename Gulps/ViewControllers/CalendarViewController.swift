@@ -64,11 +64,7 @@ class CalendarViewController: UIViewController, JTCalendarDataSource {
         updateStats()
 
         self.calendar.reloadData()
-        if let date = calendar.currentDateSelected {
-            updateLabelWithDate(date)
-        } else {
-            updateLabelWithDate(NSDate())
-        }
+        dailyLabel.text = dateLabelString(calendar.currentDateSelected ?? NSDate())
     }
 
     @IBAction func shareAction(sender: AnyObject) {
@@ -97,7 +93,7 @@ class CalendarViewController: UIViewController, JTCalendarDataSource {
     }
 
     func calendar(calendar: JTCalendar!, didSelectDate date: NSDate!) {
-        updateLabelWithDate(date)
+        dailyLabel.text = dateLabelString(date)
     }
 }
 
@@ -126,15 +122,15 @@ private extension CalendarViewController {
         }
     }
 
-    func updateLabelWithDate(date: NSDate!) {
+    func dateLabelString(_ date: NSDate = NSDate()) -> String {
         if let entry = Entry.entryForDate(date) {
             if (entry.percentage >= 100) {
-                dailyLabel.text = "Goal Met!"
+                return "Goal Met!"
             } else {
-                dailyLabel.text = entry.formattedPercentage()
+                return entry.formattedPercentage()
             }
         } else {
-            dailyLabel.text = ""
+            return ""
         }
     }
 }

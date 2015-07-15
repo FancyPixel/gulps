@@ -68,58 +68,56 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 
+        var actionSheet: AHKActionSheet?
         if (indexPath.section == 0 && indexPath.row == 0) {
-            let toActionSheet = AHKActionSheet(title: "Unit Of Measure:")
-            toActionSheet!.addButtonWithTitle(UnitsOfMeasure.Liters.nameForUnitOfMeasure(), type: .Default, handler: { (actionSheet) -> Void in
+            actionSheet = AHKActionSheet(title: "Unit Of Measure:")
+            actionSheet?.addButtonWithTitle(UnitsOfMeasure.Liters.nameForUnitOfMeasure(), type: .Default, handler: { (actionSheet) -> Void in
                 self.userDefaults.setInteger(UnitsOfMeasure.Liters.rawValue, forKey: Settings.General.UnitOfMeasure.key())
                 self.userDefaults.synchronize()
                 self.updateUI()
             })
-            toActionSheet!.addButtonWithTitle(UnitsOfMeasure.Ounces.nameForUnitOfMeasure(), type: .Default, handler: { (actionSheet) -> Void in
+            actionSheet?.addButtonWithTitle(UnitsOfMeasure.Ounces.nameForUnitOfMeasure(), type: .Default, handler: { (actionSheet) -> Void in
                 self.userDefaults.setInteger(UnitsOfMeasure.Ounces.rawValue, forKey: Settings.General.UnitOfMeasure.key())
                 self.userDefaults.synchronize()
                 self.updateUI()
             })
-            toActionSheet.show()
         }
         if (indexPath.section == 2 && indexPath.row == 1) {
-            var actionSheet = AHKActionSheet(title: "From:")
+            actionSheet = AHKActionSheet(title: "From:")
             for index in 5...22 {
-                actionSheet.addButtonWithTitle("\(index):00", type: .Default, handler: { (actionSheet) -> Void in
-                    self.userDefaults.setInteger(index, forKey: Settings.Notification.From.key())
-                    self.userDefaults.synchronize()
-                    self.updateUI()
-                    self.updateNotificationPreferences()
+                actionSheet?.addButtonWithTitle("\(index):00", type: .Default, handler: { (actionSheet) -> Void in
+                    self.updateNotificationSetting(Settings.Notification.From.key(), value: index)
                 })
             }
-            actionSheet.show()
         }
         if (indexPath.section == 2 && indexPath.row == 2) {
-            let toActionSheet = AHKActionSheet(title: "To:")
+            actionSheet = AHKActionSheet(title: "To:")
             let upper = self.userDefaults.integerForKey(Settings.Notification.From.key()) + 1
             for index in upper...24 {
-                toActionSheet!.addButtonWithTitle("\(index):00", type: .Default, handler: { (actionSheet) -> Void in
-                    self.userDefaults.setInteger(index, forKey: Settings.Notification.To.key())
-                    self.userDefaults.synchronize()
-                    self.updateUI()
-                    self.updateNotificationPreferences()
+                actionSheet?.addButtonWithTitle("\(index):00", type: .Default, handler: { (actionSheet) -> Void in
+                    self.updateNotificationSetting(Settings.Notification.To.key(), value: index)
                 })
             }
-            toActionSheet.show()
         }
         if (indexPath.section == 2 && indexPath.row == 3) {
-            var actionSheet = AHKActionSheet(title: "Every:")
+            actionSheet = AHKActionSheet(title: "Every:")
             for index in 1...8 {
                 let hour = index > 1 ? "hours" : "hour"
-                actionSheet.addButtonWithTitle("\(index) \(hour)", type: .Default, handler: { (actionSheet) -> Void in
-                    self.userDefaults.setInteger(index, forKey: Settings.Notification.Interval.key())
-                    self.userDefaults.synchronize()
-                    self.updateUI()
-                    self.updateNotificationPreferences()
+                actionSheet?.addButtonWithTitle("\(index) \(hour)", type: .Default, handler: { (actionSheet) -> Void in
+                    self.updateNotificationSetting(Settings.Notification.Interval.key(), value: index)
                 })
             }
+        }
+        if let actionSheet = actionSheet {
             actionSheet.show()
         }
+    }
+
+    func updateNotificationSetting(key: String, value: Int) {
+        userDefaults.setInteger(value, forKey: key)
+        userDefaults.synchronize()
+        updateUI()
+        updateNotificationPreferences()
     }
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -130,15 +128,6 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
         userDefaults.setBool(sender.on, forKey: Settings.Notification.On.key())
         userDefaults.synchronize()
         self.tableView.reloadData()
-        // This crashes if you touch the switch and drag...
-        //        let indexes = [NSIndexPath(forRow: 1, inSection: 2), NSIndexPath(forRow: 2, inSection: 2), NSIndexPath(forRow: 3, inSection: 2)]
-        //        self.tableView.beginUpdates()
-        //        if (sender.on) {
-        //            self.tableView.insertRowsAtIndexPaths(indexes, withRowAnimation: .Automatic)
-        //        } else {
-        //            self.tableView.deleteRowsAtIndexPaths(indexes, withRowAnimation: .Automatic)
-        //        }
-        //        self.tableView.endUpdates()
         updateNotificationPreferences()
     }
 
