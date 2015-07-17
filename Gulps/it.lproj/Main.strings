@@ -102,7 +102,7 @@
 "pt1-x1-O82.text" = "Obiettivo";
 
 /* Class = "UILabel"; text = "Good job keeping healthy! \nBy the way, we’d love some feedback! How do you feel about Gulps? "; ObjectID = "q2X-D7-DBk"; */
-"q2X-D7-DBk.text" = "Ti stai mantenendo in forma, ottimo! \nA proposito, ci piacerebbe avere un tuo parere! Cosa ne pensi di Gulps? "
+"q2X-D7-DBk.text" = "Ti stai mantenendo in forma, ottimo! \nA proposito, ci piacerebbe avere un tuo parere! Cosa ne pensi di Gulps? ";
 
 /* Class = "UILabel"; text = "Sorry to hear that! Is there any way we can improve your experience with Gulps? Contact us, we'd love your feedback!"; ObjectID = "upP-xB-nVY"; */
 "upP-xB-nVY.text" = "Ci dispiace! Possiamo in qualche modo migliorare la tua esperienza con Gulps? Contattaci, apprezzeremmo molto un tuo parare!";
