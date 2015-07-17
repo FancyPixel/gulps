@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F6a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -7,6 +7,7 @@
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="KaushanScript.ttf">
+            <string>KaushanScript-Regular</string>
             <string>KaushanScript-Regular</string>
             <string>KaushanScript-Regular</string>
             <string>KaushanScript-Regular</string>
@@ -138,7 +139,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="QGe-lt-SeA" kind="modal" id="Wuz-wY-flQ"/>
+                                    <segue destination="QGe-lt-SeA" kind="modal" identifier="feedback" id="Wuz-wY-flQ"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -250,10 +251,10 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
             </objects>
             <point key="canvasLocation" x="1688" y="-656"/>
         </scene>
-        <!--View Controller-->
+        <!--Feedback View Controller-->
         <scene sceneID="8V4-Ch-Z4J">
             <objects>
-                <viewController id="JON-j6-9hc" sceneMemberID="viewController">
+                <viewController id="JON-j6-9hc" customClass="FeedbackViewController" customModule="Gulps" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="X0v-tl-qBf"/>
                         <viewControllerLayoutGuide type="bottom" id="QzQ-Ja-tSd"/>
@@ -261,18 +262,91 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                     <view key="view" contentMode="scaleToFill" id="aAw-bJ-EC5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Yay!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ee7-af-1yT">
+                                <rect key="frame" x="16" y="40" width="288" height="70"/>
+                                <fontDescription key="fontDescription" name="KaushanScript-Regular" family="Kaushan Script" pointSize="48"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How about rating Gulps on the AppStore? We always appreciate the feedback!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R9l-6a-fbg">
+                                <rect key="frame" x="16" y="160" width="288" height="66"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QXZ-Em-FFP">
+                                <rect key="frame" x="164" y="508" width="140" height="40"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="q6m-OP-5YQ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                <state key="normal" title="Sure!">
+                                    <color key="titleColor" red="0.96078431369999995" green="0.75294117650000003" blue="0.094117647060000004" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="reviewAction" destination="JON-j6-9hc" eventType="touchUpInside" id="E1M-DL-jJv"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KcM-qN-18r">
+                                <rect key="frame" x="16" y="508" width="140" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="qs2-8m-t9L"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                <state key="normal" title="Nope">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                        <integer key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="negativeAction" destination="JON-j6-9hc" eventType="touchUpInside" id="w6X-BE-c2s"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="0.96078431369999995" green="0.75294117650000003" blue="0.094117647060000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="QXZ-Em-FFP" firstAttribute="leading" secondItem="KcM-qN-18r" secondAttribute="trailing" constant="8" id="0DL-ND-due"/>
+                            <constraint firstAttribute="trailing" secondItem="R9l-6a-fbg" secondAttribute="trailing" constant="16" id="3sD-d0-sMq"/>
+                            <constraint firstItem="ee7-af-1yT" firstAttribute="leading" secondItem="aAw-bJ-EC5" secondAttribute="leading" constant="16" id="78Y-a3-OU4"/>
+                            <constraint firstItem="R9l-6a-fbg" firstAttribute="top" secondItem="ee7-af-1yT" secondAttribute="bottom" constant="50" id="8RJ-K3-4bN"/>
+                            <constraint firstItem="R9l-6a-fbg" firstAttribute="leading" secondItem="aAw-bJ-EC5" secondAttribute="leading" constant="16" id="Ad7-IA-ULu"/>
+                            <constraint firstItem="ee7-af-1yT" firstAttribute="top" secondItem="X0v-tl-qBf" secondAttribute="bottom" constant="20" id="Ndc-zW-3sW"/>
+                            <constraint firstItem="KcM-qN-18r" firstAttribute="leading" secondItem="aAw-bJ-EC5" secondAttribute="leadingMargin" id="Ot4-bl-6jT"/>
+                            <constraint firstAttribute="trailing" secondItem="ee7-af-1yT" secondAttribute="trailing" constant="16" id="Scs-sc-Ahe"/>
+                            <constraint firstItem="KcM-qN-18r" firstAttribute="width" secondItem="QXZ-Em-FFP" secondAttribute="width" id="Wzi-1A-alu"/>
+                            <constraint firstItem="QzQ-Ja-tSd" firstAttribute="top" secondItem="QXZ-Em-FFP" secondAttribute="bottom" constant="20" id="Xgj-fr-u4c"/>
+                            <constraint firstItem="QXZ-Em-FFP" firstAttribute="trailing" secondItem="aAw-bJ-EC5" secondAttribute="trailingMargin" id="i3a-FH-qhg"/>
+                            <constraint firstItem="QzQ-Ja-tSd" firstAttribute="top" secondItem="KcM-qN-18r" secondAttribute="bottom" constant="20" id="z5k-NS-t8f"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="HIh-Ch-ikS"/>
+                    <connections>
+                        <outlet property="negativeButton" destination="KcM-qN-18r" id="LZR-pf-R5I"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LRM-gP-bOv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2124" y="-976"/>
         </scene>
-        <!--View Controller-->
+        <!--Feedback View Controller-->
         <scene sceneID="fAg-H6-Cxt">
             <objects>
-                <viewController id="gZI-Lm-las" sceneMemberID="viewController">
+                <viewController id="gZI-Lm-las" customClass="FeedbackViewController" customModule="Gulps" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Vuw-Om-KPk"/>
                         <viewControllerLayoutGuide type="bottom" id="G8G-yX-NGY"/>
@@ -280,9 +354,78 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                     <view key="view" contentMode="scaleToFill" id="yAe-6w-K2F">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nce-Ji-tce">
+                                <rect key="frame" x="16" y="508" width="140" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="7Kc-Jb-4Xm"/>
+                                    <constraint firstAttribute="height" constant="40" id="b6e-xN-rQU"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                <state key="normal" title="Close">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                        <integer key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="negativeAction" destination="gZI-Lm-las" eventType="touchUpInside" id="WGu-2g-pzQ"/>
+                                    <action selector="negativeAction" destination="JON-j6-9hc" eventType="touchUpInside" id="yps-GI-A9l"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lX0-8d-2KC">
+                                <rect key="frame" x="164" y="508" width="140" height="40"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="Rhl-Z1-Q6p"/>
+                                    <constraint firstAttribute="height" constant="40" id="qPc-AC-5hX"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                <state key="normal" title="Contact us">
+                                    <color key="titleColor" red="0.96078431369999995" green="0.75294117650000003" blue="0.094117647060000004" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="contactAction" destination="gZI-Lm-las" eventType="touchUpInside" id="wRz-kY-oiu"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sorry to hear that! Is there any way we can improve your experience with Gulps? Contact us, we'd love your feedback!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="upP-xB-nVY">
+                                <rect key="frame" x="16" y="50" width="288" height="87.5"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" red="0.96078431369999995" green="0.75294117650000003" blue="0.094117647060000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="G8G-yX-NGY" firstAttribute="top" secondItem="lX0-8d-2KC" secondAttribute="bottom" constant="20" id="5Wf-z7-y5X"/>
+                            <constraint firstItem="nce-Ji-tce" firstAttribute="leading" secondItem="yAe-6w-K2F" secondAttribute="leadingMargin" id="98p-IX-zGE"/>
+                            <constraint firstItem="lX0-8d-2KC" firstAttribute="leading" secondItem="nce-Ji-tce" secondAttribute="trailing" constant="8" id="BwY-PF-lSK"/>
+                            <constraint firstItem="nce-Ji-tce" firstAttribute="width" secondItem="lX0-8d-2KC" secondAttribute="width" id="GcI-TJ-XZH"/>
+                            <constraint firstAttribute="trailing" secondItem="upP-xB-nVY" secondAttribute="trailing" constant="16" id="IIG-82-51g"/>
+                            <constraint firstItem="nce-Ji-tce" firstAttribute="width" secondItem="lX0-8d-2KC" secondAttribute="width" id="IoS-FW-qxS"/>
+                            <constraint firstItem="upP-xB-nVY" firstAttribute="leading" secondItem="yAe-6w-K2F" secondAttribute="leading" constant="16" id="TkL-vC-6Mr"/>
+                            <constraint firstItem="upP-xB-nVY" firstAttribute="top" secondItem="Vuw-Om-KPk" secondAttribute="bottom" constant="30" id="Vbs-hU-GMD"/>
+                            <constraint firstItem="G8G-yX-NGY" firstAttribute="top" secondItem="nce-Ji-tce" secondAttribute="bottom" constant="20" id="bKn-Yz-2Td"/>
+                            <constraint firstItem="lX0-8d-2KC" firstAttribute="leading" secondItem="nce-Ji-tce" secondAttribute="trailing" constant="8" id="bkn-Fh-FgS"/>
+                            <constraint firstItem="lX0-8d-2KC" firstAttribute="trailing" secondItem="yAe-6w-K2F" secondAttribute="trailingMargin" id="pkG-So-Zmv"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="8C3-8a-tbh"/>
+                    <connections>
+                        <outlet property="negativeButton" destination="nce-Ji-tce" id="juW-N1-YaI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Mh-cU-OP2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

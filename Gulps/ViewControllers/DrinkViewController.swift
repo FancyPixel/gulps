@@ -68,7 +68,12 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
         }
 
         updateUI()
-        animateStarButton()
+
+        if !userDefaults.boolForKey("FEEDBACK") {
+            if EntryHandler.overallQuantity() > 10 {
+                animateStarButton()
+            }
+        }
     }
 
     // MARK: - UI update
@@ -84,9 +89,13 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
     }
 
     override public func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let controller = segue.destinationViewController as? UIViewController {
-            controller.transitioningDelegate = self
-            controller.modalPresentationStyle = .Custom
+        if segue.identifier == "feedback" {
+            if let controller = segue.destinationViewController as? UIViewController {
+                controller.transitioningDelegate = self
+                controller.modalPresentationStyle = .Custom
+                userDefaults.setBool(true, forKey: "FEEDBACK")
+                userDefaults.synchronize()
+            }
         }
     }
 
@@ -132,8 +141,9 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
 
     public func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         transition.transitionMode = .Dismiss
-        transition.startingPoint = starButton.center
+        transition.startingPoint = CGPoint(x: starButton.center.x, y: starButton.center.y + 64)
         transition.bubbleColor = UIColor(red: 245.0/255.0, green: 192.0/255.0, blue: 24.0/255.0, alpha: 1)
+        starButton.transform = CGAffineTransformMakeScale(0.0001, 0.0001)
         return transition
     }
 

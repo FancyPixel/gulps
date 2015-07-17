@@ -114,8 +114,8 @@ private extension CalendarViewController {
     }
 
     func updateStats() {
-        daysCountLabel.countFromZeroTo(Float(EntryHandler.overallQuantity()))
-        quantityLabel.countFromZeroTo(Float(EntryHandler.daysTracked()))
+        daysCountLabel.countFromZeroTo(Float(EntryHandler.daysTracked()))
+        quantityLabel.countFromZeroTo(Float(EntryHandler.overallQuantity()))
         if let unit = UnitsOfMeasure(rawValue: userDefaults.integerForKey(Settings.General.UnitOfMeasure.key())) {
             let unitName = unit.nameForUnitOfMeasure()
             measureLabel.text = "\(unitName) drank over"
