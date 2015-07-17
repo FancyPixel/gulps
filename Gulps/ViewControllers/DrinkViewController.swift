@@ -85,7 +85,11 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
     func updateUI() {
         let percentage = self.entryHandler.currentEntry().percentage
         percentageLabel.countFromCurrentValueTo(Float(round(percentage)))
-        progressMeter?.fillTo(CGFloat(percentage / 100.0))
+        var fillTo = CGFloat(percentage / 100.0)
+        if fillTo > 100 {
+            fillTo = 100.0
+        }
+        progressMeter?.fillTo(fillTo)
     }
 
     override public func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

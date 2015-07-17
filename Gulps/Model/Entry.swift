@@ -37,9 +37,6 @@ public class Entry: Object {
         self.quantity += quantity
         self.goal = goal
         self.percentage = self.quantity / self.goal * 100.0
-        if (self.percentage > 100) {
-            self.percentage = 100
-        }
     }
 
     func removeLastGulp() {
@@ -48,9 +45,6 @@ public class Entry: Object {
             self.percentage = self.quantity / self.goal * 100.0
             if (self.percentage < 0) {
                 self.percentage = 0
-            }
-            if (self.percentage > 100) {
-                self.percentage = 100
             }
             self.gulps.removeLast()
         }
