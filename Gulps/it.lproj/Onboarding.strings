@@ -1,0 +1,83 @@
+
+/* Class = "UILabel"; text = "22:00"; ObjectID = "0pm-Fb-nta"; */
+"0pm-Fb-nta.text" = "22:00";
+
+/* Class = "UILabel"; text = "Every"; ObjectID = "6pM-Tq-50n"; */
+"6pM-Tq-50n.text" = "Ogni";
+
+/* Class = "UILabel"; text = "1 hour"; ObjectID = "9Xn-gc-3Bx"; */
+"9Xn-gc-3Bx.text" = "1 ora";
+
+/* Class = "UILabel"; text = "Hi there!"; ObjectID = "J5V-th-GOK"; */
+"J5V-th-GOK.text" = "Ciao!";
+
+/* Class = "UILabel"; text = "I’ll keep track of your water consumption through gulps, you just need to set up your usual small gulp (a glass of water, usually 0,2 L or 8 oz) and big gulp (let’s say a bottle)"; ObjectID = "JSe-R9-wt9"; */
+"JSe-R9-wt9.text" = "Terrò traccia del tuo consumo d'acqua attraverso porzioni chiamate 'gulps', devi solo impostare la tua tipica porzione piccola (ad esempio un bicchiere, circa 0,2 L) e grande (ad esempio una bottiglia)";
+
+/* Class = "UILabel"; text = "Daily goal"; ObjectID = "K6E-SK-ldz"; */
+"K6E-SK-ldz.text" = "Obiettivo";
+
+/* Class = "UILabel"; text = "oz"; ObjectID = "OlE-qk-N7s"; */
+"OlE-qk-N7s.text" = "oz";
+
+/* Class = "UITextField"; placeholder = "goal"; ObjectID = "S54-HU-dVI"; */
+"S54-HU-dVI.placeholder" = "obiettivo";
+
+/* Class = "UITextField"; text = "2.0"; ObjectID = "S54-HU-dVI"; */
+"S54-HU-dVI.text" = "2.0";
+
+/* Class = "UILabel"; text = "I can remind you to drink every once in a while. Since I don’t want to nag you, you’ll decide when:"; ObjectID = "T9n-t2-EOq"; */
+"T9n-t2-EOq.text" = "Posso ricordarti di bere ogni tanto durante il giorno. Non voglio disturbarti però, quindi decidi tu quando:";
+
+/* Class = "UILabel"; text = "From"; ObjectID = "TTz-34-edX"; */
+"TTz-34-edX.text" = "Da";
+
+/* Class = "UILabel"; text = "Small gulp"; ObjectID = "WfK-EQ-Qob"; */
+"WfK-EQ-Qob.text" = "Small gulp";
+
+/* Class = "UILabel"; text = "A couple of questions first:\nwhat measurement system do you prefer?"; ObjectID = "aNx-Gk-pr3"; */
+"aNx-Gk-pr3.text" = "Un paio di domande prima di iniziare:\nquale sistema di misura preferisci?";
+
+/* Class = "UILabel"; text = "I’m here to help you keep track of a simple healthy habit: 
+drinking water."; ObjectID = "dbP-89-LG1"; */
+"dbP-89-LG1.text" = "Sono qui per tenere traccia di un'abitudine semplice e salutare:
+bere acqua.";
+
+/* Class = "UITextField"; placeholder = "glass"; ObjectID = "e8D-nG-89R"; */
+"e8D-nG-89R.placeholder" = "bicchiere";
+
+/* Class = "UITextField"; text = "0.2"; ObjectID = "e8D-nG-89R"; */
+"e8D-nG-89R.text" = "0.2";
+
+/* Class = "UITextField"; placeholder = "bottle"; ObjectID = "gFP-R6-3l1"; */
+"gFP-R6-3l1.placeholder" = "bottiglia";
+
+/* Class = "UITextField"; text = "0.5"; ObjectID = "gFP-R6-3l1"; */
+"gFP-R6-3l1.text" = "0.5";
+
+/* Class = "UILabel"; text = "Liters"; ObjectID = "hoW-cL-j0l"; */
+"hoW-cL-j0l.text" = "Litri";
+
+/* Class = "UILabel"; text = "Big gulp"; ObjectID = "kMj-hq-rjr"; */
+"kMj-hq-rjr.text" = "Big gulp";
+
+/* Class = "UILabel"; text = "Remind me"; ObjectID = "mVT-8Y-PAY"; */
+"mVT-8Y-PAY.text" = "Ricordami";
+
+/* Class = "UILabel"; text = "Now, set your daily goal. An average goal is around 2 L or 64 oz per day, but it can vary with your build."; ObjectID = "nbv-Ph-Ogi"; */
+"nbv-Ph-Ogi.text" = "Ora imposta un obiettivo giornaliero. Mediamente un obiettivo potrebbe essere attorno ai 2 litri per giorno, ma dipende dal proprio fisico";
+
+/* Class = "UILabel"; text = "Ounces"; ObjectID = "rUi-CZ-r3F"; */
+"rUi-CZ-r3F.text" = "Once";
+
+/* Class = "UILabel"; text = "oz"; ObjectID = "s4e-zS-DTj"; */
+"s4e-zS-DTj.text" = "oz";
+
+/* Class = "UILabel"; text = "To"; ObjectID = "sjg-oM-azP"; */
+"sjg-oM-azP.text" = "A";
+
+/* Class = "UILabel"; text = "10:00"; ObjectID = "uxY-Gi-w4N"; */
+"uxY-Gi-w4N.text" = "10:00";
+
+/* Class = "UILabel"; text = "oz"; ObjectID = "wIJ-Qh-sXS"; */
+"wIJ-Qh-sXS.text" = "oz";
