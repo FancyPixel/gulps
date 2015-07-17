@@ -31,9 +31,9 @@ class CalendarViewController: UIViewController, JTCalendarDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = "My progress"
+        self.title =
 
-        dailyLabel.text = ""
+        dailyLabel.text = NSLocalizedString("progress title", comment: "")
         [daysCountLabel, quantityLabel].map { $0.format = "%d" }
         [quantityLabel, daysLabel, daysCountLabel, measureLabel].map({ $0.textColor = .mainColor() })
         shareButton.backgroundColor = .mainColor()
@@ -57,7 +57,7 @@ class CalendarViewController: UIViewController, JTCalendarDataSource {
         super.viewDidAppear(animated)
 
         Globals.showPopTipOnceForKey("SHARE_HINT", userDefaults: userDefaults,
-            popTipText: "Here you can checkout your overall progress",
+            popTipText: NSLocalizedString("share poptip", comment: ""),
             inView: view,
             fromFrame: CGRect(x: view.frame.size.width - 28, y: -10, width: 1, height: 1))
 
@@ -70,7 +70,7 @@ class CalendarViewController: UIViewController, JTCalendarDataSource {
     @IBAction func shareAction(sender: AnyObject) {
         let quantitiy = EntryHandler.overallQuantity()
         let days = EntryHandler.daysTracked()
-        let text = "Keeping healthy! I drank \(quantitiy) liters of water over \(days) days. https://goo.gl/reTyQU"
+        let text = String(format: NSLocalizedString("share text", comment: ""), quantitiy, unitName(), days)
         let items = [text]
         let activityController = UIActivityViewController(activityItems: items, applicationActivities: nil)
         let exclusion = [
@@ -116,16 +116,20 @@ private extension CalendarViewController {
     func updateStats() {
         daysCountLabel.countFromZeroTo(Float(EntryHandler.daysTracked()))
         quantityLabel.countFromZeroTo(Float(EntryHandler.overallQuantity()))
+        measureLabel.text = String(format: NSLocalizedString("unit format", comment: ""), unitName())
+    }
+
+    func unitName() -> String {
         if let unit = UnitsOfMeasure(rawValue: userDefaults.integerForKey(Settings.General.UnitOfMeasure.key())) {
-            let unitName = unit.nameForUnitOfMeasure()
-            measureLabel.text = "\(unitName) drank over"
+            return unit.nameForUnitOfMeasure()
         }
+        return ""
     }
 
     func dateLabelString(_ date: NSDate = NSDate()) -> String {
         if let entry = Entry.entryForDate(date) {
             if (entry.percentage >= 100) {
-                return "Goal Met!"
+                return NSLocalizedString("goal met", comment: "")
             } else {
                 return entry.formattedPercentage()
             }

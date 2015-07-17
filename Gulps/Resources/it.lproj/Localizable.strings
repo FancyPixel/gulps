@@ -1,0 +1,28 @@
+/* Globals */
+"notification text" = "Ricordati di bere dell'acqua!";
+"Liters" = "Litri";
+"Ounces" = "Once";
+
+/* Main */
+"drink title" = "Bevi!"; 
+"undo poptip" = "Qui puoi annulare la tua ultima azione";
+"undo title" = "Annulla";
+"undo message" = "Annulla l'ultima azione?";
+"No" = "No";
+"Yes" = "Sì";
+
+/* Calendar */
+"progress title" = "Progressi";
+"share poptip" = "Qui puoi verificare il tuo progresso complessivo";
+"share text" = "Mi mantengo in forma! Ho bevuto %d %@ d'acqua negli ultimi %d giorni. https://goo.gl/reTyQU";
+"unit format" = "%@ bevuti negli ultimi";
+"goal met" = "Goal Met!";
+
+/* Settings */
+"settings title" = "Preferences";
+"hours" = "ore";
+"hour" = "ora";
+"unit of measure title" = "Unità di misura:";
+"from:" = "Da:";
+"to:" = "A:";
+"every:" = "Ogni:";

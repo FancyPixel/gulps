@@ -29,7 +29,7 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
     public override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = "Drink!"
+        self.title = NSLocalizedString("drink title", comment: "")
 
         initAnimation()
 
@@ -116,7 +116,7 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
     @IBAction public func selectionButtonAction(sender: UIButton) {
         contractAddButton()
         Globals.showPopTipOnceForKey("UNDO_HINT", userDefaults: userDefaults,
-            popTipText: "Tap here to undo your latest action",
+            popTipText: NSLocalizedString("undo poptip", comment: ""),
             inView: view,
             fromFrame: minusButton.frame)
         let portion = smallButton == sender ? Settings.Gulp.Small.key() : Settings.Gulp.Big.key()
@@ -124,9 +124,9 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
     }
 
     @IBAction func removeGulpAction() {
-        let controller = UIAlertController(title: "Undo", message: "Undo latest action?", preferredStyle: .Alert)
-        let no = UIAlertAction(title: "No", style: .Default) { _ in }
-        let yes = UIAlertAction(title: "Yes", style: .Cancel) { _ in
+        let controller = UIAlertController(title: NSLocalizedString("undo title", comment: ""), message: NSLocalizedString("undo message", comment: ""), preferredStyle: .Alert)
+        let no = UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .Default) { _ in }
+        let yes = UIAlertAction(title: NSLocalizedString("Yes", comment: ""), style: .Cancel) { _ in
             self.entryHandler.removeLastGulp()
         }
         [yes, no].map { controller.addAction($0) }

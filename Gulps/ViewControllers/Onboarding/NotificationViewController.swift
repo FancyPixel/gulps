@@ -10,7 +10,7 @@ class NotificationViewController: OnboardingViewController, UIActionSheetDelegat
     let userDefaults = NSUserDefaults.groupUserDefaults()
 
     lazy var fromActionSheet: AHKActionSheet = {
-        var actionSheet = AHKActionSheet(title: "From:")
+        var actionSheet = AHKActionSheet(title: NSLocalizedString("from:", comment: ""))
         for index in 5...22 {
             actionSheet.addButtonWithTitle("\(index):00", type: .Default, handler: { (actionSheet) -> Void in
                 self.userDefaults.setInteger(index, forKey: Settings.Notification.From.key())
@@ -22,9 +22,9 @@ class NotificationViewController: OnboardingViewController, UIActionSheetDelegat
     }()
 
     lazy var intervalActionSheet: AHKActionSheet = {
-        var actionSheet = AHKActionSheet(title: "Every:")
+        var actionSheet = AHKActionSheet(title: NSLocalizedString("every:", comment: ""))
         for index in 1...8 {
-            let hour = index > 1 ? "hours" : "hour"
+            let hour = index > 1 ? NSLocalizedString("hours", comment: "") : NSLocalizedString("hour", comment: "")
             actionSheet.addButtonWithTitle("\(index) \(hour)", type: .Default, handler: { (actionSheet) -> Void in
                 self.userDefaults.setInteger(index, forKey: Settings.Notification.Interval.key())
                 self.userDefaults.synchronize()
@@ -42,7 +42,7 @@ class NotificationViewController: OnboardingViewController, UIActionSheetDelegat
         self.fromLabel.text = "\(self.userDefaults.integerForKey(Settings.Notification.From.key())):00"
         self.toLabel.text = "\(self.userDefaults.integerForKey(Settings.Notification.To.key())):00"
         let interval = self.userDefaults.integerForKey(Settings.Notification.Interval.key())
-        let hour = interval > 1 ? "hours" : "hour"
+        let hour = interval > 1 ? NSLocalizedString("hours", comment: "") : NSLocalizedString("hour", comment: "")
         self.intervalLabel.text = "\(interval) \(hour)"
         self.notificationSwitch.on = self.userDefaults.boolForKey(Settings.Notification.On.key())
     }
@@ -56,7 +56,7 @@ class NotificationViewController: OnboardingViewController, UIActionSheetDelegat
     }
 
     @IBAction func openToSelection(sender: UIButton) {
-        let toActionSheet = AHKActionSheet(title: "To:")
+        let toActionSheet = AHKActionSheet(title: NSLocalizedString("to:", comment: ""))
         let upper = self.userDefaults.integerForKey(Settings.Notification.From.key()) + 1
         for index in upper...24 {
             toActionSheet!.addButtonWithTitle("\(index):00", type: .Default, handler: { (actionSheet) -> Void in

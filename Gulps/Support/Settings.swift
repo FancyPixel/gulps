@@ -6,9 +6,9 @@ enum UnitsOfMeasure: Int {
     func nameForUnitOfMeasure() -> String {
         switch self {
         case .Liters:
-            return "Liters"
+            return NSLocalizedString("Liters", comment: "")
         case .Ounces:
-            return "Ounces"
+            return NSLocalizedString("Ounces", comment: "")
         }
     }
 

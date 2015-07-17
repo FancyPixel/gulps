@@ -23,7 +23,7 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Preferences"
+        self.title = NSLocalizedString("settings title", comment: "")
         for element in [smallPortionText, largePortionText, dailyGoalText] {
             element.inputAccessoryView = Globals.numericToolbar(element,
                 selector: Selector("resignFirstResponder"),
@@ -54,7 +54,7 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
         notificationSwitch.on = userDefaults.boolForKey(Settings.Notification.On.key())
         notificationFromLabel.text = "\(userDefaults.integerForKey(Settings.Notification.From.key())):00"
         notificationToLabel.text = "\(userDefaults.integerForKey(Settings.Notification.To.key())):00"
-        notificationIntervalLabel.text = "\(userDefaults.integerForKey(Settings.Notification.Interval.key())) hours"
+        notificationIntervalLabel.text = "\(userDefaults.integerForKey(Settings.Notification.Interval.key())) " +  NSLocalizedString("hours", comment: "")
     }
 
     func updateNotificationPreferences() {
@@ -70,7 +70,7 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
 
         var actionSheet: AHKActionSheet?
         if (indexPath.section == 0 && indexPath.row == 0) {
-            actionSheet = AHKActionSheet(title: "Unit Of Measure:")
+            actionSheet = AHKActionSheet(title: NSLocalizedString("unit of measure title", comment: ""))
             actionSheet?.addButtonWithTitle(UnitsOfMeasure.Liters.nameForUnitOfMeasure(), type: .Default, handler: { (actionSheet) -> Void in
                 self.userDefaults.setInteger(UnitsOfMeasure.Liters.rawValue, forKey: Settings.General.UnitOfMeasure.key())
                 self.userDefaults.synchronize()
@@ -83,7 +83,7 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
             })
         }
         if (indexPath.section == 2 && indexPath.row == 1) {
-            actionSheet = AHKActionSheet(title: "From:")
+            actionSheet = AHKActionSheet(title: NSLocalizedString("from:", comment: ""))
             for index in 5...22 {
                 actionSheet?.addButtonWithTitle("\(index):00", type: .Default, handler: { (actionSheet) -> Void in
                     self.updateNotificationSetting(Settings.Notification.From.key(), value: index)
@@ -91,7 +91,7 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
             }
         }
         if (indexPath.section == 2 && indexPath.row == 2) {
-            actionSheet = AHKActionSheet(title: "To:")
+            actionSheet = AHKActionSheet(title: NSLocalizedString("to:", comment: ""))
             let upper = self.userDefaults.integerForKey(Settings.Notification.From.key()) + 1
             for index in upper...24 {
                 actionSheet?.addButtonWithTitle("\(index):00", type: .Default, handler: { (actionSheet) -> Void in
@@ -100,9 +100,9 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
             }
         }
         if (indexPath.section == 2 && indexPath.row == 3) {
-            actionSheet = AHKActionSheet(title: "Every:")
+            actionSheet = AHKActionSheet(title: NSLocalizedString("every:", comment: ""))
             for index in 1...8 {
-                let hour = index > 1 ? "hours" : "hour"
+                let hour = index > 1 ? NSLocalizedString("hours", comment: "") : NSLocalizedString("hour", comment: "")
                 actionSheet?.addButtonWithTitle("\(index) \(hour)", type: .Default, handler: { (actionSheet) -> Void in
                     self.updateNotificationSetting(Settings.Notification.Interval.key(), value: index)
                 })

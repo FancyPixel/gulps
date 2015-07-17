@@ -21,7 +21,7 @@ class NotificationHelper {
 
             reminder.fireDate = date
             reminder.repeatInterval = NSCalendarUnit.CalendarUnitDay
-            reminder.alertBody = "Remember to drink some water!"
+            reminder.alertBody = NSLocalizedString("notification text", comment: "")
             reminder.alertAction = "Ok"
             reminder.soundName = "sound.aif"
             reminder.category = "GULP_CATEGORY"
