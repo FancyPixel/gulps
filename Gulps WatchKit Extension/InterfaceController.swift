@@ -64,7 +64,7 @@ private extension InterfaceController {
             }
             progressImage.startAnimatingWithImagesInRange(NSMakeRange(Int(previousPercentage), delta), duration: 1.0, repeatCount: 1)
         }
-        goalLabel.setText("DAILY GOAL: \(entry.formattedPercentage())")
+        goalLabel.setText(NSLocalizedString("daily goal:", comment: "") + entry.formattedPercentage())
         previousPercentage = entry.percentage
     }
     

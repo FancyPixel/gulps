@@ -26,3 +26,12 @@
 "from:" = "From:";
 "to:" = "To:";
 "every:" = "Every:";
+
+/* Today ext */
+"way to go" = "Way to go!";
+"today extension format" = "%@ %@ drank today (%@ of your goal)";
+"confirm" = "Confirm";
+"never mind" = "Never mind";
+
+/* WatchKit */
+"daily goal:" = "DAILY GOAL: ";

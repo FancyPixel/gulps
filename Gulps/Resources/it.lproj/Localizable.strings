@@ -16,7 +16,7 @@
 "share poptip" = "Qui puoi verificare il tuo progresso complessivo";
 "share text" = "Mi mantengo in forma! Ho bevuto %d %@ d'acqua negli ultimi %d giorni. https://goo.gl/reTyQU";
 "unit format" = "%@ bevuti negli ultimi";
-"goal met" = "Goal Met!";
+"goal met" = "Obiettivo raggiunto!";
 
 /* Settings */
 "settings title" = "Preferenze";
@@ -26,3 +26,12 @@
 "from:" = "Da:";
 "to:" = "A:";
 "every:" = "Ogni:";
+
+/* Today ext */
+"way to go" = "Ottimo!";
+"today extension format" = "%@ %@ bevuti oggi (%@ del tuo obiettivo)";
+"confirm" = "Conferma";
+"never mind" = "Annulla";
+
+/* WatchKit */
+"daily goal:" = "OBIETTIVO: ";

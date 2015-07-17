@@ -74,6 +74,8 @@
 		65F44C771AF24B8A0093A3E9 /* Gulps WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 65F44C5A1AF24B8A0093A3E9 /* Gulps WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		65F55F201B5904B8008653F2 /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F55F1F1B5904B8008653F2 /* FeedbackViewController.swift */; };
 		65F55F231B592D91008653F2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65F55F211B592D91008653F2 /* Localizable.strings */; };
+		65F55F2E1B5942A3008653F2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65F55F211B592D91008653F2 /* Localizable.strings */; };
+		65F55F2F1B5942A4008653F2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65F55F211B592D91008653F2 /* Localizable.strings */; };
 		800E72B73F54FA65CABC4BD6 /* Pods_Gulps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A701E98A87809500CB34BF4 /* Pods_Gulps.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -678,6 +680,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				65F44C4E1AF24B780093A3E9 /* MainInterface.storyboard in Resources */,
+				65F55F2F1B5942A4008653F2 /* Localizable.strings in Resources */,
 				658DBFD01AF75D130094C0F1 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -687,6 +690,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				65F44C6A1AF24B8A0093A3E9 /* Gulps WatchKit App.app in Resources */,
+				65F55F2E1B5942A3008653F2 /* Localizable.strings in Resources */,
 				65F44C661AF24B8A0093A3E9 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

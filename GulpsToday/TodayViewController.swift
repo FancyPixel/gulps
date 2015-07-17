@@ -54,7 +54,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             let percentage = self.entryHandler.currentEntry().formattedPercentage()
             if let unit = UnitsOfMeasure(rawValue: self.userDefaults.integerForKey(Settings.General.UnitOfMeasure.key())) {
                 let unitName = unit.nameForUnitOfMeasure()
-                self.summaryLabel.text = "\(quantity) \(unitName) drank today (\(percentage) of your goal)"
+                self.summaryLabel.text = String(format: NSLocalizedString("today extension format", comment: ""), quantity, unitName, percentage)
             }
             }, completion: nil)
     }
@@ -74,8 +74,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         bigConfirmButton.backgroundColor = (gulpSize == .Big) ? .confirmColor() : .destructiveColor()
         smallConfirmButton.setImage(UIImage(named: (gulpSize == .Small) ? "tiny-check" : "tiny-x"), forState: .Normal)
         bigConfirmButton.setImage(UIImage(named: (gulpSize == .Big) ? "tiny-check" : "tiny-x"), forState: .Normal)
-        smallLabel.text = (gulpSize == .Small) ? "Confirm" : "Never mind"
-        bigLabel.text = (gulpSize == .Small) ? "Never mind" : "Confirm"
+        smallLabel.text = (gulpSize == .Small) ? NSLocalizedString("confirm", comment: "") : NSLocalizedString("never mind", comment: "")
+        bigLabel.text = (gulpSize == .Small) ? NSLocalizedString("never mind", comment: "") : NSLocalizedString("confirm", comment: "")
         showConfirmButtons()
     }
 
@@ -107,7 +107,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 
     func addGulp(quantity: Double) {
         entryHandler.addGulp(quantity)
-        summaryLabel.text = "Way to go!"
+        summaryLabel.text = NSLocalizedString("way to go", comment: "")
         updateLabels()
 
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { () -> Void in
