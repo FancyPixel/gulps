@@ -31,9 +31,9 @@ class CalendarViewController: UIViewController, JTCalendarDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title =
+        self.title = NSLocalizedString("progress title", comment: "")
 
-        dailyLabel.text = NSLocalizedString("progress title", comment: "")
+        dailyLabel.text = ""
         [daysCountLabel, quantityLabel].map { $0.format = "%d" }
         [quantityLabel, daysLabel, daysCountLabel, measureLabel].map({ $0.textColor = .mainColor() })
         shareButton.backgroundColor = .mainColor()
