@@ -31,8 +31,7 @@ public class Entry: Object {
     }
 
     func addGulp(quantity: Double, goal: Double) {
-        let gulp = Gulp()
-        gulp.quantity = quantity
+        let gulp = Gulp(quantity: quantity)
         self.gulps.append(gulp)
         self.quantity += quantity
         self.goal = goal

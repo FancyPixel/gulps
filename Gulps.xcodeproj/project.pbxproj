@@ -76,6 +76,7 @@
 		65F55F231B592D91008653F2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65F55F211B592D91008653F2 /* Localizable.strings */; };
 		65F55F2E1B5942A3008653F2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65F55F211B592D91008653F2 /* Localizable.strings */; };
 		65F55F2F1B5942A4008653F2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65F55F211B592D91008653F2 /* Localizable.strings */; };
+		65F55F321B5F965F008653F2 /* drop.caf in Resources */ = {isa = PBXBuildFile; fileRef = 65F55F311B5D0A0E008653F2 /* drop.caf */; };
 		800E72B73F54FA65CABC4BD6 /* Pods_Gulps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A701E98A87809500CB34BF4 /* Pods_Gulps.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -202,6 +203,7 @@
 		65F55F261B5938BE008653F2 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Main.strings; sourceTree = "<group>"; };
 		65F55F281B593A0A008653F2 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Onboarding.strings; sourceTree = "<group>"; };
 		65F55F2A1B593C16008653F2 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Interface.strings; sourceTree = "<group>"; };
+		65F55F311B5D0A0E008653F2 /* drop.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = drop.caf; sourceTree = "<group>"; };
 		8339035B8C2DA7AA7C151C33 /* Pods-GulpsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GulpsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GulpsTests/Pods-GulpsTests.release.xcconfig"; sourceTree = "<group>"; };
 		C916E6FEBE9F3B2034FA5E16 /* Pods-Gulps.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gulps.release.xcconfig"; path = "Pods/Target Support Files/Pods-Gulps/Pods-Gulps.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -282,6 +284,7 @@
 		6537A8131AF24CC800EC16E9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				65F55F311B5D0A0E008653F2 /* drop.caf */,
 				65F55F211B592D91008653F2 /* Localizable.strings */,
 				6537A8141AF24CC800EC16E9 /* Fonts */,
 			);
@@ -665,6 +668,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65F55F321B5F965F008653F2 /* drop.caf in Resources */,
 				65F44C261AF24B440093A3E9 /* Main.storyboard in Resources */,
 				65F44C2B1AF24B440093A3E9 /* LaunchScreen.xib in Resources */,
 				6537A82C1AF24CC800EC16E9 /* KaushanScript.ttf in Resources */,

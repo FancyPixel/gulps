@@ -19,9 +19,7 @@ public class EntryHandler: NSObject {
             let newEntry = Entry()
             let realm = Realm()
             realm.write {
-                newEntry.percentage = 0
-                newEntry.quantity = 0
-                realm.add(newEntry)
+                realm.add(newEntry, update: true)
             }
             return newEntry
         }

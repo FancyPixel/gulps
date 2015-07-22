@@ -23,7 +23,7 @@ class NotificationHelper {
             reminder.repeatInterval = NSCalendarUnit.CalendarUnitDay
             reminder.alertBody = NSLocalizedString("notification text", comment: "")
             reminder.alertAction = "Ok"
-            reminder.soundName = "sound.aif"
+            reminder.soundName = "drop.caf"
             reminder.category = "GULP_CATEGORY"
 
             UIApplication.sharedApplication().scheduleLocalNotification(reminder)
