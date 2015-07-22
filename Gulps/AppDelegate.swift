@@ -1,5 +1,4 @@
-	import UIKit
-import DPMeterView
+import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -10,9 +9,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         EntryHandler.bootstrapRealm()
 
-        DPMeterView.appearance().trackTintColor = .lightGray()
-        DPMeterView.appearance().progressTintColor = .mainColor()
+        setupAppearance()
 
+        Settings.registerDefaults()		
+
+        let userDefaults = NSUserDefaults.groupUserDefaults()
+        if (!userDefaults.boolForKey(Settings.General.OnboardingShown.key())) {
+            loadOnboardingInterface()
+        } else {
+            loadMainInterface()
+            checkVersion()
+        }
+
+        return true
+    }
+
+    func checkVersion() {
+        let userDefaults = NSUserDefaults.groupUserDefaults()
+        let current = userDefaults.integerForKey("BUNDLE_VERSION")
+        if let versionString = NSBundle.mainBundle().infoDictionary?["CFBundleVersion"] as? String, let version = versionString.toInt() {
+            if current < 13 {
+                NotificationHelper.rescheduleNotifications()
+            }
+            userDefaults.setInteger(version, forKey: "BUNDLE_VERSION")
+            userDefaults.synchronize()
+        }
+    }
+
+    func setupAppearance() {
         Globals.actionSheetAppearance()
 
         UITabBar.appearance().tintColor = .mainColor()
@@ -24,17 +48,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         UINavigationBar.appearance().barTintColor = .mainColor()
         UINavigationBar.appearance().tintColor = .whiteColor()
-
-        Settings.registerDefaults()		
-
-        let userDefaults = NSUserDefaults.groupUserDefaults()
-        if (!userDefaults.boolForKey(Settings.General.OnboardingShown.key())) {
-            loadOnboardingInterface()
-        } else {
-            loadMainInterface()
-        }
-
-        return true
     }
 
     func loadOnboardingInterface() {
