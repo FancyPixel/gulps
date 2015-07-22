@@ -86,8 +86,8 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
         let percentage = self.entryHandler.currentEntry().percentage
         percentageLabel.countFromCurrentValueTo(Float(round(percentage)))
         var fillTo = CGFloat(percentage / 100.0)
-        if fillTo > 100 {
-            fillTo = 100.0
+        if fillTo > 1 {
+            fillTo = 1.0
         }
         progressMeter?.fillTo(fillTo)
     }

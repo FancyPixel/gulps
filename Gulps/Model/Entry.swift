@@ -35,13 +35,17 @@ public class Entry: Object {
         self.gulps.append(gulp)
         self.quantity += quantity
         self.goal = goal
-        self.percentage = self.quantity / self.goal * 100.0
+        if goal > 0 {
+            self.percentage = (self.quantity / self.goal) * 100.0
+        }
     }
 
     func removeLastGulp() {
         if let gulp = self.gulps.last {
             self.quantity -= gulp.quantity
-            self.percentage = self.quantity / self.goal * 100.0
+            if goal > 0 {
+                self.percentage = (self.quantity / self.goal) * 100.0
+            }
             if (self.percentage < 0) {
                 self.percentage = 0
             }
