@@ -71,41 +71,41 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
         var actionSheet: AHKActionSheet?
         if (indexPath.section == 0 && indexPath.row == 0) {
             actionSheet = AHKActionSheet(title: NSLocalizedString("unit of measure title", comment: ""))
-            actionSheet?.addButtonWithTitle(UnitsOfMeasure.Liters.nameForUnitOfMeasure(), type: .Default, handler: { (actionSheet) -> Void in
+            actionSheet?.addButtonWithTitle(UnitsOfMeasure.Liters.nameForUnitOfMeasure(), type: .Default) { _ in
                 self.userDefaults.setInteger(UnitsOfMeasure.Liters.rawValue, forKey: Settings.General.UnitOfMeasure.key())
                 self.userDefaults.synchronize()
                 self.updateUI()
-            })
-            actionSheet?.addButtonWithTitle(UnitsOfMeasure.Ounces.nameForUnitOfMeasure(), type: .Default, handler: { (actionSheet) -> Void in
+            }
+            actionSheet?.addButtonWithTitle(UnitsOfMeasure.Ounces.nameForUnitOfMeasure(), type: .Default) { _ in
                 self.userDefaults.setInteger(UnitsOfMeasure.Ounces.rawValue, forKey: Settings.General.UnitOfMeasure.key())
                 self.userDefaults.synchronize()
                 self.updateUI()
-            })
+            }
         }
         if (indexPath.section == 2 && indexPath.row == 1) {
             actionSheet = AHKActionSheet(title: NSLocalizedString("from:", comment: ""))
             for index in 5...22 {
-                actionSheet?.addButtonWithTitle("\(index):00", type: .Default, handler: { (actionSheet) -> Void in
+                actionSheet?.addButtonWithTitle("\(index):00", type: .Default) { _ in
                     self.updateNotificationSetting(Settings.Notification.From.key(), value: index)
-                })
+                }
             }
         }
         if (indexPath.section == 2 && indexPath.row == 2) {
             actionSheet = AHKActionSheet(title: NSLocalizedString("to:", comment: ""))
             let upper = self.userDefaults.integerForKey(Settings.Notification.From.key()) + 1
             for index in upper...24 {
-                actionSheet?.addButtonWithTitle("\(index):00", type: .Default, handler: { (actionSheet) -> Void in
+                actionSheet?.addButtonWithTitle("\(index):00", type: .Default) { _ in
                     self.updateNotificationSetting(Settings.Notification.To.key(), value: index)
-                })
+                }
             }
         }
         if (indexPath.section == 2 && indexPath.row == 3) {
             actionSheet = AHKActionSheet(title: NSLocalizedString("every:", comment: ""))
             for index in 1...8 {
                 let hour = index > 1 ? NSLocalizedString("hours", comment: "") : NSLocalizedString("hour", comment: "")
-                actionSheet?.addButtonWithTitle("\(index) \(hour)", type: .Default, handler: { (actionSheet) -> Void in
+                actionSheet?.addButtonWithTitle("\(index) \(hour)", type: .Default) { _ in
                     self.updateNotificationSetting(Settings.Notification.Interval.key(), value: index)
-                })
+                }
             }
         }
         if let actionSheet = actionSheet {

@@ -12,11 +12,11 @@ class NotificationViewController: OnboardingViewController, UIActionSheetDelegat
     lazy var fromActionSheet: AHKActionSheet = {
         var actionSheet = AHKActionSheet(title: NSLocalizedString("from:", comment: ""))
         for index in 5...22 {
-            actionSheet.addButtonWithTitle("\(index):00", type: .Default, handler: { (actionSheet) -> Void in
+            actionSheet.addButtonWithTitle("\(index):00", type: .Default) { _ in
                 self.userDefaults.setInteger(index, forKey: Settings.Notification.From.key())
                 self.userDefaults.synchronize()
                 self.updateUI()
-            })
+            }
         }
         return actionSheet
     }()
@@ -25,11 +25,11 @@ class NotificationViewController: OnboardingViewController, UIActionSheetDelegat
         var actionSheet = AHKActionSheet(title: NSLocalizedString("every:", comment: ""))
         for index in 1...8 {
             let hour = index > 1 ? NSLocalizedString("hours", comment: "") : NSLocalizedString("hour", comment: "")
-            actionSheet.addButtonWithTitle("\(index) \(hour)", type: .Default, handler: { (actionSheet) -> Void in
+            actionSheet.addButtonWithTitle("\(index) \(hour)", type: .Default) { _ in
                 self.userDefaults.setInteger(index, forKey: Settings.Notification.Interval.key())
                 self.userDefaults.synchronize()
                 self.updateUI()
-            })
+            }
         }
         return actionSheet
         }()
@@ -59,11 +59,11 @@ class NotificationViewController: OnboardingViewController, UIActionSheetDelegat
         let toActionSheet = AHKActionSheet(title: NSLocalizedString("to:", comment: ""))
         let upper = self.userDefaults.integerForKey(Settings.Notification.From.key()) + 1
         for index in upper...24 {
-            toActionSheet!.addButtonWithTitle("\(index):00", type: .Default, handler: { (actionSheet) -> Void in
+            toActionSheet!.addButtonWithTitle("\(index):00", type: .Default) { _ in
                 self.userDefaults.setInteger(index, forKey: Settings.Notification.To.key())
                 self.userDefaults.synchronize()
                 self.updateUI()
-            })
+            }
         }
         toActionSheet.show()
     }

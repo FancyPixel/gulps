@@ -12,7 +12,6 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
     @IBOutlet public weak var smallButton: UIButton!
     @IBOutlet public weak var largeButton: UIButton!
     @IBOutlet public weak var minusButton: UIButton!
-    @IBOutlet public var entryHandler: EntryHandler!
     @IBOutlet weak var starButton: UIButton!
     @IBOutlet weak var meterContainerView: UIView!
     @IBOutlet weak var maskImage: UIImageView!
@@ -44,7 +43,7 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
             self.progressMeter?.transform = CGAffineTransformMakeRotation(CGFloat(roation))
         }
 
-        realmNotification = RLMRealm.defaultRealm().addNotificationBlock { note, realm in
+        realmNotification = EntryHandler.sharedHandler.realm.addNotificationBlock { note, realm in
             self.updateUI()
         }
 
@@ -70,7 +69,7 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
         updateUI()
 
         if !userDefaults.boolForKey("FEEDBACK") {
-            if EntryHandler.overallQuantity() > 10 {
+            if EntryHandler.sharedHandler.overallQuantity() > 10 {
                 animateStarButton()
             }
         }
@@ -79,11 +78,11 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
     // MARK: - UI update
 
     func updateCurrentEntry(delta: Double) {
-        entryHandler.addGulp(delta)
+        EntryHandler.sharedHandler.addGulp(delta)
     }
 
     func updateUI() {
-        let percentage = self.entryHandler.currentEntry().percentage
+        let percentage = EntryHandler.sharedHandler.currentPercentage()
         percentageLabel.countFromCurrentValueTo(Float(round(percentage)))
         var fillTo = CGFloat(percentage / 100.0)
         if fillTo > 1 {
@@ -127,7 +126,7 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
         let controller = UIAlertController(title: NSLocalizedString("undo title", comment: ""), message: NSLocalizedString("undo message", comment: ""), preferredStyle: .Alert)
         let no = UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .Default) { _ in }
         let yes = UIAlertAction(title: NSLocalizedString("Yes", comment: ""), style: .Cancel) { _ in
-            self.entryHandler.removeLastGulp()
+            EntryHandler.sharedHandler.removeLastGulp()
         }
         [yes, no].map { controller.addAction($0) }
         self.presentViewController(controller, animated: true) {}

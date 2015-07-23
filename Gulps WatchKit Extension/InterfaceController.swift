@@ -7,14 +7,12 @@ class InterfaceController: WKInterfaceController {
     @IBOutlet weak var goalLabel: WKInterfaceLabel!
     @IBOutlet weak var progressImage: WKInterfaceImage!
 
-    let entryHandler = EntryHandler()
     var realmToken: RLMNotificationToken?
     var previousPercentage = 0.0
 
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
-        EntryHandler.bootstrapRealm()
-        
+
         realmToken = RLMRealm.defaultRealm().addNotificationBlock { note, realm in
             self.reloadAndUpdateUI()
         }
@@ -69,6 +67,6 @@ private extension InterfaceController {
     }
     
     func updateWithGulp(gulp: String) {
-        entryHandler.addGulp(NSUserDefaults.groupUserDefaults().doubleForKey(gulp))
+        EntryHandler.sharedHandler.addGulp(NSUserDefaults.groupUserDefaults().doubleForKey(gulp))
     }
 }

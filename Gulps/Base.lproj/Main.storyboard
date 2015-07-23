@@ -171,7 +171,6 @@
                     <navigationItem key="navigationItem" id="Mv9-vs-a2D"/>
                     <connections>
                         <outlet property="addButton" destination="fW6-sm-t8g" id="ikl-2M-eYC"/>
-                        <outlet property="entryHandler" destination="YJs-c5-Aop" id="y7a-a1-jts"/>
                         <outlet property="largeButton" destination="v5a-2l-qvB" id="dvl-3k-q65"/>
                         <outlet property="maskImage" destination="JPp-1k-zdE" id="5Xq-AA-c2u"/>
                         <outlet property="meterContainerView" destination="mQX-uO-zkr" id="Xzc-Jh-LMx"/>

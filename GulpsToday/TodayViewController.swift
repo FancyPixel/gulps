@@ -11,7 +11,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     @IBOutlet weak var summaryLabel: UILabel!
     @IBOutlet weak var smallLabel: UILabel!
     @IBOutlet weak var bigLabel: UILabel!
-    @IBOutlet var entryHandler: EntryHandler!
     var realmToken: RLMNotificationToken?
     var gulpSize = Settings.Gulp.Small
 
@@ -25,9 +24,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        EntryHandler.bootstrapRealm()
-
-        realmToken = RLMRealm.defaultRealm().addNotificationBlock { note, realm in
+        realmToken = EntryHandler.sharedHandler.realm.addNotificationBlock { note, realm in
             self.updateUI()
         }
 
@@ -50,8 +47,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 
     func updateUI() {
         UIView.transitionWithView(self.summaryLabel, duration: 0.5, options: .TransitionCrossDissolve, animations: { () -> Void in
-            let quantity = self.numberFormatter.stringFromNumber(self.entryHandler.currentEntry().quantity)!
-            let percentage = self.entryHandler.currentEntry().formattedPercentage()
+            let quantity = self.numberFormatter.stringFromNumber(EntryHandler.sharedHandler.currentEntry().quantity)!
+            let percentage = EntryHandler.sharedHandler.currentEntry().formattedPercentage()
             if let unit = UnitsOfMeasure(rawValue: self.userDefaults.integerForKey(Settings.General.UnitOfMeasure.key())) {
                 let unitName = unit.nameForUnitOfMeasure()
                 self.summaryLabel.text = String(format: NSLocalizedString("today extension format", comment: ""), quantity, unitName, percentage)
@@ -106,7 +103,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
 
     func addGulp(quantity: Double) {
-        entryHandler.addGulp(quantity)
+        EntryHandler.sharedHandler.addGulp(quantity)
         summaryLabel.text = NSLocalizedString("way to go", comment: "")
         updateLabels()
 

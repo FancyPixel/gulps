@@ -12,8 +12,7 @@ class GlanceController: WKInterfaceController {
     override func willActivate() {
         super.willActivate()
         
-        EntryHandler.bootstrapRealm()
-        let entry = EntryHandler().currentEntry() as Entry
+        let entry = EntryHandler.sharedHandler.currentEntry() as Entry
         self.percentageLabel.setText(entry.formattedPercentage())
     }
 

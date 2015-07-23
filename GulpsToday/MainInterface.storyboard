@@ -152,7 +152,6 @@
                         <outlet property="bigConfirmButton" destination="CA2-9X-2XM" id="miF-TP-Rap"/>
                         <outlet property="bigGulpButton" destination="6uS-2w-0pZ" id="FEP-M8-Hze"/>
                         <outlet property="bigLabel" destination="XYo-e7-dzi" id="2Po-bK-fmh"/>
-                        <outlet property="entryHandler" destination="dKN-ch-ZKo" id="VAJ-d0-vtf"/>
                         <outlet property="smallConfirmButton" destination="GQV-Dk-jL8" id="SUg-fe-nOQ"/>
                         <outlet property="smallGulpButton" destination="Y3l-b0-FmP" id="aeD-YA-Of4"/>
                         <outlet property="smallLabel" destination="di7-sK-aUc" id="CRo-n9-RdN"/>

@@ -68,8 +68,8 @@ class CalendarViewController: UIViewController, JTCalendarDataSource {
     }
 
     @IBAction func shareAction(sender: AnyObject) {
-        let quantitiy = EntryHandler.overallQuantity()
-        let days = EntryHandler.daysTracked()
+        let quantitiy = EntryHandler.sharedHandler.overallQuantity()
+        let days = EntryHandler.sharedHandler.daysTracked()
         let text = String(format: NSLocalizedString("share text", comment: ""), quantitiy, unitName(), days)
         let items = [text]
         let activityController = UIActivityViewController(activityItems: items, applicationActivities: nil)
@@ -114,8 +114,8 @@ private extension CalendarViewController {
     }
 
     func updateStats() {
-        daysCountLabel.countFromZeroTo(Float(EntryHandler.daysTracked()))
-        quantityLabel.countFromZeroTo(Float(EntryHandler.overallQuantity()))
+        daysCountLabel.countFromZeroTo(Float(EntryHandler.sharedHandler.daysTracked()))
+        quantityLabel.countFromZeroTo(Float(EntryHandler.sharedHandler.overallQuantity()))
         measureLabel.text = String(format: NSLocalizedString("unit format", comment: ""), unitName())
     }
 
