@@ -9,10 +9,15 @@ import Gulps
 
 class MockUserDefaults: NSUserDefaults {
     override func doubleForKey(defaultName: String) -> Double {
-        if (defaultName == Settings.Gulp.Small.key()) {
-            return 10
-        } else {
-            return 20
+        switch defaultName {
+        case Settings.Gulp.Small.key():
+            return 0.1
+        case Settings.Gulp.Big.key():
+            return 0.2
+        case Settings.Gulp.Goal.key():
+            return 1
+        default:
+            return 0
         }
     }
 
@@ -24,6 +29,10 @@ class MockUserDefaults: NSUserDefaults {
 class DrinkViewControllerSpecs: QuickSpec {
     override func spec() {
         var subject: DrinkViewController!
+        beforeSuite {
+            EntryHandler.sharedHandler.realm = Realm(inMemoryIdentifier: "gulps-spec")
+            EntryHandler.sharedHandler.userDefaults = MockUserDefaults()
+        }
 
         beforeEach {
             let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
@@ -34,6 +43,12 @@ class DrinkViewControllerSpecs: QuickSpec {
             UIApplication.sharedApplication().keyWindow!.rootViewController = tabBarController
             NSRunLoop.mainRunLoop().runUntilDate(NSDate()) 
             subject.percentageLabel.animationDuration = 0.1 // makes testing easier
+        }
+
+        afterEach {
+            EntryHandler.sharedHandler.realm.write {
+                EntryHandler.sharedHandler.realm.deleteAll()
+            }
         }
 
         describe("when the controller loads") {
@@ -53,7 +68,6 @@ class DrinkViewControllerSpecs: QuickSpec {
             it("should update the progress label") {
                 subject.selectionButtonAction(subject.largeButton)
                 expect(subject.percentageLabel.text).toEventually(equal("20%"))
-                expect(subject.progressMeter).toEventually(haveValidSnapshot())
             }
         }
     }

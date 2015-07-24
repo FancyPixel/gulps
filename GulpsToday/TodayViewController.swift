@@ -46,7 +46,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
 
     func updateUI() {
-        UIView.transitionWithView(self.summaryLabel, duration: 0.5, options: .TransitionCrossDissolve, animations: { () -> Void in
+        UIView.transitionWithView(self.summaryLabel, duration: 0.5, options: .TransitionCrossDissolve, animations: {
             let quantity = self.numberFormatter.stringFromNumber(EntryHandler.sharedHandler.currentEntry().quantity)!
             let percentage = EntryHandler.sharedHandler.currentEntry().formattedPercentage()
             if let unit = UnitsOfMeasure(rawValue: self.userDefaults.integerForKey(Settings.General.UnitOfMeasure.key())) {
@@ -107,7 +107,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         summaryLabel.text = NSLocalizedString("way to go", comment: "")
         updateLabels()
 
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { () -> Void in
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
             self.updateUI()
         }
     }

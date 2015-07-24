@@ -3,9 +3,10 @@ import RealmSwift
 
 public class EntryHandler: NSObject {
 
-    static let sharedHandler = EntryHandler()
+    public static let sharedHandler = EntryHandler()
+    public lazy var userDefaults = NSUserDefaults.groupUserDefaults()
 
-    lazy var realm: Realm = {
+    public lazy var realm: Realm = {
         if let directory: NSURL = NSFileManager.defaultManager().containerURLForSecurityApplicationGroupIdentifier("group.\(Constants.bundle())") {
             let realmPath = directory.path!.stringByAppendingPathComponent("db.realm")
             Realm.defaultPath = realmPath
@@ -15,8 +16,20 @@ public class EntryHandler: NSObject {
         return Realm()
     }()
 
+    public func entryForToday() -> Entry? {
+        return entryForDate(NSDate())
+    }
+
+    public func entryForDate(date: NSDate) -> Entry? {
+        let dateFormat = NSDateFormatter()
+        dateFormat.dateFormat = "yyyy-MM-dd"
+        let p: NSPredicate = NSPredicate(format: "date = %@", argumentArray: [ dateFormat.stringFromDate(date) ])
+        let objects = realm.objects(Entry).filter(p)
+        return objects.first
+    }
+
     public func currentEntry() -> Entry {
-        if let entry = Entry.entryForToday() {
+        if let entry = entryForToday() {
             return entry
         } else {
             let newEntry = Entry()
@@ -34,7 +47,7 @@ public class EntryHandler: NSObject {
     public func addGulp(quantity: Double) {
         let entry = currentEntry()
         realm.write {
-            entry.addGulp(quantity, goal: NSUserDefaults.groupUserDefaults().doubleForKey(Settings.Gulp.Goal.key()))
+            entry.addGulp(quantity, goal: self.userDefaults.doubleForKey(Settings.Gulp.Goal.key()))
         }
     }
 

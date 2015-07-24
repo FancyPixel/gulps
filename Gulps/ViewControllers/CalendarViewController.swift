@@ -84,7 +84,7 @@ class CalendarViewController: UIViewController, JTCalendarDataSource {
     // MARK: - JTCalendarDataSource
 
     func calendar(calendar: JTCalendar!, dataForDate date: NSDate!) -> AnyObject? {
-        let entry = Entry.entryForDate(date)
+        let entry = EntryHandler.sharedHandler.entryForDate(date)
         if let entry = entry {
             return 1 - (entry.percentage / 100.0)
         } else {
@@ -127,7 +127,7 @@ private extension CalendarViewController {
     }
 
     func dateLabelString(_ date: NSDate = NSDate()) -> String {
-        if let entry = Entry.entryForDate(date) {
+        if let entry = EntryHandler.sharedHandler.entryForDate(date) {
             if (entry.percentage >= 100) {
                 return NSLocalizedString("goal met", comment: "")
             } else {

@@ -18,18 +18,6 @@ public class Entry: Object {
         return "date"
     }
 
-    class func entryForToday() -> Entry? {
-        return entryForDate(NSDate())
-    }
-
-    class func entryForDate(date: NSDate) -> Entry? {
-        let dateFormat = NSDateFormatter()
-        dateFormat.dateFormat = "yyyy-MM-dd"
-        let p: NSPredicate = NSPredicate(format: "date = %@", argumentArray: [ dateFormat.stringFromDate(date) ])
-        let objects = Realm().objects(Entry).filter(p)
-        return objects.first
-    }
-
     func addGulp(quantity: Double, goal: Double) {
         let gulp = Gulp(quantity: quantity)
         self.gulps.append(gulp)

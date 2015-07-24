@@ -1,5 +1,5 @@
 import UIKit
-
+import RealmSwift
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -10,7 +10,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupAppearance()
 
         Settings.registerDefaults()		
-
+            EntryHandler.sharedHandler.realm = Realm(inMemoryIdentifier: "gulps-spec")
         let userDefaults = NSUserDefaults.groupUserDefaults()
         if (!userDefaults.boolForKey(Settings.General.OnboardingShown.key())) {
             loadOnboardingInterface()
