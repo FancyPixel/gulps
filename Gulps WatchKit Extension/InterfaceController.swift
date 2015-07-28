@@ -17,7 +17,7 @@ class InterfaceController: WKInterfaceController {
             self.reloadAndUpdateUI()
         }
 
-        let entry = EntryHandler().currentEntry() as Entry
+        let entry = EntryHandler.sharedHandler.currentEntry() as Entry
         previousPercentage = entry.percentage
         progressImage.setImageNamed("activity-")
     }
@@ -50,7 +50,7 @@ class InterfaceController: WKInterfaceController {
 private extension InterfaceController {
     
     func reloadAndUpdateUI() {
-        let entry = EntryHandler().currentEntry() as Entry
+        let entry = EntryHandler.sharedHandler.currentEntry() as Entry
         var delta = Int(entry.percentage - previousPercentage)
         if (delta < 0) {
             // animate in reverse using negative duration

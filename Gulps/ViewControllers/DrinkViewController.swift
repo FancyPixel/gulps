@@ -62,6 +62,7 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
             progressMeter!.backgroundColor = .clearColor()
             progressMeter!.fillColor = .mainColor()
             progressMeter!.fillAutoReverse = false
+            progressMeter!.fillDuration = 1.5
             progressMeter!.fillRepeatCount = 0;
             meterContainerView.insertSubview(progressMeter!, belowSubview: maskImage)
         }
@@ -85,10 +86,7 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
         let percentage = EntryHandler.sharedHandler.currentPercentage()
         percentageLabel.countFromCurrentValueTo(Float(round(percentage)))
         var fillTo = CGFloat(percentage / 100.0)
-        if fillTo > 1 {
-            fillTo = 1.0
-        }
-        progressMeter?.fillTo(fillTo)
+        progressMeter?.fillTo(fillTo > 1 ? 1 : fillTo)
     }
 
     override public func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
