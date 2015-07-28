@@ -1,5 +1,6 @@
 ![Gulps](https://raw.githubusercontent.com/FancyPixel/gulps/master/assets/screenshot.png)
 
+[![Build Status](https://travis-ci.org/FancyPixel/gulps.svg)](https://travis-ci.org/FancyPixel/gulps)
 [![Join the chat at https://gitter.im/FancyPixel/gulps](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/FancyPixel/gulps?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Gulps lets you track your daily water intake in a simple and intuitive way: set your goal, set your usual portion, and start keeping track from within the app or the widget in your notification center.  
