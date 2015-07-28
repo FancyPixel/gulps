@@ -83,6 +83,6 @@ class NotificationHelper {
     }
 
     class func addGulp(size: String) {
-        EntryHandler().addGulp(NSUserDefaults.groupUserDefaults().doubleForKey(size))
+        EntryHandler.sharedHandler.addGulp(NSUserDefaults.groupUserDefaults().doubleForKey(size))
     }
 }

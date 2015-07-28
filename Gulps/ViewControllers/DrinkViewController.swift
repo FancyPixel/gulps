@@ -65,9 +65,9 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
             progressMeter!.fillDuration = 1.5
             progressMeter!.fillRepeatCount = 0;
             meterContainerView.insertSubview(progressMeter!, belowSubview: maskImage)
-        }
 
-        updateUI()
+            updateUI()
+        }
 
         if !userDefaults.boolForKey("FEEDBACK") {
             if EntryHandler.sharedHandler.overallQuantity() > 10 {
