@@ -1,6 +1,6 @@
 osx_image: xcode6.4
 sudo: required
-language: swift
+language: objective-c
 before_install:
   - export LANG=en_US.UTF-8
   - gem install cocoapods xcpretty --no-ri --no-rdoc --no-ri --no-rdoc
