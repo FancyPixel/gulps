@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func checkVersion() {
         let userDefaults = NSUserDefaults.groupUserDefaults()
         let current = userDefaults.integerForKey("BUNDLE_VERSION")
-        if let versionString = NSBundle.mainBundle().infoDictionary?["CFBundleVersion"] as? String, let version = versionString.toInt() {
+        if let versionString = NSBundle.mainBundle().infoDictionary?["CFBundleVersion"] as? String, let version = Int(versionString) {
             if current < 13 {
                 NotificationHelper.rescheduleNotifications()
             }
@@ -51,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func loadOnboardingInterface() {
         UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .Slide)
         let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
-        if let controller = storyboard.instantiateInitialViewController() as? UIViewController {
+        if let controller = storyboard.instantiateInitialViewController() {
             self.window?.rootViewController = controller
         }
     }
@@ -59,7 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func loadMainInterface() {
         UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Slide)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let controller = storyboard.instantiateInitialViewController() as? UIViewController {
+        if let controller = storyboard.instantiateInitialViewController() {
             self.window?.rootViewController = controller
         }
     }
@@ -72,7 +72,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(application: UIApplication, didRegisterUserNotificationSettings notificationSettings: UIUserNotificationSettings) {
-        if (UIApplication.sharedApplication().scheduledLocalNotifications.count == 0) {
+        if (UIApplication.sharedApplication().scheduledLocalNotifications?.count == 0) {
             NotificationHelper.registerNotifications()
         }
     }

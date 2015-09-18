@@ -30,7 +30,7 @@ class NotificationHelper {
             let reminder = UILocalNotification()
 
             reminder.fireDate = date
-            reminder.repeatInterval = NSCalendarUnit.CalendarUnitDay
+            reminder.repeatInterval = NSCalendarUnit.Day
             reminder.alertBody = NSLocalizedString("notification text", comment: "")
             reminder.alertAction = "Ok"
             reminder.soundName = "drop.caf"
@@ -43,7 +43,7 @@ class NotificationHelper {
     }
 
     class func unscheduleNotifications() {
-        UIApplication.sharedApplication().scheduledLocalNotifications.removeAll(keepCapacity: false)
+        UIApplication.sharedApplication().scheduledLocalNotifications?.removeAll(keepCapacity: false)
     }
 
     class func askPermission() {
@@ -66,8 +66,8 @@ class NotificationHelper {
         gulpCategory.setActions([smallAction, bigAction], forContext: .Default)
         gulpCategory.setActions([smallAction, bigAction], forContext: .Minimal)
 
-        let types = UIUserNotificationType.Alert | UIUserNotificationType.Sound
-        let settings = UIUserNotificationSettings(forTypes: types, categories: NSSet(object: gulpCategory) as Set<NSObject>)
+        let categories = NSSet(object: gulpCategory) as! Set<UIUserNotificationCategory>
+        let settings = UIUserNotificationSettings(forTypes: [.Alert, .Sound], categories: categories)
         UIApplication.sharedApplication().registerUserNotificationSettings(settings)
     }
 

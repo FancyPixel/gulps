@@ -7,13 +7,16 @@ public class EntryHandler: NSObject {
     public lazy var userDefaults = NSUserDefaults.groupUserDefaults()
 
     public lazy var realm: Realm = {
-        if let directory: NSURL = NSFileManager.defaultManager().containerURLForSecurityApplicationGroupIdentifier("group.\(Constants.bundle())") {
-            let realmPath = directory.path!.stringByAppendingPathComponent("db.realm")
-            Realm.defaultPath = realmPath
-        } else {
-            assertionFailure("Unable to setup Realm. Make sure to setup your app group in the developer portal")
+        guard let directory: NSURL = NSFileManager.defaultManager().containerURLForSecurityApplicationGroupIdentifier("group.\(Constants.bundle())") else {
+            fatalError("Unable to setup Realm. Make sure to setup your app group in the developer portal")
         }
-        return Realm()
+
+        let realmPath = directory.URLByAppendingPathComponent("db.realm")
+        var config = Realm.Configuration()
+        config.path = realmPath.path
+        Realm.Configuration.defaultConfiguration = config
+
+        return try! Realm()
     }()
 
     public func entryForToday() -> Entry? {

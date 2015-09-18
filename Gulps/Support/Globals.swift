@@ -32,8 +32,11 @@ class Globals {
     }
 
     class func numericTextField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        let newValue = textField.text.stringByReplacingCharactersInRange(range.toRange(textField.text), withString: string)
-        if (count(newValue) == 0) {
+        guard let text = textField.text else {
+            return false
+        }
+        let newValue = text.stringByReplacingCharactersInRange(range.toRange(text), withString: string)
+        if (newValue.characters.count == 0) {
             return true;
         }
         let numberFormatter = NSNumberFormatter()
@@ -56,8 +59,8 @@ class Globals {
 
 extension NSRange {
     func toRange(string: String) -> Range<String.Index> {
-        let startIndex = advance(string.startIndex, location)
-        let endIndex = advance(startIndex, length)
+        let startIndex = string.startIndex.advancedBy(location)
+        let endIndex = startIndex.advancedBy(length)
         return startIndex..<endIndex
     }
 }

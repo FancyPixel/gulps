@@ -46,7 +46,7 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
             suffix = unit.suffixForUnitOfMeasure()
         }
 
-        uomLabels.map({$0.text = suffix})
+        _ = uomLabels.map({$0.text = suffix})
         largePortionText.text = numberFormatter.stringFromNumber(userDefaults.doubleForKey(Settings.Gulp.Big.key()))
         smallPortionText.text = numberFormatter.stringFromNumber(userDefaults.doubleForKey(Settings.Gulp.Small.key()))
         dailyGoalText.text = numberFormatter.stringFromNumber(userDefaults.doubleForKey(Settings.Gulp.Goal.key()))
@@ -158,7 +158,10 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
     }
 
     func storeText(textField: UITextField, toKey key: String) {
-        let number = numberFormatter.numberFromString(textField.text) as? Double
+        guard let text = textField.text else {
+            return
+        }
+        let number = numberFormatter.numberFromString(text) as? Double
         userDefaults.setDouble(number ?? 0.0, forKey: key)
         userDefaults.synchronize()
     }

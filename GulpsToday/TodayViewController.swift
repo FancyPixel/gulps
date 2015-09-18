@@ -28,14 +28,14 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             self.updateUI()
         }
 
-        [bigConfirmButton, smallConfirmButton].map({$0.transform = CGAffineTransformMakeScale(0.001, 0.001)})
+        _ = [bigConfirmButton, smallConfirmButton].map({$0.transform = CGAffineTransformMakeScale(0.001, 0.001)})
         self.title = "Gulps"
         self.preferredContentSize = CGSizeMake(0, 108)
         updateUI()
         updateLabels()
     }
 
-    func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)!) {
+    func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)) {
         updateUI()
         updateLabels()
         completionHandler(NCUpdateResult.NewData)

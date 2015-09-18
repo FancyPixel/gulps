@@ -34,8 +34,8 @@ class CalendarViewController: UIViewController, JTCalendarDataSource {
         self.title = NSLocalizedString("progress title", comment: "")
 
         dailyLabel.text = ""
-        [daysCountLabel, quantityLabel].map { $0.format = "%d" }
-        [quantityLabel, daysLabel, daysCountLabel, measureLabel].map({ $0.textColor = .mainColor() })
+        _ = [daysCountLabel, quantityLabel].map { $0.format = "%d" }
+        _ = [quantityLabel, daysLabel, daysCountLabel, measureLabel].map({ $0.textColor = .mainColor() })
         shareButton.backgroundColor = .mainColor()
 
         self.navigationItem.rightBarButtonItem = {
@@ -68,6 +68,7 @@ class CalendarViewController: UIViewController, JTCalendarDataSource {
     }
 
     @IBAction func shareAction(sender: AnyObject) {
+        // TODO: fix this
         let quantitiy = EntryHandler.sharedHandler.overallQuantity()
         let days = EntryHandler.sharedHandler.daysTracked()
         let text = String(format: NSLocalizedString("share text", comment: ""), quantitiy, unitName(), days)
@@ -126,7 +127,7 @@ private extension CalendarViewController {
         return ""
     }
 
-    func dateLabelString(_ date: NSDate = NSDate()) -> String {
+    func dateLabelString(date: NSDate = NSDate()) -> String {
         if let entry = EntryHandler.sharedHandler.entryForDate(date) {
             if (entry.percentage >= 100) {
                 return NSLocalizedString("goal met", comment: "")

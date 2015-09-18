@@ -16,13 +16,17 @@ class GoalViewController: OnboardingViewController, UITextFieldDelegate {
     }
 
     func dismissAndSave() {
+        guard let text = goalTextField.text else {
+            return
+        }
+
         let numberFormatter = NSNumberFormatter()
         numberFormatter.numberStyle = .DecimalStyle
 
         self.goalTextField.resignFirstResponder()
 
         var goal = 0.0
-        if let number = numberFormatter.numberFromString(self.goalTextField.text) {
+        if let number = numberFormatter.numberFromString(text) {
             goal = number as Double
         }
 

@@ -9,7 +9,7 @@ class MeasureViewController: OnboardingViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        [litersCheck, ouncesCheck].map({$0.transform = CGAffineTransformMakeScale(0.001, 0.001)})
+        _ = [litersCheck, ouncesCheck].map({$0.transform = CGAffineTransformMakeScale(0.001, 0.001)})
     }
 
     override func updateUI() {

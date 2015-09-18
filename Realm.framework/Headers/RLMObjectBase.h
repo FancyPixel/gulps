@@ -17,6 +17,9 @@
 ////////////////////////////////////////////////////////////////////////////
 
 #import <Foundation/Foundation.h>
+#import <Realm/RLMDefines.h>
+
+RLM_ASSUME_NONNULL_BEGIN
 
 @class RLMRealm;
 @class RLMSchema;
@@ -30,4 +33,9 @@
 
 + (NSString *)className;
 
+// Returns whether the class is included in the default set of classes persisted in a Realm.
++ (BOOL)shouldIncludeInDefaultSchema;
+
 @end
+
+RLM_ASSUME_NONNULL_END

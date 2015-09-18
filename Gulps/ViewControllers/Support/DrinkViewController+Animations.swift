@@ -41,7 +41,7 @@ extension DrinkViewController {
         rotate.removedOnCompletion = true
         rotate.completionBlock = {(_, _) in
             self.addButton.userInteractionEnabled = true
-            [self.smallButton, self.largeButton].map({$0.userInteractionEnabled = true})
+            _ = [self.smallButton, self.largeButton].map({$0.userInteractionEnabled = true})
             self.expanded = true
         }
 
@@ -67,7 +67,7 @@ extension DrinkViewController {
         addButton.pop_addAnimation(color, forKey: "color")
         minusButton.pop_addAnimation(scaleMinus, forKey: "scaleMinus")
 
-        [smallButton, largeButton].map({$0.alpha = 1})
+        _ = [smallButton, largeButton].map({$0.alpha = 1})
         for button in [smallButton, largeButton] {
             let pop = POPSpringAnimation(propertyNamed: kPOPViewScaleXY)
             pop.fromValue = NSValue(CGPoint: CGPointMake(0.1, 0.1))
@@ -91,7 +91,7 @@ extension DrinkViewController {
     }
 
     func contractAddButton() {
-        [smallButton, largeButton].map({$0.userInteractionEnabled = false})
+        _ = [smallButton, largeButton].map({$0.userInteractionEnabled = false})
         addButton.userInteractionEnabled = false
 
         let rotate = POPSpringAnimation(propertyNamed: kPOPLayerRotation)

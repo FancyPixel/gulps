@@ -39,8 +39,10 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
         manager.deviceMotionUpdateInterval = 0.01;
         manager.startDeviceMotionUpdatesToQueue(NSOperationQueue.mainQueue()) {
             (motion, error) in
-            let roation = atan2(motion.gravity.x, motion.gravity.y) - M_PI
-            self.progressMeter?.transform = CGAffineTransformMakeRotation(CGFloat(roation))
+            if let motion = motion {
+                let roation = atan2(motion.gravity.x, motion.gravity.y) - M_PI
+                self.progressMeter?.transform = CGAffineTransformMakeRotation(CGFloat(roation))
+            }
         }
 
         realmNotification = EntryHandler.sharedHandler.realm.addNotificationBlock { note, realm in
@@ -85,18 +87,17 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
     func updateUI() {
         let percentage = EntryHandler.sharedHandler.currentPercentage()
         percentageLabel.countFromCurrentValueTo(Float(round(percentage)))
-        var fillTo = CGFloat(percentage / 100.0)
+        let fillTo = CGFloat(percentage / 100.0)
         progressMeter?.fillTo(fillTo > 1 ? 1 : fillTo)
     }
 
     override public func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "feedback" {
-            if let controller = segue.destinationViewController as? UIViewController {
-                controller.transitioningDelegate = self
-                controller.modalPresentationStyle = .Custom
-                userDefaults.setBool(true, forKey: "FEEDBACK")
-                userDefaults.synchronize()
-            }
+            let controller = segue.destinationViewController
+            controller.transitioningDelegate = self
+            controller.modalPresentationStyle = .Custom
+            userDefaults.setBool(true, forKey: "FEEDBACK")
+            userDefaults.synchronize()
         }
     }
 
@@ -126,7 +127,7 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
         let yes = UIAlertAction(title: NSLocalizedString("Yes", comment: ""), style: .Cancel) { _ in
             EntryHandler.sharedHandler.removeLastGulp()
         }
-        [yes, no].map { controller.addAction($0) }
+        _ = [yes, no].map { controller.addAction($0) }
         self.presentViewController(controller, animated: true) {}
     }
 

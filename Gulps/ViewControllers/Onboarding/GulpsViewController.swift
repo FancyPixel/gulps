@@ -30,15 +30,15 @@ class GulpsViewController: OnboardingViewController, UITextFieldDelegate {
         let numberFormatter = NSNumberFormatter()
         numberFormatter.numberStyle = .DecimalStyle
 
-        [self.smallGulpText, self.bigGulpText].map({$0.resignFirstResponder()})
+        _ = [self.smallGulpText, self.bigGulpText].map({$0.resignFirstResponder()})
 
         var small = 0.0
         var big = 0.0
-        if let number = numberFormatter.numberFromString(self.smallGulpText.text) {
+        if let number = numberFormatter.numberFromString(self.smallGulpText.text ?? "0") {
             small = number as Double
         }
 
-        if let number = numberFormatter.numberFromString(self.bigGulpText.text) {
+        if let number = numberFormatter.numberFromString(self.bigGulpText.text ?? "0") {
             big = number as Double
         }
 
@@ -68,8 +68,8 @@ class GulpsViewController: OnboardingViewController, UITextFieldDelegate {
         }
     }
 
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
-        [self.smallGulpText, self.bigGulpText].map({$0.resignFirstResponder()})
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        _ = [self.smallGulpText, self.bigGulpText].map({$0.resignFirstResponder()})
     }
 
     func keyboardWillShow(notification: NSNotification) {

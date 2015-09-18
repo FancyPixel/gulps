@@ -59,6 +59,9 @@ FOUNDATION_EXTERN NSArray *RLMObjectBaseLinkingObjectsOfClass(RLMObjectBase *obj
 FOUNDATION_EXTERN id RLMObjectBaseObjectForKeyedSubscript(RLMObjectBase *object, NSString *key);
 FOUNDATION_EXTERN void RLMObjectBaseSetObjectForKeyedSubscript(RLMObjectBase *object, NSString *key, id obj);
 
+// Calls valueForKey: and re-raises NSUndefinedKeyExceptions
+FOUNDATION_EXTERN id RLMValidatedValueForProperty(id object, NSString *key, NSString *className);
+
 // Compare two RLObjectBases
 FOUNDATION_EXTERN BOOL RLMObjectBaseAreEqual(RLMObjectBase *o1, RLMObjectBase *o2);
 
@@ -76,5 +79,7 @@ FOUNDATION_EXTERN const NSUInteger RLMDescriptionMaxDepth;
 + (NSArray *)getGenericListPropertyNames:(id)obj;
 + (void)initializeListProperty:(RLMObjectBase *)object property:(RLMProperty *)property array:(RLMArray *)array;
 
-@end
++ (NSArray *)getOptionalPropertyNames:(id)obj;
++ (NSArray *)requiredPropertiesForClass:(Class)cls;
 
+@end
