@@ -1,6 +1,7 @@
 import pop
 
-extension CalendarViewController {
+typealias CalendarAnimation = CalendarViewController
+extension CalendarAnimation {
 
     func initAnimations() {
         quantityLabelStartingConstant = Double(quantityLabelConstraint.constant)
