@@ -41,6 +41,7 @@
 		6537A8451AF24CFF00EC16E9 /* EntryHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A8111AF24CC800EC16E9 /* EntryHandler.swift */; };
 		6537A8461AF24D0200EC16E9 /* Gulp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A8121AF24CC800EC16E9 /* Gulp.swift */; };
 		6537A8471AF24D0200EC16E9 /* Gulp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A8121AF24CC800EC16E9 /* Gulp.swift */; };
+		653EF86F1BAD8DF2001136CF /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A81D1AF24CC800EC16E9 /* Settings.swift */; settings = {ASSET_TAGS = (); }; };
 		6555BB681B0CAE1700CE436A /* AnimatedShareButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6555BB671B0CAE1700CE436A /* AnimatedShareButton.swift */; };
 		6555BB6B1B0CB90A00CE436A /* DrinkViewController+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6555BB6A1B0CB90A00CE436A /* DrinkViewController+Animations.swift */; };
 		6555BB6D1B0CB93100CE436A /* CalendarViewController+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6555BB6C1B0CB93100CE436A /* CalendarViewController+Animations.swift */; };
@@ -995,6 +996,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				653EF86F1BAD8DF2001136CF /* Settings.swift in Sources */,
 				655DF0E11BAC148D00431D0E /* NotificationController.swift in Sources */,
 				655DF0DF1BAC148D00431D0E /* ExtensionDelegate.swift in Sources */,
 				655DF0E51BAC148D00431D0E /* ComplicationController.swift in Sources */,
@@ -1536,6 +1538,7 @@
 				655DF0EE1BAC148D00431D0E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		655DF0F01BAC148D00431D0E /* Build configuration list for PBXNativeTarget "Gulps watchOS" */ = {
 			isa = XCConfigurationList;
@@ -1544,6 +1547,7 @@
 				655DF0F21BAC148D00431D0E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		65F44C161AF24B440093A3E9 /* Build configuration list for PBXProject "Gulps" */ = {
 			isa = XCConfigurationList;

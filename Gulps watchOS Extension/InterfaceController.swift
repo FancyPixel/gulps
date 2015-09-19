@@ -8,23 +8,80 @@
 
 import WatchKit
 import Foundation
+import WatchConnectivity
 
+class InterfaceController: WKInterfaceController, WCSessionDelegate {
 
-class InterfaceController: WKInterfaceController {
+    @IBOutlet weak var goalLabel: WKInterfaceLabel!
+    @IBOutlet weak var progressImage: WKInterfaceImage!
+    var previousPercentage = 0.0
+
+    let session = WCSession.defaultSession()
 
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
-        
-        // Configure interface objects here.
+
+        previousPercentage = 0
+        progressImage.setImageNamed("activity-")
+        reloadAndUpdateUI(0)
+    }
+
+    func session(session: WCSession, didReceiveApplicationContext applicationContext: [String : AnyObject]) {
+        if let percentage = applicationContext["percentage"] as? Double {
+            reloadAndUpdateUI(percentage)
+        }
+    }
+
+    @IBAction func addSmallGulpAction() {
+        updateWithGulp(Settings.Gulp.Small.key())
+    }
+
+    @IBAction func addBigGulpAction() {
+        updateWithGulp(Settings.Gulp.Big.key())
+    }
+
+    func updateWithGulp(size: String) {
+        let applicationData = ["value": String(Settings.Gulp.Small.key())]
+
+        // Toptimistically update before sending the data
+
+        // Send the update to the main app
+        session.sendMessage(applicationData, replyHandler: {
+            (data: [String : AnyObject]) in
+            // Get the updated value
+            if let percentage = data["percentage"] as? Double {
+                self.reloadAndUpdateUI(percentage)
+            }
+            }) { (error) in
+        }
+    }
+
+    func reloadAndUpdateUI(percentage: Double) {
+        var delta = Int(percentage - previousPercentage)
+        if (delta < 0) {
+            // animate in reverse using negative duration
+            progressImage.startAnimatingWithImagesInRange(NSMakeRange(Int(percentage), -delta), duration: -1.0, repeatCount: 1)
+        } else {
+            if (delta == 0) {
+                // if the range's length is 0, no image is loaded
+                delta = 1
+            }
+            progressImage.startAnimatingWithImagesInRange(NSMakeRange(Int(previousPercentage), delta), duration: 1.0, repeatCount: 1)
+        }
+        goalLabel.setText(NSLocalizedString("daily goal:", comment: "") + percentage.formattedPercentage())
+        previousPercentage = percentage
     }
 
     override func willActivate() {
-        // This method is called when watch view controller is about to be visible to user
         super.willActivate()
+
+        if (WCSession.isSupported()) {
+            session.delegate = self
+            session.activateSession()
+        }
     }
 
     override func didDeactivate() {
-        // This method is called when watch view controller is no longer visible
         super.didDeactivate()
     }
 

@@ -42,8 +42,6 @@ public class Entry: Object {
     }
 
     func formattedPercentage() -> String {
-        let percentageFormatter = NSNumberFormatter()
-        percentageFormatter.numberStyle = .PercentStyle
-        return percentageFormatter.stringFromNumber(round(percentage) / 100.0) ?? "\(percentage)%"
+        return percentage.formattedPercentage()
     }
 }

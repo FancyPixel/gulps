@@ -100,3 +100,11 @@ public class Settings {
         userDefaults.synchronize()
     }
 }
+
+extension Double {
+    func formattedPercentage() -> String {
+        let percentageFormatter = NSNumberFormatter()
+        percentageFormatter.numberStyle = .PercentStyle
+        return percentageFormatter.stringFromNumber(round(self) / 100.0) ?? "\(self)%"
+    }
+}
