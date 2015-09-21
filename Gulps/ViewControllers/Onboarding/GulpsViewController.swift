@@ -42,8 +42,8 @@ class GulpsViewController: OnboardingViewController, UITextFieldDelegate {
             big = number as Double
         }
 
-        self.userDefaults.setDouble(small, forKey: Settings.Gulp.Small.key())
-        self.userDefaults.setDouble(big, forKey: Settings.Gulp.Big.key())
+        self.userDefaults.setDouble(small, forKey: Constants.Gulp.Small.key())
+        self.userDefaults.setDouble(big, forKey: Constants.Gulp.Big.key())
         self.userDefaults.synchronize()
     }
 
@@ -58,9 +58,9 @@ class GulpsViewController: OnboardingViewController, UITextFieldDelegate {
     override func updateUI() {
         let numberFormatter = NSNumberFormatter()
         numberFormatter.numberStyle = .DecimalStyle
-        self.smallGulpText.text = numberFormatter.stringFromNumber(self.userDefaults.doubleForKey(Settings.Gulp.Small.key()))
-        self.bigGulpText.text = numberFormatter.stringFromNumber(self.userDefaults.doubleForKey(Settings.Gulp.Big.key()))
-        let unit = UnitsOfMeasure(rawValue: self.userDefaults.integerForKey(Settings.General.UnitOfMeasure.key()))
+        self.smallGulpText.text = numberFormatter.stringFromNumber(self.userDefaults.doubleForKey(Constants.Gulp.Small.key()))
+        self.bigGulpText.text = numberFormatter.stringFromNumber(self.userDefaults.doubleForKey(Constants.Gulp.Big.key()))
+        let unit = Constants.UnitsOfMeasure(rawValue: self.userDefaults.integerForKey(Constants.General.UnitOfMeasure.key()))
 
         if let unit = unit {
             self.smallSuffixLabel.text = unit.suffixForUnitOfMeasure()

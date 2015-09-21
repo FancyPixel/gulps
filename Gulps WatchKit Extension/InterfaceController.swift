@@ -27,11 +27,11 @@ class InterfaceController: WKInterfaceController {
     }
 
     @IBAction func addSmallGulpAction() {
-        updateWithGulp(Settings.Gulp.Small.key())
+        updateWithGulp(Constants.Gulp.Small.key())
     }
 
     @IBAction func addBigGulpAction() {
-        updateWithGulp(Settings.Gulp.Big.key())
+        updateWithGulp(Constants.Gulp.Big.key())
     }
 
     override func willActivate() {

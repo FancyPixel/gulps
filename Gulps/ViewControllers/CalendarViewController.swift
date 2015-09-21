@@ -121,7 +121,7 @@ private extension CalendarViewController {
     }
 
     func unitName() -> String {
-        if let unit = UnitsOfMeasure(rawValue: userDefaults.integerForKey(Settings.General.UnitOfMeasure.key())) {
+        if let unit = Constants.UnitsOfMeasure(rawValue: userDefaults.integerForKey(Constants.General.UnitOfMeasure.key())) {
             return unit.nameForUnitOfMeasure()
         }
         return ""

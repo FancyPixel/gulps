@@ -117,7 +117,7 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
             popTipText: NSLocalizedString("undo poptip", comment: ""),
             inView: view,
             fromFrame: minusButton.frame)
-        let portion = smallButton == sender ? Settings.Gulp.Small.key() : Settings.Gulp.Big.key()
+        let portion = smallButton == sender ? Constants.Gulp.Small.key() : Constants.Gulp.Big.key()
         updateCurrentEntry(userDefaults.doubleForKey(portion))
     }
 

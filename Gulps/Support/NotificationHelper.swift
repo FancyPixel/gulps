@@ -6,7 +6,7 @@ class NotificationHelper {
     /// Version 1.4 introduces a new sound. Users from previous versions need to reschedule the local notifications
     class func rescheduleNotifications() {
         let userDefaults = NSUserDefaults.groupUserDefaults()
-        if (!userDefaults.boolForKey(Settings.Notification.On.key())) {
+        if (!userDefaults.boolForKey(Constants.Notification.On.key())) {
             return
         }
         unscheduleNotifications()
@@ -15,13 +15,13 @@ class NotificationHelper {
 
     class func registerNotifications() {
         let userDefaults = NSUserDefaults.groupUserDefaults()
-        if (!userDefaults.boolForKey(Settings.Notification.On.key())) {
+        if (!userDefaults.boolForKey(Constants.Notification.On.key())) {
             return
         }
 
-        let startHour = userDefaults.integerForKey(Settings.Notification.From.key())
-        let endHour = userDefaults.integerForKey(Settings.Notification.To.key())
-        let interval = userDefaults.integerForKey(Settings.Notification.Interval.key())
+        let startHour = userDefaults.integerForKey(Constants.Notification.From.key())
+        let endHour = userDefaults.integerForKey(Constants.Notification.To.key())
+        let interval = userDefaults.integerForKey(Constants.Notification.Interval.key())
 
         var hour = startHour
         while (hour < endHour) {
@@ -74,10 +74,10 @@ class NotificationHelper {
     class func handleNotification(notification: UILocalNotification, identifier: String) {
         if (notification.category == "GULP_CATEGORY") {
             if (identifier == "BIG_ACTION") {
-                NotificationHelper.addGulp(Settings.Gulp.Big.key())
+                NotificationHelper.addGulp(Constants.Gulp.Big.key())
             }
             if (identifier == "SMALL_ACTION") {
-                NotificationHelper.addGulp(Settings.Gulp.Small.key())
+                NotificationHelper.addGulp(Constants.Gulp.Small.key())
             }
         }
     }

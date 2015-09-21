@@ -1,4 +1,5 @@
 import UIKit
+import WatchConnectivity
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -8,11 +9,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
         setupAppearance()
-
         Settings.registerDefaults()
+        setupWatchSession()
 
         let userDefaults = NSUserDefaults.groupUserDefaults()
-        if (!userDefaults.boolForKey(Settings.General.OnboardingShown.key())) {
+        if (!userDefaults.boolForKey(Constants.General.OnboardingShown.key())) {
             loadOnboardingInterface()
         } else {
             loadMainInterface()
@@ -20,6 +21,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         return true
+    }
+
+    func setupWatchSession() {
+        if #available(iOS 9.0, *) {
+            if (WCSession.isSupported()) {
+                WCSession.defaultSession().activateSession()
+            }
+        }
     }
 
     func checkVersion() {
@@ -57,6 +66,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func loadMainInterface() {
+        if #available(iOS 9.0, *) {
+            Settings.pushSettings(WCSession.defaultSession())
+        }
         UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Slide)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let controller = storyboard.instantiateInitialViewController() {

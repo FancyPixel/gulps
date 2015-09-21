@@ -50,7 +50,7 @@ public class EntryHandler: NSObject {
     public func addGulp(quantity: Double) {
         let entry = currentEntry()
         realm.write {
-            entry.addGulp(quantity, goal: self.userDefaults.doubleForKey(Settings.Gulp.Goal.key()))
+            entry.addGulp(quantity, goal: self.userDefaults.doubleForKey(Constants.Gulp.Goal.key()))
         }
     }
 

@@ -1,5 +1,6 @@
 import UIKit
 import AHKActionSheet
+import WatchConnectivity
 
 class SettingsViewController: UITableViewController, UIAlertViewDelegate, UITextFieldDelegate {
 
@@ -30,6 +31,12 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
                 barColor: .mainColor(),
                 textColor: .whiteColor())
         }
+
+        if #available(iOS 9.0, *) {
+            if (WCSession.isSupported()) {
+                WCSession.defaultSession().activateSession()
+            }
+        }
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -41,20 +48,20 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
         let numberFormatter = NSNumberFormatter()
         numberFormatter.numberStyle = .DecimalStyle
         var suffix = ""
-        if let unit = UnitsOfMeasure(rawValue: userDefaults.integerForKey(Settings.General.UnitOfMeasure.key())) {
+        if let unit = Constants.UnitsOfMeasure(rawValue: userDefaults.integerForKey(Constants.General.UnitOfMeasure.key())) {
             unitOfMesureLabel.text = unit.nameForUnitOfMeasure()
             suffix = unit.suffixForUnitOfMeasure()
         }
 
         _ = uomLabels.map({$0.text = suffix})
-        largePortionText.text = numberFormatter.stringFromNumber(userDefaults.doubleForKey(Settings.Gulp.Big.key()))
-        smallPortionText.text = numberFormatter.stringFromNumber(userDefaults.doubleForKey(Settings.Gulp.Small.key()))
-        dailyGoalText.text = numberFormatter.stringFromNumber(userDefaults.doubleForKey(Settings.Gulp.Goal.key()))
+        largePortionText.text = numberFormatter.stringFromNumber(userDefaults.doubleForKey(Constants.Gulp.Big.key()))
+        smallPortionText.text = numberFormatter.stringFromNumber(userDefaults.doubleForKey(Constants.Gulp.Small.key()))
+        dailyGoalText.text = numberFormatter.stringFromNumber(userDefaults.doubleForKey(Constants.Gulp.Goal.key()))
 
-        notificationSwitch.on = userDefaults.boolForKey(Settings.Notification.On.key())
-        notificationFromLabel.text = "\(userDefaults.integerForKey(Settings.Notification.From.key())):00"
-        notificationToLabel.text = "\(userDefaults.integerForKey(Settings.Notification.To.key())):00"
-        notificationIntervalLabel.text = "\(userDefaults.integerForKey(Settings.Notification.Interval.key())) " +  NSLocalizedString("hours", comment: "")
+        notificationSwitch.on = userDefaults.boolForKey(Constants.Notification.On.key())
+        notificationFromLabel.text = "\(userDefaults.integerForKey(Constants.Notification.From.key())):00"
+        notificationToLabel.text = "\(userDefaults.integerForKey(Constants.Notification.To.key())):00"
+        notificationIntervalLabel.text = "\(userDefaults.integerForKey(Constants.Notification.Interval.key())) " +  NSLocalizedString("hours", comment: "")
     }
 
     func updateNotificationPreferences() {
@@ -71,13 +78,13 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
         var actionSheet: AHKActionSheet?
         if (indexPath.section == 0 && indexPath.row == 0) {
             actionSheet = AHKActionSheet(title: NSLocalizedString("unit of measure title", comment: ""))
-            actionSheet?.addButtonWithTitle(UnitsOfMeasure.Liters.nameForUnitOfMeasure(), type: .Default) { _ in
-                self.userDefaults.setInteger(UnitsOfMeasure.Liters.rawValue, forKey: Settings.General.UnitOfMeasure.key())
+            actionSheet?.addButtonWithTitle(Constants.UnitsOfMeasure.Liters.nameForUnitOfMeasure(), type: .Default) { _ in
+                self.userDefaults.setInteger(Constants.UnitsOfMeasure.Liters.rawValue, forKey: Constants.General.UnitOfMeasure.key())
                 self.userDefaults.synchronize()
                 self.updateUI()
             }
-            actionSheet?.addButtonWithTitle(UnitsOfMeasure.Ounces.nameForUnitOfMeasure(), type: .Default) { _ in
-                self.userDefaults.setInteger(UnitsOfMeasure.Ounces.rawValue, forKey: Settings.General.UnitOfMeasure.key())
+            actionSheet?.addButtonWithTitle(Constants.UnitsOfMeasure.Ounces.nameForUnitOfMeasure(), type: .Default) { _ in
+                self.userDefaults.setInteger(Constants.UnitsOfMeasure.Ounces.rawValue, forKey: Constants.General.UnitOfMeasure.key())
                 self.userDefaults.synchronize()
                 self.updateUI()
             }
@@ -86,16 +93,16 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
             actionSheet = AHKActionSheet(title: NSLocalizedString("from:", comment: ""))
             for index in 5...22 {
                 actionSheet?.addButtonWithTitle("\(index):00", type: .Default) { _ in
-                    self.updateNotificationSetting(Settings.Notification.From.key(), value: index)
+                    self.updateNotificationSetting(Constants.Notification.From.key(), value: index)
                 }
             }
         }
         if (indexPath.section == 2 && indexPath.row == 2) {
             actionSheet = AHKActionSheet(title: NSLocalizedString("to:", comment: ""))
-            let upper = self.userDefaults.integerForKey(Settings.Notification.From.key()) + 1
+            let upper = self.userDefaults.integerForKey(Constants.Notification.From.key()) + 1
             for index in upper...24 {
                 actionSheet?.addButtonWithTitle("\(index):00", type: .Default) { _ in
-                    self.updateNotificationSetting(Settings.Notification.To.key(), value: index)
+                    self.updateNotificationSetting(Constants.Notification.To.key(), value: index)
                 }
             }
         }
@@ -104,7 +111,7 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
             for index in 1...8 {
                 let hour = index > 1 ? NSLocalizedString("hours", comment: "") : NSLocalizedString("hour", comment: "")
                 actionSheet?.addButtonWithTitle("\(index) \(hour)", type: .Default) { _ in
-                    self.updateNotificationSetting(Settings.Notification.Interval.key(), value: index)
+                    self.updateNotificationSetting(Constants.Notification.Interval.key(), value: index)
                 }
             }
         }
@@ -125,7 +132,7 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
     }
 
     @IBAction func reminderAction(sender: UISwitch) {
-        userDefaults.setBool(sender.on, forKey: Settings.Notification.On.key())
+        userDefaults.setBool(sender.on, forKey: Constants.Notification.On.key())
         userDefaults.synchronize()
         self.tableView.reloadData()
         updateNotificationPreferences()
@@ -137,7 +144,7 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
         } else if (section == 1) {
             return 3
         } else {
-            if NSUserDefaults.groupUserDefaults().boolForKey(Settings.Notification.On.key()) {
+            if NSUserDefaults.groupUserDefaults().boolForKey(Constants.Notification.On.key()) {
                 return 4
             } else {
                 return 1
@@ -147,13 +154,13 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
 
     func textFieldDidEndEditing(textField: UITextField) {
         if (textField == smallPortionText) {
-            storeText(smallPortionText, toKey: Settings.Gulp.Small.key())
+            storeText(smallPortionText, toKey: Constants.Gulp.Small.key())
         }
         if (textField == largePortionText) {
-            storeText(largePortionText, toKey: Settings.Gulp.Big.key())
+            storeText(largePortionText, toKey: Constants.Gulp.Big.key())
         }
         if (textField == dailyGoalText) {
-            storeText(dailyGoalText, toKey: Settings.Gulp.Goal.key())
+            storeText(dailyGoalText, toKey: Constants.Gulp.Goal.key())
         }
     }
 
@@ -164,6 +171,10 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
         let number = numberFormatter.numberFromString(text) as? Double
         userDefaults.setDouble(number ?? 0.0, forKey: key)
         userDefaults.synchronize()
+
+        if #available(iOS 9.0, *) {
+            Settings.pushSettings(WCSession.defaultSession())
+        }
     }
 
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {

@@ -12,7 +12,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     @IBOutlet weak var smallLabel: UILabel!
     @IBOutlet weak var bigLabel: UILabel!
     var realmToken: RLMNotificationToken?
-    var gulpSize = Settings.Gulp.Small
+    var gulpSize = Constants.Gulp.Small
 
     let userDefaults = NSUserDefaults.groupUserDefaults()
     let numberFormatter: NSNumberFormatter = {
@@ -49,7 +49,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         UIView.transitionWithView(self.summaryLabel, duration: 0.5, options: .TransitionCrossDissolve, animations: {
             let quantity = self.numberFormatter.stringFromNumber(EntryHandler.sharedHandler.currentEntry().quantity)!
             let percentage = EntryHandler.sharedHandler.currentEntry().formattedPercentage()
-            if let unit = UnitsOfMeasure(rawValue: self.userDefaults.integerForKey(Settings.General.UnitOfMeasure.key())) {
+            if let unit = Constants.UnitsOfMeasure(rawValue: self.userDefaults.integerForKey(Constants.General.UnitOfMeasure.key())) {
                 let unitName = unit.nameForUnitOfMeasure()
                 self.summaryLabel.text = String(format: NSLocalizedString("today extension format", comment: ""), quantity, unitName, percentage)
             }
@@ -58,12 +58,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 
     func updateLabels() {
         var suffix = ""
-        if let unit = UnitsOfMeasure(rawValue: userDefaults.integerForKey(Settings.General.UnitOfMeasure.key())) {
+        if let unit = Constants.UnitsOfMeasure(rawValue: userDefaults.integerForKey(Constants.General.UnitOfMeasure.key())) {
             suffix = unit.suffixForUnitOfMeasure()
         }
 
-        smallLabel.text = "\(numberFormatter.stringFromNumber(userDefaults.doubleForKey(Settings.Gulp.Small.key()))!)\(suffix)"
-        bigLabel.text = "\(numberFormatter.stringFromNumber(userDefaults.doubleForKey(Settings.Gulp.Big.key()))!)\(suffix)"
+        smallLabel.text = "\(numberFormatter.stringFromNumber(userDefaults.doubleForKey(Constants.Gulp.Small.key()))!)\(suffix)"
+        bigLabel.text = "\(numberFormatter.stringFromNumber(userDefaults.doubleForKey(Constants.Gulp.Big.key()))!)\(suffix)"
     }
 
     func confirmAction() {
@@ -77,18 +77,18 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
 
     @IBAction func smallGulp(sender: UIButton) {
-        self.gulpSize = Settings.Gulp.Small
+        self.gulpSize = Constants.Gulp.Small
         confirmAction()
     }
 
     @IBAction func bigGulp(sender: UIButton) {
-        self.gulpSize = Settings.Gulp.Big
+        self.gulpSize = Constants.Gulp.Big
         confirmAction()
     }
 
     @IBAction func smallConfirmAction() {
         if (self.gulpSize == .Small) {
-            addGulp(NSUserDefaults.groupUserDefaults().doubleForKey(Settings.Gulp.Small.key()))
+            addGulp(NSUserDefaults.groupUserDefaults().doubleForKey(Constants.Gulp.Small.key()))
         }
         hideConfirmButtons()
         updateLabels()
@@ -96,7 +96,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 
     @IBAction func bigConfirmAction() {
         if (self.gulpSize == .Big) {
-            addGulp(NSUserDefaults.groupUserDefaults().doubleForKey(Settings.Gulp.Big.key()))
+            addGulp(NSUserDefaults.groupUserDefaults().doubleForKey(Constants.Gulp.Big.key()))
         }
         updateLabels()
         hideConfirmButtons()

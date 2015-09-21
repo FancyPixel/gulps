@@ -33,15 +33,15 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     }
 
     @IBAction func addSmallGulpAction() {
-        updateWithGulp(Settings.Gulp.Small.key())
+        updateWithGulp(Constants.Gulp.Small.key())
     }
 
     @IBAction func addBigGulpAction() {
-        updateWithGulp(Settings.Gulp.Big.key())
+        updateWithGulp(Constants.Gulp.Big.key())
     }
 
     func updateWithGulp(size: String) {
-        let applicationData = ["value": String(Settings.Gulp.Small.key())]
+        let applicationData = ["value": String(Constants.Gulp.Small.key())]
 
         // Optimistically update before sending the data
         // TODO: implement
