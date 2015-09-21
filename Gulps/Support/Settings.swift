@@ -99,6 +99,17 @@ public class Settings {
         userDefaults.setDouble(64, forKey: Gulp.Goal.key())
         userDefaults.synchronize()
     }
+
+    public typealias WatchSettings = [String: Double]
+    public class func settingsForWatch() -> WatchSettings {
+        let userDefaults = NSUserDefaults.groupUserDefaults()
+        var settings = WatchSettings()
+
+        for key in [Gulp.Big.key(), Gulp.Small.key(), Gulp.Goal.key()] {
+            settings[key] = userDefaults.doubleForKey(key)
+        }
+        return settings
+    }
 }
 
 extension Double {

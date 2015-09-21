@@ -43,7 +43,8 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     func updateWithGulp(size: String) {
         let applicationData = ["value": String(Settings.Gulp.Small.key())]
 
-        // Toptimistically update before sending the data
+        // Optimistically update before sending the data
+        // TODO: implement
 
         // Send the update to the main app
         session.sendMessage(applicationData, replyHandler: {
