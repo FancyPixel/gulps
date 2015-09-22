@@ -78,6 +78,15 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
         }
     }
 
+    public override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+
+        Globals.showPopTipOnceForKey("HEALTH_HINT", userDefaults: userDefaults,
+            popTipText: NSLocalizedString("health.poptip", comment: ""),
+            inView: view,
+            fromFrame: CGRect(x: view.frame.width - 60, y: view.frame.height, width: 1, height: 1), direction: .Up, color: .destructiveColor())
+    }
+
     // MARK: - UI update
 
     func updateCurrentEntry(delta: Double) {

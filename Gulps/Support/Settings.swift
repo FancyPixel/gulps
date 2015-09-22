@@ -11,6 +11,7 @@ public class Settings {
             userDefaults.setDouble(0.5, forKey: Constants.Gulp.Big.key())
             userDefaults.setDouble(0.2, forKey: Constants.Gulp.Small.key())
             userDefaults.setDouble(2, forKey: Constants.Gulp.Goal.key())
+            userDefaults.setBool(false, forKey: Constants.Health.On.key())
             userDefaults.setBool(true, forKey: Constants.Notification.On.key())
             userDefaults.setInteger(10, forKey: Constants.Notification.From.key())
             userDefaults.setInteger(22, forKey: Constants.Notification.To.key())

@@ -1,10 +1,17 @@
 import Foundation
 import HealthKit
 
+/**
+HealthKit Helper
+Handles the insertion and deletion of items in HealthKit
+*/
 public class HealthKitHelper {
     static let sharedHelper = HealthKitHelper()
     let healthKitStore = HKHealthStore()
 
+    /** 
+    Ask permission to share data with HealthKit
+    */
     @available(iOS 9.0, *)
     func askPermission() {
         let types = Set(arrayLiteral: HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietaryWater)!)
@@ -23,6 +30,10 @@ public class HealthKitHelper {
 
     @available(iOS 9.0, *)
     func saveSample(value: Double) {
+        if !NSUserDefaults.groupUserDefaults().boolForKey(Constants.Health.On.key()) {
+            return
+        }
+
         if !HKHealthStore.isHealthDataAvailable() || healthKitStore.authorizationStatusForType(HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietaryWater)!) != HKAuthorizationStatus.SharingAuthorized {
             return;
         }
@@ -47,6 +58,10 @@ public class HealthKitHelper {
 
     @available(iOS 9.0, *)
     func removeLastSample() {
+        if !NSUserDefaults.groupUserDefaults().boolForKey(Constants.Health.On.key()) {
+            return
+        }
+
         if !HKHealthStore.isHealthDataAvailable() || healthKitStore.authorizationStatusForType(HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietaryWater)!) != HKAuthorizationStatus.SharingAuthorized {
             return;
         }

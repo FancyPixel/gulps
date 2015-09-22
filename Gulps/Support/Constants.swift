@@ -54,6 +54,16 @@ public class Constants {
         }
     }
 
+    public enum Health: Int {
+        case On
+        public func key() -> String {
+            switch self {
+            case .On:
+                return "HEALTH_ON"
+            }
+        }
+    }
+
     public enum Notification: Int {
         case On, From, To, Interval
         public func key() -> String {

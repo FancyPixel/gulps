@@ -45,6 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         UINavigationBar.appearance().barTintColor = .mainColor()
         UINavigationBar.appearance().tintColor = .whiteColor()
+        window?.backgroundColor = .whiteColor()
     }
 
     func loadOnboardingInterface() {
@@ -60,9 +61,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let controller = storyboard.instantiateInitialViewController() {
             self.window?.rootViewController = controller
-            if #available(iOS 9.0, *) {
-                HealthKitHelper.sharedHelper.askPermission()
-            }
         }
     }
 

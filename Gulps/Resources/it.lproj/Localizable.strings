@@ -35,3 +35,6 @@
 
 /* WatchKit */
 "daily goal:" = "OBIETTIVO: ";
+
+/* HealthKit */
+"health.poptip" = "Puoi abilitare l'esportazione verso Apple Salute nelle impostazioni";

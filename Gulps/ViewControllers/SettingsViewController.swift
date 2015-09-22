@@ -9,6 +9,7 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
     @IBOutlet weak var largePortionText: UITextField!
     @IBOutlet weak var dailyGoalText: UITextField!
     @IBOutlet weak var notificationSwitch: UISwitch!
+    @IBOutlet weak var healthSwitch: UISwitch!
     @IBOutlet weak var notificationFromLabel: UILabel!
     @IBOutlet weak var notificationToLabel: UILabel!
     @IBOutlet weak var notificationIntervalLabel: UILabel!
@@ -57,6 +58,8 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
         largePortionText.text = numberFormatter.stringFromNumber(userDefaults.doubleForKey(Constants.Gulp.Big.key()))
         smallPortionText.text = numberFormatter.stringFromNumber(userDefaults.doubleForKey(Constants.Gulp.Small.key()))
         dailyGoalText.text = numberFormatter.stringFromNumber(userDefaults.doubleForKey(Constants.Gulp.Goal.key()))
+
+        notificationSwitch.on = userDefaults.boolForKey(Constants.Health.On.key())
 
         notificationSwitch.on = userDefaults.boolForKey(Constants.Notification.On.key())
         notificationFromLabel.text = "\(userDefaults.integerForKey(Constants.Notification.From.key())):00"
@@ -131,6 +134,17 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
         return 44
     }
 
+    @IBAction func healthAction(sender: UISwitch) {
+        userDefaults.setBool(sender.on, forKey: Constants.Health.On.key())
+        userDefaults.synchronize()
+        self.tableView.reloadData()
+        if sender.on {
+            if #available(iOS 9.0, *) {
+                HealthKitHelper.sharedHelper.askPermission()
+            }
+        }
+    }
+
     @IBAction func reminderAction(sender: UISwitch) {
         userDefaults.setBool(sender.on, forKey: Constants.Notification.On.key())
         userDefaults.synchronize()
@@ -138,17 +152,27 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
         updateNotificationPreferences()
     }
 
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        // HealthKit provides water tracking only in iOS9
+        if #available(iOS 9.0, *) {
+            return 4
+        }
+        return 3
+    }
+
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (section == 0) {
             return 1
         } else if (section == 1) {
             return 3
-        } else {
+        } else if (section == 2) {
             if NSUserDefaults.groupUserDefaults().boolForKey(Constants.Notification.On.key()) {
                 return 4
             } else {
                 return 1
             }
+        } else {
+            return 1
         }
     }
 
