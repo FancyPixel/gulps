@@ -42,9 +42,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let font = font {
             UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName: font, NSForegroundColorAttributeName: UIColor.whiteColor()]
         }
-
+        
         UINavigationBar.appearance().barTintColor = .mainColor()
         UINavigationBar.appearance().tintColor = .whiteColor()
+        
         window?.backgroundColor = .whiteColor()
     }
 
