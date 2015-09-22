@@ -48,6 +48,9 @@ public class EntryHandler: NSObject {
     }
 
     public func addGulp(quantity: Double) {
+        if #available(iOS 9.0, *) {
+            HealthKitHelper.sharedHelper.saveSample(quantity)
+        }
         let entry = currentEntry()
         realm.write {
             entry.addGulp(quantity, goal: self.userDefaults.doubleForKey(Constants.Gulp.Goal.key()))

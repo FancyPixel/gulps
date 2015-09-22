@@ -56,6 +56,10 @@
 		65AADD191AFBAFB10039EE4C /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65AADD101AFBAD7B0039EE4C /* Realm.framework */; };
 		65AADD1A1AFBAFB70039EE4C /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65AADD101AFBAD7B0039EE4C /* Realm.framework */; };
 		65AADD1B1AFBB0110039EE4C /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65AADD101AFBAD7B0039EE4C /* Realm.framework */; };
+		65C92DA51BB1648C00E2DFE7 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65C92DA41BB1648C00E2DFE7 /* HealthKit.framework */; };
+		65C92DA71BB164D100E2DFE7 /* HealthKitHealper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C92DA61BB164D100E2DFE7 /* HealthKitHealper.swift */; settings = {ASSET_TAGS = (); }; };
+		65C92DA81BB184DB00E2DFE7 /* HealthKitHealper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C92DA61BB164D100E2DFE7 /* HealthKitHealper.swift */; settings = {ASSET_TAGS = (); }; };
+		65C92DA91BB184DC00E2DFE7 /* HealthKitHealper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C92DA61BB164D100E2DFE7 /* HealthKitHealper.swift */; settings = {ASSET_TAGS = (); }; };
 		65F44C211AF24B440093A3E9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F44C201AF24B440093A3E9 /* AppDelegate.swift */; };
 		65F44C261AF24B440093A3E9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65F44C241AF24B440093A3E9 /* Main.storyboard */; };
 		65F44C281AF24B440093A3E9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65F44C271AF24B440093A3E9 /* Images.xcassets */; };
@@ -185,6 +189,8 @@
 		65A234FE1AF253D1002A35F3 /* TodayViewController+Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TodayViewController+Animation.swift"; sourceTree = "<group>"; };
 		65A235021AF2543B002A35F3 /* Gulps WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Gulps WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		65AADD101AFBAD7B0039EE4C /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
+		65C92DA41BB1648C00E2DFE7 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		65C92DA61BB164D100E2DFE7 /* HealthKitHealper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthKitHealper.swift; sourceTree = "<group>"; };
 		65F44C1B1AF24B440093A3E9 /* Gulps.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gulps.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65F44C1F1AF24B440093A3E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		65F44C201AF24B440093A3E9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -233,6 +239,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				65AADD111AFBAD7B0039EE4C /* Realm.framework in Frameworks */,
+				65C92DA51BB1648C00E2DFE7 /* HealthKit.framework in Frameworks */,
 				800E72B73F54FA65CABC4BD6 /* Pods_Gulps.framework in Frameworks */,
 				65694D7B1B186B2C0078D991 /* RealmSwift.framework in Frameworks */,
 			);
@@ -320,6 +327,7 @@
 				6537A81D1AF24CC800EC16E9 /* Settings.swift */,
 				650DCE641AF3CD4100E12764 /* Constants.swift */,
 				6555BB671B0CAE1700CE436A /* AnimatedShareButton.swift */,
+				65C92DA61BB164D100E2DFE7 /* HealthKitHealper.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -428,6 +436,7 @@
 		65F44C451AF24B770093A3E9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				65C92DA41BB1648C00E2DFE7 /* HealthKit.framework */,
 				65694D7A1B186B2C0078D991 /* RealmSwift.framework */,
 				65AADD101AFBAD7B0039EE4C /* Realm.framework */,
 				65F44C461AF24B770093A3E9 /* NotificationCenter.framework */,
@@ -616,6 +625,9 @@
 						DevelopmentTeam = H72GR44F4M;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.HealthKit = {
 								enabled = 1;
 							};
 						};
@@ -858,6 +870,7 @@
 				6537A82A1AF24CC800EC16E9 /* EntryHandler.swift in Sources */,
 				65F44C211AF24B440093A3E9 /* AppDelegate.swift in Sources */,
 				6537A83A1AF24CC800EC16E9 /* NotificationViewController.swift in Sources */,
+				65C92DA71BB164D100E2DFE7 /* HealthKitHealper.swift in Sources */,
 				650DCE651AF3CD4100E12764 /* Constants.swift in Sources */,
 				6537A8311AF24CC800EC16E9 /* Extensions.swift in Sources */,
 				6537A8361AF24CC800EC16E9 /* DrinkViewController.swift in Sources */,
@@ -874,6 +887,7 @@
 				65A234FF1AF253D1002A35F3 /* TodayViewController+Animation.swift in Sources */,
 				6537A8431AF24CFD00EC16E9 /* Entry.swift in Sources */,
 				6537A8441AF24CFF00EC16E9 /* EntryHandler.swift in Sources */,
+				65C92DA81BB184DB00E2DFE7 /* HealthKitHealper.swift in Sources */,
 				6537A83E1AF24CE800EC16E9 /* Settings.swift in Sources */,
 				65F44C4C1AF24B780093A3E9 /* TodayViewController.swift in Sources */,
 				6537A8411AF24CEF00EC16E9 /* Extensions.swift in Sources */,
@@ -890,6 +904,7 @@
 				6537A8401AF24CEF00EC16E9 /* Extensions.swift in Sources */,
 				65F44C621AF24B8A0093A3E9 /* NotificationController.swift in Sources */,
 				6537A8451AF24CFF00EC16E9 /* EntryHandler.swift in Sources */,
+				65C92DA91BB184DC00E2DFE7 /* HealthKitHealper.swift in Sources */,
 				65F44C601AF24B8A0093A3E9 /* InterfaceController.swift in Sources */,
 				6537A8471AF24D0200EC16E9 /* Gulp.swift in Sources */,
 				6537A83F1AF24CE900EC16E9 /* Settings.swift in Sources */,
@@ -1125,8 +1140,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Gulps/Gulps.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
