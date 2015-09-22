@@ -58,6 +58,9 @@ public class EntryHandler: NSObject {
     }
 
     public func removeLastGulp() {
+        if #available(iOS 9.0, *) {
+            HealthKitHelper.sharedHelper.removeLastSample()
+        }
         let entry = currentEntry()
         if let gulp = entry.gulps.last {
             realm.write {

@@ -44,4 +44,31 @@ public class HealthKitHelper {
             }
         }
     }
+
+    @available(iOS 9.0, *)
+    func removeLastSample() {
+        if !HKHealthStore.isHealthDataAvailable() || healthKitStore.authorizationStatusForType(HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietaryWater)!) != HKAuthorizationStatus.SharingAuthorized {
+            return;
+        }
+
+        guard let type = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietaryWater) else {
+            return
+        }
+
+        let sortDescriptor = NSSortDescriptor(key:HKSampleSortIdentifierStartDate, ascending: false)
+        let query = HKSampleQuery(sampleType: type, predicate: nil, limit: 1, sortDescriptors: [sortDescriptor]) {
+            [unowned self] (query, results, error) in
+            if let results = results as? [HKQuantitySample], let sample = results.first {
+                self.healthKitStore.deleteObject(sample) {
+                    (success, error) in
+                    if let error = error {
+                        print(error)
+                    }
+                }
+            }
+        }
+
+        healthKitStore.executeQuery(query)
+    }
+
 }
