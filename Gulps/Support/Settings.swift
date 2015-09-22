@@ -1,5 +1,4 @@
 import Foundation
-import WatchConnectivity
 
 public class Settings {
     public class func registerDefaults() {
@@ -34,45 +33,5 @@ public class Settings {
         userDefaults.setDouble(8, forKey: Constants.Gulp.Small.key())
         userDefaults.setDouble(64, forKey: Constants.Gulp.Goal.key())
         userDefaults.synchronize()
-    }
-
-    /**
-    `WatchSettings` holds the basic settings needed by the Watch app:
-    - `Gulp.Big`: The Big portion size
-    - `Gulp.Small`: The Small portion size
-    - `Gulp.Goal`: The daiyGoal
-    */
-    typealias WatchSettings = [String: Double]
-
-    /**
-    Exports the current settings' subset needed by the Watch app
-    - Returns: `WatchSettings`
-    */
-    class func settingsForWatch() -> WatchSettings {
-        let userDefaults = NSUserDefaults.groupUserDefaults()
-        var settings = WatchSettings()
-
-        for key in [Constants.Gulp.Big.key(), Constants.Gulp.Small.key(), Constants.Gulp.Goal.key()] {
-            settings[key] = userDefaults.doubleForKey(key)
-        }
-        return settings
-    }
-
-    /** 
-    Transfer the settings to the Watch app
-    - Parameter session: WCSession instance
-    */
-    @available(iOS 9.0, *)
-    @available(iOSApplicationExtension 9.0, *)
-    public class func pushSettings(session: WCSession) {
-        for transfer in session.outstandingUserInfoTransfers {
-            if let settings = transfer.userInfo["settings"] as? WCSessionUserInfoTransfer {
-                settings.cancel()
-            }
-        }
-
-        if session.watchAppInstalled {
-            session.transferUserInfo(["settings": settingsForWatch()])
-        }
     }
 }

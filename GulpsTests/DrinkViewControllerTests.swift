@@ -10,11 +10,11 @@ import Gulps
 class MockUserDefaults: NSUserDefaults {
     override func doubleForKey(defaultName: String) -> Double {
         switch defaultName {
-        case Settings.Gulp.Small.key():
+        case Constants.Gulp.Small.key():
             return 0.1
-        case Settings.Gulp.Big.key():
+        case Constants.Gulp.Big.key():
             return 0.2
-        case Settings.Gulp.Goal.key():
+        case Constants.Gulp.Goal.key():
             return 1
         default:
             return 0

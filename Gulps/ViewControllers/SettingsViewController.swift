@@ -171,10 +171,6 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
         let number = numberFormatter.numberFromString(text) as? Double
         userDefaults.setDouble(number ?? 0.0, forKey: key)
         userDefaults.synchronize()
-
-        if #available(iOS 9.0, *) {
-            Settings.pushSettings(WCSession.defaultSession())
-        }
     }
 
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {

@@ -44,22 +44,10 @@
 		6555BB681B0CAE1700CE436A /* AnimatedShareButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6555BB671B0CAE1700CE436A /* AnimatedShareButton.swift */; };
 		6555BB6B1B0CB90A00CE436A /* DrinkViewController+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6555BB6A1B0CB90A00CE436A /* DrinkViewController+Animations.swift */; };
 		6555BB6D1B0CB93100CE436A /* CalendarViewController+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6555BB6C1B0CB93100CE436A /* CalendarViewController+Animations.swift */; };
-		655DF0CD1BAC148D00431D0E /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 655DF0CB1BAC148D00431D0E /* Interface.storyboard */; };
-		655DF0CF1BAC148D00431D0E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 655DF0CE1BAC148D00431D0E /* Assets.xcassets */; };
-		655DF0D61BAC148D00431D0E /* Gulps watchOS Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 655DF0D51BAC148D00431D0E /* Gulps watchOS Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		655DF0DD1BAC148D00431D0E /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655DF0DC1BAC148D00431D0E /* InterfaceController.swift */; };
-		655DF0DF1BAC148D00431D0E /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655DF0DE1BAC148D00431D0E /* ExtensionDelegate.swift */; };
-		655DF0E11BAC148D00431D0E /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655DF0E01BAC148D00431D0E /* NotificationController.swift */; };
-		655DF0E31BAC148D00431D0E /* GlanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655DF0E21BAC148D00431D0E /* GlanceController.swift */; };
-		655DF0E51BAC148D00431D0E /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655DF0E41BAC148D00431D0E /* ComplicationController.swift */; };
-		655DF0E71BAC148D00431D0E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 655DF0E61BAC148D00431D0E /* Assets.xcassets */; };
-		655DF0EB1BAC148D00431D0E /* Gulps watchOS.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 655DF0C91BAC148D00431D0E /* Gulps watchOS.app */; };
 		65694D7B1B186B2C0078D991 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65694D7A1B186B2C0078D991 /* RealmSwift.framework */; };
 		65694D7C1B186B2C0078D991 /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 65694D7A1B186B2C0078D991 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		65694D7D1B186B490078D991 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65694D7A1B186B2C0078D991 /* RealmSwift.framework */; };
 		65694D7E1B186B4D0078D991 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65694D7A1B186B2C0078D991 /* RealmSwift.framework */; };
-		6585602F1BB0067800BEFB34 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650DCE641AF3CD4100E12764 /* Constants.swift */; settings = {ASSET_TAGS = (); }; };
-		658560301BB006DC00BEFB34 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A81B1AF24CC800EC16E9 /* Extensions.swift */; settings = {ASSET_TAGS = (); }; };
 		658DBFD01AF75D130094C0F1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65F44C271AF24B440093A3E9 /* Images.xcassets */; };
 		6591D8C61AF2684A0069E198 /* DrinkViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6591D8C51AF2684A0069E198 /* DrinkViewControllerTests.swift */; };
 		65A234FF1AF253D1002A35F3 /* TodayViewController+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A234FE1AF253D1002A35F3 /* TodayViewController+Animation.swift */; };
@@ -100,20 +88,6 @@
 			remoteGlobalIDString = 65F44C1A1AF24B440093A3E9;
 			remoteInfo = Gulps;
 		};
-		655DF0D71BAC148D00431D0E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 65F44C131AF24B440093A3E9 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 655DF0D41BAC148D00431D0E;
-			remoteInfo = "Gulps watchOS Extension";
-		};
-		655DF0E91BAC148D00431D0E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 65F44C131AF24B440093A3E9 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 655DF0C81BAC148D00431D0E;
-			remoteInfo = "Gulps watchOS";
-		};
 		65F44C4F1AF24B780093A3E9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 65F44C131AF24B440093A3E9 /* Project object */;
@@ -138,24 +112,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		655DF0EF1BAC148D00431D0E /* Embed App Extensions */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
-			files = (
-				655DF0D61BAC148D00431D0E /* Gulps watchOS Extension.appex in Embed App Extensions */,
-			);
-			name = "Embed App Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		655DF0F31BAC148D00431D0E /* Embed Watch Content */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				655DF0EB1BAC148D00431D0E /* Gulps watchOS.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -217,19 +179,6 @@
 		6555BB671B0CAE1700CE436A /* AnimatedShareButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatedShareButton.swift; sourceTree = "<group>"; };
 		6555BB6A1B0CB90A00CE436A /* DrinkViewController+Animations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DrinkViewController+Animations.swift"; sourceTree = "<group>"; };
 		6555BB6C1B0CB93100CE436A /* CalendarViewController+Animations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CalendarViewController+Animations.swift"; sourceTree = "<group>"; };
-		655DF0C91BAC148D00431D0E /* Gulps watchOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gulps watchOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		655DF0CC1BAC148D00431D0E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
-		655DF0CE1BAC148D00431D0E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		655DF0D01BAC148D00431D0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		655DF0D51BAC148D00431D0E /* Gulps watchOS Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Gulps watchOS Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
-		655DF0DB1BAC148D00431D0E /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
-		655DF0DC1BAC148D00431D0E /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
-		655DF0DE1BAC148D00431D0E /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
-		655DF0E01BAC148D00431D0E /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
-		655DF0E21BAC148D00431D0E /* GlanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlanceController.swift; sourceTree = "<group>"; };
-		655DF0E41BAC148D00431D0E /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
-		655DF0E61BAC148D00431D0E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		655DF0E81BAC148D00431D0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		65694D7A1B186B2C0078D991 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
 		6591D8C51AF2684A0069E198 /* DrinkViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrinkViewControllerTests.swift; sourceTree = "<group>"; };
 		65A234FD1AF25376002A35F3 /* GulpsToday.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = GulpsToday.entitlements; sourceTree = "<group>"; };
@@ -276,13 +225,6 @@
 			files = (
 				00612DD0922770ADF791FB36 /* Pods_GulpsTests.framework in Frameworks */,
 				65AADD1B1AFBB0110039EE4C /* Realm.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		655DF0D21BAC148D00431D0E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -433,39 +375,6 @@
 			path = Support;
 			sourceTree = "<group>";
 		};
-		655DF0CA1BAC148D00431D0E /* Gulps watchOS */ = {
-			isa = PBXGroup;
-			children = (
-				655DF0CB1BAC148D00431D0E /* Interface.storyboard */,
-				655DF0CE1BAC148D00431D0E /* Assets.xcassets */,
-				655DF0D01BAC148D00431D0E /* Info.plist */,
-			);
-			path = "Gulps watchOS";
-			sourceTree = "<group>";
-		};
-		655DF0D91BAC148D00431D0E /* Gulps watchOS Extension */ = {
-			isa = PBXGroup;
-			children = (
-				655DF0DC1BAC148D00431D0E /* InterfaceController.swift */,
-				655DF0DE1BAC148D00431D0E /* ExtensionDelegate.swift */,
-				655DF0E01BAC148D00431D0E /* NotificationController.swift */,
-				655DF0E21BAC148D00431D0E /* GlanceController.swift */,
-				655DF0E41BAC148D00431D0E /* ComplicationController.swift */,
-				655DF0E61BAC148D00431D0E /* Assets.xcassets */,
-				655DF0E81BAC148D00431D0E /* Info.plist */,
-				655DF0DA1BAC148D00431D0E /* Supporting Files */,
-			);
-			path = "Gulps watchOS Extension";
-			sourceTree = "<group>";
-		};
-		655DF0DA1BAC148D00431D0E /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				655DF0DB1BAC148D00431D0E /* PushNotificationPayload.apns */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		65F44C121AF24B440093A3E9 = {
 			isa = PBXGroup;
 			children = (
@@ -474,8 +383,6 @@
 				65F44C5B1AF24B8A0093A3E9 /* Gulps WatchKit Extension */,
 				65F44C6D1AF24B8A0093A3E9 /* Gulps WatchKit App */,
 				654764B51AF267D100C68C2A /* GulpsTests */,
-				655DF0CA1BAC148D00431D0E /* Gulps watchOS */,
-				655DF0D91BAC148D00431D0E /* Gulps watchOS Extension */,
 				65F44C451AF24B770093A3E9 /* Frameworks */,
 				65F44C1C1AF24B440093A3E9 /* Products */,
 				22F2459053E11D898935B997 /* Pods */,
@@ -490,8 +397,6 @@
 				65F44C5A1AF24B8A0093A3E9 /* Gulps WatchKit Extension.appex */,
 				65F44C691AF24B8A0093A3E9 /* Gulps WatchKit App.app */,
 				654764B41AF267D100C68C2A /* GulpsTests.xctest */,
-				655DF0C91BAC148D00431D0E /* Gulps watchOS.app */,
-				655DF0D51BAC148D00431D0E /* Gulps watchOS Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -616,40 +521,6 @@
 			productReference = 654764B41AF267D100C68C2A /* GulpsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		655DF0C81BAC148D00431D0E /* Gulps watchOS */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 655DF0F01BAC148D00431D0E /* Build configuration list for PBXNativeTarget "Gulps watchOS" */;
-			buildPhases = (
-				655DF0C71BAC148D00431D0E /* Resources */,
-				655DF0EF1BAC148D00431D0E /* Embed App Extensions */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				655DF0D81BAC148D00431D0E /* PBXTargetDependency */,
-			);
-			name = "Gulps watchOS";
-			productName = "Gulps watchOS";
-			productReference = 655DF0C91BAC148D00431D0E /* Gulps watchOS.app */;
-			productType = "com.apple.product-type.application.watchapp2";
-		};
-		655DF0D41BAC148D00431D0E /* Gulps watchOS Extension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 655DF0EC1BAC148D00431D0E /* Build configuration list for PBXNativeTarget "Gulps watchOS Extension" */;
-			buildPhases = (
-				655DF0D11BAC148D00431D0E /* Sources */,
-				655DF0D21BAC148D00431D0E /* Frameworks */,
-				655DF0D31BAC148D00431D0E /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Gulps watchOS Extension";
-			productName = "Gulps watchOS Extension";
-			productReference = 655DF0D51BAC148D00431D0E /* Gulps watchOS Extension.appex */;
-			productType = "com.apple.product-type.watchkit2-extension";
-		};
 		65F44C1A1AF24B440093A3E9 /* Gulps */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 65F44C3A1AF24B440093A3E9 /* Build configuration list for PBXNativeTarget "Gulps" */;
@@ -670,7 +541,6 @@
 			dependencies = (
 				65F44C501AF24B780093A3E9 /* PBXTargetDependency */,
 				65F44C761AF24B8A0093A3E9 /* PBXTargetDependency */,
-				655DF0EA1BAC148D00431D0E /* PBXTargetDependency */,
 			);
 			name = Gulps;
 			productName = Gulps;
@@ -741,13 +611,6 @@
 						CreatedOnToolsVersion = 6.3.1;
 						TestTargetID = 65F44C1A1AF24B440093A3E9;
 					};
-					655DF0C81BAC148D00431D0E = {
-						CreatedOnToolsVersion = 7.0;
-						DevelopmentTeam = H72GR44F4M;
-					};
-					655DF0D41BAC148D00431D0E = {
-						CreatedOnToolsVersion = 7.0;
-					};
 					65F44C1A1AF24B440093A3E9 = {
 						CreatedOnToolsVersion = 6.3.1;
 						DevelopmentTeam = H72GR44F4M;
@@ -800,8 +663,6 @@
 				65F44C591AF24B8A0093A3E9 /* Gulps WatchKit Extension */,
 				65F44C681AF24B8A0093A3E9 /* Gulps WatchKit App */,
 				654764B31AF267D100C68C2A /* GulpsTests */,
-				655DF0C81BAC148D00431D0E /* Gulps watchOS */,
-				655DF0D41BAC148D00431D0E /* Gulps watchOS Extension */,
 			);
 		};
 /* End PBXProject section */
@@ -811,23 +672,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		655DF0C71BAC148D00431D0E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				655DF0CF1BAC148D00431D0E /* Assets.xcassets in Resources */,
-				655DF0CD1BAC148D00431D0E /* Interface.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		655DF0D31BAC148D00431D0E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				655DF0E71BAC148D00431D0E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -993,20 +837,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		655DF0D11BAC148D00431D0E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				655DF0E11BAC148D00431D0E /* NotificationController.swift in Sources */,
-				655DF0DF1BAC148D00431D0E /* ExtensionDelegate.swift in Sources */,
-				655DF0E51BAC148D00431D0E /* ComplicationController.swift in Sources */,
-				6585602F1BB0067800BEFB34 /* Constants.swift in Sources */,
-				655DF0DD1BAC148D00431D0E /* InterfaceController.swift in Sources */,
-				655DF0E31BAC148D00431D0E /* GlanceController.swift in Sources */,
-				658560301BB006DC00BEFB34 /* Extensions.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		65F44C171AF24B440093A3E9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1076,16 +906,6 @@
 			target = 65F44C1A1AF24B440093A3E9 /* Gulps */;
 			targetProxy = 654764BA1AF267D100C68C2A /* PBXContainerItemProxy */;
 		};
-		655DF0D81BAC148D00431D0E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 655DF0D41BAC148D00431D0E /* Gulps watchOS Extension */;
-			targetProxy = 655DF0D71BAC148D00431D0E /* PBXContainerItemProxy */;
-		};
-		655DF0EA1BAC148D00431D0E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 655DF0C81BAC148D00431D0E /* Gulps watchOS */;
-			targetProxy = 655DF0E91BAC148D00431D0E /* PBXContainerItemProxy */;
-		};
 		65F44C501AF24B780093A3E9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 65F44C431AF24B770093A3E9 /* GulpsToday */;
@@ -1111,14 +931,6 @@
 				65F55F281B593A0A008653F2 /* it */,
 			);
 			name = Onboarding.storyboard;
-			sourceTree = "<group>";
-		};
-		655DF0CB1BAC148D00431D0E /* Interface.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				655DF0CC1BAC148D00431D0E /* Base */,
-			);
-			name = Interface.storyboard;
 			sourceTree = "<group>";
 		};
 		65F44C241AF24B440093A3E9 /* Main.storyboard */ = {
@@ -1198,74 +1010,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "it.fancypixel.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Gulps.app/Gulps";
-			};
-			name = Release;
-		};
-		655DF0ED1BAC148D00431D0E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				INFOPLIST_FILE = "Gulps watchOS Extension/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = it.fancypixel.BigGulp.watchkitapp.watchkitextension;
-				PRODUCT_NAME = "${TARGET_NAME}";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
-			};
-			name = Debug;
-		};
-		655DF0EE1BAC148D00431D0E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
-				INFOPLIST_FILE = "Gulps watchOS Extension/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = it.fancypixel.BigGulp.watchkitapp.watchkitextension;
-				PRODUCT_NAME = "${TARGET_NAME}";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
-			};
-			name = Release;
-		};
-		655DF0F11BAC148D00431D0E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
-				IBSC_MODULE = Gulps_watchOS_Extension;
-				INFOPLIST_FILE = "Gulps watchOS/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = it.fancypixel.BigGulp.watchkitapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
-			};
-			name = Debug;
-		};
-		655DF0F21BAC148D00431D0E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
-				IBSC_MODULE = Gulps_watchOS_Extension;
-				INFOPLIST_FILE = "Gulps watchOS/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = it.fancypixel.BigGulp.watchkitapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};
@@ -1529,24 +1273,6 @@
 			buildConfigurations = (
 				654764BC1AF267D100C68C2A /* Debug */,
 				654764BD1AF267D100C68C2A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		655DF0EC1BAC148D00431D0E /* Build configuration list for PBXNativeTarget "Gulps watchOS Extension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				655DF0ED1BAC148D00431D0E /* Debug */,
-				655DF0EE1BAC148D00431D0E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		655DF0F01BAC148D00431D0E /* Build configuration list for PBXNativeTarget "Gulps watchOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				655DF0F11BAC148D00431D0E /* Debug */,
-				655DF0F21BAC148D00431D0E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

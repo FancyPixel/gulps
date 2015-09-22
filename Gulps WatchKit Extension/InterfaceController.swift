@@ -1,8 +1,9 @@
 import WatchKit
 import Foundation
 import Realm
+import WatchConnectivity
 
-class InterfaceController: WKInterfaceController {
+class InterfaceController: WKInterfaceController, WCSessionDelegate {
 
     @IBOutlet weak var goalLabel: WKInterfaceLabel!
     @IBOutlet weak var progressImage: WKInterfaceImage!
@@ -13,8 +14,14 @@ class InterfaceController: WKInterfaceController {
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
 
-        realmToken = RLMRealm.defaultRealm().addNotificationBlock { note, realm in
-            self.reloadAndUpdateUI()
+        /* 
+        The realm notification token works only with WatchOS 1.
+        */
+        if #available(watchOS 2.0, *) {
+        } else {
+            realmToken = RLMRealm.defaultRealm().addNotificationBlock { note, realm in
+                self.reloadAndUpdateUI()
+            }
         }
 
         let entry = EntryHandler.sharedHandler.currentEntry() as Entry
@@ -23,7 +30,7 @@ class InterfaceController: WKInterfaceController {
     }
 
     override func handleActionWithIdentifier(identifier: String?, forLocalNotification localNotification: UILocalNotification) {
-
+        reloadAndUpdateUI()
     }
 
     @IBAction func addSmallGulpAction() {
@@ -42,7 +49,6 @@ class InterfaceController: WKInterfaceController {
     override func didDeactivate() {
         super.didDeactivate()
     }
-
 }
 
 // MARK: Private Helper Methods
@@ -68,5 +74,9 @@ private extension InterfaceController {
     
     func updateWithGulp(gulp: String) {
         EntryHandler.sharedHandler.addGulp(NSUserDefaults.groupUserDefaults().doubleForKey(gulp))
+        if realmToken == .None {
+            // The realm token is not set in WatchOS 2, updating the UI manually
+            reloadAndUpdateUI()
+        }
     }
 }
