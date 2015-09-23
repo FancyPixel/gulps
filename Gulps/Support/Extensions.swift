@@ -13,3 +13,11 @@ extension Double {
         return percentageFormatter.stringFromNumber(round(self) / 100.0) ?? "\(self)%"
     }
 }
+
+extension NSRange {
+    func toRange(string: String) -> Range<String.Index> {
+        let startIndex = string.startIndex.advancedBy(location)
+        let endIndex = startIndex.advancedBy(length)
+        return startIndex..<endIndex
+    }
+}

@@ -16,7 +16,7 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
     @IBOutlet weak var meterContainerView: UIView!
     @IBOutlet weak var maskImage: UIImageView!
 
-    public var userDefaults = NSUserDefaults.groupUserDefaults()
+    public let userDefaults = NSUserDefaults.groupUserDefaults()
     public var progressMeter: BAFluidView?
     var realmNotification: RLMNotificationToken?
     var expanded = false
