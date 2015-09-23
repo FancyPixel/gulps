@@ -28,6 +28,11 @@ public class HealthKitHelper {
         }
     }
 
+    /**
+    Save a sample, given the value.
+    The unit of measure is retrieved from the NSUserDefaults
+    - Parameter value: The sample value
+    */
     @available(iOS 9.0, *)
     func saveSample(value: Double) {
         if !NSUserDefaults.groupUserDefaults().boolForKey(Constants.Health.On.key()) {
@@ -56,6 +61,9 @@ public class HealthKitHelper {
         }
     }
 
+    /**
+    Remove the last sample
+    */
     @available(iOS 9.0, *)
     func removeLastSample() {
         if !NSUserDefaults.groupUserDefaults().boolForKey(Constants.Health.On.key()) {
