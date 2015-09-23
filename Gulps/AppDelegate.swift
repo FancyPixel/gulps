@@ -21,6 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
+    /**
+    Check the app version and perform required tasks when upgrading
+    */
     func checkVersion() {
         let userDefaults = NSUserDefaults.groupUserDefaults()
         let current = userDefaults.integerForKey("BUNDLE_VERSION")
@@ -33,6 +36,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
+    /**
+    Sets the main appearance of the app
+    */
     func setupAppearance() {
         Globals.actionSheetAppearance()
 
@@ -49,6 +55,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.backgroundColor = .whiteColor()
     }
 
+    /**
+    Present the onboarding controller if needed
+    */
     func loadOnboardingInterface() {
         UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .Slide)
         let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
@@ -57,6 +66,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
+    /**
+    Present the main interface
+    */
     func loadMainInterface() {
         UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Slide)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -64,6 +76,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window?.rootViewController = controller
         }
     }
+
+    // MARK: - Notification handler
 
     func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, completionHandler: () -> Void) {
         if let identifier = identifier {

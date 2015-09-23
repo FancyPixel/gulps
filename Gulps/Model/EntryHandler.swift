@@ -1,11 +1,17 @@
 import Foundation
 import RealmSwift
 
+/**
+Helper singleton to perform operations on the Realm database
+*/
 public class EntryHandler: NSObject {
 
     public static let sharedHandler = EntryHandler()
     public lazy var userDefaults = NSUserDefaults.groupUserDefaults()
 
+    /**
+    Realm is initialized lazily, using the group bundle identifier.
+    */
     public lazy var realm: Realm = {
         guard let directory: NSURL = NSFileManager.defaultManager().containerURLForSecurityApplicationGroupIdentifier("group.\(Constants.bundle())") else {
             fatalError("Unable to setup Realm. Make sure to setup your app group in the developer portal")
@@ -19,10 +25,19 @@ public class EntryHandler: NSObject {
         return try! Realm()
     }()
 
+    /**
+    Returns the current entry
+    - returns: Entry?
+    */
     public func entryForToday() -> Entry? {
         return entryForDate(NSDate())
     }
 
+    /**
+    Returns an entry for the given date
+    - parameter date: The desired date
+    - returns: Entry?
+    */
     public func entryForDate(date: NSDate) -> Entry? {
         let dateFormat = NSDateFormatter()
         dateFormat.dateFormat = "yyyy-MM-dd"
@@ -31,6 +46,10 @@ public class EntryHandler: NSObject {
         return objects.first
     }
 
+    /**
+    Returns the current entry if available, or creates a new one instead
+    - returns: Entry
+    */
     public func currentEntry() -> Entry {
         if let entry = entryForToday() {
             return entry
@@ -43,10 +62,18 @@ public class EntryHandler: NSObject {
         }
     }
 
+    /**
+    Gets the current percentage
+    - returns: Double
+    */
     public func currentPercentage() -> Double {
         return currentEntry().percentage
     }
 
+    /**
+    Adds a portion to the current entry. If available, the sample is saved in HealthKit as well
+    - parameter quantity: The sample value
+    */
     public func addGulp(quantity: Double) {
         if #available(iOS 9.0, *) {
             HealthKitHelper.sharedHelper.saveSample(quantity)
@@ -57,6 +84,9 @@ public class EntryHandler: NSObject {
         }
     }
 
+    /**
+    Removes the last portion to the current entry. If available, the sample is removed in HealthKit as well
+    */
     public func removeLastGulp() {
         if #available(iOS 9.0, *) {
             HealthKitHelper.sharedHelper.removeLastSample()
@@ -70,10 +100,18 @@ public class EntryHandler: NSObject {
         }
     }
 
+    /**
+    Returns the value of all the portions recorded
+    - returns: Double
+    */
     public func overallQuantity() -> Double {
         return realm.objects(Entry).sum("quantity") as Double
     }
 
+    /**
+    Returns the value number of days tracked
+    - returns: Int
+    */
     public func daysTracked() -> Int {
         return realm.objects(Entry).count
     }
