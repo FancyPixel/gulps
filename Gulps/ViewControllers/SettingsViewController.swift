@@ -59,7 +59,7 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
         smallPortionText.text = numberFormatter.stringFromNumber(userDefaults.doubleForKey(Constants.Gulp.Small.key()))
         dailyGoalText.text = numberFormatter.stringFromNumber(userDefaults.doubleForKey(Constants.Gulp.Goal.key()))
 
-        notificationSwitch.on = userDefaults.boolForKey(Constants.Health.On.key())
+        healthSwitch.on = userDefaults.boolForKey(Constants.Health.On.key())
 
         notificationSwitch.on = userDefaults.boolForKey(Constants.Notification.On.key())
         notificationFromLabel.text = "\(userDefaults.integerForKey(Constants.Notification.From.key())):00"
