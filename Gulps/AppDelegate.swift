@@ -91,4 +91,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NotificationHelper.registerNotifications()
         }
     }
+
+    // MARK: - 3D Touch shortcut
+
+    enum ShortcutType: String {
+        case Big = "it.fancypixel.gulps.big"
+        case Small = "it.fancypixel.gulps.small"
+    }
+
+    @available(iOS 9.0, *)
+    func application(application: UIApplication, performActionForShortcutItem shortcutItem: UIApplicationShortcutItem, completionHandler: (Bool) -> Void) {
+        completionHandler(true)
+    }
+
+    @available(iOS 9.0, *)
+    class func handleShortcutItem(item: UIApplicationShortcutItem) {
+        if let type = ShortcutType(rawValue: item.type) {
+            if (type == .Small) {
+                EntryHandler.sharedHandler.addGulp(NSUserDefaults.groupUserDefaults().doubleForKey(Constants.Gulp.Small.key()))
+            } else if (type == .Big) {
+                EntryHandler.sharedHandler.addGulp(NSUserDefaults.groupUserDefaults().doubleForKey(Constants.Gulp.Big.key()))
+            }
+        }
+    }
 }

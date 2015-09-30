@@ -53,5 +53,20 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>UIApplicationShortcutItems</key>
+	<array>
+		<dict>
+			<key>UIApplicationShortcutItemType</key>
+			<string>it.fancypixel.gulps.big</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Add big gulp</string>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemType</key>
+			<string>it.fancypixel.gulps.small</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Add small gulp</string>
+		</dict>
+	</array>
 </dict>
 </plist>
