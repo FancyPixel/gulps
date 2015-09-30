@@ -59,13 +59,13 @@
 			<key>UIApplicationShortcutItemType</key>
 			<string>it.fancypixel.gulps.big</string>
 			<key>UIApplicationShortcutItemTitle</key>
-			<string>Add big gulp</string>
+			<string>ADD_BIG_GULP</string>
 		</dict>
 		<dict>
 			<key>UIApplicationShortcutItemType</key>
 			<string>it.fancypixel.gulps.small</string>
 			<key>UIApplicationShortcutItemTitle</key>
-			<string>Add small gulp</string>
+			<string>ADD_SMALL_GULP</string>
 		</dict>
 	</array>
 </dict>
