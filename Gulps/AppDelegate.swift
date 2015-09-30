@@ -101,11 +101,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     @available(iOS 9.0, *)
     func application(application: UIApplication, performActionForShortcutItem shortcutItem: UIApplicationShortcutItem, completionHandler: (Bool) -> Void) {
+        handleShortcutItem(shortcutItem)
         completionHandler(true)
     }
 
     @available(iOS 9.0, *)
-    class func handleShortcutItem(item: UIApplicationShortcutItem) {
+    func handleShortcutItem(item: UIApplicationShortcutItem) {
         if let type = ShortcutType(rawValue: item.type) {
             if (type == .Small) {
                 EntryHandler.sharedHandler.addGulp(NSUserDefaults.groupUserDefaults().doubleForKey(Constants.Gulp.Small.key()))

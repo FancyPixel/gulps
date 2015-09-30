@@ -57,15 +57,19 @@
 	<array>
 		<dict>
 			<key>UIApplicationShortcutItemType</key>
-			<string>it.fancypixel.gulps.big</string>
-			<key>UIApplicationShortcutItemTitle</key>
-			<string>ADD_BIG_GULP</string>
-		</dict>
-		<dict>
-			<key>UIApplicationShortcutItemType</key>
 			<string>it.fancypixel.gulps.small</string>
 			<key>UIApplicationShortcutItemTitle</key>
 			<string>ADD_SMALL_GULP</string>
+			<key>UIApplicationShortcutItemIconFile</key>
+			<string>small-icon</string>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemType</key>
+			<string>it.fancypixel.gulps.big</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>ADD_BIG_GULP</string>
+			<key>UIApplicationShortcutItemIconFile</key>
+			<string>large-icon</string>
 		</dict>
 	</array>
 </dict>
