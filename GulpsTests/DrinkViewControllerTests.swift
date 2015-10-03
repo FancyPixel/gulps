@@ -30,7 +30,10 @@ class DrinkViewControllerSpecs: QuickSpec {
     override func spec() {
         var subject: DrinkViewController!
         beforeSuite {
-            EntryHandler.sharedHandler.realm = try! Realm(inMemoryIdentifier: "gulps-spec")
+            var config = Realm.Configuration()
+            config.inMemoryIdentifier = "gulps-spec"
+            Realm.Configuration.defaultConfiguration = config
+            EntryHandler.sharedHandler.realm = try! Realm()
             EntryHandler.sharedHandler.userDefaults = MockUserDefaults()
         }
 
