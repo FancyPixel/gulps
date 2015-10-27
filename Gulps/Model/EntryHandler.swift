@@ -75,12 +75,21 @@ public class EntryHandler: NSObject {
     - parameter quantity: The sample value
     */
     public func addGulp(quantity: Double) {
+        addGulp(quantity, date: nil)
+    }
+
+    /**
+     Adds a portion to the current entry for a given date. If available, the sample is saved in HealthKit as well
+     - parameter quantity: The sample value
+     - parameter quantity: The sample date
+     */
+    public func addGulp(quantity: Double, date: NSDate?) {
         if #available(iOS 9.0, *) {
             HealthKitHelper.sharedHelper.saveSample(quantity)
         }
         let entry = currentEntry()
         try! realm.write {
-            entry.addGulp(quantity, goal: self.userDefaults.doubleForKey(Constants.Gulp.Goal.key()))
+            entry.addGulp(quantity, goal: self.userDefaults.doubleForKey(Constants.Gulp.Goal.key()), date: date)
         }
     }
 

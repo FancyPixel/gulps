@@ -5,6 +5,18 @@ public class Constants {
         return "it.fancypixel.BigGulp"
     }
 
+    public enum WatchContext: Int {
+        case Current, Cached
+        public func key() -> String {
+            switch self {
+            case .Current:
+                return "WATCH_CURRENT"
+            case .Cached:
+                return "WATCH_CACHED"
+            }
+        }
+    }
+
     public enum UnitsOfMeasure: Int {
         case Liters, Ounces
 

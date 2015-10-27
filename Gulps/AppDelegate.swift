@@ -163,4 +163,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
             }
         }
     }
+
+    @available(iOS 9.0, *)
+    func session(session: WCSession, didReceiveApplicationContext applicationContext: [String : AnyObject]) {
+        print("Receiving Context: \(applicationContext)")
+        if let cached = applicationContext[Constants.WatchContext.Cached.key()] as? [[String: AnyObject]] {
+            cached.forEach({
+                (portion: [String : AnyObject]) in
+                if let gulp = portion["gulp"] as? String, let date = portion["date"] as? NSDate {
+                    dispatch_async(dispatch_get_main_queue()) {
+                        EntryHandler.sharedHandler.addGulp(NSUserDefaults.groupUserDefaults().doubleForKey(gulp), date: date)
+                    }
+                }
+            })
+        }
+    }
 }

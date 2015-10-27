@@ -29,12 +29,16 @@ public class Entry: Object {
     Adds a portion of water to the current day
     - parameter quantity: The portion size
     - parameter goal: The daily goal
+    - parameter date: The date of the portion
     */
-    func addGulp(quantity: Double, goal: Double) {
+    func addGulp(quantity: Double, goal: Double, date: NSDate?) {
         let gulp = Gulp(quantity: quantity)
         self.gulps.append(gulp)
         self.quantity += quantity
         self.goal = goal
+        if let date = date {
+            gulp.date = date
+        }
         if goal > 0 {
             self.percentage = (self.quantity / self.goal) * 100.0
         }

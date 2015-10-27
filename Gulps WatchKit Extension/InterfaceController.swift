@@ -3,6 +3,7 @@ import Foundation
 import WatchConnectivity
 
 let NotificationContextReceived = "NotificationContextReceived"
+let NotificationWatchGulpAdded = "NotificationWatchGulpAdded"
 
 class InterfaceController: WKInterfaceController, WCSessionDelegate {
 
@@ -71,7 +72,8 @@ private extension InterfaceHelper {
     }
 
     func updateWithGulp(gulp: String) {
-
+        EntryHelper.sharedHelper.addGulp(gulp)
+        NSNotificationCenter.defaultCenter().postNotificationName(NotificationWatchGulpAdded, object: gulp)
     }
 }
 
