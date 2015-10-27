@@ -55,7 +55,7 @@ public class EntryHandler: NSObject {
             return entry
         } else {
             let newEntry = Entry()
-            realm.write {
+            try! realm.write {
                 self.realm.add(newEntry, update: true)
             }
             return newEntry
@@ -79,7 +79,7 @@ public class EntryHandler: NSObject {
             HealthKitHelper.sharedHelper.saveSample(quantity)
         }
         let entry = currentEntry()
-        realm.write {
+        try! realm.write {
             entry.addGulp(quantity, goal: self.userDefaults.doubleForKey(Constants.Gulp.Goal.key()))
         }
     }
@@ -93,7 +93,7 @@ public class EntryHandler: NSObject {
         }
         let entry = currentEntry()
         if let gulp = entry.gulps.last {
-            realm.write {
+            try! realm.write {
                 entry.removeLastGulp()
                 self.realm.delete(gulp)
             }

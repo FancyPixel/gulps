@@ -1,37 +1,35 @@
 import WatchKit
 import Foundation
-import Realm
 import WatchConnectivity
+
+let NotificationContextReceived = "NotificationContextReceived"
 
 class InterfaceController: WKInterfaceController, WCSessionDelegate {
 
     @IBOutlet weak var goalLabel: WKInterfaceLabel!
     @IBOutlet weak var progressImage: WKInterfaceImage!
-
-    var realmToken: RLMNotificationToken?
+    lazy var notificationCenter: NSNotificationCenter = {
+        return NSNotificationCenter.defaultCenter()
+    }()
     var previousPercentage = 0.0
 
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
+        setupNotificationCenter()
 
-        /* 
-        The realm notification token works only with WatchOS 1.
-        */
-        if #available(watchOS 2.0, *) {
-        } else {
-            realmToken = RLMRealm.defaultRealm().addNotificationBlock { note, realm in
-                self.reloadAndUpdateUI()
-            }
-        }
-
-        let entry = EntryHandler.sharedHandler.currentEntry() as Entry
-        previousPercentage = entry.percentage
         progressImage.setImageNamed("activity-")
     }
 
     override func handleActionWithIdentifier(identifier: String?, forLocalNotification localNotification: UILocalNotification) {
         reloadAndUpdateUI()
     }
+
+    override func willActivate() {
+        super.willActivate()
+        reloadAndUpdateUI()
+    }
+
+    //MARK: - Actions
 
     @IBAction func addSmallGulpAction() {
         updateWithGulp(Constants.Gulp.Small.key())
@@ -41,26 +39,26 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         updateWithGulp(Constants.Gulp.Big.key())
     }
 
-    override func willActivate() {
-        super.willActivate()
-        reloadAndUpdateUI()
-    }
+    // MARK: - Notification Center
 
-    override func didDeactivate() {
-        super.didDeactivate()
+    private func setupNotificationCenter() {
+        notificationCenter.addObserverForName(NotificationContextReceived, object: nil, queue: nil) { _ in
+            self.reloadAndUpdateUI()
+        }
     }
 }
 
-// MARK: Private Helper Methods
+// MARK: - Private Helper Methods
 
-private extension InterfaceController {
-    
+typealias InterfaceHelper = InterfaceController
+private extension InterfaceHelper {
+
     func reloadAndUpdateUI() {
-        let entry = EntryHandler.sharedHandler.currentEntry() as Entry
-        var delta = Int(entry.percentage - previousPercentage)
+        let percentage = EntryHelper.sharedHelper.percentage()
+        var delta = percentage - Int(previousPercentage)
         if (delta < 0) {
             // animate in reverse using negative duration
-            progressImage.startAnimatingWithImagesInRange(NSMakeRange(Int(entry.percentage), -delta), duration: -1.0, repeatCount: 1)
+            progressImage.startAnimatingWithImagesInRange(NSMakeRange(percentage, -delta), duration: -1.0, repeatCount: 1)
         } else {
             if (delta == 0) {
                 // if the range's length is 0, no image is loaded
@@ -68,15 +66,12 @@ private extension InterfaceController {
             }
             progressImage.startAnimatingWithImagesInRange(NSMakeRange(Int(previousPercentage), delta), duration: 1.0, repeatCount: 1)
         }
-        goalLabel.setText(NSLocalizedString("daily goal:", comment: "") + entry.formattedPercentage())
-        previousPercentage = entry.percentage
+        goalLabel.setText("\(NSLocalizedString("daily goal:", comment: "")) \(percentage)%")
+        previousPercentage = Double(percentage)
     }
-    
+
     func updateWithGulp(gulp: String) {
-        EntryHandler.sharedHandler.addGulp(NSUserDefaults.groupUserDefaults().doubleForKey(gulp))
-        if realmToken == .None {
-            // The realm token is not set in WatchOS 2, updating the UI manually
-            reloadAndUpdateUI()
-        }
+
     }
 }
+

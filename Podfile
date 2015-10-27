@@ -18,9 +18,9 @@ end
 
 target 'GulpsTests' do
   common_pods
-  pod 'Nimble', '~> 2.0.0-rc.3'
-  pod 'Quick', '~> 0.6.0'
-  pod 'Nimble-Snapshots'
+  pod 'Nimble', '~> 3.0.0'
+  pod 'Quick', :git => 'https://github.com/andreamazz/Quick.git', :branch => 'xcode7.1'
+  pod 'FBSnapshotTestCase', git: 'https://github.com/andreamazz/ios-snapshot-test-case'
 end
 
 inhibit_all_warnings!

@@ -35,4 +35,13 @@ public class Settings {
         userDefaults.setDouble(64, forKey: Constants.Gulp.Goal.key())
         userDefaults.synchronize()
     }
+
+    public class func watchData(current current: Double) -> [String: Double] {
+        let userDefaults = NSUserDefaults.groupUserDefaults()
+        return [
+            "goal": userDefaults.doubleForKey(Constants.Gulp.Goal.key()),
+            "current": current,
+            "small": userDefaults.doubleForKey(Constants.Gulp.Small.key()),
+            "big": userDefaults.doubleForKey(Constants.Gulp.Big.key())]
+    }
 }
