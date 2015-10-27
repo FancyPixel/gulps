@@ -74,10 +74,11 @@ class NotificationViewController: OnboardingViewController, UIActionSheetDelegat
     }
 
     @IBAction func doneAction() {
-        let userDefaults = NSUserDefaults.groupUserDefaults()
         userDefaults.setBool(true, forKey: Constants.General.OnboardingShown.key())
         NotificationHelper.unscheduleNotifications()
-        NotificationHelper.askPermission()
+        if notificationSwitch.on {
+            NotificationHelper.askPermission()
+        }
 
         if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
             appDelegate.loadMainInterface()
