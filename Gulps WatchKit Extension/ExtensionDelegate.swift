@@ -36,8 +36,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, WCSessionDelegate {
             let big = applicationContext["big"] as? Double {
                 EntryHelper.sharedHelper.saveSettings(goal: goal, current: current, small: small, big: big)
                 dispatch_async(dispatch_get_main_queue()) {
-                    let notificationCenter = NSNotificationCenter.defaultCenter()
-                    notificationCenter.postNotificationName(NotificationContextReceived, object: nil)
+                    NSNotificationCenter.defaultCenter().postNotificationName(NotificationContextReceived, object: nil)
                 }
         }
     }
