@@ -56,7 +56,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             circularSmall.tintColor = .mainColor()
             handler(CLKComplicationTimelineEntry(date: NSDate(), complicationTemplate: circularSmall))
         } else if complication.family == .ModularSmall {
-            let modularSmall = CLKComplicationTemplateCircularSmallRingImage()
+            let modularSmall = CLKComplicationTemplateModularSmallRingImage()
             modularSmall.imageProvider = CLKImageProvider(onePieceImage: UIImage(named: "complication")!)
             modularSmall.ringStyle = .Closed
             modularSmall.fillFraction = Float(percentage) / 100.0
@@ -66,6 +66,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     }
     
     // MARK: - Time Travel
+    
     func getSupportedTimeTravelDirectionsForComplication(complication: CLKComplication, withHandler handler: (CLKComplicationTimeTravelDirections) -> Void) {
         handler(.None)
     }
