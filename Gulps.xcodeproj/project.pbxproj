@@ -18,6 +18,8 @@
 		6530398E1BDF827300263D77 /* HaveValidSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6530398B1BDF827300263D77 /* HaveValidSnapshot.swift */; };
 		6530398F1BDF827300263D77 /* NimbleSnapshotsConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6530398C1BDF827300263D77 /* NimbleSnapshotsConfiguration.swift */; };
 		653039901BDF827300263D77 /* PrettySyntax.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6530398D1BDF827300263D77 /* PrettySyntax.swift */; };
+		653039921BDFE5FC00263D77 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653039911BDFE5FC00263D77 /* ComplicationController.swift */; };
+		653039D71BE0CE5E00263D77 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A8181AF24CC800EC16E9 /* Colors.swift */; };
 		6537A80D1AF24CA700EC16E9 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6537A80B1AF24CA700EC16E9 /* Onboarding.storyboard */; };
 		6537A8291AF24CC800EC16E9 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A8101AF24CC800EC16E9 /* Entry.swift */; };
 		6537A82A1AF24CC800EC16E9 /* EntryHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A8111AF24CC800EC16E9 /* EntryHandler.swift */; };
@@ -186,6 +188,7 @@
 		6530398B1BDF827300263D77 /* HaveValidSnapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaveValidSnapshot.swift; sourceTree = "<group>"; };
 		6530398C1BDF827300263D77 /* NimbleSnapshotsConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NimbleSnapshotsConfiguration.swift; sourceTree = "<group>"; };
 		6530398D1BDF827300263D77 /* PrettySyntax.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrettySyntax.swift; sourceTree = "<group>"; };
+		653039911BDFE5FC00263D77 /* ComplicationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
 		6537A80C1AF24CA700EC16E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Onboarding.storyboard; sourceTree = "<group>"; };
 		6537A8101AF24CC800EC16E9 /* Entry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 		6537A8111AF24CC800EC16E9 /* EntryHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryHandler.swift; sourceTree = "<group>"; };
@@ -509,6 +512,7 @@
 		65F44C5B1AF24B8A0093A3E9 /* Gulps WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
+				653039911BDFE5FC00263D77 /* ComplicationController.swift */,
 				653039881BDF703200263D77 /* ExtensionDelegate.swift */,
 				653039861BDF6F9000263D77 /* EntryHelper.swift */,
 				65F44C5F1AF24B8A0093A3E9 /* InterfaceController.swift */,
@@ -949,12 +953,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				6537A8401AF24CEF00EC16E9 /* Extensions.swift in Sources */,
+				653039D71BE0CE5E00263D77 /* Colors.swift in Sources */,
 				65F44C621AF24B8A0093A3E9 /* NotificationController.swift in Sources */,
 				653039891BDF703200263D77 /* ExtensionDelegate.swift in Sources */,
 				65C92DA91BB184DC00E2DFE7 /* HealthKitHealper.swift in Sources */,
 				65F44C601AF24B8A0093A3E9 /* InterfaceController.swift in Sources */,
 				6537A83F1AF24CE900EC16E9 /* Settings.swift in Sources */,
 				65F44C641AF24B8A0093A3E9 /* GlanceController.swift in Sources */,
+				653039921BDFE5FC00263D77 /* ComplicationController.swift in Sources */,
 				653039871BDF6F9000263D77 /* EntryHelper.swift in Sources */,
 				650DCE671AF3CD4100E12764 /* Constants.swift in Sources */,
 			);

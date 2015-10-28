@@ -30,6 +30,11 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         reloadAndUpdateUI()
     }
 
+    override func didDeactivate() {
+        super.didDeactivate()
+        notificationCenter.removeObserver(self)
+    }
+
     //MARK: - Actions
 
     @IBAction func addSmallGulpAction() {
@@ -55,7 +60,7 @@ typealias InterfaceHelper = InterfaceController
 private extension InterfaceHelper {
 
     func reloadAndUpdateUI() {
-        let percentage = EntryHelper.sharedHelper.percentage()
+        let percentage = EntryHelper.sharedHelper.percentage() ?? 0
         var delta = percentage - Int(previousPercentage)
         if (delta < 0) {
             // animate in reverse using negative duration

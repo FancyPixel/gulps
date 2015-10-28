@@ -26,13 +26,13 @@ class EntryHelper {
         return [["gulp": data, "date": NSDate()]]
     }
 
-    func percentage() -> Int {
+    func percentage() -> Int? {
+        guard userDefaults.doubleForKey(Constants.Gulp.Goal.key()) != 0 else {
+            return nil
+        }
+
         let quantity = userDefaults.doubleForKey(Constants.WatchContext.Current.key())
         let goal = userDefaults.doubleForKey(Constants.Gulp.Goal.key())
-        if goal == 0 {
-            return 0
-        } else {
-            return Int((quantity / goal) * 100.0)
-        }
+        return Int((quantity / goal) * 100.0)
     }
 }
