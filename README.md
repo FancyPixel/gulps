@@ -19,7 +19,8 @@ You can learn how to share data between an iOS app and its extension using Realm
 * Match the bundle identifier in `Constants.swift`
 
 #Contribute
-Want to contribute? We would really appreciate a hand with the localization in other languages. You can find a spreadsheet with all the strings in the project [here](https://docs.google.com/spreadsheets/d/1vh_b1VNcrsiV3mtwOY1V7tW0LR18wHoE1xCMuigc8pg/edit?usp=sharing). 
+Want to contribute? We would really appreciate a hand with the localization in other languages. You can find a spreadsheet with all the strings in the project [here](https://docs.google.com/spreadsheets/d/1vh_b1VNcrsiV3mtwOY1V7tW0LR18wHoE1xCMuigc8pg/edit?usp=sharing).  
+
 Feel free to edit the file, we'll include your translation in the next release and attribute your work.  
 
 #Imitation is the sincerest form of flattery
