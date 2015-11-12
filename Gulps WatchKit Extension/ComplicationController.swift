@@ -1,5 +1,6 @@
 import ClockKit
 
+
 class ComplicationController: NSObject, CLKComplicationDataSource {
 
     func getPlaceholderTemplateForComplication(complication: CLKComplication, withHandler handler: (CLKComplicationTemplate?) -> Void) {
@@ -32,11 +33,11 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 
     func getCurrentTimelineEntryForComplication(complication: CLKComplication, withHandler handler: (CLKComplicationTimelineEntry?) -> Void) {
         var percentage = 0
-        if let storedPercentage = EntryHelper.sharedHelper.percentage() {
+        if let storedPercentage = WatchEntryHelper.sharedHelper.percentage() {
             percentage = storedPercentage
         }
 
-        if (complication.family == .UtilitarianSmall) {
+        if complication.family == .UtilitarianSmall {
             let smallFlat = CLKComplicationTemplateUtilitarianSmallFlat()
             smallFlat.textProvider = CLKSimpleTextProvider(text: "\(percentage)%")
             smallFlat.imageProvider = CLKImageProvider(onePieceImage: UIImage(named: "complication")!)
@@ -66,7 +67,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     }
     
     // MARK: - Time Travel
-    
+
     func getSupportedTimeTravelDirectionsForComplication(complication: CLKComplication, withHandler handler: (CLKComplicationTimeTravelDirections) -> Void) {
         handler(.None)
     }

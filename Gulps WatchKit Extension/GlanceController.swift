@@ -11,7 +11,7 @@ class GlanceController: WKInterfaceController {
 
     override func willActivate() {
         super.willActivate()
-        if let percentage = EntryHelper.sharedHelper.percentage() {
+        if let percentage = WatchEntryHelper.sharedHelper.percentage() {
             percentageLabel.setText("\(percentage)%")
         }
     }

@@ -1,5 +1,6 @@
 import WatchKit
 import WatchConnectivity
+import ClockKit
 
 class ExtensionDelegate: NSObject, WKExtensionDelegate, WCSessionDelegate {
 
@@ -17,31 +18,33 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, WCSessionDelegate {
     private func setupNotificationCenter() {
         notificationCenter.addObserverForName(NotificationWatchGulpAdded, object: nil, queue: nil) {
             (notification: NSNotification) in
-            if let data = notification.object as? String {
-                let cache = EntryHelper.sharedHelper.cachedData(newData: data)
-                self.sendCachedData(cache)
-            }
+            self.sendApplicationContext()
+            self.reloadComplications()
         }
     }
 
     // MARK: - Watch Connectivity
 
     private func setupWatchConnectivity() {
-        if WCSession.isSupported() {
-            let session  = WCSession.defaultSession()
-            session.delegate = self
-            session.activateSession()
+        guard WCSession.isSupported() else {
+            return
         }
+
+        let session  = WCSession.defaultSession()
+        session.delegate = self
+        session.activateSession()
     }
 
-    private func sendCachedData(data: [[String: AnyObject]]) {
-        if WCSession.isSupported() {
-            do {
-                let dictionary = [Constants.WatchContext.Cached.key(): data]
-                try WCSession.defaultSession().updateApplicationContext(dictionary)
-            } catch {
-                print("Unable to send cache data to WCSession: \(error)")
-            }
+    private func sendApplicationContext() {
+        guard WCSession.isSupported() else {
+            return
+        }
+
+        do {
+            let context = WatchEntryHelper.sharedHelper.applicationContext()
+            try WCSession.defaultSession().updateApplicationContext(context)
+        } catch {
+            print("Unable to send cache data to WCSession: \(error)")
         }
     }
 
@@ -51,11 +54,20 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, WCSessionDelegate {
             let current = applicationContext[Constants.WatchContext.Current.key()] as? Double,
             let small = applicationContext[Constants.Gulp.Small.key()] as? Double,
             let big = applicationContext[Constants.Gulp.Big.key()] as? Double {
-                EntryHelper.sharedHelper.saveSettings(goal: goal, current: current, small: small, big: big)
+                WatchEntryHelper.sharedHelper.saveSettings(goal: goal, current: current, small: small, big: big)
                 dispatch_async(dispatch_get_main_queue()) {
                     NSNotificationCenter.defaultCenter().postNotificationName(NotificationContextReceived, object: nil)
+                    self.reloadComplications()
                 }
         }
     }
 
+    func reloadComplications() {
+        if let complications: [CLKComplication] = CLKComplicationServer.sharedInstance().activeComplications {
+            complications.forEach({
+                (complication: CLKComplication) in
+                CLKComplicationServer.sharedInstance().reloadTimelineForComplication(complication)
+            })
+        }
+    }
 }

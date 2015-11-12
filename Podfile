@@ -10,6 +10,7 @@ def common_pods
   pod 'JTCalendar', git: 'https://github.com/andreamazz/JTCalendar', branch: 'develop'
   pod 'BAFluidView', '~> 0.1.6'
   pod 'BubbleTransition', '~> 1.0.0'
+  pod 'SwiftDate', '~> 1.2'
 end
 
 target 'Gulps' do

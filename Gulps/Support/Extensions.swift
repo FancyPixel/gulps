@@ -21,3 +21,15 @@ extension NSRange {
         return startIndex..<endIndex
     }
 }
+
+extension NSDate {
+    var startOfDay: NSDate {
+        return NSCalendar.currentCalendar().startOfDayForDate(self)
+    }
+
+    var startOfTomorrow: NSDate? {
+        let components = NSDateComponents()
+        components.day = 1
+        return NSCalendar.currentCalendar().dateByAddingComponents(components, toDate: startOfDay, options: NSCalendarOptions())
+    }
+}

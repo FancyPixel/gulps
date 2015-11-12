@@ -7,13 +7,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
 
     var window: UIWindow?
     var realmNotification: RLMNotificationToken?
+    let watchConnectivityHelper = WatchConnectivityHelper()
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
         setupAppearance()
         Settings.registerDefaults()
         if #available(iOS 9.0, *) {
-            setupWatchConnectivity()
+            watchConnectivityHelper.setupWatchConnectivity(delegate: self)
         }
 
         let userDefaults = NSUserDefaults.groupUserDefaults()
@@ -77,7 +78,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     */
     func loadMainInterface() {
         if #available(iOS 9.0, *) {
-            setupWatchUpdates()
+            realmNotification = watchConnectivityHelper.setupWatchUpdates()
         }
         UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Slide)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -125,57 +126,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         }
     }
 
-    // MARK: - WatchConnectivity
-
-    /**
-    Sends the current data to WatchOS, and listens for changes
-    */
-    @available(iOS 9.0, *)
-    func setupWatchUpdates() {
-        sendWatchData()
-        realmNotification = EntryHandler.sharedHandler.realm.addNotificationBlock { note, realm in
-            self.sendWatchData()
-        }
-    }
-
-    @available(iOS 9.0, *)
-    private func setupWatchConnectivity() {
-        if WCSession.isSupported() {
-            let session = WCSession.defaultSession()
-            session.delegate = self
-            session.activateSession()
-        }
-    }
-
-    @available(iOS 9.0, *)
-    private func sendWatchData() {
-        if WCSession.isSupported() {
-            let watchData = Settings.watchData(current: EntryHandler.sharedHandler.currentEntry().quantity)
-            let session = WCSession.defaultSession()
-            session.delegate = self
-            session.activateSession()
-            if session.watchAppInstalled {
-                do {
-                    try session.updateApplicationContext(watchData)
-                } catch {
-                    print("Unable to send application context: \(error)")
-                }
-            }
-        }
-    }
-
     @available(iOS 9.0, *)
     func session(session: WCSession, didReceiveApplicationContext applicationContext: [String : AnyObject]) {
-        print("Receiving Context: \(applicationContext)")
-        if let cached = applicationContext[Constants.WatchContext.Cached.key()] as? [[String: AnyObject]] {
-            cached.forEach({
-                (portion: [String : AnyObject]) in
-                if let gulp = portion["gulp"] as? String, let date = portion["date"] as? NSDate {
-                    dispatch_async(dispatch_get_main_queue()) {
-                        EntryHandler.sharedHandler.addGulp(NSUserDefaults.groupUserDefaults().doubleForKey(gulp), date: date)
-                    }
-                }
-            })
-        }
+        watchConnectivityHelper.session(session, didReceiveApplicationContext: applicationContext)
     }
 }

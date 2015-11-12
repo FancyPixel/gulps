@@ -81,7 +81,7 @@ public class EntryHandler: NSObject {
     /**
      Adds a portion to the current entry for a given date. If available, the sample is saved in HealthKit as well
      - parameter quantity: The sample value
-     - parameter quantity: The sample date
+     - parameter date: The sample date
      */
     public func addGulp(quantity: Double, date: NSDate?) {
         if #available(iOS 9.0, *) {

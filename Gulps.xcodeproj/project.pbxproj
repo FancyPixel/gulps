@@ -13,7 +13,7 @@
 		650DCE671AF3CD4100E12764 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650DCE641AF3CD4100E12764 /* Constants.swift */; };
 		653039801BDF6D8A00263D77 /* Gulps WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 65F44C5A1AF24B8A0093A3E9 /* Gulps WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		653039831BDF6D8B00263D77 /* Gulps WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 65F44C691AF24B8A0093A3E9 /* Gulps WatchKit App.app */; };
-		653039871BDF6F9000263D77 /* EntryHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653039861BDF6F9000263D77 /* EntryHelper.swift */; };
+		653039871BDF6F9000263D77 /* WatchEntryHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653039861BDF6F9000263D77 /* WatchEntryHelper.swift */; };
 		653039891BDF703200263D77 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653039881BDF703200263D77 /* ExtensionDelegate.swift */; };
 		6530398E1BDF827300263D77 /* HaveValidSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6530398B1BDF827300263D77 /* HaveValidSnapshot.swift */; };
 		6530398F1BDF827300263D77 /* NimbleSnapshotsConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6530398C1BDF827300263D77 /* NimbleSnapshotsConfiguration.swift */; };
@@ -60,6 +60,7 @@
 		65AADD121AFBAD7B0039EE4C /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 65AADD101AFBAD7B0039EE4C /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		65AADD191AFBAFB10039EE4C /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65AADD101AFBAD7B0039EE4C /* Realm.framework */; };
 		65AADD1B1AFBB0110039EE4C /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65AADD101AFBAD7B0039EE4C /* Realm.framework */; };
+		65C6AA5C1BF4AD3200BB80CF /* WatchConnectivityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C6AA5B1BF4AD3200BB80CF /* WatchConnectivityHelper.swift */; };
 		65C92DA51BB1648C00E2DFE7 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65C92DA41BB1648C00E2DFE7 /* HealthKit.framework */; };
 		65C92DA71BB164D100E2DFE7 /* HealthKitHealper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C92DA61BB164D100E2DFE7 /* HealthKitHealper.swift */; };
 		65C92DA81BB184DB00E2DFE7 /* HealthKitHealper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C92DA61BB164D100E2DFE7 /* HealthKitHealper.swift */; };
@@ -142,16 +143,6 @@
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		655DF0F31BAC148D00431D0E /* Embed Watch Content */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
-			dstSubfolderSpec = 16;
-			files = (
-			);
-			name = "Embed Watch Content";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		65AADD131AFBAD7B0039EE4C /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -183,7 +174,7 @@
 		4A4925FCD5463140CD8FE9BC /* Pods_GulpsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GulpsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A701E98A87809500CB34BF4 /* Pods_Gulps.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gulps.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		650DCE641AF3CD4100E12764 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		653039861BDF6F9000263D77 /* EntryHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryHelper.swift; sourceTree = "<group>"; };
+		653039861BDF6F9000263D77 /* WatchEntryHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchEntryHelper.swift; sourceTree = "<group>"; };
 		653039881BDF703200263D77 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
 		6530398B1BDF827300263D77 /* HaveValidSnapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaveValidSnapshot.swift; sourceTree = "<group>"; };
 		6530398C1BDF827300263D77 /* NimbleSnapshotsConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NimbleSnapshotsConfiguration.swift; sourceTree = "<group>"; };
@@ -220,6 +211,7 @@
 		65A234FE1AF253D1002A35F3 /* TodayViewController+Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TodayViewController+Animation.swift"; sourceTree = "<group>"; };
 		65A235021AF2543B002A35F3 /* Gulps WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Gulps WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		65AADD101AFBAD7B0039EE4C /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
+		65C6AA5B1BF4AD3200BB80CF /* WatchConnectivityHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchConnectivityHelper.swift; sourceTree = "<group>"; };
 		65C92DA41BB1648C00E2DFE7 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		65C92DA61BB164D100E2DFE7 /* HealthKitHealper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthKitHealper.swift; sourceTree = "<group>"; };
 		65E94C6B1BBC13B400A65B30 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -254,6 +246,7 @@
 		65F55F2A1B593C16008653F2 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Interface.strings; sourceTree = "<group>"; };
 		65F55F311B5D0A0E008653F2 /* drop.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = drop.caf; sourceTree = "<group>"; };
 		8339035B8C2DA7AA7C151C33 /* Pods-GulpsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GulpsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GulpsTests/Pods-GulpsTests.release.xcconfig"; sourceTree = "<group>"; };
+		BEC10A47E1AB990C16B7DEFC /* Pods_Gulps_WatchKit_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gulps_WatchKit_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C916E6FEBE9F3B2034FA5E16 /* Pods-Gulps.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gulps.release.xcconfig"; path = "Pods/Target Support Files/Pods-Gulps/Pods-Gulps.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -289,6 +282,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		65F44C571AF24B8A0093A3E9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		997745B21650E868D61D4388 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -369,6 +369,7 @@
 				650DCE641AF3CD4100E12764 /* Constants.swift */,
 				6555BB671B0CAE1700CE436A /* AnimatedShareButton.swift */,
 				65C92DA61BB164D100E2DFE7 /* HealthKitHealper.swift */,
+				65C6AA5B1BF4AD3200BB80CF /* WatchConnectivityHelper.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -423,6 +424,14 @@
 				6555BB6C1B0CB93100CE436A /* CalendarViewController+Animations.swift */,
 			);
 			path = Support;
+			sourceTree = "<group>";
+		};
+		65B9FA7C1BF4D837007CBE0E /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				653039861BDF6F9000263D77 /* WatchEntryHelper.swift */,
+			);
+			name = Support;
 			sourceTree = "<group>";
 		};
 		65F44C121AF24B440093A3E9 = {
@@ -485,6 +494,7 @@
 				65F44C461AF24B770093A3E9 /* NotificationCenter.framework */,
 				5A701E98A87809500CB34BF4 /* Pods_Gulps.framework */,
 				4A4925FCD5463140CD8FE9BC /* Pods_GulpsTests.framework */,
+				BEC10A47E1AB990C16B7DEFC /* Pods_Gulps_WatchKit_App.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -512,12 +522,12 @@
 		65F44C5B1AF24B8A0093A3E9 /* Gulps WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
-				653039911BDFE5FC00263D77 /* ComplicationController.swift */,
+				65B9FA7C1BF4D837007CBE0E /* Support */,
 				653039881BDF703200263D77 /* ExtensionDelegate.swift */,
-				653039861BDF6F9000263D77 /* EntryHelper.swift */,
 				65F44C5F1AF24B8A0093A3E9 /* InterfaceController.swift */,
 				65F44C611AF24B8A0093A3E9 /* NotificationController.swift */,
 				65F44C631AF24B8A0093A3E9 /* GlanceController.swift */,
+				653039911BDFE5FC00263D77 /* ComplicationController.swift */,
 				65F44C651AF24B8A0093A3E9 /* Images.xcassets */,
 				65F44C5C1AF24B8A0093A3E9 /* Supporting Files */,
 			);
@@ -589,7 +599,6 @@
 				06E6943317C6B36A9014DF37 /* Copy Pods Resources */,
 				65AADD131AFBAD7B0039EE4C /* Embed Frameworks */,
 				65AADD181AFBAEEF0039EE4C /* Framework strip */,
-				655DF0F31BAC148D00431D0E /* Embed Watch Content */,
 				653039851BDF6D8B00263D77 /* Embed Watch Content */,
 			);
 			buildRules = (
@@ -643,6 +652,7 @@
 			buildPhases = (
 				65F44C671AF24B8A0093A3E9 /* Resources */,
 				653039841BDF6D8B00263D77 /* Embed App Extensions */,
+				997745B21650E868D61D4388 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -927,6 +937,7 @@
 				6537A8311AF24CC800EC16E9 /* Extensions.swift in Sources */,
 				6537A8361AF24CC800EC16E9 /* DrinkViewController.swift in Sources */,
 				6537A8301AF24CC800EC16E9 /* NotificationHelper.swift in Sources */,
+				65C6AA5C1BF4AD3200BB80CF /* WatchConnectivityHelper.swift in Sources */,
 				6555BB681B0CAE1700CE436A /* AnimatedShareButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -961,7 +972,7 @@
 				6537A83F1AF24CE900EC16E9 /* Settings.swift in Sources */,
 				65F44C641AF24B8A0093A3E9 /* GlanceController.swift in Sources */,
 				653039921BDFE5FC00263D77 /* ComplicationController.swift in Sources */,
-				653039871BDF6F9000263D77 /* EntryHelper.swift in Sources */,
+				653039871BDF6F9000263D77 /* WatchEntryHelper.swift in Sources */,
 				650DCE671AF3CD4100E12764 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

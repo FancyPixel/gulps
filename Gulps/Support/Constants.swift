@@ -1,18 +1,18 @@
 import Foundation
 
-public class Constants {
-    public class func bundle() -> String {
+public enum Constants {
+    public static func bundle() -> String {
         return "it.fancypixel.BigGulp"
     }
 
     public enum WatchContext: Int {
-        case Current, Cached
+        case Current, Date
         public func key() -> String {
             switch self {
             case .Current:
                 return "WATCH_CURRENT"
-            case .Cached:
-                return "WATCH_CACHED"
+            case .Date:
+                return "WATCH_DATE"
             }
         }
     }

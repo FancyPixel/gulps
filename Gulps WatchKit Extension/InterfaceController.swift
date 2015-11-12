@@ -60,7 +60,7 @@ typealias InterfaceHelper = InterfaceController
 private extension InterfaceHelper {
 
     func reloadAndUpdateUI() {
-        let percentage = EntryHelper.sharedHelper.percentage() ?? 0
+        let percentage = WatchEntryHelper.sharedHelper.percentage() ?? 0
         var delta = percentage - Int(previousPercentage)
         if (delta < 0) {
             // animate in reverse using negative duration
@@ -77,7 +77,8 @@ private extension InterfaceHelper {
     }
 
     func updateWithGulp(gulp: String) {
-        EntryHelper.sharedHelper.addGulp(gulp)
+        WatchEntryHelper.sharedHelper.addGulp(gulp)
+        reloadAndUpdateUI()
         NSNotificationCenter.defaultCenter().postNotificationName(NotificationWatchGulpAdded, object: gulp)
     }
 }
