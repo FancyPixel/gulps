@@ -9,11 +9,11 @@ class MeasureViewController: OnboardingViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        [litersCheck, ouncesCheck].map({$0.transform = CGAffineTransformMakeScale(0.001, 0.001)})
+        _ = [litersCheck, ouncesCheck].map({$0.transform = CGAffineTransformMakeScale(0.001, 0.001)})
     }
 
     override func updateUI() {
-        let unit = UnitsOfMeasure(rawValue: self.userDefaults.integerForKey(Settings.General.UnitOfMeasure.key()))
+        let unit = Constants.UnitsOfMeasure(rawValue: self.userDefaults.integerForKey(Constants.General.UnitOfMeasure.key()))
 
         let scaleUp = POPBasicAnimation(propertyNamed: kPOPViewScaleXY)
         scaleUp.fromValue = NSValue(CGPoint: CGPointMake(0, 0))
@@ -25,7 +25,7 @@ class MeasureViewController: OnboardingViewController {
         scaleDown.toValue = NSValue(CGPoint: CGPointMake(0, 0))
         scaleDown.removedOnCompletion = true
 
-        if (unit == UnitsOfMeasure.Liters) {
+        if (unit == Constants.UnitsOfMeasure.Liters) {
             self.litersCheck.pop_addAnimation(scaleUp, forKey: "scaleUp")
             self.ouncesCheck.pop_addAnimation(scaleDown, forKey: "scaleDown")
             Settings.registerDefaultsForLiter()
@@ -37,13 +37,13 @@ class MeasureViewController: OnboardingViewController {
     }
 
     @IBAction func ouncesButtonAction() {
-        self.userDefaults.setInteger(UnitsOfMeasure.Ounces.rawValue, forKey: Settings.General.UnitOfMeasure.key())
+        self.userDefaults.setInteger(Constants.UnitsOfMeasure.Ounces.rawValue, forKey: Constants.General.UnitOfMeasure.key())
         self.userDefaults.synchronize()
         updateUI()
     }
 
     @IBAction func litersButtonAction() {
-        self.userDefaults.setInteger(UnitsOfMeasure.Liters.rawValue, forKey: Settings.General.UnitOfMeasure.key())
+        self.userDefaults.setInteger(Constants.UnitsOfMeasure.Liters.rawValue, forKey: Constants.General.UnitOfMeasure.key())
         self.userDefaults.synchronize()
         updateUI()
     }

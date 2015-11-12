@@ -1,7 +1,7 @@
 import UIKit
 import Quick
 import Nimble
-import Nimble_Snapshots
+//import Nimble_Snapshots
 
 import RealmSwift
 
@@ -10,11 +10,11 @@ import Gulps
 class MockUserDefaults: NSUserDefaults {
     override func doubleForKey(defaultName: String) -> Double {
         switch defaultName {
-        case Settings.Gulp.Small.key():
+        case Constants.Gulp.Small.key():
             return 0.1
-        case Settings.Gulp.Big.key():
+        case Constants.Gulp.Big.key():
             return 0.2
-        case Settings.Gulp.Goal.key():
+        case Constants.Gulp.Goal.key():
             return 1
         default:
             return 0
@@ -30,7 +30,10 @@ class DrinkViewControllerSpecs: QuickSpec {
     override func spec() {
         var subject: DrinkViewController!
         beforeSuite {
-            EntryHandler.sharedHandler.realm = Realm(inMemoryIdentifier: "gulps-spec")
+            var config = Realm.Configuration()
+            config.inMemoryIdentifier = "gulps-spec"
+            Realm.Configuration.defaultConfiguration = config
+            EntryHandler.sharedHandler.realm = try! Realm()
             EntryHandler.sharedHandler.userDefaults = MockUserDefaults()
         }
 
@@ -46,7 +49,7 @@ class DrinkViewControllerSpecs: QuickSpec {
         }
 
         afterEach {
-            EntryHandler.sharedHandler.realm.write {
+            try! EntryHandler.sharedHandler.realm.write {
                 EntryHandler.sharedHandler.realm.deleteAll()
             }
         }

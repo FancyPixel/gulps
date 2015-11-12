@@ -16,17 +16,21 @@ class GoalViewController: OnboardingViewController, UITextFieldDelegate {
     }
 
     func dismissAndSave() {
+        guard let text = goalTextField.text else {
+            return
+        }
+
         let numberFormatter = NSNumberFormatter()
         numberFormatter.numberStyle = .DecimalStyle
 
         self.goalTextField.resignFirstResponder()
 
         var goal = 0.0
-        if let number = numberFormatter.numberFromString(self.goalTextField.text) {
+        if let number = numberFormatter.numberFromString(text) {
             goal = number as Double
         }
 
-        self.userDefaults.setDouble(goal, forKey: Settings.Gulp.Goal.key())
+        self.userDefaults.setDouble(goal, forKey: Constants.Gulp.Goal.key())
         self.userDefaults.synchronize()
     }
 
@@ -41,8 +45,8 @@ class GoalViewController: OnboardingViewController, UITextFieldDelegate {
     override func updateUI() {
         let numberFormatter = NSNumberFormatter()
         numberFormatter.numberStyle = .DecimalStyle
-        self.goalTextField.text = numberFormatter.stringFromNumber(self.userDefaults.doubleForKey(Settings.Gulp.Goal.key()))
-        let unit = UnitsOfMeasure(rawValue: self.userDefaults.integerForKey(Settings.General.UnitOfMeasure.key()))
+        self.goalTextField.text = numberFormatter.stringFromNumber(self.userDefaults.doubleForKey(Constants.Gulp.Goal.key()))
+        let unit = Constants.UnitsOfMeasure(rawValue: self.userDefaults.integerForKey(Constants.General.UnitOfMeasure.key()))
 
         if let unit = unit {
             self.goalSuffixLabel.text = unit.suffixForUnitOfMeasure()

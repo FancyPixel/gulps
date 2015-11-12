@@ -1,37 +1,28 @@
 import WatchKit
 import Foundation
-import Realm
+import WatchConnectivity
 
-class InterfaceController: WKInterfaceController {
+let NotificationContextReceived = "NotificationContextReceived"
+let NotificationWatchGulpAdded = "NotificationWatchGulpAdded"
+
+class InterfaceController: WKInterfaceController, WCSessionDelegate {
 
     @IBOutlet weak var goalLabel: WKInterfaceLabel!
     @IBOutlet weak var progressImage: WKInterfaceImage!
-
-    var realmToken: RLMNotificationToken?
+    lazy var notificationCenter: NSNotificationCenter = {
+        return NSNotificationCenter.defaultCenter()
+    }()
     var previousPercentage = 0.0
 
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
+        setupNotificationCenter()
 
-        realmToken = RLMRealm.defaultRealm().addNotificationBlock { note, realm in
-            self.reloadAndUpdateUI()
-        }
-
-        let entry = EntryHandler.sharedHandler.currentEntry() as Entry
-        previousPercentage = entry.percentage
         progressImage.setImageNamed("activity-")
     }
 
     override func handleActionWithIdentifier(identifier: String?, forLocalNotification localNotification: UILocalNotification) {
-
-    }
-
-    @IBAction func addSmallGulpAction() {
-        updateWithGulp(Settings.Gulp.Small.key())
-    }
-
-    @IBAction func addBigGulpAction() {
-        updateWithGulp(Settings.Gulp.Big.key())
+        reloadAndUpdateUI()
     }
 
     override func willActivate() {
@@ -41,20 +32,39 @@ class InterfaceController: WKInterfaceController {
 
     override func didDeactivate() {
         super.didDeactivate()
+        notificationCenter.removeObserver(self)
     }
 
+    //MARK: - Actions
+
+    @IBAction func addSmallGulpAction() {
+        updateWithGulp(Constants.Gulp.Small.key())
+    }
+
+    @IBAction func addBigGulpAction() {
+        updateWithGulp(Constants.Gulp.Big.key())
+    }
+
+    // MARK: - Notification Center
+
+    private func setupNotificationCenter() {
+        notificationCenter.addObserverForName(NotificationContextReceived, object: nil, queue: nil) { _ in
+            self.reloadAndUpdateUI()
+        }
+    }
 }
 
-// MARK: Private Helper Methods
+// MARK: - Private Helper Methods
 
-private extension InterfaceController {
-    
+typealias InterfaceHelper = InterfaceController
+private extension InterfaceHelper {
+
     func reloadAndUpdateUI() {
-        let entry = EntryHandler.sharedHandler.currentEntry() as Entry
-        var delta = Int(entry.percentage - previousPercentage)
+        let percentage = EntryHelper.sharedHelper.percentage() ?? 0
+        var delta = percentage - Int(previousPercentage)
         if (delta < 0) {
             // animate in reverse using negative duration
-            progressImage.startAnimatingWithImagesInRange(NSMakeRange(Int(entry.percentage), -delta), duration: -1.0, repeatCount: 1)
+            progressImage.startAnimatingWithImagesInRange(NSMakeRange(percentage, -delta), duration: -1.0, repeatCount: 1)
         } else {
             if (delta == 0) {
                 // if the range's length is 0, no image is loaded
@@ -62,11 +72,13 @@ private extension InterfaceController {
             }
             progressImage.startAnimatingWithImagesInRange(NSMakeRange(Int(previousPercentage), delta), duration: 1.0, repeatCount: 1)
         }
-        goalLabel.setText(NSLocalizedString("daily goal:", comment: "") + entry.formattedPercentage())
-        previousPercentage = entry.percentage
+        goalLabel.setText("\(NSLocalizedString("daily goal:", comment: "")) \(percentage)%")
+        previousPercentage = Double(percentage)
     }
-    
+
     func updateWithGulp(gulp: String) {
-        EntryHandler.sharedHandler.addGulp(NSUserDefaults.groupUserDefaults().doubleForKey(gulp))
+        EntryHelper.sharedHelper.addGulp(gulp)
+        NSNotificationCenter.defaultCenter().postNotificationName(NotificationWatchGulpAdded, object: gulp)
     }
 }
+

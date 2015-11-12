@@ -32,8 +32,11 @@ class Globals {
     }
 
     class func numericTextField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        let newValue = textField.text.stringByReplacingCharactersInRange(range.toRange(textField.text), withString: string)
-        if (count(newValue) == 0) {
+        guard let text = textField.text else {
+            return false
+        }
+        let newValue = text.stringByReplacingCharactersInRange(range.toRange(text), withString: string)
+        if (newValue.characters.count == 0) {
             return true;
         }
         let numberFormatter = NSNumberFormatter()
@@ -41,23 +44,15 @@ class Globals {
         return numberFormatter.numberFromString(newValue) != nil
     }
 
-    class func showPopTipOnceForKey(key: String, userDefaults: NSUserDefaults, popTipText text: String, inView view: UIView, fromFrame frame: CGRect) {
+    class func showPopTipOnceForKey(key: String, userDefaults: NSUserDefaults, popTipText text: String, inView view: UIView, fromFrame frame: CGRect, direction: AMPopTipDirection = .Down, color: UIColor = .mainColor()) {
         if (!userDefaults.boolForKey(key)) {
             userDefaults.setBool(true, forKey: key)
             userDefaults.synchronize()
-            AMPopTip.appearance().popoverColor = .mainColor()
+            AMPopTip.appearance().popoverColor = color
             AMPopTip.appearance().offset = 10
             AMPopTip.appearance().edgeMargin = 5
             let popTip = AMPopTip()
-            popTip.showText(text, direction: .Down, maxWidth: 200, inView: view, fromFrame: frame)
+            popTip.showText(text, direction: direction, maxWidth: 200, inView: view, fromFrame: frame)
         }
-    }
-}
-
-extension NSRange {
-    func toRange(string: String) -> Range<String.Index> {
-        let startIndex = advance(string.startIndex, location)
-        let endIndex = advance(startIndex, length)
-        return startIndex..<endIndex
     }
 }

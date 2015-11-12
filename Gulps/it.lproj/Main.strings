@@ -118,3 +118,9 @@
 
 /* Class = "UILabel"; text = "Way to go!"; ObjectID = "zyj-Gr-Ph8"; */
 "zyj-Gr-Ph8.text" = "Ottimo!";
+
+/* Class = "UITableViewSection"; headerTitle = "Apple Health"; ObjectID = "kL3-zV-Q1y"; */
+"kL3-zV-Q1y.headerTitle" = "Apple Salute";
+
+/* Class = "UILabel"; text = "Export data to Health"; ObjectID = "72o-fo-Kke"; */
+"72o-fo-Kke.text" = "Esporta dati in Salute";

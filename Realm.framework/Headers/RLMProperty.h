@@ -18,6 +18,21 @@
 
 #import <Foundation/Foundation.h>
 #import <Realm/RLMConstants.h>
+#import <Realm/RLMDefines.h>
+
+RLM_ASSUME_NONNULL_BEGIN
+
+@protocol RLMInt
+@end
+@protocol RLMBool
+@end
+@protocol RLMDouble
+@end
+@protocol RLMFloat
+@end
+
+@interface NSNumber ()<RLMInt, RLMBool, RLMDouble, RLMFloat>
+@end
 
 /**
  This class models properties persisted to Realm in an RLMObjectSchema.
@@ -51,7 +66,12 @@
 /**
  Object class name - specify object types for RLMObject and RLMArray properties.
  */
-@property (nonatomic, readonly, copy) NSString *objectClassName;
+@property (nonatomic, readonly, copy, nullable) NSString *objectClassName;
+
+/**
+ Whether this property is optional.
+ */
+@property (nonatomic, readonly) BOOL optional;
 
 /**
  Returns YES if property objects are equal.
@@ -59,3 +79,5 @@
 - (BOOL)isEqualToProperty:(RLMProperty *)property;
 
 @end
+
+RLM_ASSUME_NONNULL_END

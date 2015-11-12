@@ -1,6 +1,7 @@
 import UIKit
 
-extension UIColor {
+typealias Palette = UIColor
+extension Palette {
     class func mainColor() -> UIColor {
         return UIColor(red:0.22, green:0.49, blue:0.81, alpha:1)
     }

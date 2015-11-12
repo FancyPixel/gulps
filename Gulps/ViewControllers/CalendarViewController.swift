@@ -5,7 +5,7 @@ import UICountingLabel
 
 class CalendarViewController: UIViewController, JTCalendarDataSource {
 
-    var userDefaults = NSUserDefaults.groupUserDefaults()
+    let userDefaults = NSUserDefaults.groupUserDefaults()
 
     @IBOutlet weak var calendarMenu: JTCalendarMenuView!
     @IBOutlet weak var calendarContent: JTCalendarContentView!
@@ -24,9 +24,14 @@ class CalendarViewController: UIViewController, JTCalendarDataSource {
     var quantityLabelStartingConstant = 0.0
     var daysLabelStartingConstant = 0.0
     var shareButtonStartingConstant = 0.0
-    var calendar: JTCalendar!
+    let calendar = JTCalendar()
     var showingStats = false
     var animating = false
+
+    let shareExclusions = [
+        UIActivityTypeAirDrop, UIActivityTypeAssignToContact, UIActivityTypeAddToReadingList,
+        UIActivityTypePrint, UIActivityTypePostToWeibo, UIActivityTypePostToVimeo, UIActivityTypePostToTencentWeibo
+    ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,8 +39,8 @@ class CalendarViewController: UIViewController, JTCalendarDataSource {
         self.title = NSLocalizedString("progress title", comment: "")
 
         dailyLabel.text = ""
-        [daysCountLabel, quantityLabel].map { $0.format = "%d" }
-        [quantityLabel, daysLabel, daysCountLabel, measureLabel].map({ $0.textColor = .mainColor() })
+        _ = [daysCountLabel, quantityLabel].map { $0.format = "%d" }
+        _ = [quantityLabel, daysLabel, daysCountLabel, measureLabel].map({ $0.textColor = .mainColor() })
         shareButton.backgroundColor = .mainColor()
 
         self.navigationItem.rightBarButtonItem = {
@@ -68,16 +73,11 @@ class CalendarViewController: UIViewController, JTCalendarDataSource {
     }
 
     @IBAction func shareAction(sender: AnyObject) {
-        let quantitiy = EntryHandler.sharedHandler.overallQuantity()
+        let quantity = Int(EntryHandler.sharedHandler.overallQuantity())
         let days = EntryHandler.sharedHandler.daysTracked()
-        let text = String(format: NSLocalizedString("share text", comment: ""), quantitiy, unitName(), days)
-        let items = [text]
-        let activityController = UIActivityViewController(activityItems: items, applicationActivities: nil)
-        let exclusion = [
-            UIActivityTypeAirDrop, UIActivityTypeAssignToContact, UIActivityTypeAddToReadingList,
-            UIActivityTypePrint, UIActivityTypePostToWeibo, UIActivityTypePostToVimeo, UIActivityTypePostToTencentWeibo
-        ]
-        activityController.excludedActivityTypes = exclusion
+        let text = String(format: NSLocalizedString("share text", comment: ""), quantity, unitName(), days)
+        let activityController = UIActivityViewController(activityItems: [text], applicationActivities: nil)
+        activityController.excludedActivityTypes = shareExclusions
         presentViewController(activityController, animated: true, completion: nil)
     }
 
@@ -101,7 +101,6 @@ private extension CalendarViewController {
     func setupCalendar() {
         let font = UIFont(name: "KaushanScript-Regular", size: 16)
 
-        calendar = JTCalendar()
         calendar.calendarAppearance.calendar().firstWeekday = 2
         calendar.calendarAppearance.dayDotRatio = 1.0 / 7.0
         calendar.menuMonthsView = calendarMenu
@@ -120,13 +119,13 @@ private extension CalendarViewController {
     }
 
     func unitName() -> String {
-        if let unit = UnitsOfMeasure(rawValue: userDefaults.integerForKey(Settings.General.UnitOfMeasure.key())) {
+        if let unit = Constants.UnitsOfMeasure(rawValue: userDefaults.integerForKey(Constants.General.UnitOfMeasure.key())) {
             return unit.nameForUnitOfMeasure()
         }
         return ""
     }
 
-    func dateLabelString(_ date: NSDate = NSDate()) -> String {
+    func dateLabelString(date: NSDate = NSDate()) -> String {
         if let entry = EntryHandler.sharedHandler.entryForDate(date) {
             if (entry.percentage >= 100) {
                 return NSLocalizedString("goal met", comment: "")

@@ -39,8 +39,10 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
         manager.deviceMotionUpdateInterval = 0.01;
         manager.startDeviceMotionUpdatesToQueue(NSOperationQueue.mainQueue()) {
             (motion, error) in
-            let roation = atan2(motion.gravity.x, motion.gravity.y) - M_PI
-            self.progressMeter?.transform = CGAffineTransformMakeRotation(CGFloat(roation))
+            if let motion = motion {
+                let roation = atan2(motion.gravity.x, motion.gravity.y) - M_PI
+                self.progressMeter?.transform = CGAffineTransformMakeRotation(CGFloat(roation))
+            }
         }
 
         realmNotification = EntryHandler.sharedHandler.realm.addNotificationBlock { note, realm in
@@ -76,6 +78,17 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
         }
     }
 
+    public override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+
+        if #available(iOS 9.0, *) {
+            Globals.showPopTipOnceForKey("HEALTH_HINT", userDefaults: userDefaults,
+                popTipText: NSLocalizedString("health.poptip", comment: ""),
+                inView: view,
+                fromFrame: CGRect(x: view.frame.width - 60, y: view.frame.height, width: 1, height: 1), direction: .Up, color: .destructiveColor())
+        }
+    }
+
     // MARK: - UI update
 
     func updateCurrentEntry(delta: Double) {
@@ -85,18 +98,17 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
     func updateUI() {
         let percentage = EntryHandler.sharedHandler.currentPercentage()
         percentageLabel.countFromCurrentValueTo(Float(round(percentage)))
-        var fillTo = CGFloat(percentage / 100.0)
+        let fillTo = CGFloat(percentage / 100.0)
         progressMeter?.fillTo(fillTo > 1 ? 1 : fillTo)
     }
 
     override public func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "feedback" {
-            if let controller = segue.destinationViewController as? UIViewController {
-                controller.transitioningDelegate = self
-                controller.modalPresentationStyle = .Custom
-                userDefaults.setBool(true, forKey: "FEEDBACK")
-                userDefaults.synchronize()
-            }
+            let controller = segue.destinationViewController
+            controller.transitioningDelegate = self
+            controller.modalPresentationStyle = .Custom
+            userDefaults.setBool(true, forKey: "FEEDBACK")
+            userDefaults.synchronize()
         }
     }
 
@@ -116,7 +128,7 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
             popTipText: NSLocalizedString("undo poptip", comment: ""),
             inView: view,
             fromFrame: minusButton.frame)
-        let portion = smallButton == sender ? Settings.Gulp.Small.key() : Settings.Gulp.Big.key()
+        let portion = smallButton == sender ? Constants.Gulp.Small.key() : Constants.Gulp.Big.key()
         updateCurrentEntry(userDefaults.doubleForKey(portion))
     }
 
@@ -126,7 +138,7 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
         let yes = UIAlertAction(title: NSLocalizedString("Yes", comment: ""), style: .Cancel) { _ in
             EntryHandler.sharedHandler.removeLastGulp()
         }
-        [yes, no].map { controller.addAction($0) }
+        _ = [yes, no].map { controller.addAction($0) }
         self.presentViewController(controller, animated: true) {}
     }
 

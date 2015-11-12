@@ -7,10 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00612DD0922770ADF791FB36 /* Pods_GulpsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A4925FCD5463140CD8FE9BC /* Pods_GulpsTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		00612DD0922770ADF791FB36 /* Pods_GulpsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A4925FCD5463140CD8FE9BC /* Pods_GulpsTests.framework */; };
 		650DCE651AF3CD4100E12764 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650DCE641AF3CD4100E12764 /* Constants.swift */; };
 		650DCE661AF3CD4100E12764 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650DCE641AF3CD4100E12764 /* Constants.swift */; };
 		650DCE671AF3CD4100E12764 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650DCE641AF3CD4100E12764 /* Constants.swift */; };
+		653039801BDF6D8A00263D77 /* Gulps WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 65F44C5A1AF24B8A0093A3E9 /* Gulps WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		653039831BDF6D8B00263D77 /* Gulps WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 65F44C691AF24B8A0093A3E9 /* Gulps WatchKit App.app */; };
+		653039871BDF6F9000263D77 /* EntryHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653039861BDF6F9000263D77 /* EntryHelper.swift */; };
+		653039891BDF703200263D77 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653039881BDF703200263D77 /* ExtensionDelegate.swift */; };
+		6530398E1BDF827300263D77 /* HaveValidSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6530398B1BDF827300263D77 /* HaveValidSnapshot.swift */; };
+		6530398F1BDF827300263D77 /* NimbleSnapshotsConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6530398C1BDF827300263D77 /* NimbleSnapshotsConfiguration.swift */; };
+		653039901BDF827300263D77 /* PrettySyntax.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6530398D1BDF827300263D77 /* PrettySyntax.swift */; };
+		653039921BDFE5FC00263D77 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653039911BDFE5FC00263D77 /* ComplicationController.swift */; };
+		653039D71BE0CE5E00263D77 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A8181AF24CC800EC16E9 /* Colors.swift */; };
 		6537A80D1AF24CA700EC16E9 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6537A80B1AF24CA700EC16E9 /* Onboarding.storyboard */; };
 		6537A8291AF24CC800EC16E9 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A8101AF24CC800EC16E9 /* Entry.swift */; };
 		6537A82A1AF24CC800EC16E9 /* EntryHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A8111AF24CC800EC16E9 /* EntryHandler.swift */; };
@@ -20,7 +29,7 @@
 		6537A82E1AF24CC800EC16E9 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A8181AF24CC800EC16E9 /* Colors.swift */; };
 		6537A82F1AF24CC800EC16E9 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A8191AF24CC800EC16E9 /* Globals.swift */; };
 		6537A8301AF24CC800EC16E9 /* NotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A81A1AF24CC800EC16E9 /* NotificationHelper.swift */; };
-		6537A8311AF24CC800EC16E9 /* NSUserDefaults-BigGulp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A81B1AF24CC800EC16E9 /* NSUserDefaults-BigGulp.swift */; };
+		6537A8311AF24CC800EC16E9 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A81B1AF24CC800EC16E9 /* Extensions.swift */; };
 		6537A8331AF24CC800EC16E9 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A81D1AF24CC800EC16E9 /* Settings.swift */; };
 		6537A8341AF24CC800EC16E9 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A81F1AF24CC800EC16E9 /* CalendarViewController.swift */; };
 		6537A8361AF24CC800EC16E9 /* DrinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A8211AF24CC800EC16E9 /* DrinkViewController.swift */; };
@@ -33,29 +42,30 @@
 		6537A83D1AF24CE100EC16E9 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A8181AF24CC800EC16E9 /* Colors.swift */; };
 		6537A83E1AF24CE800EC16E9 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A81D1AF24CC800EC16E9 /* Settings.swift */; };
 		6537A83F1AF24CE900EC16E9 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A81D1AF24CC800EC16E9 /* Settings.swift */; };
-		6537A8401AF24CEF00EC16E9 /* NSUserDefaults-BigGulp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A81B1AF24CC800EC16E9 /* NSUserDefaults-BigGulp.swift */; };
-		6537A8411AF24CEF00EC16E9 /* NSUserDefaults-BigGulp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A81B1AF24CC800EC16E9 /* NSUserDefaults-BigGulp.swift */; };
-		6537A8421AF24CFC00EC16E9 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A8101AF24CC800EC16E9 /* Entry.swift */; };
+		6537A8401AF24CEF00EC16E9 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A81B1AF24CC800EC16E9 /* Extensions.swift */; };
+		6537A8411AF24CEF00EC16E9 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A81B1AF24CC800EC16E9 /* Extensions.swift */; };
 		6537A8431AF24CFD00EC16E9 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A8101AF24CC800EC16E9 /* Entry.swift */; };
 		6537A8441AF24CFF00EC16E9 /* EntryHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A8111AF24CC800EC16E9 /* EntryHandler.swift */; };
-		6537A8451AF24CFF00EC16E9 /* EntryHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A8111AF24CC800EC16E9 /* EntryHandler.swift */; };
 		6537A8461AF24D0200EC16E9 /* Gulp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A8121AF24CC800EC16E9 /* Gulp.swift */; };
-		6537A8471AF24D0200EC16E9 /* Gulp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537A8121AF24CC800EC16E9 /* Gulp.swift */; };
 		6555BB681B0CAE1700CE436A /* AnimatedShareButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6555BB671B0CAE1700CE436A /* AnimatedShareButton.swift */; };
 		6555BB6B1B0CB90A00CE436A /* DrinkViewController+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6555BB6A1B0CB90A00CE436A /* DrinkViewController+Animations.swift */; };
 		6555BB6D1B0CB93100CE436A /* CalendarViewController+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6555BB6C1B0CB93100CE436A /* CalendarViewController+Animations.swift */; };
 		65694D7B1B186B2C0078D991 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65694D7A1B186B2C0078D991 /* RealmSwift.framework */; };
 		65694D7C1B186B2C0078D991 /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 65694D7A1B186B2C0078D991 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		65694D7D1B186B490078D991 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65694D7A1B186B2C0078D991 /* RealmSwift.framework */; };
-		65694D7E1B186B4D0078D991 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65694D7A1B186B2C0078D991 /* RealmSwift.framework */; };
 		658DBFD01AF75D130094C0F1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65F44C271AF24B440093A3E9 /* Images.xcassets */; };
 		6591D8C61AF2684A0069E198 /* DrinkViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6591D8C51AF2684A0069E198 /* DrinkViewControllerTests.swift */; };
 		65A234FF1AF253D1002A35F3 /* TodayViewController+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A234FE1AF253D1002A35F3 /* TodayViewController+Animation.swift */; };
 		65AADD111AFBAD7B0039EE4C /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65AADD101AFBAD7B0039EE4C /* Realm.framework */; };
 		65AADD121AFBAD7B0039EE4C /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 65AADD101AFBAD7B0039EE4C /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		65AADD191AFBAFB10039EE4C /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65AADD101AFBAD7B0039EE4C /* Realm.framework */; };
-		65AADD1A1AFBAFB70039EE4C /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65AADD101AFBAD7B0039EE4C /* Realm.framework */; };
 		65AADD1B1AFBB0110039EE4C /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65AADD101AFBAD7B0039EE4C /* Realm.framework */; };
+		65C92DA51BB1648C00E2DFE7 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65C92DA41BB1648C00E2DFE7 /* HealthKit.framework */; };
+		65C92DA71BB164D100E2DFE7 /* HealthKitHealper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C92DA61BB164D100E2DFE7 /* HealthKitHealper.swift */; };
+		65C92DA81BB184DB00E2DFE7 /* HealthKitHealper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C92DA61BB164D100E2DFE7 /* HealthKitHealper.swift */; };
+		65C92DA91BB184DC00E2DFE7 /* HealthKitHealper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C92DA61BB164D100E2DFE7 /* HealthKitHealper.swift */; };
+		65E94C6C1BBC13B400A65B30 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65E94C6A1BBC13B400A65B30 /* InfoPlist.strings */; };
+		65E94C6E1BBC13BF00A65B30 /* Gulps.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 6537A8481AF24D2000EC16E9 /* Gulps.entitlements */; };
 		65F44C211AF24B440093A3E9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F44C201AF24B440093A3E9 /* AppDelegate.swift */; };
 		65F44C261AF24B440093A3E9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65F44C241AF24B440093A3E9 /* Main.storyboard */; };
 		65F44C281AF24B440093A3E9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65F44C271AF24B440093A3E9 /* Images.xcassets */; };
@@ -68,19 +78,31 @@
 		65F44C621AF24B8A0093A3E9 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F44C611AF24B8A0093A3E9 /* NotificationController.swift */; };
 		65F44C641AF24B8A0093A3E9 /* GlanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F44C631AF24B8A0093A3E9 /* GlanceController.swift */; };
 		65F44C661AF24B8A0093A3E9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65F44C651AF24B8A0093A3E9 /* Images.xcassets */; };
-		65F44C6A1AF24B8A0093A3E9 /* Gulps WatchKit App.app in Resources */ = {isa = PBXBuildFile; fileRef = 65F44C691AF24B8A0093A3E9 /* Gulps WatchKit App.app */; };
 		65F44C721AF24B8A0093A3E9 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65F44C701AF24B8A0093A3E9 /* Interface.storyboard */; };
 		65F44C741AF24B8A0093A3E9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65F44C731AF24B8A0093A3E9 /* Images.xcassets */; };
-		65F44C771AF24B8A0093A3E9 /* Gulps WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 65F44C5A1AF24B8A0093A3E9 /* Gulps WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		65F55F201B5904B8008653F2 /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F55F1F1B5904B8008653F2 /* FeedbackViewController.swift */; };
 		65F55F231B592D91008653F2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65F55F211B592D91008653F2 /* Localizable.strings */; };
 		65F55F2E1B5942A3008653F2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65F55F211B592D91008653F2 /* Localizable.strings */; };
 		65F55F2F1B5942A4008653F2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65F55F211B592D91008653F2 /* Localizable.strings */; };
 		65F55F321B5F965F008653F2 /* drop.caf in Resources */ = {isa = PBXBuildFile; fileRef = 65F55F311B5D0A0E008653F2 /* drop.caf */; };
-		800E72B73F54FA65CABC4BD6 /* Pods_Gulps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A701E98A87809500CB34BF4 /* Pods_Gulps.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		800E72B73F54FA65CABC4BD6 /* Pods_Gulps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A701E98A87809500CB34BF4 /* Pods_Gulps.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		6530397E1BDF6D8A00263D77 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65F44C131AF24B440093A3E9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 65F44C591AF24B8A0093A3E9;
+			remoteInfo = "Gulps WatchKit Extension";
+		};
+		653039811BDF6D8B00263D77 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65F44C131AF24B440093A3E9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 65F44C681AF24B8A0093A3E9;
+			remoteInfo = "Gulps WatchKit App";
+		};
 		654764BA1AF267D100C68C2A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 65F44C131AF24B440093A3E9 /* Project object */;
@@ -95,23 +117,41 @@
 			remoteGlobalIDString = 65F44C431AF24B770093A3E9;
 			remoteInfo = GulpsToday;
 		};
-		65F44C6B1AF24B8A0093A3E9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 65F44C131AF24B440093A3E9 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 65F44C681AF24B8A0093A3E9;
-			remoteInfo = "Gulps WatchKit App";
-		};
-		65F44C751AF24B8A0093A3E9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 65F44C131AF24B440093A3E9 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 65F44C591AF24B8A0093A3E9;
-			remoteInfo = "Gulps WatchKit Extension";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		653039841BDF6D8B00263D77 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				653039801BDF6D8A00263D77 /* Gulps WatchKit Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		653039851BDF6D8B00263D77 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				653039831BDF6D8B00263D77 /* Gulps WatchKit App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		655DF0F31BAC148D00431D0E /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		65AADD131AFBAD7B0039EE4C /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -131,7 +171,6 @@
 			dstSubfolderSpec = 13;
 			files = (
 				65F44C511AF24B780093A3E9 /* GulpsToday.appex in Embed App Extensions */,
-				65F44C771AF24B8A0093A3E9 /* Gulps WatchKit Extension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -144,6 +183,12 @@
 		4A4925FCD5463140CD8FE9BC /* Pods_GulpsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GulpsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A701E98A87809500CB34BF4 /* Pods_Gulps.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gulps.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		650DCE641AF3CD4100E12764 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		653039861BDF6F9000263D77 /* EntryHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryHelper.swift; sourceTree = "<group>"; };
+		653039881BDF703200263D77 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		6530398B1BDF827300263D77 /* HaveValidSnapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaveValidSnapshot.swift; sourceTree = "<group>"; };
+		6530398C1BDF827300263D77 /* NimbleSnapshotsConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NimbleSnapshotsConfiguration.swift; sourceTree = "<group>"; };
+		6530398D1BDF827300263D77 /* PrettySyntax.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrettySyntax.swift; sourceTree = "<group>"; };
+		653039911BDFE5FC00263D77 /* ComplicationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
 		6537A80C1AF24CA700EC16E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Onboarding.storyboard; sourceTree = "<group>"; };
 		6537A8101AF24CC800EC16E9 /* Entry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 		6537A8111AF24CC800EC16E9 /* EntryHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryHandler.swift; sourceTree = "<group>"; };
@@ -153,7 +198,7 @@
 		6537A8181AF24CC800EC16E9 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		6537A8191AF24CC800EC16E9 /* Globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
 		6537A81A1AF24CC800EC16E9 /* NotificationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationHelper.swift; sourceTree = "<group>"; };
-		6537A81B1AF24CC800EC16E9 /* NSUserDefaults-BigGulp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSUserDefaults-BigGulp.swift"; sourceTree = "<group>"; };
+		6537A81B1AF24CC800EC16E9 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		6537A81D1AF24CC800EC16E9 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		6537A81F1AF24CC800EC16E9 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		6537A8211AF24CC800EC16E9 /* DrinkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrinkViewController.swift; sourceTree = "<group>"; };
@@ -163,7 +208,7 @@
 		6537A8261AF24CC800EC16E9 /* NotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		6537A8271AF24CC800EC16E9 /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		6537A8281AF24CC800EC16E9 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		6537A8481AF24D2000EC16E9 /* Gulps.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Gulps.entitlements; sourceTree = "<group>"; };
+		6537A8481AF24D2000EC16E9 /* Gulps.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Gulps.entitlements; sourceTree = "<group>"; };
 		654764B41AF267D100C68C2A /* GulpsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GulpsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		654764B71AF267D100C68C2A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6555BB671B0CAE1700CE436A /* AnimatedShareButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatedShareButton.swift; sourceTree = "<group>"; };
@@ -175,6 +220,10 @@
 		65A234FE1AF253D1002A35F3 /* TodayViewController+Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TodayViewController+Animation.swift"; sourceTree = "<group>"; };
 		65A235021AF2543B002A35F3 /* Gulps WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Gulps WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		65AADD101AFBAD7B0039EE4C /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
+		65C92DA41BB1648C00E2DFE7 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		65C92DA61BB164D100E2DFE7 /* HealthKitHealper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthKitHealper.swift; sourceTree = "<group>"; };
+		65E94C6B1BBC13B400A65B30 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		65E94C6D1BBC13BF00A65B30 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		65F44C1B1AF24B440093A3E9 /* Gulps.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gulps.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65F44C1F1AF24B440093A3E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		65F44C201AF24B440093A3E9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -223,6 +272,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				65AADD111AFBAD7B0039EE4C /* Realm.framework in Frameworks */,
+				65C92DA51BB1648C00E2DFE7 /* HealthKit.framework in Frameworks */,
 				800E72B73F54FA65CABC4BD6 /* Pods_Gulps.framework in Frameworks */,
 				65694D7B1B186B2C0078D991 /* RealmSwift.framework in Frameworks */,
 			);
@@ -242,8 +292,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65AADD1A1AFBAFB70039EE4C /* Realm.framework in Frameworks */,
-				65694D7E1B186B4D0078D991 /* RealmSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,6 +307,16 @@
 				8339035B8C2DA7AA7C151C33 /* Pods-GulpsTests.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		6530398A1BDF827300263D77 /* Nimble-Snapshots */ = {
+			isa = PBXGroup;
+			children = (
+				6530398B1BDF827300263D77 /* HaveValidSnapshot.swift */,
+				6530398C1BDF827300263D77 /* NimbleSnapshotsConfiguration.swift */,
+				6530398D1BDF827300263D77 /* PrettySyntax.swift */,
+			);
+			path = "Nimble-Snapshots";
 			sourceTree = "<group>";
 		};
 		6537A80E1AF24CAB00EC16E9 /* Storyboards */ = {
@@ -306,10 +364,11 @@
 				6537A8181AF24CC800EC16E9 /* Colors.swift */,
 				6537A8191AF24CC800EC16E9 /* Globals.swift */,
 				6537A81A1AF24CC800EC16E9 /* NotificationHelper.swift */,
-				6537A81B1AF24CC800EC16E9 /* NSUserDefaults-BigGulp.swift */,
+				6537A81B1AF24CC800EC16E9 /* Extensions.swift */,
 				6537A81D1AF24CC800EC16E9 /* Settings.swift */,
 				650DCE641AF3CD4100E12764 /* Constants.swift */,
 				6555BB671B0CAE1700CE436A /* AnimatedShareButton.swift */,
+				65C92DA61BB164D100E2DFE7 /* HealthKitHealper.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -342,6 +401,7 @@
 		654764B51AF267D100C68C2A /* GulpsTests */ = {
 			isa = PBXGroup;
 			children = (
+				6530398A1BDF827300263D77 /* Nimble-Snapshots */,
 				6591D8C51AF2684A0069E198 /* DrinkViewControllerTests.swift */,
 				654764B61AF267D100C68C2A /* Supporting Files */,
 			);
@@ -410,6 +470,7 @@
 			isa = PBXGroup;
 			children = (
 				6537A8481AF24D2000EC16E9 /* Gulps.entitlements */,
+				65E94C6A1BBC13B400A65B30 /* InfoPlist.strings */,
 				65F44C1F1AF24B440093A3E9 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -418,6 +479,7 @@
 		65F44C451AF24B770093A3E9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				65C92DA41BB1648C00E2DFE7 /* HealthKit.framework */,
 				65694D7A1B186B2C0078D991 /* RealmSwift.framework */,
 				65AADD101AFBAD7B0039EE4C /* Realm.framework */,
 				65F44C461AF24B770093A3E9 /* NotificationCenter.framework */,
@@ -450,6 +512,9 @@
 		65F44C5B1AF24B8A0093A3E9 /* Gulps WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
+				653039911BDFE5FC00263D77 /* ComplicationController.swift */,
+				653039881BDF703200263D77 /* ExtensionDelegate.swift */,
+				653039861BDF6F9000263D77 /* EntryHelper.swift */,
 				65F44C5F1AF24B8A0093A3E9 /* InterfaceController.swift */,
 				65F44C611AF24B8A0093A3E9 /* NotificationController.swift */,
 				65F44C631AF24B8A0093A3E9 /* GlanceController.swift */,
@@ -524,12 +589,14 @@
 				06E6943317C6B36A9014DF37 /* Copy Pods Resources */,
 				65AADD131AFBAD7B0039EE4C /* Embed Frameworks */,
 				65AADD181AFBAEEF0039EE4C /* Framework strip */,
+				655DF0F31BAC148D00431D0E /* Embed Watch Content */,
+				653039851BDF6D8B00263D77 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				65F44C501AF24B780093A3E9 /* PBXTargetDependency */,
-				65F44C761AF24B8A0093A3E9 /* PBXTargetDependency */,
+				653039821BDF6D8B00263D77 /* PBXTargetDependency */,
 			);
 			name = Gulps;
 			productName = Gulps;
@@ -564,27 +631,28 @@
 			buildRules = (
 			);
 			dependencies = (
-				65F44C6C1AF24B8A0093A3E9 /* PBXTargetDependency */,
 			);
 			name = "Gulps WatchKit Extension";
 			productName = "Gulps WatchKit Extension";
 			productReference = 65F44C5A1AF24B8A0093A3E9 /* Gulps WatchKit Extension.appex */;
-			productType = "com.apple.product-type.watchkit-extension";
+			productType = "com.apple.product-type.watchkit2-extension";
 		};
 		65F44C681AF24B8A0093A3E9 /* Gulps WatchKit App */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 65F44C781AF24B8A0093A3E9 /* Build configuration list for PBXNativeTarget "Gulps WatchKit App" */;
 			buildPhases = (
 				65F44C671AF24B8A0093A3E9 /* Resources */,
+				653039841BDF6D8B00263D77 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				6530397F1BDF6D8A00263D77 /* PBXTargetDependency */,
 			);
 			name = "Gulps WatchKit App";
 			productName = "Gulps WatchKit App";
 			productReference = 65F44C691AF24B8A0093A3E9 /* Gulps WatchKit App.app */;
-			productType = "com.apple.product-type.application.watchapp";
+			productType = "com.apple.product-type.application.watchapp2";
 		};
 /* End PBXNativeTarget section */
 
@@ -593,7 +661,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Fancy Pixel";
 				TargetAttributes = {
 					654764B31AF267D100C68C2A = {
@@ -605,6 +673,9 @@
 						DevelopmentTeam = H72GR44F4M;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.HealthKit = {
 								enabled = 1;
 							};
 						};
@@ -623,7 +694,7 @@
 						DevelopmentTeam = H72GR44F4M;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -671,10 +742,12 @@
 				65F55F321B5F965F008653F2 /* drop.caf in Resources */,
 				65F44C261AF24B440093A3E9 /* Main.storyboard in Resources */,
 				65F44C2B1AF24B440093A3E9 /* LaunchScreen.xib in Resources */,
+				65E94C6E1BBC13BF00A65B30 /* Gulps.entitlements in Resources */,
 				6537A82C1AF24CC800EC16E9 /* KaushanScript.ttf in Resources */,
 				65F55F231B592D91008653F2 /* Localizable.strings in Resources */,
 				6537A82D1AF24CC800EC16E9 /* Lato-Light.ttf in Resources */,
 				65F44C281AF24B440093A3E9 /* Images.xcassets in Resources */,
+				65E94C6C1BBC13B400A65B30 /* InfoPlist.strings in Resources */,
 				6537A80D1AF24CA700EC16E9 /* Onboarding.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -693,7 +766,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65F44C6A1AF24B8A0093A3E9 /* Gulps WatchKit App.app in Resources */,
 				65F55F2E1B5942A3008653F2 /* Localizable.strings in Resources */,
 				65F44C661AF24B8A0093A3E9 /* Images.xcassets in Resources */,
 			);
@@ -822,6 +894,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				653039901BDF827300263D77 /* PrettySyntax.swift in Sources */,
+				6530398F1BDF827300263D77 /* NimbleSnapshotsConfiguration.swift in Sources */,
+				6530398E1BDF827300263D77 /* HaveValidSnapshot.swift in Sources */,
 				6591D8C61AF2684A0069E198 /* DrinkViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -847,8 +922,9 @@
 				6537A82A1AF24CC800EC16E9 /* EntryHandler.swift in Sources */,
 				65F44C211AF24B440093A3E9 /* AppDelegate.swift in Sources */,
 				6537A83A1AF24CC800EC16E9 /* NotificationViewController.swift in Sources */,
+				65C92DA71BB164D100E2DFE7 /* HealthKitHealper.swift in Sources */,
 				650DCE651AF3CD4100E12764 /* Constants.swift in Sources */,
-				6537A8311AF24CC800EC16E9 /* NSUserDefaults-BigGulp.swift in Sources */,
+				6537A8311AF24CC800EC16E9 /* Extensions.swift in Sources */,
 				6537A8361AF24CC800EC16E9 /* DrinkViewController.swift in Sources */,
 				6537A8301AF24CC800EC16E9 /* NotificationHelper.swift in Sources */,
 				6555BB681B0CAE1700CE436A /* AnimatedShareButton.swift in Sources */,
@@ -863,9 +939,10 @@
 				65A234FF1AF253D1002A35F3 /* TodayViewController+Animation.swift in Sources */,
 				6537A8431AF24CFD00EC16E9 /* Entry.swift in Sources */,
 				6537A8441AF24CFF00EC16E9 /* EntryHandler.swift in Sources */,
+				65C92DA81BB184DB00E2DFE7 /* HealthKitHealper.swift in Sources */,
 				6537A83E1AF24CE800EC16E9 /* Settings.swift in Sources */,
 				65F44C4C1AF24B780093A3E9 /* TodayViewController.swift in Sources */,
-				6537A8411AF24CEF00EC16E9 /* NSUserDefaults-BigGulp.swift in Sources */,
+				6537A8411AF24CEF00EC16E9 /* Extensions.swift in Sources */,
 				6537A83D1AF24CE100EC16E9 /* Colors.swift in Sources */,
 				650DCE661AF3CD4100E12764 /* Constants.swift in Sources */,
 			);
@@ -875,14 +952,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6537A8421AF24CFC00EC16E9 /* Entry.swift in Sources */,
-				6537A8401AF24CEF00EC16E9 /* NSUserDefaults-BigGulp.swift in Sources */,
+				6537A8401AF24CEF00EC16E9 /* Extensions.swift in Sources */,
+				653039D71BE0CE5E00263D77 /* Colors.swift in Sources */,
 				65F44C621AF24B8A0093A3E9 /* NotificationController.swift in Sources */,
-				6537A8451AF24CFF00EC16E9 /* EntryHandler.swift in Sources */,
+				653039891BDF703200263D77 /* ExtensionDelegate.swift in Sources */,
+				65C92DA91BB184DC00E2DFE7 /* HealthKitHealper.swift in Sources */,
 				65F44C601AF24B8A0093A3E9 /* InterfaceController.swift in Sources */,
-				6537A8471AF24D0200EC16E9 /* Gulp.swift in Sources */,
 				6537A83F1AF24CE900EC16E9 /* Settings.swift in Sources */,
 				65F44C641AF24B8A0093A3E9 /* GlanceController.swift in Sources */,
+				653039921BDFE5FC00263D77 /* ComplicationController.swift in Sources */,
+				653039871BDF6F9000263D77 /* EntryHelper.swift in Sources */,
 				650DCE671AF3CD4100E12764 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -890,6 +969,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		6530397F1BDF6D8A00263D77 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 65F44C591AF24B8A0093A3E9 /* Gulps WatchKit Extension */;
+			targetProxy = 6530397E1BDF6D8A00263D77 /* PBXContainerItemProxy */;
+		};
+		653039821BDF6D8B00263D77 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 65F44C681AF24B8A0093A3E9 /* Gulps WatchKit App */;
+			targetProxy = 653039811BDF6D8B00263D77 /* PBXContainerItemProxy */;
+		};
 		654764BB1AF267D100C68C2A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 65F44C1A1AF24B440093A3E9 /* Gulps */;
@@ -899,16 +988,6 @@
 			isa = PBXTargetDependency;
 			target = 65F44C431AF24B770093A3E9 /* GulpsToday */;
 			targetProxy = 65F44C4F1AF24B780093A3E9 /* PBXContainerItemProxy */;
-		};
-		65F44C6C1AF24B8A0093A3E9 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 65F44C681AF24B8A0093A3E9 /* Gulps WatchKit App */;
-			targetProxy = 65F44C6B1AF24B8A0093A3E9 /* PBXContainerItemProxy */;
-		};
-		65F44C761AF24B8A0093A3E9 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 65F44C591AF24B8A0093A3E9 /* Gulps WatchKit Extension */;
-			targetProxy = 65F44C751AF24B8A0093A3E9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -920,6 +999,15 @@
 				65F55F281B593A0A008653F2 /* it */,
 			);
 			name = Onboarding.storyboard;
+			sourceTree = "<group>";
+		};
+		65E94C6A1BBC13B400A65B30 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				65E94C6B1BBC13B400A65B30 /* Base */,
+				65E94C6D1BBC13BF00A65B30 /* it */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 		65F44C241AF24B440093A3E9 /* Main.storyboard */ = {
@@ -977,6 +1065,7 @@
 				INFOPLIST_FILE = GulpsTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "it.fancypixel.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Gulps.app/Gulps";
 			};
@@ -995,6 +1084,7 @@
 				INFOPLIST_FILE = GulpsTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "it.fancypixel.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Gulps.app/Gulps";
 			};
@@ -1022,6 +1112,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1092,12 +1183,14 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Gulps/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = it.fancypixel.BigGulp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -1109,15 +1202,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Gulps/Gulps.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Gulps/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = it.fancypixel.BigGulp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -1130,6 +1225,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1140,6 +1236,7 @@
 				);
 				INFOPLIST_FILE = GulpsToday/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "it.fancypixel.BigGulp.Gulps-Today";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
@@ -1153,12 +1250,14 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = GulpsToday/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "it.fancypixel.BigGulp.Gulps-Today";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
@@ -1170,17 +1269,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				ENABLE_BITCODE = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				IBSC_MODULE = Gulps_WatchKit_Extension;
 				INFOPLIST_FILE = "Gulps WatchKit App/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				PRODUCT_BUNDLE_IDENTIFIER = it.fancypixel.BigGulp.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
-				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
@@ -1189,22 +1291,25 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				ENABLE_BITCODE = YES;
 				IBSC_MODULE = Gulps_WatchKit_Extension;
 				INFOPLIST_FILE = "Gulps WatchKit App/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				PRODUCT_BUNDLE_IDENTIFIER = it.fancypixel.BigGulp.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
-				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};
 		65F44C7C1AF24B8A0093A3E9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "Gulps WatchKit Extension/Gulps WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1216,18 +1321,22 @@
 				INFOPLIST_FILE = "Gulps WatchKit Extension/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = it.fancypixel.BigGulp.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE = "";
+				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
 		65F44C7D1AF24B8A0093A3E9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "Gulps WatchKit Extension/Gulps WatchKit Extension.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1235,9 +1344,13 @@
 				INFOPLIST_FILE = "Gulps WatchKit Extension/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = it.fancypixel.BigGulp.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE = "";
+				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};

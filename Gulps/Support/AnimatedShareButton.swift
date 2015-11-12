@@ -78,7 +78,7 @@ class AnimatedShareButton: UIButton {
             layer.lineCap = kCALineCapRound
             layer.masksToBounds = true
 
-            let strokingPath = CGPathCreateCopyByStrokingPath(layer.path, nil, strokeWidth, kCGLineCapRound, kCGLineJoinMiter, strokeWidth)
+            let strokingPath = CGPathCreateCopyByStrokingPath(layer.path, nil, strokeWidth, CGLineCap.Round, CGLineJoin.Miter, strokeWidth)
 
             layer.bounds = CGPathGetPathBoundingBox(strokingPath)
 
@@ -106,7 +106,7 @@ class AnimatedShareButton: UIButton {
     var showsMenu: Bool = true {
         didSet {
             var strokeStart = CABasicAnimation(keyPath: "strokeStart")
-            var strokeEnd = CABasicAnimation(keyPath: "strokeEnd")
+            let strokeEnd = CABasicAnimation(keyPath: "strokeEnd")
 
             // Box
             if self.showsMenu {
@@ -179,14 +179,14 @@ class AnimatedShareButton: UIButton {
 extension CALayer {
     // Thanks to https://github.com/robb/hamburger-button
     func ocb_applyAnimation(animation: CABasicAnimation) {
-        if let copy = animation.copy() as? CABasicAnimation {
+        if let copy = animation.copy() as? CABasicAnimation, let keyPath = copy.keyPath {
 
             if copy.fromValue == nil {
-                copy.fromValue = self.presentationLayer().valueForKeyPath(copy.keyPath)
+                copy.fromValue = self.presentationLayer()?.valueForKeyPath(keyPath)
             }
 
             self.addAnimation(copy, forKey: copy.keyPath)
-            self.setValue(copy.toValue, forKeyPath:copy.keyPath)
+            self.setValue(copy.toValue, forKeyPath:keyPath)
         }
     }
 }

@@ -14,7 +14,7 @@
 /* Calendar */
 "progress title" = "Progressi";
 "share poptip" = "Qui puoi verificare il tuo progresso complessivo";
-"share text" = "Mi mantengo in forma! Ho bevuto %d %@ d'acqua negli ultimi %d giorni. https://goo.gl/reTyQU";
+"share text" = "Mi mantengo in forma! Ho bevuto %d %@ d'acqua negli ultimi %d giorni. https://goo.gl/reTyQU @GulpsApp";
 "unit format" = "%@ bevuti negli ultimi";
 "goal met" = "Obiettivo raggiunto!";
 
@@ -35,3 +35,6 @@
 
 /* WatchKit */
 "daily goal:" = "OBIETTIVO: ";
+
+/* HealthKit */
+"health.poptip" = "Puoi abilitare l'esportazione verso l'app Salute nelle preferenze";
