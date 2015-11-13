@@ -23,6 +23,11 @@ Want to contribute? We would really appreciate a hand with the localization in o
 
 Feel free to edit the file, we'll include your translation in the next release and attribute your work.  
 
+###Contributors
+
+- Thanks to [Donny Wals](https://github.com/donnywals) for the Dutch translation. 
+- Thanks to [Alexandre Thomas](https://github.com/thomalexandre) for the French translation. 
+
 #Imitation is the sincerest form of flattery
 
 That's why we want to thank these fellow developers for the vote of confidence:  

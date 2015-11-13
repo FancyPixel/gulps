@@ -49,25 +49,24 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, WCSessionDelegate {
     }
 
     func session(session: WCSession, didReceiveApplicationContext applicationContext: [String : AnyObject]) {
-        print("Receiving Context: \(applicationContext)")
         if let goal = applicationContext[Constants.Gulp.Goal.key()] as? Double,
             let current = applicationContext[Constants.WatchContext.Current.key()] as? Double,
             let small = applicationContext[Constants.Gulp.Small.key()] as? Double,
             let big = applicationContext[Constants.Gulp.Big.key()] as? Double {
                 WatchEntryHelper.sharedHelper.saveSettings(goal: goal, current: current, small: small, big: big)
-                dispatch_async(dispatch_get_main_queue()) {
-                    NSNotificationCenter.defaultCenter().postNotificationName(NotificationContextReceived, object: nil)
-                    self.reloadComplications()
-                }
+                NSNotificationCenter.defaultCenter().postNotificationName(NotificationContextReceived, object: nil)
+                self.reloadComplications()
         }
     }
 
     func reloadComplications() {
-        if let complications: [CLKComplication] = CLKComplicationServer.sharedInstance().activeComplications {
-            complications.forEach({
-                (complication: CLKComplication) in
-                CLKComplicationServer.sharedInstance().reloadTimelineForComplication(complication)
-            })
+        dispatch_async(dispatch_get_main_queue()) {
+            if let complications: [CLKComplication] = CLKComplicationServer.sharedInstance().activeComplications {
+                complications.forEach({
+                    (complication: CLKComplication) in
+                    CLKComplicationServer.sharedInstance().reloadTimelineForComplication(complication)
+                })
+            }
         }
     }
 }
