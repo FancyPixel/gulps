@@ -61,6 +61,6 @@ class WatchEntryHelper {
         }
 
         let goal = userDefaults.doubleForKey(Constants.Gulp.Goal.key())
-        return Int((quantity / goal) * 100.0)
+        return Int(round(quantity / goal * 100.0))
     }
 }
