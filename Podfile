@@ -1,5 +1,5 @@
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '8.0'
+platform :ios, '9.0'
 
 def common_pods
   pod 'AMWaveTransition', '~> 0.5'
@@ -20,8 +20,8 @@ end
 target 'GulpsTests' do
   common_pods
   pod 'Nimble', '~> 3.0.0'
-  pod 'Quick', :git => 'https://github.com/andreamazz/Quick.git', :branch => 'xcode7.1'
-  pod 'FBSnapshotTestCase', git: 'https://github.com/andreamazz/ios-snapshot-test-case'
+  pod 'Quick', '~> 0.8.0'
+  pod 'Nimble-Snapshots', '~> 3.0.0'
 end
 
 inhibit_all_warnings!
