@@ -56,6 +56,10 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
         return false
     }
 
+    public override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .LightContent
+    }
+
     public override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 

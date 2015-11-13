@@ -1,4 +1,5 @@
 import Foundation
+import UIKit
 
 extension NSUserDefaults {
     class func groupUserDefaults() -> NSUserDefaults {

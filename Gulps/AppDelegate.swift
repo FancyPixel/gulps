@@ -47,10 +47,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     func setupAppearance() {
         Globals.actionSheetAppearance()
 
+        UIApplication.sharedApplication().statusBarStyle = .LightContent
+
         UITabBar.appearance().tintColor = .mainColor()
 
-        let font = UIFont(name: "KaushanScript-Regular", size: 22)
-        if let font = font {
+        if let font = UIFont(name: "KaushanScript-Regular", size: 22) {
             UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName: font, NSForegroundColorAttributeName: UIColor.whiteColor()]
         }
         
