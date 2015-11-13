@@ -13,9 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
 
         setupAppearance()
         Settings.registerDefaults()
-        if #available(iOS 9.0, *) {
-            watchConnectivityHelper.setupWatchConnectivity(delegate: self)
-        }
+        watchConnectivityHelper.setupWatchConnectivity(delegate: self)
 
         let userDefaults = NSUserDefaults.groupUserDefaults()
         if (!userDefaults.boolForKey(Constants.General.OnboardingShown.key())) {
@@ -66,7 +64,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     Present the onboarding controller if needed
     */
     func loadOnboardingInterface() {
-        UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .Slide)
         let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
         if let controller = storyboard.instantiateInitialViewController() {
             self.window?.rootViewController = controller
@@ -77,10 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     Present the main interface
     */
     func loadMainInterface() {
-        if #available(iOS 9.0, *) {
-            realmNotification = watchConnectivityHelper.setupWatchUpdates()
-        }
-        UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Slide)
+        realmNotification = watchConnectivityHelper.setupWatchUpdates()
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let controller = storyboard.instantiateInitialViewController() {
             self.window?.rootViewController = controller
@@ -109,13 +103,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         case Small = "it.fancypixel.gulps.small"
     }
 
-    @available(iOS 9.0, *)
     func application(application: UIApplication, performActionForShortcutItem shortcutItem: UIApplicationShortcutItem, completionHandler: (Bool) -> Void) {
         handleShortcutItem(shortcutItem)
         completionHandler(true)
     }
 
-    @available(iOS 9.0, *)
     func handleShortcutItem(item: UIApplicationShortcutItem) {
         if let type = ShortcutType(rawValue: item.type) {
             if (type == .Small) {
@@ -126,7 +118,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         }
     }
 
-    @available(iOS 9.0, *)
     func session(session: WCSession, didReceiveApplicationContext applicationContext: [String : AnyObject]) {
         watchConnectivityHelper.session(session, didReceiveApplicationContext: applicationContext)
     }

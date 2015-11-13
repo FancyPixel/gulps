@@ -3,6 +3,14 @@ import ClockKit
 
 class ComplicationController: NSObject, CLKComplicationDataSource {
 
+    func requestedUpdateDidBegin() {
+        let server = CLKComplicationServer.sharedInstance()
+
+        for comp in (server.activeComplications) {
+            server.reloadTimelineForComplication(comp)
+        }
+    }
+
     func getPlaceholderTemplateForComplication(complication: CLKComplication, withHandler handler: (CLKComplicationTemplate?) -> Void) {
         if complication.family == .UtilitarianSmall {
             let smallFlat = CLKComplicationTemplateUtilitarianSmallFlat()

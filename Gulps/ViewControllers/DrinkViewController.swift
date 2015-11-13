@@ -52,6 +52,10 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateUI", name: UIApplicationDidBecomeActiveNotification, object: nil)
     }
 
+    public override func prefersStatusBarHidden() -> Bool {
+        return false
+    }
+
     public override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
@@ -81,12 +85,10 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
     public override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 
-        if #available(iOS 9.0, *) {
-            Globals.showPopTipOnceForKey("HEALTH_HINT", userDefaults: userDefaults,
-                popTipText: NSLocalizedString("health.poptip", comment: ""),
-                inView: view,
-                fromFrame: CGRect(x: view.frame.width - 60, y: view.frame.height, width: 1, height: 1), direction: .Up, color: .destructiveColor())
-        }
+        Globals.showPopTipOnceForKey("HEALTH_HINT", userDefaults: userDefaults,
+            popTipText: NSLocalizedString("health.poptip", comment: ""),
+            inView: view,
+            fromFrame: CGRect(x: view.frame.width - 60, y: view.frame.height, width: 1, height: 1), direction: .Up, color: .destructiveColor())
     }
 
     // MARK: - UI update

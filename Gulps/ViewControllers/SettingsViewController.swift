@@ -33,10 +33,8 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
                 textColor: .whiteColor())
         }
 
-        if #available(iOS 9.0, *) {
-            if (WCSession.isSupported()) {
-                WCSession.defaultSession().activateSession()
-            }
+        if (WCSession.isSupported()) {
+            WCSession.defaultSession().activateSession()
         }
     }
 
@@ -139,9 +137,7 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
         userDefaults.synchronize()
         self.tableView.reloadData()
         if sender.on {
-            if #available(iOS 9.0, *) {
-                HealthKitHelper.sharedHelper.askPermission()
-            }
+            HealthKitHelper.sharedHelper.askPermission()
         }
     }
 
@@ -153,11 +149,7 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
     }
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // HealthKit provides water tracking only in iOS9
-        if #available(iOS 9.0, *) {
-            return 4
-        }
-        return 3
+        return 4
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -195,6 +187,9 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
         let number = numberFormatter.numberFromString(text) as? Double
         userDefaults.setDouble(number ?? 0.0, forKey: key)
         userDefaults.synchronize()
+
+        // Update the settings on the watch
+        WatchConnectivityHelper().sendWatchData()
     }
 
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {

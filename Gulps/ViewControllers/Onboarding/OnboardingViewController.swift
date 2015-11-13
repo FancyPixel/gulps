@@ -14,6 +14,10 @@ class OnboardingViewController: AMWaveViewController {
         updateUI()
     }
 
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+
     override func visibleCells() -> [AnyObject]! {
         return self.viewArray
     }

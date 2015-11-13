@@ -19,7 +19,6 @@ public struct WatchConnectivityHelper {
      Establishes the connection between the app and WatchOS2
      - Parameter delegate: an object implementing `WCSessionDelegate`
      */
-    @available(iOS 9.0, *)
     public func setupWatchConnectivity(delegate delegate: WCSessionDelegate) {
         guard WCSession.isSupported() else {
             return
@@ -34,7 +33,6 @@ public struct WatchConnectivityHelper {
      Updates data on WatchOS, and listens for changes
      - Returns: RLMNotificationToken that needs to be retained
      */
-    @available(iOS 9.0, *)
     public func setupWatchUpdates() -> RLMNotificationToken {
         sendWatchData()
         return EntryHandler.sharedHandler.realm.addNotificationBlock { note, realm in
@@ -46,7 +44,6 @@ public struct WatchConnectivityHelper {
     /**
      Sends the current data to WatchOS
      */
-    @available(iOS 9.0, *)
     public func sendWatchData() {
         guard WCSession.isSupported() else {
             return
@@ -68,7 +65,6 @@ public struct WatchConnectivityHelper {
      Reads the new applications context and updates Realm if needed. 
      It's triggered when a new portion is added on the watch
      */
-    @available(iOS 9.0, *)
     public func session(session: WCSession, didReceiveApplicationContext applicationContext: [String : AnyObject]) {
         print("Receiving Context: \(applicationContext)")
         guard let new = applicationContext[Constants.WatchContext.Current.key()] as? Double else {
