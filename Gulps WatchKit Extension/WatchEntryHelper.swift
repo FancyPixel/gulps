@@ -25,10 +25,9 @@ class WatchEntryHelper {
      - parameter portion: The portion key
      */
     func addGulp(portion: String) {
-        let quantity = userDefaults.doubleForKey(Constants.WatchContext.Current.key())
         let portion = userDefaults.doubleForKey(portion)
+        userDefaults.setDouble(quantity() + portion, forKey: Constants.WatchContext.Current.key())
         userDefaults.setObject(NSDate(), forKey: Constants.WatchContext.Date.key())
-        userDefaults.setDouble(quantity + portion, forKey: Constants.WatchContext.Current.key())
         userDefaults.synchronize()
     }
 
@@ -42,16 +41,12 @@ class WatchEntryHelper {
     }
 
     /**
-     Returns the current percentage, if available
-     The data might not be there yet (app just installed)
+     Returns the current quantity
+     It also checks if the data is stale, resetting the quantity if needed
      - Returns: Int? the current percentage
      */
-    func percentage() -> Int? {
+    func quantity() -> Double {
         let quantity = userDefaults.doubleForKey(Constants.WatchContext.Current.key())
-
-        guard quantity != 0 else {
-            return nil
-        }
 
         if let date = userDefaults.objectForKey(Constants.WatchContext.Date.key()) as? NSDate {
             if let tomorrow = date.startOfTomorrow where NSDate().compare(tomorrow) != NSComparisonResult.OrderedAscending {
@@ -60,7 +55,16 @@ class WatchEntryHelper {
             }
         }
 
+        return quantity
+    }
+
+    /**
+     Returns the current percentage, if available
+     The data might not be there yet (app just installed)
+     - Returns: Int? the current percentage
+     */
+    func percentage() -> Int? {
         let goal = userDefaults.doubleForKey(Constants.Gulp.Goal.key())
-        return Int(round(quantity / goal * 100.0))
+        return Int(round(quantity() / goal * 100.0))
     }
 }
