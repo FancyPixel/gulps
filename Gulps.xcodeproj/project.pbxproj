@@ -597,6 +597,7 @@
 				65F44C421AF24B770093A3E9 /* Resources */,
 				29A26A670C128C589C4F161A /* Embed Pods Frameworks */,
 				8BAAE1953D129A3D43C702A6 /* Copy Pods Resources */,
+				658BE4AD1BFCC60A003BBB18 /* Strip frameworks */,
 			);
 			buildRules = (
 			);
@@ -845,6 +846,20 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
+		};
+		658BE4AD1BFCC60A003BBB18 /* Strip frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Strip frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd \"${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\"\nif [[ -d \"Frameworks\" ]]; then\nrm -fr Frameworks\nfi";
 		};
 		6B6AF88C106CF70B20D20372 /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
