@@ -31,11 +31,14 @@ class WatchEntryHelper {
         userDefaults.synchronize()
     }
 
+    /**
+     Application Context sent by the watch
+     - Returns: [String: Double]
+     */
     func applicationContext() -> [String: Double] {
-        let quantity = userDefaults.doubleForKey(Constants.WatchContext.Current.key())
         return [
             Constants.Gulp.Goal.key(): userDefaults.doubleForKey(Constants.Gulp.Goal.key()),
-            Constants.WatchContext.Current.key(): quantity,
+            Constants.WatchContext.Current.key(): quantity(),
             Constants.Gulp.Small.key(): userDefaults.doubleForKey(Constants.Gulp.Small.key()),
             Constants.Gulp.Big.key(): userDefaults.doubleForKey(Constants.Gulp.Big.key())]
     }
@@ -43,7 +46,7 @@ class WatchEntryHelper {
     /**
      Returns the current quantity
      It also checks if the data is stale, resetting the quantity if needed
-     - Returns: Int? the current percentage
+     - Returns: Double the current quantity
      */
     func quantity() -> Double {
         let quantity = userDefaults.doubleForKey(Constants.WatchContext.Current.key())
