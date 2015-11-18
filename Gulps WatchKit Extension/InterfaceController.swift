@@ -60,6 +60,14 @@ typealias InterfaceHelper = InterfaceController
 private extension InterfaceHelper {
 
     func reloadAndUpdateUI() {
+        if NSUserDefaults.standardUserDefaults().doubleForKey(Constants.Gulp.Goal.key()) == 0 {
+            progressImage.setHidden(true)
+            goalLabel.setText(NSLocalizedString("watch.please_onboard", comment: "Shown when the user did not start the iPhone app yet"))
+            return
+        }
+
+        progressImage.setHidden(false)
+
         let percentage = WatchEntryHelper.sharedHelper.percentage() ?? 0
         var delta = percentage - Int(previousPercentage)
         if (delta < 0) {

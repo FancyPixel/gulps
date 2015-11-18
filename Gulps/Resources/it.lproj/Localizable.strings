@@ -35,6 +35,7 @@
 
 /* WatchKit */
 "daily goal:" = "OBIETTIVO: ";
+"watch.please_onboard" = "Avvia l'applicazione sul tuo iPhone almeno una volta per iniziare";
 
 /* HealthKit */
 "health.poptip" = "Puoi abilitare l'esportazione verso l'app Salute nelle preferenze";

@@ -35,6 +35,7 @@
 
 /* WatchKit */
 "daily goal:" = "DAILY GOAL: ";
+"watch.please_onboard" = "Please make sure to run the app on your iPhone first!";
 
 /* HealthKit */
 "health.poptip" = "You can enable the Apple Health export in the settings";
