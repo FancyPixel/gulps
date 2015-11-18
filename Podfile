@@ -2,6 +2,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '9.0'
 
 def common_pods
+  pod 'RealmSwift'
   pod 'AMWaveTransition', '~> 0.5'
   pod 'AHKActionSheet', '~> 0.5'
   pod 'pop', '~> 1.0'
@@ -15,6 +16,10 @@ end
 
 target 'Gulps' do
   common_pods
+end
+
+target 'GulpsToday' do
+  pod 'RealmSwift'
 end
 
 target 'GulpsTests' do

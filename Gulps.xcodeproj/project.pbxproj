@@ -48,16 +48,9 @@
 		6555BB6B1B0CB90A00CE436A /* DrinkViewController+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6555BB6A1B0CB90A00CE436A /* DrinkViewController+Animations.swift */; };
 		6555BB6D1B0CB93100CE436A /* CalendarViewController+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6555BB6C1B0CB93100CE436A /* CalendarViewController+Animations.swift */; };
 		655BE8C81BF6558E003232A8 /* UINavigationController-StatusBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655BE8C71BF6558E003232A8 /* UINavigationController-StatusBar.swift */; };
-		65694D7B1B186B2C0078D991 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65694D7A1B186B2C0078D991 /* RealmSwift.framework */; };
-		65694D7C1B186B2C0078D991 /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 65694D7A1B186B2C0078D991 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		65694D7D1B186B490078D991 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65694D7A1B186B2C0078D991 /* RealmSwift.framework */; };
 		658DBFD01AF75D130094C0F1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65F44C271AF24B440093A3E9 /* Images.xcassets */; };
 		6591D8C61AF2684A0069E198 /* DrinkViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6591D8C51AF2684A0069E198 /* DrinkViewControllerTests.swift */; };
 		65A234FF1AF253D1002A35F3 /* TodayViewController+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A234FE1AF253D1002A35F3 /* TodayViewController+Animation.swift */; };
-		65AADD111AFBAD7B0039EE4C /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65AADD101AFBAD7B0039EE4C /* Realm.framework */; };
-		65AADD121AFBAD7B0039EE4C /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 65AADD101AFBAD7B0039EE4C /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		65AADD191AFBAFB10039EE4C /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65AADD101AFBAD7B0039EE4C /* Realm.framework */; };
-		65AADD1B1AFBB0110039EE4C /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65AADD101AFBAD7B0039EE4C /* Realm.framework */; };
 		65C6AA5C1BF4AD3200BB80CF /* WatchConnectivityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C6AA5B1BF4AD3200BB80CF /* WatchConnectivityHelper.swift */; };
 		65C92DA51BB1648C00E2DFE7 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65C92DA41BB1648C00E2DFE7 /* HealthKit.framework */; };
 		65C92DA71BB164D100E2DFE7 /* HealthKitHealper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C92DA61BB164D100E2DFE7 /* HealthKitHealper.swift */; };
@@ -85,6 +78,7 @@
 		65F55F2F1B5942A4008653F2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65F55F211B592D91008653F2 /* Localizable.strings */; };
 		65F55F321B5F965F008653F2 /* drop.caf in Resources */ = {isa = PBXBuildFile; fileRef = 65F55F311B5D0A0E008653F2 /* drop.caf */; };
 		800E72B73F54FA65CABC4BD6 /* Pods_Gulps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A701E98A87809500CB34BF4 /* Pods_Gulps.framework */; };
+		E3F5301FBFEDB00ED6B865BA /* Pods_GulpsToday.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD5FAC2A10E7AFB568C1D91E /* Pods_GulpsToday.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -147,8 +141,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				65694D7C1B186B2C0078D991 /* RealmSwift.framework in Embed Frameworks */,
-				65AADD121AFBAD7B0039EE4C /* Realm.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -201,12 +193,10 @@
 		6555BB6A1B0CB90A00CE436A /* DrinkViewController+Animations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DrinkViewController+Animations.swift"; sourceTree = "<group>"; };
 		6555BB6C1B0CB93100CE436A /* CalendarViewController+Animations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CalendarViewController+Animations.swift"; sourceTree = "<group>"; };
 		655BE8C71BF6558E003232A8 /* UINavigationController-StatusBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationController-StatusBar.swift"; sourceTree = "<group>"; };
-		65694D7A1B186B2C0078D991 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
 		6591D8C51AF2684A0069E198 /* DrinkViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrinkViewControllerTests.swift; sourceTree = "<group>"; };
 		65A234FD1AF25376002A35F3 /* GulpsToday.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = GulpsToday.entitlements; sourceTree = "<group>"; };
 		65A234FE1AF253D1002A35F3 /* TodayViewController+Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TodayViewController+Animation.swift"; sourceTree = "<group>"; };
 		65A235021AF2543B002A35F3 /* Gulps WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Gulps WatchKit Extension.entitlements"; sourceTree = "<group>"; };
-		65AADD101AFBAD7B0039EE4C /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
 		65C6AA5B1BF4AD3200BB80CF /* WatchConnectivityHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchConnectivityHelper.swift; sourceTree = "<group>"; };
 		65C92DA41BB1648C00E2DFE7 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		65C92DA61BB164D100E2DFE7 /* HealthKitHealper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthKitHealper.swift; sourceTree = "<group>"; };
@@ -243,7 +233,10 @@
 		65F55F311B5D0A0E008653F2 /* drop.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = drop.caf; sourceTree = "<group>"; };
 		8339035B8C2DA7AA7C151C33 /* Pods-GulpsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GulpsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GulpsTests/Pods-GulpsTests.release.xcconfig"; sourceTree = "<group>"; };
 		BEC10A47E1AB990C16B7DEFC /* Pods_Gulps_WatchKit_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gulps_WatchKit_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C5FBA99C443A944184AA9213 /* Pods-GulpsToday.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GulpsToday.release.xcconfig"; path = "Pods/Target Support Files/Pods-GulpsToday/Pods-GulpsToday.release.xcconfig"; sourceTree = "<group>"; };
 		C916E6FEBE9F3B2034FA5E16 /* Pods-Gulps.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gulps.release.xcconfig"; path = "Pods/Target Support Files/Pods-Gulps/Pods-Gulps.release.xcconfig"; sourceTree = "<group>"; };
+		CD5FAC2A10E7AFB568C1D91E /* Pods_GulpsToday.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GulpsToday.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E254AD32CE09950B6DA12F66 /* Pods-GulpsToday.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GulpsToday.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GulpsToday/Pods-GulpsToday.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -252,7 +245,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				00612DD0922770ADF791FB36 /* Pods_GulpsTests.framework in Frameworks */,
-				65AADD1B1AFBB0110039EE4C /* Realm.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,10 +252,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65AADD111AFBAD7B0039EE4C /* Realm.framework in Frameworks */,
 				65C92DA51BB1648C00E2DFE7 /* HealthKit.framework in Frameworks */,
 				800E72B73F54FA65CABC4BD6 /* Pods_Gulps.framework in Frameworks */,
-				65694D7B1B186B2C0078D991 /* RealmSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,8 +262,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				65F44C471AF24B770093A3E9 /* NotificationCenter.framework in Frameworks */,
-				65AADD191AFBAFB10039EE4C /* Realm.framework in Frameworks */,
-				65694D7D1B186B490078D991 /* RealmSwift.framework in Frameworks */,
+				E3F5301FBFEDB00ED6B865BA /* Pods_GulpsToday.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,6 +290,8 @@
 				C916E6FEBE9F3B2034FA5E16 /* Pods-Gulps.release.xcconfig */,
 				2895AC59AC7E84643B88E562 /* Pods-GulpsTests.debug.xcconfig */,
 				8339035B8C2DA7AA7C151C33 /* Pods-GulpsTests.release.xcconfig */,
+				E254AD32CE09950B6DA12F66 /* Pods-GulpsToday.debug.xcconfig */,
+				C5FBA99C443A944184AA9213 /* Pods-GulpsToday.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -475,12 +466,11 @@
 			isa = PBXGroup;
 			children = (
 				65C92DA41BB1648C00E2DFE7 /* HealthKit.framework */,
-				65694D7A1B186B2C0078D991 /* RealmSwift.framework */,
-				65AADD101AFBAD7B0039EE4C /* Realm.framework */,
 				65F44C461AF24B770093A3E9 /* NotificationCenter.framework */,
 				5A701E98A87809500CB34BF4 /* Pods_Gulps.framework */,
 				4A4925FCD5463140CD8FE9BC /* Pods_GulpsTests.framework */,
 				BEC10A47E1AB990C16B7DEFC /* Pods_Gulps_WatchKit_App.framework */,
+				CD5FAC2A10E7AFB568C1D91E /* Pods_GulpsToday.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -584,7 +574,6 @@
 				6B6AF88C106CF70B20D20372 /* Embed Pods Frameworks */,
 				06E6943317C6B36A9014DF37 /* Copy Pods Resources */,
 				65AADD131AFBAD7B0039EE4C /* Embed Frameworks */,
-				65AADD181AFBAEEF0039EE4C /* Framework strip */,
 				653039851BDF6D8B00263D77 /* Embed Watch Content */,
 			);
 			buildRules = (
@@ -602,9 +591,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 65F44C521AF24B780093A3E9 /* Build configuration list for PBXNativeTarget "GulpsToday" */;
 			buildPhases = (
+				97C23851ADB2B3C1FBF18339 /* Check Pods Manifest.lock */,
 				65F44C401AF24B770093A3E9 /* Sources */,
 				65F44C411AF24B770093A3E9 /* Frameworks */,
 				65F44C421AF24B770093A3E9 /* Resources */,
+				29A26A670C128C589C4F161A /* Embed Pods Frameworks */,
+				8BAAE1953D129A3D43C702A6 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -794,6 +786,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Gulps/Pods-Gulps-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		29A26A670C128C589C4F161A /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GulpsToday/Pods-GulpsToday-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		370ADBA65A9592D39680DCF5 /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -839,20 +846,6 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		65AADD181AFBAEEF0039EE4C /* Framework strip */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Framework strip";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "bash ${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework/strip-frameworks.sh";
-		};
 		6B6AF88C106CF70B20D20372 /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -866,6 +859,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Gulps/Pods-Gulps-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8BAAE1953D129A3D43C702A6 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GulpsToday/Pods-GulpsToday-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		97C23851ADB2B3C1FBF18339 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		AD0AAEF0A3C6E92AC4A7BD92 /* Copy Pods Resources */ = {
@@ -1217,6 +1240,7 @@
 		};
 		65F44C531AF24B780093A3E9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E254AD32CE09950B6DA12F66 /* Pods-GulpsToday.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = GulpsToday/GulpsToday.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1243,6 +1267,7 @@
 		};
 		65F44C541AF24B780093A3E9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C5FBA99C443A944184AA9213 /* Pods-GulpsToday.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = GulpsToday/GulpsToday.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
@@ -1289,7 +1314,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = YES;
@@ -1334,7 +1359,7 @@
 		65F44C7D1AF24B8A0093A3E9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
