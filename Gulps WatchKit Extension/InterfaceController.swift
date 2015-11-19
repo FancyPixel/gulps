@@ -68,7 +68,10 @@ private extension InterfaceHelper {
 
         progressImage.setHidden(false)
 
-        let percentage = WatchEntryHelper.sharedHelper.percentage() ?? 0
+        var percentage = WatchEntryHelper.sharedHelper.percentage() ?? 0
+        if percentage > 100 {
+            percentage = 100
+        }
         var delta = percentage - Int(previousPercentage)
         if (delta < 0) {
             // animate in reverse using negative duration
