@@ -68,11 +68,8 @@ private extension InterfaceHelper {
 
         progressImage.setHidden(false)
 
-        var percentage = WatchEntryHelper.sharedHelper.percentage() ?? 0
-        if percentage > 100 {
-            percentage = 100
-        }
-        var delta = percentage - Int(previousPercentage)
+        let percentage = WatchEntryHelper.sharedHelper.percentage() ?? 0
+        var delta = (percentage > 100 ? 100 : percentage) - Int(previousPercentage)
         if (delta < 0) {
             // animate in reverse using negative duration
             progressImage.startAnimatingWithImagesInRange(NSMakeRange(percentage, -delta), duration: -1.0, repeatCount: 1)
