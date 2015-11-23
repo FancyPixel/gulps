@@ -40,10 +40,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     }
 
     func getCurrentTimelineEntryForComplication(complication: CLKComplication, withHandler handler: (CLKComplicationTimelineEntry?) -> Void) {
-        var percentage = 0
-        if let storedPercentage = WatchEntryHelper.sharedHelper.percentage() {
-            percentage = storedPercentage
-        }
+        let percentage = WatchEntryHelper.sharedHelper.percentage() ?? 0
 
         if complication.family == .UtilitarianSmall {
             let smallFlat = CLKComplicationTemplateUtilitarianSmallFlat()
