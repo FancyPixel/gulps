@@ -6,9 +6,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     func requestedUpdateDidBegin() {
         let server = CLKComplicationServer.sharedInstance()
 
-        for comp in (server.activeComplications) {
-            server.reloadTimelineForComplication(comp)
-        }
+        server.activeComplications.forEach { server.reloadTimelineForComplication($0) }
     }
 
     func getPlaceholderTemplateForComplication(complication: CLKComplication, withHandler handler: (CLKComplicationTemplate?) -> Void) {
