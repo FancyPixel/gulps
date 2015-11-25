@@ -10,11 +10,15 @@ import UIKit
 
 class FeedbackViewController: UIViewController {
 
-    @IBOutlet weak var negativeButton: UIButton!
+    @IBOutlet weak var negativeButton: UIButton?
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        negativeButton.layer.borderColor = UIColor.whiteColor().CGColor
+        negativeButton?.layer.borderColor = UIColor.whiteColor().CGColor
+    }
+
+    override func prefersStatusBarHidden() -> Bool {
+        return true
     }
     
     @IBAction func reviewAction() {
