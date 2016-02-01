@@ -82,7 +82,7 @@
                                     <constraint firstAttribute="width" constant="70" id="LO1-pb-ERG"/>
                                     <constraint firstAttribute="height" constant="70" id="nlr-di-dUQ"/>
                                 </constraints>
-                                <state key="normal" image="small-icon">
+                                <state key="normal" image="custom-icon">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -1017,6 +1017,7 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
     </scenes>
     <resources>
         <image name="calendar-icon" width="30" height="30"/>
+        <image name="custom-icon" width="21" height="27"/>
         <image name="drink-icon" width="30" height="30"/>
         <image name="drop" width="300" height="300"/>
         <image name="large-icon" width="40" height="40"/>
