@@ -57,6 +57,8 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, WCSessionDelegate {
                 NSNotificationCenter.defaultCenter().postNotificationName(NotificationContextReceived, object: nil)
                 self.reloadComplications()
         }
+        
+        // NOTE: The Apple Watch target does not yet support "Constants.Gulp.Custom.key"
     }
 
     func reloadComplications() {
