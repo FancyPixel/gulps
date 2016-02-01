@@ -67,6 +67,16 @@ public enum Constants {
             }
         }
     }
+    
+    public enum CustomGulp: Int {
+        case On
+        public func key() -> String {
+            switch self {
+            case .On:
+                return "CUSTOM_GULP_ON"
+            }
+        }
+    }
 
     public enum Health: Int {
         case On

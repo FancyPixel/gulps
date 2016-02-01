@@ -8,6 +8,7 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
     @IBOutlet weak var smallPortionText: UITextField!
     @IBOutlet weak var largePortionText: UITextField!
     @IBOutlet weak var dailyGoalText: UITextField!
+    @IBOutlet weak var customGulpSwitch: UISwitch!
     @IBOutlet weak var notificationSwitch: UISwitch!
     @IBOutlet weak var healthSwitch: UISwitch!
     @IBOutlet weak var notificationFromLabel: UILabel!
@@ -56,13 +57,15 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
         largePortionText.text = numberFormatter.stringFromNumber(userDefaults.doubleForKey(Constants.Gulp.Big.key()))
         smallPortionText.text = numberFormatter.stringFromNumber(userDefaults.doubleForKey(Constants.Gulp.Small.key()))
         dailyGoalText.text = numberFormatter.stringFromNumber(userDefaults.doubleForKey(Constants.Gulp.Goal.key()))
-
-        healthSwitch.on = userDefaults.boolForKey(Constants.Health.On.key())
+        
+        customGulpSwitch.on = userDefaults.boolForKey(Constants.CustomGulp.On.key())
 
         notificationSwitch.on = userDefaults.boolForKey(Constants.Notification.On.key())
         notificationFromLabel.text = "\(userDefaults.integerForKey(Constants.Notification.From.key())):00"
         notificationToLabel.text = "\(userDefaults.integerForKey(Constants.Notification.To.key())):00"
         notificationIntervalLabel.text = "\(userDefaults.integerForKey(Constants.Notification.Interval.key())) " +  NSLocalizedString("hours", comment: "")
+        
+        healthSwitch.on = userDefaults.boolForKey(Constants.Health.On.key())
     }
 
     func updateNotificationPreferences() {
@@ -147,6 +150,12 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
         self.tableView.reloadData()
         updateNotificationPreferences()
     }
+    
+    @IBAction func customGulpAction(sender: UISwitch) {
+        userDefaults.setBool(sender.on, forKey: Constants.CustomGulp.On.key())
+        userDefaults.synchronize()
+        self.tableView.reloadData()
+    }
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 4
@@ -156,7 +165,7 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
         if (section == 0) {
             return 1
         } else if (section == 1) {
-            return 3
+            return 4
         } else if (section == 2) {
             if NSUserDefaults.groupUserDefaults().boolForKey(Constants.Notification.On.key()) {
                 return 4

@@ -902,12 +902,42 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PreferencesCll" id="zxJ-o7-B6s">
+                                        <rect key="frame" x="0.0" y="267.5" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zxJ-o7-B6s" id="jZz-Pb-xk2">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Custom gulp" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="shg-KE-AQ9">
+                                                    <rect key="frame" x="15" y="12" width="93" height="20"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Dw-Au-mpO">
+                                                    <rect key="frame" x="263" y="7" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="customGulpAction:" destination="t9K-A9-XHF" eventType="valueChanged" id="1Np-Bz-TUK"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="shg-KE-AQ9" firstAttribute="leading" secondItem="jZz-Pb-xk2" secondAttribute="leading" constant="15" id="6uT-fK-La6"/>
+                                                <constraint firstAttribute="trailing" secondItem="9Dw-Au-mpO" secondAttribute="trailing" constant="8" id="8vl-iC-Y95"/>
+                                                <constraint firstAttribute="centerY" secondItem="shg-KE-AQ9" secondAttribute="centerY" id="974-a8-XOU"/>
+                                                <constraint firstAttribute="bottom" secondItem="9Dw-Au-mpO" secondAttribute="bottom" constant="6" id="QOl-kj-LOe"/>
+                                                <constraint firstItem="9Dw-Au-mpO" firstAttribute="centerY" secondItem="jZz-Pb-xk2" secondAttribute="centerY" id="RDv-A3-mFK"/>
+                                                <constraint firstItem="9Dw-Au-mpO" firstAttribute="top" secondItem="jZz-Pb-xk2" secondAttribute="top" constant="7" id="iQ4-d2-dvh"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Notifications" id="Cqk-U1-F6w">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PreferencesCll" id="Ii4-wt-fc6">
-                                        <rect key="frame" x="0.0" y="309.5" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="353.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ii4-wt-fc6" id="1Hn-44-t70">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
@@ -937,7 +967,7 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PreferencesCll" textLabel="Pnc-7E-Kee" detailTextLabel="aBp-Ni-lCc" style="IBUITableViewCellStyleValue1" id="dxR-vc-Rwx">
-                                        <rect key="frame" x="0.0" y="353.5" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="397.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dxR-vc-Rwx" id="iKk-wz-AiX">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
@@ -961,7 +991,7 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PreferencesCll" textLabel="f3c-OV-GHw" detailTextLabel="en4-wz-CaR" style="IBUITableViewCellStyleValue1" id="sFs-MK-DDj">
-                                        <rect key="frame" x="0.0" y="397.5" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="441.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sFs-MK-DDj" id="9UG-1o-lam">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
@@ -985,7 +1015,7 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PreferencesCll" textLabel="w1F-Cx-bRx" detailTextLabel="llL-4J-aC6" style="IBUITableViewCellStyleValue1" id="8v4-HN-MkF">
-                                        <rect key="frame" x="0.0" y="441.5" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="485.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8v4-HN-MkF" id="wVD-TQ-jfH">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
@@ -1013,7 +1043,7 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                             <tableViewSection headerTitle="Apple Health" id="kL3-zV-Q1y">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PreferencesCll" id="rtu-Sv-Asn">
-                                        <rect key="frame" x="0.0" y="527.5" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="571.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rtu-Sv-Asn" id="NkK-Il-Fd3">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
@@ -1052,6 +1082,7 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                     </tableView>
                     <navigationItem key="navigationItem" id="yM9-kq-UP2"/>
                     <connections>
+                        <outlet property="customGulpSwitch" destination="9Dw-Au-mpO" id="YDN-c5-wYP"/>
                         <outlet property="dailyGoalText" destination="Heo-vz-8M3" id="lHN-ai-OMb"/>
                         <outlet property="healthSwitch" destination="fU5-mD-m8k" id="83t-Hg-eil"/>
                         <outlet property="largePortionText" destination="SBF-ug-rBd" id="kj7-UV-Usx"/>

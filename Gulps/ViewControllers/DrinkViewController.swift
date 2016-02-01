@@ -63,6 +63,14 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
 
     public override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        if NSUserDefaults.groupUserDefaults().boolForKey(Constants.CustomGulp.On.key()) {
+            customButton.userInteractionEnabled = true
+            customButton.hidden = false
+        } else {
+            customButton.userInteractionEnabled = false
+            customButton.hidden = true
+        }
 
         view.layoutIfNeeded()
 
