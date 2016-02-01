@@ -117,6 +117,15 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
             userDefaults.setBool(true, forKey: "FEEDBACK")
             userDefaults.synchronize()
         }
+        
+        if let customViewController = segue.destinationViewController as? CustomViewController {
+            customViewController.gulpSize = {[weak self]
+                (value) in
+                if let weakSelf = self {
+                    weakSelf.addCustomGulp(value)
+                }
+            }
+        }
     }
 
     // MARK: - Actions
@@ -136,9 +145,8 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
             inView: view,
             fromFrame: minusButton.frame)
         
-        // IMPROVE: This approach is not clear to read and may cause errors.
-        let portion = smallButton == sender ? Constants.Gulp.Small.key() : largeButton == sender ? Constants.Gulp.Big.key() : Constants.Gulp.Custom.key()
-        updateCurrentEntry(userDefaults.doubleForKey(portion))
+        let portion = smallButton == sender ? Constants.Gulp.Small.key() : Constants.Gulp.Big.key()
+        addGulp(portion)
     }
 
     @IBAction func removeGulpAction() {
@@ -149,6 +157,22 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
         }
         _ = [yes, no].map { controller.addAction($0) }
         self.presentViewController(controller, animated: true) {}
+    }
+    
+    private func addGulp(portion: String) {
+        updateCurrentEntry(userDefaults.doubleForKey(portion))
+    }
+    
+    private func addCustomGulp(value: String) {
+        // TODO: Remove duplicated code
+        contractAddButton()
+        Globals.showPopTipOnceForKey("UNDO_HINT", userDefaults: userDefaults,
+            popTipText: NSLocalizedString("undo poptip", comment: ""),
+            inView: view,
+            fromFrame: minusButton.frame)
+        
+        
+        addGulp(Constants.Gulp.Custom.key())
     }
 
     // MARK: - UIViewControllerTransitioningDelegate

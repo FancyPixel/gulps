@@ -19,6 +19,99 @@
         </mutableArray>
     </customFonts>
     <scenes>
+        <!--Custom View Controller-->
+        <scene sceneID="l26-fl-tUt">
+            <objects>
+                <viewController id="n7l-IF-ya7" customClass="CustomViewController" customModule="Gulps" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="vID-sg-Sa9"/>
+                        <viewControllerLayoutGuide type="bottom" id="G1F-sT-mkp"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="sLD-Ot-aKZ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gulp size" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MVT-j7-QAE">
+                                <rect key="frame" x="18" y="152" width="67" height="19"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="19" id="eUF-ts-kKD"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0,2" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0sb-ML-tka">
+                                <rect key="frame" x="194" y="140" width="90" height="43"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="43" id="0yK-l2-akN"/>
+                                    <constraint firstAttribute="width" constant="90" id="CNd-QH-cpz"/>
+                                </constraints>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="decimalPad"/>
+                                <connections>
+                                    <outlet property="delegate" destination="n7l-IF-ya7" id="Db3-A9-n3O"/>
+                                </connections>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Oz" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vjp-66-WA9">
+                                <rect key="frame" x="290" y="153" width="18" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="17" id="OeR-zq-eTX"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VHN-QJ-E7A">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="nlO-eC-i5C"/>
+                                </constraints>
+                                <color key="barTintColor" red="0.21960784310000001" green="0.49019607840000001" blue="0.81176470590000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Custom Gulp" id="Q09-Pw-s4E">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="EOQ-Rt-2Kg">
+                                            <connections>
+                                                <action selector="cancelTapped:" destination="n7l-IF-ya7" id="mEh-dn-FGr"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="Dzz-8I-exp">
+                                            <connections>
+                                                <action selector="doneTapped:" destination="n7l-IF-ya7" id="IxL-P8-07j"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" red="0.2196078431372549" green="0.49019607843137253" blue="0.81176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="VHN-QJ-E7A" firstAttribute="top" secondItem="vID-sg-Sa9" secondAttribute="bottom" constant="-20" id="FoL-Gq-APK"/>
+                            <constraint firstItem="Vjp-66-WA9" firstAttribute="centerY" secondItem="MVT-j7-QAE" secondAttribute="centerY" id="PBa-Yk-1tA"/>
+                            <constraint firstItem="MVT-j7-QAE" firstAttribute="leading" secondItem="sLD-Ot-aKZ" secondAttribute="leading" constant="18" id="U6A-tl-eaj"/>
+                            <constraint firstItem="0sb-ML-tka" firstAttribute="centerY" secondItem="MVT-j7-QAE" secondAttribute="centerY" id="VQN-fp-mVC"/>
+                            <constraint firstItem="MVT-j7-QAE" firstAttribute="top" secondItem="VHN-QJ-E7A" secondAttribute="bottom" constant="88" id="Zrn-LF-4yO"/>
+                            <constraint firstAttribute="trailing" secondItem="Vjp-66-WA9" secondAttribute="trailing" constant="12" id="bBN-6C-fxG"/>
+                            <constraint firstAttribute="trailing" secondItem="VHN-QJ-E7A" secondAttribute="trailing" id="neA-bG-u1P"/>
+                            <constraint firstItem="VHN-QJ-E7A" firstAttribute="leading" secondItem="sLD-Ot-aKZ" secondAttribute="leading" id="qaC-wZ-vhH"/>
+                            <constraint firstItem="Vjp-66-WA9" firstAttribute="leading" secondItem="0sb-ML-tka" secondAttribute="trailing" constant="6" id="tzx-cI-e2m"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="cancelButton" destination="EOQ-Rt-2Kg" id="ghW-hK-Css"/>
+                        <outlet property="customPortionText" destination="0sb-ML-tka" id="6Ld-Td-msj"/>
+                        <outlet property="doneButton" destination="Dzz-8I-exp" id="4d3-KT-029"/>
+                        <outlet property="unitOfMesureLabel" destination="Vjp-66-WA9" id="Ifi-2i-WSS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uMT-xB-qgV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="833" y="-1343"/>
+        </scene>
         <!--Drink View Controller-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
@@ -91,7 +184,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="selectionButtonAction:" destination="9pv-A4-QxB" eventType="touchUpInside" id="UiM-bH-8Y9"/>
+                                    <segue destination="n7l-IF-ya7" kind="modal" id="bql-Mh-9W4"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v5a-2l-qvB" userLabel="Large Button">
@@ -422,7 +515,7 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sorry to hear that! Is there any way we can improve your experience with Gulps? Contact us, we'd love your feedback!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="upP-xB-nVY">
-                                <rect key="frame" x="16" y="50" width="288" height="87.5"/>
+                                <rect key="frame" x="16" y="50" width="288" height="88"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -688,7 +781,7 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Small gulp" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Brt-M3-CC4">
-                                                    <rect key="frame" x="15" y="12.5" width="75.5" height="19.5"/>
+                                                    <rect key="frame" x="15" y="13" width="76" height="19"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -706,7 +799,7 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                                                     </connections>
                                                 </textField>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Oz" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nbd-CS-kU7">
-                                                    <rect key="frame" x="286" y="13" width="18.5" height="17"/>
+                                                    <rect key="frame" x="286" y="13" width="19" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -743,13 +836,13 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                                                     </connections>
                                                 </textField>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Big gulp" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yCk-VT-Gki">
-                                                    <rect key="frame" x="15" y="12.5" width="59.5" height="19.5"/>
+                                                    <rect key="frame" x="15" y="13" width="60" height="19"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Oz" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RVh-z0-hYc">
-                                                    <rect key="frame" x="286" y="13" width="18.5" height="17"/>
+                                                    <rect key="frame" x="286" y="13" width="19" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -786,13 +879,13 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                                                     </connections>
                                                 </textField>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Daily goal" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pt1-x1-O82">
-                                                    <rect key="frame" x="15" y="12.5" width="71" height="19.5"/>
+                                                    <rect key="frame" x="15" y="13" width="71" height="19"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Oz" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DT8-cB-ShB">
-                                                    <rect key="frame" x="286" y="13" width="18.5" height="17"/>
+                                                    <rect key="frame" x="286" y="13" width="19" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -821,7 +914,7 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remind me to drink" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XIg-ci-rnk">
-                                                    <rect key="frame" x="15" y="12.5" width="141" height="19.5"/>
+                                                    <rect key="frame" x="15" y="13" width="141" height="19"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
