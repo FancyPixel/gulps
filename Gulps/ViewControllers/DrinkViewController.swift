@@ -10,6 +10,7 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
     @IBOutlet public weak var percentageLabel: UICountingLabel!
     @IBOutlet public weak var addButton: UIButton!
     @IBOutlet public weak var smallButton: UIButton!
+    @IBOutlet public weak var customButton: UIButton!
     @IBOutlet public weak var largeButton: UIButton!
     @IBOutlet public weak var minusButton: UIButton!
     @IBOutlet weak var starButton: UIButton!

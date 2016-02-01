@@ -4,6 +4,7 @@ extension DrinkViewController {
 
     func initAnimation() {
         smallButton.alpha = 0
+        customButton.alpha = 0
         largeButton.alpha = 0
         starButton.transform = CGAffineTransformMakeScale(0.0001, 0.0001)
     }
@@ -41,7 +42,7 @@ extension DrinkViewController {
         rotate.removedOnCompletion = true
         rotate.completionBlock = {(_, _) in
             self.addButton.userInteractionEnabled = true
-            _ = [self.smallButton, self.largeButton].map({$0.userInteractionEnabled = true})
+            _ = [self.smallButton, self.customButton, self.largeButton].map({$0.userInteractionEnabled = true})
             self.expanded = true
         }
 
@@ -67,8 +68,8 @@ extension DrinkViewController {
         addButton.pop_addAnimation(color, forKey: "color")
         minusButton.pop_addAnimation(scaleMinus, forKey: "scaleMinus")
 
-        _ = [smallButton, largeButton].map({$0.alpha = 1})
-        for button in [smallButton, largeButton] {
+        _ = [smallButton, customButton, largeButton].map({$0.alpha = 1})
+        for button in [smallButton, customButton, largeButton] {
             let pop = POPSpringAnimation(propertyNamed: kPOPViewScaleXY)
             pop.fromValue = NSValue(CGPoint: CGPointMake(0.1, 0.1))
             pop.toValue = NSValue(CGPoint: CGPointMake(1, 1))
@@ -88,10 +89,16 @@ extension DrinkViewController {
         right.fromValue = 0
         right.toValue = 100
         largeButton.layer.pop_addAnimation(right, forKey: "right")
+        
+        let top = POPSpringAnimation(propertyNamed: kPOPLayerTranslationY)
+        top.springBounciness = 5
+        top.fromValue = 0
+        top.toValue = -100
+        customButton.layer.pop_addAnimation(top, forKey: "top")
     }
 
     func contractAddButton() {
-        _ = [smallButton, largeButton].map({$0.userInteractionEnabled = false})
+        _ = [smallButton, customButton, largeButton].map({$0.userInteractionEnabled = false})
         addButton.userInteractionEnabled = false
 
         let rotate = POPSpringAnimation(propertyNamed: kPOPLayerRotation)
@@ -124,7 +131,7 @@ extension DrinkViewController {
         addButton.pop_addAnimation(color, forKey: "color")
         minusButton.pop_addAnimation(scaleMinus, forKey: "scaleMinus")
 
-        for button in [smallButton, largeButton] {
+        for button in [smallButton, customButton, largeButton] {
             let pop = POPSpringAnimation(propertyNamed: kPOPViewScaleXY)
             pop.fromValue = NSValue(CGPoint: CGPointMake(1, 1))
             pop.toValue = NSValue(CGPoint: CGPointMake(0.1, 0.1))
@@ -144,5 +151,11 @@ extension DrinkViewController {
         right.fromValue = 100
         right.toValue = 0
         largeButton.layer.pop_addAnimation(right, forKey: "right")
+        
+        let top = POPBasicAnimation(propertyNamed: kPOPLayerTranslationY)
+        top.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+        top.fromValue = -100
+        top.toValue = 0
+        customButton.layer.pop_addAnimation(top, forKey: "top")
     }
 }
