@@ -16,6 +16,8 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
     @IBOutlet weak var starButton: UIButton!
     @IBOutlet weak var meterContainerView: UIView!
     @IBOutlet weak var maskImage: UIImageView!
+    @IBOutlet weak var topView: UIView!
+    @IBOutlet weak var bottomView: UIView!
 
     public var userDefaults = NSUserDefaults.groupUserDefaults()
     public var progressMeter: BAFluidView?
@@ -102,6 +104,14 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
             popTipText: NSLocalizedString("health.poptip", comment: ""),
             inView: view,
             fromFrame: CGRect(x: view.frame.width - 60, y: view.frame.height, width: 1, height: 1), direction: .Up, color: .destructiveColor())
+    }
+    
+    public override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        if (expanded) {
+            contractAddButton()
+        }
     }
 
     // MARK: - UI update
