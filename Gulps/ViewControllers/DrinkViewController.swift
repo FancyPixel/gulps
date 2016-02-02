@@ -137,10 +137,10 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
         }
         
         if let customViewController = segue.destinationViewController as? CustomViewController {
-            customViewController.gulpSize = {[weak self]
-                (value) in
+            customViewController.gulp = {[weak self]
+                (portion) in
                 if let weakSelf = self {
-                    weakSelf.addCustomGulp(value)
+                    weakSelf.addGulp(portion)
                 }
             }
         }
@@ -157,12 +157,6 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
     }
 
     @IBAction public func selectionButtonAction(sender: UIButton) {
-        contractAddButton()
-        Globals.showPopTipOnceForKey("UNDO_HINT", userDefaults: userDefaults,
-            popTipText: NSLocalizedString("undo poptip", comment: ""),
-            inView: view,
-            fromFrame: minusButton.frame)
-        
         let portion = smallButton == sender ? Constants.Gulp.Small.key() : Constants.Gulp.Big.key()
         addGulp(portion)
     }
@@ -177,20 +171,19 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
         self.presentViewController(controller, animated: true) {}
     }
     
-    private func addGulp(portion: String) {
-        updateCurrentEntry(userDefaults.doubleForKey(portion))
-    }
+    // MARK: - Private
     
-    private func addCustomGulp(value: String) {
-        // TODO: Remove duplicated code
-        contractAddButton()
+    private func addGulp(portion: String) {
+        if (expanded) {
+            contractAddButton()
+        }
+        
         Globals.showPopTipOnceForKey("UNDO_HINT", userDefaults: userDefaults,
             popTipText: NSLocalizedString("undo poptip", comment: ""),
             inView: view,
             fromFrame: minusButton.frame)
         
-        
-        addGulp(Constants.Gulp.Custom.key())
+        updateCurrentEntry(userDefaults.doubleForKey(portion))
     }
 
     // MARK: - UIViewControllerTransitioningDelegate

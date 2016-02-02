@@ -15,7 +15,7 @@ class CustomViewController: UIViewController {
     @IBOutlet weak var customPortionText: UITextField!
     @IBOutlet weak var unitOfMesureLabel: UILabel!
     
-    var gulpSize: ((value: String) -> ())?
+    var gulp: ((portion: String) -> ())?
     
     private let userDefaults = NSUserDefaults.groupUserDefaults()
     
@@ -26,16 +26,6 @@ class CustomViewController: UIViewController {
     }()
     
     // MARK: - Lifecycle
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        customPortionText.inputAccessoryView = Globals.numericToolbar(customPortionText,
-            selector: Selector("resignFirstResponder"),
-            barColor: .mainColor(),
-            textColor: .whiteColor())
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
-    }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -46,17 +36,11 @@ class CustomViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func cancelTapped(sender: UIBarButtonItem) {
-        dismissAddingGulp(false)
+        dismissViewControllerAnimated(true, applyingGulp: false)
     }
     
     @IBAction func doneTapped(sender: AnyObject) {
-        dismissAddingGulp(true)
-    }
-    
-    // MARK: - Notifications
-    
-    func keyboardWillHide(notification: NSNotification) {
-        dismissAddingGulp(true)
+        dismissViewControllerAnimated(true, applyingGulp: true)
     }
     
     // MARK: - Private
@@ -74,13 +58,23 @@ class CustomViewController: UIViewController {
         customPortionText.text = numberFormatter.stringFromNumber(userDefaults.doubleForKey(Constants.Gulp.Custom.key()))
     }
     
-    private func dismissAddingGulp(save: Bool) {
-        self.dismissViewControllerAnimated(save, completion: {
-            if save {
-                self.gulpSize?(value: Constants.Gulp.Custom.key())
-            }
-        })
+    func dismissViewControllerAnimated(animated: Bool, applyingGulp applyGulp: Bool) {
+        defer {
+            self.dismissViewControllerAnimated(animated, completion: {
+                if applyGulp {
+                    self.gulp?(portion: Constants.Gulp.Custom.key())
+                }
+            })
+        }
+        
+        // Dismiss the keyboard before dismissing the view controller.
+        guard !customPortionText.isFirstResponder() else {
+            customPortionText.resignFirstResponder()
+            return
+        }
+        
     }
+
 }
 
 extension CustomViewController : UITextFieldDelegate {
