@@ -1177,7 +1177,7 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
     </scenes>
     <resources>
         <image name="calendar-icon" width="30" height="30"/>
-        <image name="custom-icon" width="21" height="27"/>
+        <image name="custom-icon" width="40" height="40"/>
         <image name="drink-icon" width="30" height="30"/>
         <image name="drop" width="300" height="300"/>
         <image name="large-icon" width="40" height="40"/>
