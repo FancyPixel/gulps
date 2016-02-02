@@ -19,6 +19,10 @@ class MockUserDefaults: NSUserDefaults {
         default:
             return 0
         }
+        
+        // NOTE: The "Constants.Gulp.Custom.key" does not require a mock value.
+        // It is set by the user each time they enter a custom value, and it's
+        // not possible to set a custom value from anywhere else in the app.
     }
 
     override func boolForKey(defaultName: String) -> Bool {

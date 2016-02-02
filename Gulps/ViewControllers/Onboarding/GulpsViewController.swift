@@ -45,6 +45,9 @@ class GulpsViewController: OnboardingViewController, UITextFieldDelegate {
         self.userDefaults.setDouble(small, forKey: Constants.Gulp.Small.key())
         self.userDefaults.setDouble(big, forKey: Constants.Gulp.Big.key())
         self.userDefaults.synchronize()
+        
+        // NOTE: The "Constants.Gulp.Custom.key" is set each time it's entered by the
+        // user, so it's not required in the onvoarding process.
     }
 
     func textFieldShouldReturn(textField: UITextField) -> Bool {

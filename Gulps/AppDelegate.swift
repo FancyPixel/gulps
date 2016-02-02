@@ -117,6 +117,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
                 EntryHandler.sharedHandler.addGulp(NSUserDefaults.groupUserDefaults().doubleForKey(Constants.Gulp.Big.key()))
             }
         }
+        
+        // NOTE: We do not currently support a shortcut for the "Constants.Gulp.Custom.key"
     }
 
     func session(session: WCSession, didReceiveApplicationContext applicationContext: [String : AnyObject]) {

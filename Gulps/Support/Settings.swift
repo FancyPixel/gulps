@@ -4,7 +4,7 @@ public class Settings {
     public class func registerDefaults() {
         let userDefaults = NSUserDefaults.groupUserDefaults()
 
-        // The defaults registered with registerDefaults are ignore by the Today Extension. :/
+        // The defaults registered with registerDefaults are ignored by the Today Extension.
         if (!userDefaults.boolForKey("DEFAULTS_INSTALLED")) {
             userDefaults.setBool(true, forKey: "DEFAULTS_INSTALLED")
             userDefaults.setInteger(Constants.UnitsOfMeasure.Liters.rawValue, forKey: Constants.General.UnitOfMeasure.key())

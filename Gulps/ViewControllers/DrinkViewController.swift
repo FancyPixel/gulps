@@ -10,11 +10,14 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
     @IBOutlet public weak var percentageLabel: UICountingLabel!
     @IBOutlet public weak var addButton: UIButton!
     @IBOutlet public weak var smallButton: UIButton!
+    @IBOutlet public weak var customButton: UIButton!
     @IBOutlet public weak var largeButton: UIButton!
     @IBOutlet public weak var minusButton: UIButton!
     @IBOutlet weak var starButton: UIButton!
     @IBOutlet weak var meterContainerView: UIView!
     @IBOutlet weak var maskImage: UIImageView!
+    @IBOutlet weak var topView: UIView!
+    @IBOutlet weak var bottomView: UIView!
 
     public var userDefaults = NSUserDefaults.groupUserDefaults()
     public var progressMeter: BAFluidView?
@@ -62,6 +65,14 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
 
     public override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        if NSUserDefaults.groupUserDefaults().boolForKey(Constants.CustomGulp.On.key()) {
+            customButton.userInteractionEnabled = true
+            customButton.hidden = false
+        } else {
+            customButton.userInteractionEnabled = false
+            customButton.hidden = true
+        }
 
         view.layoutIfNeeded()
 
@@ -94,6 +105,14 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
             inView: view,
             fromFrame: CGRect(x: view.frame.width - 60, y: view.frame.height, width: 1, height: 1), direction: .Up, color: .destructiveColor())
     }
+    
+    public override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        if (expanded) {
+            contractAddButton()
+        }
+    }
 
     // MARK: - UI update
 
@@ -116,6 +135,15 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
             userDefaults.setBool(true, forKey: "FEEDBACK")
             userDefaults.synchronize()
         }
+        
+        if let customViewController = segue.destinationViewController as? CustomViewController {
+            customViewController.gulp = {[weak self]
+                (portion) in
+                if let weakSelf = self {
+                    weakSelf.addGulp(portion)
+                }
+            }
+        }
     }
 
     // MARK: - Actions
@@ -129,13 +157,8 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
     }
 
     @IBAction public func selectionButtonAction(sender: UIButton) {
-        contractAddButton()
-        Globals.showPopTipOnceForKey("UNDO_HINT", userDefaults: userDefaults,
-            popTipText: NSLocalizedString("undo poptip", comment: ""),
-            inView: view,
-            fromFrame: minusButton.frame)
         let portion = smallButton == sender ? Constants.Gulp.Small.key() : Constants.Gulp.Big.key()
-        updateCurrentEntry(userDefaults.doubleForKey(portion))
+        addGulp(portion)
     }
 
     @IBAction func removeGulpAction() {
@@ -146,6 +169,21 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
         }
         _ = [yes, no].map { controller.addAction($0) }
         self.presentViewController(controller, animated: true) {}
+    }
+    
+    // MARK: - Private
+    
+    private func addGulp(portion: String) {
+        if (expanded) {
+            contractAddButton()
+        }
+        
+        Globals.showPopTipOnceForKey("UNDO_HINT", userDefaults: userDefaults,
+            popTipText: NSLocalizedString("undo poptip", comment: ""),
+            inView: view,
+            fromFrame: minusButton.frame)
+        
+        updateCurrentEntry(userDefaults.doubleForKey(portion))
     }
 
     // MARK: - UIViewControllerTransitioningDelegate

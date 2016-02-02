@@ -1,9 +1,34 @@
 import pop
 
 extension DrinkViewController {
+    
+    private var animationDistance: CGFloat {
+        get {
+            let maximumAnimationDistance: CGFloat = 100
+            let padding: CGFloat = 16
+            
+            var animationDistance = maximumAnimationDistance
+            
+            if NSUserDefaults.groupUserDefaults().boolForKey(Constants.CustomGulp.On.key()) {
+                // Calculate the animation distance allowing for the height of the custom button.
+                let startPosition = bottomView.bounds.height - addButton.center.y
+                let delta = bottomView.bounds.height - startPosition - padding - (customButton.bounds.height / 2)
+                animationDistance = delta > maximumAnimationDistance ? maximumAnimationDistance : delta
+                
+                // NOTE: It is possible that the animation distance may be less than the height of the button. This
+                // would cause the buttons to overlay each other, this would happen if the bottomView height is reduced.
+                
+            }
+            
+            return animationDistance
+
+            // TODO: Prevent button over-lapping.
+        }
+    }
 
     func initAnimation() {
         smallButton.alpha = 0
+        customButton.alpha = 0
         largeButton.alpha = 0
         starButton.transform = CGAffineTransformMakeScale(0.0001, 0.0001)
     }
@@ -41,7 +66,7 @@ extension DrinkViewController {
         rotate.removedOnCompletion = true
         rotate.completionBlock = {(_, _) in
             self.addButton.userInteractionEnabled = true
-            _ = [self.smallButton, self.largeButton].map({$0.userInteractionEnabled = true})
+            _ = [self.smallButton, self.customButton, self.largeButton].map({$0.userInteractionEnabled = true})
             self.expanded = true
         }
 
@@ -67,8 +92,8 @@ extension DrinkViewController {
         addButton.pop_addAnimation(color, forKey: "color")
         minusButton.pop_addAnimation(scaleMinus, forKey: "scaleMinus")
 
-        _ = [smallButton, largeButton].map({$0.alpha = 1})
-        for button in [smallButton, largeButton] {
+        _ = [smallButton, customButton, largeButton].map({$0.alpha = 1})
+        for button in [smallButton, customButton, largeButton] {
             let pop = POPSpringAnimation(propertyNamed: kPOPViewScaleXY)
             pop.fromValue = NSValue(CGPoint: CGPointMake(0.1, 0.1))
             pop.toValue = NSValue(CGPoint: CGPointMake(1, 1))
@@ -80,18 +105,24 @@ extension DrinkViewController {
         let left = POPSpringAnimation(propertyNamed: kPOPLayerTranslationX)
         left.springBounciness = 5
         left.fromValue = 0
-        left.toValue = -100
+        left.toValue = -animationDistance
         smallButton.layer.pop_addAnimation(left, forKey: "left")
 
         let right = POPSpringAnimation(propertyNamed: kPOPLayerTranslationX)
         right.springBounciness = 5
         right.fromValue = 0
-        right.toValue = 100
+        right.toValue = animationDistance
         largeButton.layer.pop_addAnimation(right, forKey: "right")
+        
+        let top = POPSpringAnimation(propertyNamed: kPOPLayerTranslationY)
+        top.springBounciness = 5
+        top.fromValue = 0
+        top.toValue = -animationDistance
+        customButton.layer.pop_addAnimation(top, forKey: "top")
     }
 
     func contractAddButton() {
-        _ = [smallButton, largeButton].map({$0.userInteractionEnabled = false})
+        _ = [smallButton, customButton, largeButton].map({$0.userInteractionEnabled = false})
         addButton.userInteractionEnabled = false
 
         let rotate = POPSpringAnimation(propertyNamed: kPOPLayerRotation)
@@ -124,7 +155,7 @@ extension DrinkViewController {
         addButton.pop_addAnimation(color, forKey: "color")
         minusButton.pop_addAnimation(scaleMinus, forKey: "scaleMinus")
 
-        for button in [smallButton, largeButton] {
+        for button in [smallButton, customButton, largeButton] {
             let pop = POPSpringAnimation(propertyNamed: kPOPViewScaleXY)
             pop.fromValue = NSValue(CGPoint: CGPointMake(1, 1))
             pop.toValue = NSValue(CGPoint: CGPointMake(0.1, 0.1))
@@ -135,14 +166,20 @@ extension DrinkViewController {
 
         let left = POPBasicAnimation(propertyNamed: kPOPLayerTranslationX)
         left.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
-        left.fromValue = -100
+        left.fromValue = -animationDistance
         left.toValue = 0
         smallButton.layer.pop_addAnimation(left, forKey: "left")
 
         let right = POPBasicAnimation(propertyNamed: kPOPLayerTranslationX)
         right.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
-        right.fromValue = 100
+        right.fromValue = animationDistance
         right.toValue = 0
         largeButton.layer.pop_addAnimation(right, forKey: "right")
+        
+        let top = POPBasicAnimation(propertyNamed: kPOPLayerTranslationY)
+        top.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+        top.fromValue = -animationDistance
+        top.toValue = 0
+        customButton.layer.pop_addAnimation(top, forKey: "top")
     }
 }

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="KaushanScript.ttf">
@@ -19,6 +20,101 @@
         </mutableArray>
     </customFonts>
     <scenes>
+        <!--Custom View Controller-->
+        <scene sceneID="l26-fl-tUt">
+            <objects>
+                <viewController id="n7l-IF-ya7" customClass="CustomViewController" customModule="Gulps" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="vID-sg-Sa9"/>
+                        <viewControllerLayoutGuide type="bottom" id="G1F-sT-mkp"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="sLD-Ot-aKZ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gulp size" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MVT-j7-QAE">
+                                <rect key="frame" x="16" y="128" width="288" height="19"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="19" id="eUF-ts-kKD"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0,2" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0sb-ML-tka">
+                                <rect key="frame" x="16" y="191" width="141" height="60"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="0yK-l2-akN"/>
+                                </constraints>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="decimalPad"/>
+                                <connections>
+                                    <outlet property="delegate" destination="n7l-IF-ya7" id="Db3-A9-n3O"/>
+                                </connections>
+                            </textField>
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VHN-QJ-E7A">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="nlO-eC-i5C"/>
+                                </constraints>
+                                <color key="barTintColor" red="0.21960784310000001" green="0.49019607840000001" blue="0.81176470590000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Custom Gulp" id="Q09-Pw-s4E">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="EOQ-Rt-2Kg">
+                                            <connections>
+                                                <action selector="cancelTapped:" destination="n7l-IF-ya7" id="mEh-dn-FGr"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="Dzz-8I-exp">
+                                            <connections>
+                                                <action selector="doneTapped:" destination="n7l-IF-ya7" id="IxL-P8-07j"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Oz" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vjp-66-WA9">
+                                <rect key="frame" x="163" y="191" width="141" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="OeR-zq-eTX"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.2196078431372549" green="0.49019607843137253" blue="0.81176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="0sb-ML-tka" firstAttribute="top" secondItem="MVT-j7-QAE" secondAttribute="bottom" constant="44" id="2fd-YN-2EH"/>
+                            <constraint firstItem="Vjp-66-WA9" firstAttribute="centerY" secondItem="0sb-ML-tka" secondAttribute="centerY" id="4sk-G5-G7j"/>
+                            <constraint firstAttribute="trailing" secondItem="MVT-j7-QAE" secondAttribute="trailing" constant="16" id="BRF-Dm-hqQ"/>
+                            <constraint firstItem="VHN-QJ-E7A" firstAttribute="top" secondItem="vID-sg-Sa9" secondAttribute="bottom" constant="-20" id="FoL-Gq-APK"/>
+                            <constraint firstItem="MVT-j7-QAE" firstAttribute="leading" secondItem="sLD-Ot-aKZ" secondAttribute="leading" constant="16" id="OT2-bl-3it"/>
+                            <constraint firstAttribute="trailing" secondItem="Vjp-66-WA9" secondAttribute="trailing" constant="16" id="bBN-6C-fxG"/>
+                            <constraint firstItem="Vjp-66-WA9" firstAttribute="width" secondItem="0sb-ML-tka" secondAttribute="width" id="c0J-iH-hP2"/>
+                            <constraint firstItem="MVT-j7-QAE" firstAttribute="top" secondItem="VHN-QJ-E7A" secondAttribute="bottom" constant="64" id="n4a-Nw-e4i"/>
+                            <constraint firstAttribute="trailing" secondItem="VHN-QJ-E7A" secondAttribute="trailing" id="neA-bG-u1P"/>
+                            <constraint firstItem="VHN-QJ-E7A" firstAttribute="leading" secondItem="sLD-Ot-aKZ" secondAttribute="leading" id="qaC-wZ-vhH"/>
+                            <constraint firstItem="0sb-ML-tka" firstAttribute="leading" secondItem="sLD-Ot-aKZ" secondAttribute="leading" constant="16" id="tdb-S0-2JB"/>
+                            <constraint firstItem="Vjp-66-WA9" firstAttribute="leading" secondItem="0sb-ML-tka" secondAttribute="trailing" constant="6" id="tzx-cI-e2m"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="cancelButton" destination="EOQ-Rt-2Kg" id="ghW-hK-Css"/>
+                        <outlet property="customPortionText" destination="0sb-ML-tka" id="6Ld-Td-msj"/>
+                        <outlet property="doneButton" destination="Dzz-8I-exp" id="4d3-KT-029"/>
+                        <outlet property="unitOfMesureLabel" destination="Vjp-66-WA9" id="Ifi-2i-WSS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uMT-xB-qgV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="833" y="-1343"/>
+        </scene>
         <!--Drink View Controller-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
@@ -31,155 +127,202 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mQX-uO-zkr">
-                                <rect key="frame" x="50" y="20" width="220" height="220"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="lOF-Z5-hJh">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="drop" translatesAutoresizingMaskIntoConstraints="NO" id="JPp-1k-zdE">
-                                        <rect key="frame" x="0.0" y="0.0" width="220" height="220"/>
-                                        <animations/>
-                                    </imageView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uon-a0-aZs">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="303.5"/>
+                                        <subviews>
+                                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mQX-uO-zkr">
+                                                <rect key="frame" x="45" y="8" width="230" height="230"/>
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="drop" translatesAutoresizingMaskIntoConstraints="NO" id="JPp-1k-zdE">
+                                                        <rect key="frame" x="0.0" y="0.0" width="230" height="230"/>
+                                                    </imageView>
+                                                </subviews>
+                                                <color key="backgroundColor" red="0.90980392156862744" green="0.90980392156862744" blue="0.92156862745098034" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstItem="JPp-1k-zdE" firstAttribute="leading" secondItem="mQX-uO-zkr" secondAttribute="leading" id="EhX-T7-UUV"/>
+                                                    <constraint firstAttribute="width" secondItem="mQX-uO-zkr" secondAttribute="height" multiplier="1:1" id="KfC-cY-eVr"/>
+                                                    <constraint firstAttribute="bottom" secondItem="JPp-1k-zdE" secondAttribute="bottom" id="ZYz-ru-A4Y"/>
+                                                    <constraint firstAttribute="trailing" secondItem="JPp-1k-zdE" secondAttribute="trailing" id="ZxZ-A8-OFo"/>
+                                                    <constraint firstItem="JPp-1k-zdE" firstAttribute="top" secondItem="mQX-uO-zkr" secondAttribute="top" id="bJ8-BN-dj7"/>
+                                                </constraints>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mEa-Xq-QB6" customClass="UICountingLabel">
+                                                <rect key="frame" x="16" y="245.5" width="288" height="42"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="42" id="BaT-Nj-R8l"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="KaushanScript-Regular" family="Kaushan Script" pointSize="34"/>
+                                                <color key="textColor" red="0.21960784310000001" green="0.49019607840000001" blue="0.81176470590000005" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uvx-n6-xp2">
+                                                <rect key="frame" x="280" y="16" width="24" height="24"/>
+                                                <color key="backgroundColor" red="0.90909090909090906" green="0.90909090909090906" blue="0.90909090909090906" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="24" id="Uaj-E9-JgW"/>
+                                                    <constraint firstAttribute="height" constant="24" id="VlT-aJ-HwN"/>
+                                                </constraints>
+                                                <state key="normal" image="minus-icon">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="12"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="removeGulpAction" destination="9pv-A4-QxB" eventType="touchUpInside" id="dHe-Ob-mdh"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xap-Vb-CbA">
+                                                <rect key="frame" x="16" y="16" width="50" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="7dc-b1-iEo"/>
+                                                    <constraint firstAttribute="width" constant="50" id="lRF-8H-e5f"/>
+                                                </constraints>
+                                                <state key="normal" image="star">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <segue destination="QGe-lt-SeA" kind="modal" identifier="feedback" id="Wuz-wY-flQ"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="mQX-uO-zkr" firstAttribute="centerX" secondItem="Uon-a0-aZs" secondAttribute="centerX" id="Adr-03-PdH"/>
+                                            <constraint firstItem="mEa-Xq-QB6" firstAttribute="leading" secondItem="Uon-a0-aZs" secondAttribute="leading" constant="16" id="CoE-E0-kTX"/>
+                                            <constraint firstItem="mQX-uO-zkr" firstAttribute="top" secondItem="Uon-a0-aZs" secondAttribute="top" constant="8" id="GJq-cX-mFX"/>
+                                            <constraint firstAttribute="bottom" secondItem="mEa-Xq-QB6" secondAttribute="bottom" constant="16" id="M9Z-qe-cIx"/>
+                                            <constraint firstItem="xap-Vb-CbA" firstAttribute="top" secondItem="Uon-a0-aZs" secondAttribute="top" constant="16" id="Mag-tC-gJ3"/>
+                                            <constraint firstItem="mEa-Xq-QB6" firstAttribute="top" secondItem="mQX-uO-zkr" secondAttribute="bottom" constant="8" id="Pyy-94-Ruc"/>
+                                            <constraint firstAttribute="trailing" secondItem="uvx-n6-xp2" secondAttribute="trailing" constant="16" id="SUd-qD-8e9"/>
+                                            <constraint firstItem="xap-Vb-CbA" firstAttribute="leading" secondItem="Uon-a0-aZs" secondAttribute="leading" constant="16" id="VyD-Dw-Plj"/>
+                                            <constraint firstAttribute="trailing" secondItem="mEa-Xq-QB6" secondAttribute="trailing" constant="16" id="mCI-iP-Jqg"/>
+                                            <constraint firstItem="uvx-n6-xp2" firstAttribute="top" secondItem="Uon-a0-aZs" secondAttribute="top" constant="16" id="oQL-C6-QiC"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MYL-lf-FkP">
+                                        <rect key="frame" x="0.0" y="303.5" width="320" height="151.5"/>
+                                        <subviews>
+                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rSl-zs-C7Z" userLabel="Small Button">
+                                                <rect key="frame" x="125" y="56.5" width="70" height="70"/>
+                                                <color key="backgroundColor" red="0.21960784310000001" green="0.49019607840000001" blue="0.81176470590000005" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="70" id="3RS-1m-Fjb"/>
+                                                    <constraint firstAttribute="height" constant="70" id="poi-5r-ZNd"/>
+                                                </constraints>
+                                                <state key="normal" image="small-icon">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="35"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="selectionButtonAction:" destination="9pv-A4-QxB" eventType="touchUpInside" id="Uak-g7-Cxp"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ugo-as-UvZ" userLabel="Custom Button">
+                                                <rect key="frame" x="125" y="56.5" width="70" height="70"/>
+                                                <color key="backgroundColor" red="0.21960784310000001" green="0.49019607840000001" blue="0.81176470590000005" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="70" id="LO1-pb-ERG"/>
+                                                    <constraint firstAttribute="height" constant="70" id="nlr-di-dUQ"/>
+                                                </constraints>
+                                                <state key="normal" image="custom-icon">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="35"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <segue destination="n7l-IF-ya7" kind="modal" id="bql-Mh-9W4"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v5a-2l-qvB" userLabel="Large Button">
+                                                <rect key="frame" x="125" y="56.5" width="70" height="70"/>
+                                                <color key="backgroundColor" red="0.21960784310000001" green="0.49019607840000001" blue="0.81176470590000005" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="70" id="Njd-jj-cNp"/>
+                                                    <constraint firstAttribute="height" constant="70" id="mE0-49-sQ9"/>
+                                                </constraints>
+                                                <state key="normal" image="large-icon">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="35"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="selectionButtonAction:" destination="9pv-A4-QxB" eventType="touchUpInside" id="5Lu-Gy-RKQ"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fW6-sm-t8g" userLabel="Add Button">
+                                                <rect key="frame" x="125" y="56.5" width="70" height="70"/>
+                                                <color key="backgroundColor" red="0.2196078431372549" green="0.49019607843137253" blue="0.81176470588235294" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="70" id="Yl3-mS-wuG"/>
+                                                    <constraint firstAttribute="width" constant="70" id="wj6-7a-7cp"/>
+                                                </constraints>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <state key="normal" image="plus-icon">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="35"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="addButtonAction:" destination="9pv-A4-QxB" eventType="touchUpInside" id="mK6-dn-7WX"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="fW6-sm-t8g" firstAttribute="centerY" secondItem="v5a-2l-qvB" secondAttribute="centerY" id="03a-61-Q6A"/>
+                                            <constraint firstItem="fW6-sm-t8g" firstAttribute="centerX" secondItem="ugo-as-UvZ" secondAttribute="centerX" id="6R4-tU-uMu"/>
+                                            <constraint firstItem="fW6-sm-t8g" firstAttribute="centerX" secondItem="v5a-2l-qvB" secondAttribute="centerX" id="EUO-uV-MxV"/>
+                                            <constraint firstAttribute="bottom" secondItem="fW6-sm-t8g" secondAttribute="bottom" constant="25" id="KTW-ym-GFg"/>
+                                            <constraint firstItem="rSl-zs-C7Z" firstAttribute="centerY" secondItem="fW6-sm-t8g" secondAttribute="centerY" id="SGf-Z9-ix0"/>
+                                            <constraint firstItem="fW6-sm-t8g" firstAttribute="centerX" secondItem="MYL-lf-FkP" secondAttribute="centerX" id="cw4-Kv-6xM"/>
+                                            <constraint firstItem="fW6-sm-t8g" firstAttribute="centerY" secondItem="ugo-as-UvZ" secondAttribute="centerY" id="pDo-MD-NNd"/>
+                                            <constraint firstItem="rSl-zs-C7Z" firstAttribute="centerX" secondItem="fW6-sm-t8g" secondAttribute="centerX" id="uQy-8X-9FE"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
-                                <animations/>
-                                <color key="backgroundColor" red="0.90980392156862744" green="0.90980392156862744" blue="0.92156862745098034" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="JPp-1k-zdE" firstAttribute="top" secondItem="mQX-uO-zkr" secondAttribute="top" id="Giv-Uf-qPF"/>
-                                    <constraint firstAttribute="bottom" secondItem="JPp-1k-zdE" secondAttribute="bottom" id="KIj-wg-Gwd"/>
-                                    <constraint firstAttribute="width" secondItem="mQX-uO-zkr" secondAttribute="height" multiplier="1:1" id="KfC-cY-eVr"/>
-                                    <constraint firstAttribute="trailing" secondItem="JPp-1k-zdE" secondAttribute="trailing" id="M6n-rq-Jqd"/>
-                                    <constraint firstItem="JPp-1k-zdE" firstAttribute="leading" secondItem="mQX-uO-zkr" secondAttribute="leading" id="RUG-Nj-0J9"/>
+                                    <constraint firstItem="Uon-a0-aZs" firstAttribute="leading" secondItem="lOF-Z5-hJh" secondAttribute="leading" id="65F-47-4TN"/>
+                                    <constraint firstAttribute="trailing" secondItem="Uon-a0-aZs" secondAttribute="trailing" id="PBB-EB-jI6"/>
+                                    <constraint firstAttribute="trailing" secondItem="MYL-lf-FkP" secondAttribute="trailing" id="Vv5-LL-gn8"/>
+                                    <constraint firstItem="MYL-lf-FkP" firstAttribute="leading" secondItem="lOF-Z5-hJh" secondAttribute="leading" id="nfr-sh-Y3y"/>
+                                    <constraint firstItem="Uon-a0-aZs" firstAttribute="top" secondItem="lOF-Z5-hJh" secondAttribute="top" id="o77-Zm-8KO"/>
+                                    <constraint firstItem="MYL-lf-FkP" firstAttribute="height" secondItem="Uon-a0-aZs" secondAttribute="height" multiplier="5:10" id="sgd-fo-Xfh"/>
                                 </constraints>
-                            </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mEa-Xq-QB6" customClass="UICountingLabel">
-                                <rect key="frame" x="16" y="270" width="288" height="42"/>
-                                <animations/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="42" id="BaT-Nj-R8l"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="KaushanScript-Regular" family="Kaushan Script" pointSize="34"/>
-                                <color key="textColor" red="0.21960784310000001" green="0.49019607840000001" blue="0.81176470590000005" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rSl-zs-C7Z" userLabel="Small Button">
-                                <rect key="frame" x="125" y="355" width="70" height="70"/>
-                                <animations/>
-                                <color key="backgroundColor" red="0.21960784310000001" green="0.49019607840000001" blue="0.81176470590000005" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="70" id="3RS-1m-Fjb"/>
-                                    <constraint firstAttribute="height" constant="70" id="poi-5r-ZNd"/>
-                                </constraints>
-                                <state key="normal" image="small-icon">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="35"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="selectionButtonAction:" destination="9pv-A4-QxB" eventType="touchUpInside" id="Uak-g7-Cxp"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v5a-2l-qvB" userLabel="Large Button">
-                                <rect key="frame" x="125" y="355" width="70" height="70"/>
-                                <animations/>
-                                <color key="backgroundColor" red="0.21960784310000001" green="0.49019607840000001" blue="0.81176470590000005" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="70" id="Njd-jj-cNp"/>
-                                    <constraint firstAttribute="height" constant="70" id="mE0-49-sQ9"/>
-                                </constraints>
-                                <state key="normal" image="large-icon">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="35"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="selectionButtonAction:" destination="9pv-A4-QxB" eventType="touchUpInside" id="5Lu-Gy-RKQ"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fW6-sm-t8g" userLabel="Add Button">
-                                <rect key="frame" x="125" y="355" width="70" height="70"/>
-                                <animations/>
-                                <color key="backgroundColor" red="0.2196078431372549" green="0.49019607843137253" blue="0.81176470588235294" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="70" id="Yl3-mS-wuG"/>
-                                    <constraint firstAttribute="width" constant="70" id="wj6-7a-7cp"/>
-                                </constraints>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <state key="normal" image="plus-icon">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="35"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="addButtonAction:" destination="9pv-A4-QxB" eventType="touchUpInside" id="mK6-dn-7WX"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uvx-n6-xp2">
-                                <rect key="frame" x="288" y="8" width="24" height="24"/>
-                                <animations/>
-                                <color key="backgroundColor" red="0.90909090909090906" green="0.90909090909090906" blue="0.90909090909090906" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" image="minus-icon">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="12"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="removeGulpAction" destination="9pv-A4-QxB" eventType="touchUpInside" id="dHe-Ob-mdh"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xap-Vb-CbA">
-                                <rect key="frame" x="10" y="10" width="50" height="50"/>
-                                <animations/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="7dc-b1-iEo"/>
-                                    <constraint firstAttribute="width" constant="50" id="lRF-8H-e5f"/>
-                                </constraints>
-                                <state key="normal" image="star">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="QGe-lt-SeA" kind="modal" identifier="feedback" id="Wuz-wY-flQ"/>
-                                </connections>
-                            </button>
+                            </stackView>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="xap-Vb-CbA" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" constant="10" id="0Kf-6v-f86"/>
-                            <constraint firstItem="fW6-sm-t8g" firstAttribute="top" relation="greaterThanOrEqual" secondItem="mEa-Xq-QB6" secondAttribute="bottom" id="4AF-N9-UE2"/>
-                            <constraint firstItem="mEa-Xq-QB6" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" id="5Kw-Si-2x9"/>
-                            <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="fW6-sm-t8g" secondAttribute="bottom" priority="999" constant="30" id="6mW-Ks-Okm"/>
-                            <constraint firstAttribute="trailing" secondItem="mQX-uO-zkr" secondAttribute="trailing" constant="50" id="7kZ-5Y-T7k"/>
-                            <constraint firstItem="mQX-uO-zkr" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="20" id="I7T-On-xnd"/>
-                            <constraint firstItem="v5a-2l-qvB" firstAttribute="centerY" secondItem="rSl-zs-C7Z" secondAttribute="centerY" id="OMr-uc-lE0"/>
-                            <constraint firstItem="fW6-sm-t8g" firstAttribute="centerY" secondItem="rSl-zs-C7Z" secondAttribute="centerY" id="QsQ-Rb-R1e"/>
-                            <constraint firstAttribute="trailing" secondItem="uvx-n6-xp2" secondAttribute="trailing" constant="8" id="RFk-Vg-f7U"/>
-                            <constraint firstItem="mEa-Xq-QB6" firstAttribute="top" secondItem="mQX-uO-zkr" secondAttribute="bottom" priority="999" constant="30" id="RhO-7v-9ug"/>
-                            <constraint firstItem="mEa-Xq-QB6" firstAttribute="top" relation="greaterThanOrEqual" secondItem="mQX-uO-zkr" secondAttribute="bottom" id="TZU-e2-bDA"/>
-                            <constraint firstItem="mQX-uO-zkr" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" constant="50" id="VsT-9X-zkj"/>
-                            <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" relation="greaterThanOrEqual" secondItem="fW6-sm-t8g" secondAttribute="bottom" id="X3C-2n-qiw"/>
-                            <constraint firstAttribute="centerX" secondItem="v5a-2l-qvB" secondAttribute="centerX" id="XZH-TI-mlc"/>
-                            <constraint firstAttribute="centerX" secondItem="rSl-zs-C7Z" secondAttribute="centerX" id="byo-kl-5Ts"/>
-                            <constraint firstAttribute="centerX" secondItem="fW6-sm-t8g" secondAttribute="centerX" id="eai-hx-KLM"/>
-                            <constraint firstItem="mEa-Xq-QB6" firstAttribute="trailing" secondItem="tsR-hK-woN" secondAttribute="trailingMargin" id="j6h-Zi-1LS"/>
-                            <constraint firstAttribute="centerX" secondItem="mEa-Xq-QB6" secondAttribute="centerX" id="oP9-VY-fG7"/>
-                            <constraint firstItem="xap-Vb-CbA" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="10" id="pAa-mt-Iaf"/>
-                            <constraint firstItem="uvx-n6-xp2" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="8" id="x61-hZ-WvW"/>
-                            <constraint firstItem="fW6-sm-t8g" firstAttribute="centerY" secondItem="v5a-2l-qvB" secondAttribute="centerY" id="zwb-N5-8xQ"/>
+                            <constraint firstItem="lOF-Z5-hJh" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" id="1eO-Bn-Wzk"/>
+                            <constraint firstAttribute="trailing" secondItem="lOF-Z5-hJh" secondAttribute="trailing" id="gav-ff-hAe"/>
+                            <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="lOF-Z5-hJh" secondAttribute="bottom" id="muC-Ei-wHc"/>
+                            <constraint firstItem="lOF-Z5-hJh" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" id="yRB-LX-AFb"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Mv9-vs-a2D"/>
                     <connections>
                         <outlet property="addButton" destination="fW6-sm-t8g" id="ikl-2M-eYC"/>
+                        <outlet property="bottomView" destination="MYL-lf-FkP" id="AT4-Yh-5Nv"/>
+                        <outlet property="customButton" destination="ugo-as-UvZ" id="zVy-px-r21"/>
                         <outlet property="largeButton" destination="v5a-2l-qvB" id="dvl-3k-q65"/>
                         <outlet property="maskImage" destination="JPp-1k-zdE" id="5Xq-AA-c2u"/>
                         <outlet property="meterContainerView" destination="mQX-uO-zkr" id="Xzc-Jh-LMx"/>
@@ -187,6 +330,7 @@
                         <outlet property="percentageLabel" destination="mEa-Xq-QB6" id="VWN-Gf-0ip"/>
                         <outlet property="smallButton" destination="rSl-zs-C7Z" id="Eb6-qX-fT4"/>
                         <outlet property="starButton" destination="xap-Vb-CbA" id="RjA-tl-1Yo"/>
+                        <outlet property="topView" destination="Uon-a0-aZs" id="oRd-3Q-BTE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
@@ -208,14 +352,12 @@
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Way to go!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zyj-Gr-Ph8">
                                 <rect key="frame" x="16" y="30" width="288" height="70"/>
-                                <animations/>
                                 <fontDescription key="fontDescription" name="KaushanScript-Regular" family="Kaushan Script" pointSize="48"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q2X-D7-DBk">
                                 <rect key="frame" x="16" y="120" width="288" height="66"/>
-                                <animations/>
                                 <string key="text">Good job keeping healthy! 
 By the way, we’d love some feedback! How do you feel about Gulps? </string>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
@@ -224,7 +366,6 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uEc-xW-5dW">
                                 <rect key="frame" x="110" y="221" width="100" height="100"/>
-                                <animations/>
                                 <state key="normal" image="smile">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -234,7 +375,6 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xa4-EW-hWa">
                                 <rect key="frame" x="110" y="351" width="100" height="100"/>
-                                <animations/>
                                 <state key="normal" image="sad">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -243,7 +383,6 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                                 </connections>
                             </button>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" red="0.96078431372549022" green="0.75294117647058822" blue="0.094117647058823528" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="q2X-D7-DBk" secondAttribute="trailing" constant="16" id="0Fi-De-qIh"/>
@@ -278,21 +417,18 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Yay!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ee7-af-1yT">
                                 <rect key="frame" x="16" y="40" width="288" height="70"/>
-                                <animations/>
                                 <fontDescription key="fontDescription" name="KaushanScript-Regular" family="Kaushan Script" pointSize="48"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How about rating Gulps on the AppStore? We always appreciate the feedback!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R9l-6a-fbg">
                                 <rect key="frame" x="16" y="160" width="288" height="66"/>
-                                <animations/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QXZ-Em-FFP">
                                 <rect key="frame" x="164" y="508" width="140" height="40"/>
-                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="q6m-OP-5YQ"/>
@@ -313,7 +449,6 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KcM-qN-18r">
                                 <rect key="frame" x="16" y="508" width="140" height="40"/>
-                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="qs2-8m-t9L"/>
                                 </constraints>
@@ -335,7 +470,6 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                                 </connections>
                             </button>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" red="0.96078431369999995" green="0.75294117650000003" blue="0.094117647060000004" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="QXZ-Em-FFP" firstAttribute="leading" secondItem="KcM-qN-18r" secondAttribute="trailing" constant="8" id="0DL-ND-due"/>
@@ -375,7 +509,6 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nce-Ji-tce">
                                 <rect key="frame" x="16" y="508" width="140" height="40"/>
-                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="7Kc-Jb-4Xm"/>
                                     <constraint firstAttribute="height" constant="40" id="b6e-xN-rQU"/>
@@ -400,7 +533,6 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lX0-8d-2KC">
                                 <rect key="frame" x="164" y="508" width="140" height="40"/>
-                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="Rhl-Z1-Q6p"/>
@@ -421,14 +553,12 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sorry to hear that! Is there any way we can improve your experience with Gulps? Contact us, we'd love your feedback!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="upP-xB-nVY">
-                                <rect key="frame" x="16" y="50" width="288" height="87.5"/>
-                                <animations/>
+                                <rect key="frame" x="16" y="50" width="288" height="88"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" red="0.96078431369999995" green="0.75294117650000003" blue="0.094117647060000004" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="G8G-yX-NGY" firstAttribute="top" secondItem="lX0-8d-2KC" secondAttribute="bottom" constant="20" id="5Wf-z7-y5X"/>
@@ -461,7 +591,6 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                     <tabBar key="tabBar" contentMode="scaleToFill" translucent="NO" id="W28-zg-YXA">
                         <rect key="frame" x="0.0" y="975" width="768" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                        <animations/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="tintColor" red="0.21960784310000001" green="0.49019607840000001" blue="0.81176470590000005" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="selectedImageTintColor" red="0.21960784310000001" green="0.49019607840000001" blue="0.81176470590000005" alpha="1" colorSpace="calibratedRGB"/>
@@ -485,7 +614,6 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="U4a-LJ-b69">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
                         <color key="barTintColor" red="0.21960784310000001" green="0.49019607840000001" blue="0.81176470590000005" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -511,7 +639,6 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6kF-sJ-gnc" customClass="JTCalendarMenuView">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
-                                <animations/>
                                 <color key="backgroundColor" red="0.96687578914141414" green="0.96687578914141414" blue="0.96687578914141414" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="u4k-S9-CBs"/>
@@ -519,7 +646,6 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3gz-XS-2c7" customClass="JTCalendarContentView">
                                 <rect key="frame" x="0.0" y="30" width="320" height="300"/>
-                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="300" id="38h-4O-5tL"/>
@@ -527,42 +653,36 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nja-Uo-jJw">
                                 <rect key="frame" x="16" y="338" width="288" height="35"/>
-                                <animations/>
                                 <fontDescription key="fontDescription" name="KaushanScript-Regular" family="Kaushan Script" pointSize="24"/>
                                 <color key="textColor" red="0.21960784310000001" green="0.49019607840000001" blue="0.81176470590000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Liters drank over" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4E2-NO-CiF">
                                 <rect key="frame" x="16" y="133" width="288" height="25"/>
-                                <animations/>
                                 <fontDescription key="fontDescription" name="KaushanScript-Regular" family="Kaushan Script" pointSize="17"/>
                                 <color key="textColor" red="0.21960784310000001" green="0.49019607840000001" blue="0.81176470590000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="200" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="lon-Jb-3Cm" customClass="UICountingLabel">
                                 <rect key="frame" x="16" y="40" width="288" height="93"/>
-                                <animations/>
                                 <fontDescription key="fontDescription" name="KaushanScript-Regular" family="Kaushan Script" pointSize="64"/>
                                 <color key="textColor" red="0.21960784310000001" green="0.49019607840000001" blue="0.81176470590000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="days" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jpZ-Ht-zcx">
                                 <rect key="frame" x="16" y="263" width="288" height="25"/>
-                                <animations/>
                                 <fontDescription key="fontDescription" name="KaushanScript-Regular" family="Kaushan Script" pointSize="17"/>
                                 <color key="textColor" red="0.21960784310000001" green="0.49019607840000001" blue="0.81176470590000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="200" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="R2u-Oc-VLI" customClass="UICountingLabel">
                                 <rect key="frame" x="16" y="170" width="288" height="93"/>
-                                <animations/>
                                 <fontDescription key="fontDescription" name="KaushanScript-Regular" family="Kaushan Script" pointSize="64"/>
                                 <color key="textColor" red="0.21960784310000001" green="0.49019607840000001" blue="0.81176470590000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xk6-tX-JQH">
                                 <rect key="frame" x="16" y="330" width="288" height="44"/>
-                                <animations/>
                                 <color key="backgroundColor" red="0.21960784310000001" green="0.49019607840000001" blue="0.81176470590000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="8yg-2q-j0h"/>
@@ -582,7 +702,6 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                                 </connections>
                             </button>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Nja-Uo-jJw" firstAttribute="leading" secondItem="qyp-gc-0kQ" secondAttribute="leadingMargin" id="3cW-EI-RHb"/>
@@ -642,7 +761,6 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Oty-Lr-Na6">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
                         <color key="barTintColor" red="0.2196078431372549" green="0.49019607843137253" blue="0.81176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -661,7 +779,6 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="LmZ-Eo-HR4">
                         <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <animations/>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
                             <tableViewSection headerTitle="Settings" id="M6x-da-DQK">
@@ -676,7 +793,6 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Unit of mesure" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mud-m1-HKI">
                                                     <rect key="frame" x="15" y="12" width="107" height="19.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -684,15 +800,12 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Liters" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Jwx-tY-nJI">
                                                     <rect key="frame" x="264.5" y="12" width="40.5" height="19.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <animations/>
                                         </tableViewCellContentView>
-                                        <animations/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -706,15 +819,13 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Small gulp" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Brt-M3-CC4">
-                                                    <rect key="frame" x="15" y="12.5" width="75.5" height="19.5"/>
-                                                    <animations/>
+                                                    <rect key="frame" x="15" y="13" width="76" height="19"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0,2" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HpM-IE-rg0">
                                                     <rect key="frame" x="190" y="0.0" width="90" height="43"/>
-                                                    <animations/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="90" id="2Oj-6B-XzV"/>
                                                     </constraints>
@@ -726,14 +837,12 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                                                     </connections>
                                                 </textField>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Oz" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nbd-CS-kU7">
-                                                    <rect key="frame" x="286" y="13" width="18.5" height="17"/>
-                                                    <animations/>
+                                                    <rect key="frame" x="286" y="13" width="19" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="HpM-IE-rg0" secondAttribute="bottom" id="3yl-9G-Seh"/>
                                                 <constraint firstItem="HpM-IE-rg0" firstAttribute="top" secondItem="Tjr-vg-Hgk" secondAttribute="top" id="Bm0-a7-1Cu"/>
@@ -744,7 +853,6 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                                                 <constraint firstAttribute="centerY" secondItem="nbd-CS-kU7" secondAttribute="centerY" id="dAZ-Z8-Re2"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <animations/>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PreferencesCll" id="XVN-Hr-Cdk">
                                         <rect key="frame" x="0.0" y="179.5" width="320" height="44"/>
@@ -755,7 +863,6 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0,5" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SBF-ug-rBd">
                                                     <rect key="frame" x="190" y="0.0" width="90" height="43"/>
-                                                    <animations/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="90" id="QyB-HA-EVf"/>
                                                     </constraints>
@@ -767,21 +874,18 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                                                     </connections>
                                                 </textField>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Big gulp" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yCk-VT-Gki">
-                                                    <rect key="frame" x="15" y="12.5" width="59.5" height="19.5"/>
-                                                    <animations/>
+                                                    <rect key="frame" x="15" y="13" width="60" height="19"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Oz" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RVh-z0-hYc">
-                                                    <rect key="frame" x="286" y="13" width="18.5" height="17"/>
-                                                    <animations/>
+                                                    <rect key="frame" x="286" y="13" width="19" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="centerY" secondItem="RVh-z0-hYc" secondAttribute="centerY" id="2NS-CN-pBL"/>
                                                 <constraint firstAttribute="bottom" secondItem="SBF-ug-rBd" secondAttribute="bottom" id="M0M-Ba-pav"/>
@@ -792,7 +896,6 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                                                 <constraint firstAttribute="trailing" secondItem="RVh-z0-hYc" secondAttribute="trailing" constant="15" id="yq4-nu-LI0"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <animations/>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PreferencesCll" id="Q2W-7p-buv">
                                         <rect key="frame" x="0.0" y="223.5" width="320" height="44"/>
@@ -803,7 +906,6 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="2" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Heo-vz-8M3">
                                                     <rect key="frame" x="190" y="0.0" width="90" height="43"/>
-                                                    <animations/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="90" id="PIP-Vv-8Xt"/>
                                                     </constraints>
@@ -815,21 +917,18 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                                                     </connections>
                                                 </textField>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Daily goal" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pt1-x1-O82">
-                                                    <rect key="frame" x="15" y="12.5" width="71" height="19.5"/>
-                                                    <animations/>
+                                                    <rect key="frame" x="15" y="13" width="71" height="19"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Oz" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DT8-cB-ShB">
-                                                    <rect key="frame" x="286" y="13" width="18.5" height="17"/>
-                                                    <animations/>
+                                                    <rect key="frame" x="286" y="13" width="19" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="centerY" secondItem="DT8-cB-ShB" secondAttribute="centerY" id="4bj-BO-77K"/>
                                                 <constraint firstItem="Heo-vz-8M3" firstAttribute="top" secondItem="MoA-It-qj5" secondAttribute="top" id="GlT-wb-nDB"/>
@@ -840,35 +939,61 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                                                 <constraint firstAttribute="trailing" secondItem="DT8-cB-ShB" secondAttribute="trailing" constant="15" id="wt0-F4-OPv"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <animations/>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PreferencesCll" id="zxJ-o7-B6s">
+                                        <rect key="frame" x="0.0" y="267.5" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zxJ-o7-B6s" id="jZz-Pb-xk2">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Custom gulp" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="shg-KE-AQ9">
+                                                    <rect key="frame" x="15" y="12" width="93" height="20"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Dw-Au-mpO">
+                                                    <rect key="frame" x="263" y="7" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="customGulpAction:" destination="t9K-A9-XHF" eventType="valueChanged" id="1Np-Bz-TUK"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="shg-KE-AQ9" firstAttribute="leading" secondItem="jZz-Pb-xk2" secondAttribute="leading" constant="15" id="6uT-fK-La6"/>
+                                                <constraint firstAttribute="trailing" secondItem="9Dw-Au-mpO" secondAttribute="trailing" constant="8" id="8vl-iC-Y95"/>
+                                                <constraint firstAttribute="centerY" secondItem="shg-KE-AQ9" secondAttribute="centerY" id="974-a8-XOU"/>
+                                                <constraint firstAttribute="bottom" secondItem="9Dw-Au-mpO" secondAttribute="bottom" constant="6" id="QOl-kj-LOe"/>
+                                                <constraint firstItem="9Dw-Au-mpO" firstAttribute="centerY" secondItem="jZz-Pb-xk2" secondAttribute="centerY" id="RDv-A3-mFK"/>
+                                                <constraint firstItem="9Dw-Au-mpO" firstAttribute="top" secondItem="jZz-Pb-xk2" secondAttribute="top" constant="7" id="iQ4-d2-dvh"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Notifications" id="Cqk-U1-F6w">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PreferencesCll" id="Ii4-wt-fc6">
-                                        <rect key="frame" x="0.0" y="309.5" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="353.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ii4-wt-fc6" id="1Hn-44-t70">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remind me to drink" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XIg-ci-rnk">
-                                                    <rect key="frame" x="15" y="12.5" width="141" height="19.5"/>
-                                                    <animations/>
+                                                    <rect key="frame" x="15" y="13" width="141" height="19"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mua-Mo-rXC">
                                                     <rect key="frame" x="263" y="6" width="51" height="31"/>
-                                                    <animations/>
                                                     <connections>
                                                         <action selector="reminderAction:" destination="t9K-A9-XHF" eventType="valueChanged" id="zyb-e2-1zL"/>
                                                     </connections>
                                                 </switch>
                                             </subviews>
-                                            <animations/>
                                             <constraints>
                                                 <constraint firstItem="XIg-ci-rnk" firstAttribute="leading" secondItem="1Hn-44-t70" secondAttribute="leading" constant="15" id="Lo4-Sz-U8c"/>
                                                 <constraint firstAttribute="centerY" secondItem="mua-Mo-rXC" secondAttribute="centerY" id="Lzh-Ra-yMC"/>
@@ -878,10 +1003,9 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                                                 <constraint firstAttribute="centerY" secondItem="XIg-ci-rnk" secondAttribute="centerY" id="saC-LY-7nS"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <animations/>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PreferencesCll" textLabel="Pnc-7E-Kee" detailTextLabel="aBp-Ni-lCc" style="IBUITableViewCellStyleValue1" id="dxR-vc-Rwx">
-                                        <rect key="frame" x="0.0" y="353.5" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="397.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dxR-vc-Rwx" id="iKk-wz-AiX">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
@@ -890,7 +1014,6 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="From" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Pnc-7E-Kee">
                                                     <rect key="frame" x="15" y="12" width="37.5" height="19.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -898,18 +1021,15 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="8:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aBp-Ni-lCc">
                                                     <rect key="frame" x="271" y="12" width="34" height="19.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <animations/>
                                         </tableViewCellContentView>
-                                        <animations/>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PreferencesCll" textLabel="f3c-OV-GHw" detailTextLabel="en4-wz-CaR" style="IBUITableViewCellStyleValue1" id="sFs-MK-DDj">
-                                        <rect key="frame" x="0.0" y="397.5" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="441.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sFs-MK-DDj" id="9UG-1o-lam">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
@@ -918,7 +1038,6 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="To" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="f3c-OV-GHw">
                                                     <rect key="frame" x="15" y="12" width="18" height="19.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -926,18 +1045,15 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="22:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="en4-wz-CaR">
                                                     <rect key="frame" x="262" y="12" width="43" height="19.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <animations/>
                                         </tableViewCellContentView>
-                                        <animations/>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PreferencesCll" textLabel="w1F-Cx-bRx" detailTextLabel="llL-4J-aC6" style="IBUITableViewCellStyleValue1" id="8v4-HN-MkF">
-                                        <rect key="frame" x="0.0" y="441.5" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="485.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8v4-HN-MkF" id="wVD-TQ-jfH">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
@@ -946,7 +1062,6 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Every" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="w1F-Cx-bRx">
                                                     <rect key="frame" x="15" y="12" width="40.5" height="19.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -954,22 +1069,19 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="2 hours" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="llL-4J-aC6">
                                                     <rect key="frame" x="250" y="12" width="55" height="19.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <animations/>
                                         </tableViewCellContentView>
-                                        <animations/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Apple Health" id="kL3-zV-Q1y">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PreferencesCll" id="rtu-Sv-Asn">
-                                        <rect key="frame" x="0.0" y="527.5" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="571.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rtu-Sv-Asn" id="NkK-Il-Fd3">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
@@ -977,20 +1089,17 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Export data to Health" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="72o-fo-Kke">
                                                     <rect key="frame" x="15" y="12" width="155" height="20"/>
-                                                    <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="fU5-mD-m8k">
                                                     <rect key="frame" x="263" y="6" width="51" height="31"/>
-                                                    <animations/>
                                                     <connections>
                                                         <action selector="healthAction:" destination="t9K-A9-XHF" eventType="valueChanged" id="QZV-Zs-eiK"/>
                                                     </connections>
                                                 </switch>
                                             </subviews>
-                                            <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="centerY" secondItem="72o-fo-Kke" secondAttribute="centerY" id="56z-pf-C52"/>
                                                 <constraint firstAttribute="trailing" secondItem="fU5-mD-m8k" secondAttribute="trailing" constant="8" id="LYl-JQ-1b8"/>
@@ -1000,7 +1109,6 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                                                 <constraint firstAttribute="centerY" secondItem="fU5-mD-m8k" secondAttribute="centerY" id="c5L-Yv-pPM"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <animations/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -1012,6 +1120,7 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                     </tableView>
                     <navigationItem key="navigationItem" id="yM9-kq-UP2"/>
                     <connections>
+                        <outlet property="customGulpSwitch" destination="9Dw-Au-mpO" id="YDN-c5-wYP"/>
                         <outlet property="dailyGoalText" destination="Heo-vz-8M3" id="lHN-ai-OMb"/>
                         <outlet property="healthSwitch" destination="fU5-mD-m8k" id="83t-Hg-eil"/>
                         <outlet property="largePortionText" destination="SBF-ug-rBd" id="kj7-UV-Usx"/>
@@ -1039,7 +1148,6 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="zxx-GC-h7k">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -1058,7 +1166,6 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="pIc-im-Nrb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -1072,6 +1179,7 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
     </scenes>
     <resources>
         <image name="calendar-icon" width="30" height="30"/>
+        <image name="custom-icon" width="40" height="40"/>
         <image name="drink-icon" width="30" height="30"/>
         <image name="drop" width="300" height="300"/>
         <image name="large-icon" width="40" height="40"/>
