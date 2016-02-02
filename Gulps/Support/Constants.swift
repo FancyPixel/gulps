@@ -2,7 +2,7 @@ import Foundation
 
 public enum Constants {
     public static func bundle() -> String {
-        return "com.awarai.gulps.BigGulp"
+        return "it.fancypixel.BigGulp"
     }
 
     public enum WatchContext: Int {
