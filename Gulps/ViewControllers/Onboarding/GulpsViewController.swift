@@ -25,6 +25,14 @@ class GulpsViewController: OnboardingViewController, UITextFieldDelegate {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
     }
+    
+    override func goNextScreen(gesture: UIGestureRecognizer) {
+        self.navigationController?.pushViewController((self.storyboard?.instantiateViewControllerWithIdentifier("GoalViewController"))!, animated: true)
+    }
+    
+    override func goPrevScreen(gesture: UIGestureRecognizer) {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
 
     func dismissAndSave() {
         let numberFormatter = NSNumberFormatter()

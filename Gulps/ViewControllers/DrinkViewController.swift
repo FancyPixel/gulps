@@ -103,7 +103,7 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
 
     func updateUI() {
         let percentage = EntryHandler.sharedHandler.currentPercentage()
-        percentageLabel.countFromCurrentValueTo(Float(round(percentage)))
+        percentageLabel.countFromCurrentValueTo(CGFloat(round(percentage)))
         let fillTo = CGFloat(percentage / 100.0)
         progressMeter?.fillTo(fillTo > 1 ? 1 : fillTo)
     }

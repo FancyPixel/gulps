@@ -52,4 +52,12 @@ class GoalViewController: OnboardingViewController, UITextFieldDelegate {
             self.goalSuffixLabel.text = unit.suffixForUnitOfMeasure()
         }
     }
+    
+    override func goNextScreen(gesture: UIGestureRecognizer) {
+        self.navigationController?.pushViewController((self.storyboard?.instantiateViewControllerWithIdentifier("NotificationViewController"))!, animated: true)
+    }
+    
+    override func goPrevScreen(gesture: UIGestureRecognizer) {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
 }
