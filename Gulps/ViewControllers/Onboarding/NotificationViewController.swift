@@ -46,6 +46,14 @@ class NotificationViewController: OnboardingViewController, UIActionSheetDelegat
         self.intervalLabel.text = "\(interval) \(hour)"
         self.notificationSwitch.on = self.userDefaults.boolForKey(Constants.Notification.On.key())
     }
+    
+    override func goPrevScreen(gesture: UIGestureRecognizer) {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+    
+    override func goNextScreen(gesture: UIGestureRecognizer) {
+        
+    }
 
     @IBAction func openFromSelection(sender: UIButton) {
         self.fromActionSheet.show()

@@ -12,6 +12,14 @@ class MeasureViewController: OnboardingViewController {
         _ = [litersCheck, ouncesCheck].map({$0.transform = CGAffineTransformMakeScale(0.001, 0.001)})
     }
 
+    override func goNextScreen(gesture: UIGestureRecognizer) {
+        self.navigationController?.pushViewController((self.storyboard?.instantiateViewControllerWithIdentifier("GulpsViewController"))!, animated: true)
+    }
+    
+    override func goPrevScreen(gesture: UIGestureRecognizer) {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+    
     override func updateUI() {
         let unit = Constants.UnitsOfMeasure(rawValue: self.userDefaults.integerForKey(Constants.General.UnitOfMeasure.key()))
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F6a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="By6-Ql-uIz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="By6-Ql-uIz">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -13,7 +13,7 @@
         <!--Onboarding View Controller-->
         <scene sceneID="JCX-9k-L92">
             <objects>
-                <viewController id="3Iy-ME-FoV" customClass="OnboardingViewController" customModule="Gulps" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OnboardingViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3Iy-ME-FoV" customClass="OnboardingViewController" customModule="Gulps" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="XG9-8W-ap2"/>
                         <viewControllerLayoutGuide type="bottom" id="a9y-6F-IFj"/>
@@ -94,7 +94,7 @@
         <!--Measure View Controller-->
         <scene sceneID="7xK-23-hdv">
             <objects>
-                <viewController id="G0M-tk-SWS" customClass="MeasureViewController" customModule="Gulps" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MeasureViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="G0M-tk-SWS" customClass="MeasureViewController" customModule="Gulps" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="k5a-UD-A8v"/>
                         <viewControllerLayoutGuide type="bottom" id="9AR-mY-hKU"/>
@@ -275,7 +275,7 @@ what measurement system do you prefer?</string>
         <!--Gulps View Controller-->
         <scene sceneID="H0O-CP-zMe">
             <objects>
-                <viewController id="zCq-Eo-bzE" customClass="GulpsViewController" customModule="Gulps" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GulpsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="zCq-Eo-bzE" customClass="GulpsViewController" customModule="Gulps" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="c1S-tf-jdw"/>
                         <viewControllerLayoutGuide type="bottom" id="hbR-Yb-Sx1"/>
@@ -480,7 +480,7 @@ what measurement system do you prefer?</string>
         <!--Goal View Controller-->
         <scene sceneID="l6E-L5-1xE">
             <objects>
-                <viewController id="axR-yE-00K" customClass="GoalViewController" customModule="Gulps" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GoalViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="axR-yE-00K" customClass="GoalViewController" customModule="Gulps" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="VvQ-Aw-iSd"/>
                         <viewControllerLayoutGuide type="bottom" id="6PH-YY-LNP"/>
@@ -620,7 +620,7 @@ what measurement system do you prefer?</string>
         <!--Notification View Controller-->
         <scene sceneID="tvc-JM-hjT">
             <objects>
-                <viewController id="UpA-CQ-AM6" customClass="NotificationViewController" customModule="Gulps" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NotificationViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="UpA-CQ-AM6" customClass="NotificationViewController" customModule="Gulps" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ICO-OY-AjV"/>
                         <viewControllerLayoutGuide type="bottom" id="4Dn-cW-4Td"/>
@@ -894,10 +894,5 @@ what measurement system do you prefer?</string>
         <image name="prev-icon" width="40" height="40"/>
         <image name="small-icon" width="40" height="40"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
     <color key="tintColor" red="0.15686274510000001" green="0.3921568627" blue="0.7725490196" alpha="1" colorSpace="calibratedRGB"/>
 </document>

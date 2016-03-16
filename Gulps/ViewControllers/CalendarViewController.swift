@@ -113,8 +113,8 @@ private extension CalendarViewController {
     }
 
     func updateStats() {
-        daysCountLabel.countFromZeroTo(Float(EntryHandler.sharedHandler.daysTracked()))
-        quantityLabel.countFromZeroTo(Float(EntryHandler.sharedHandler.overallQuantity()))
+        daysCountLabel.countFromZeroTo(CGFloat(EntryHandler.sharedHandler.daysTracked()))
+        quantityLabel.countFromZeroTo(CGFloat(EntryHandler.sharedHandler.overallQuantity()))
         measureLabel.text = String(format: NSLocalizedString("unit format", comment: ""), unitName())
     }
 
