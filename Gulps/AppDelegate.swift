@@ -16,7 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         watchConnectivityHelper.setupWatchConnectivity(delegate: self)
 
         let userDefaults = NSUserDefaults.groupUserDefaults()
-        userDefaults.setBool(false, forKey: Constants.General.OnboardingShown.key())
         if (!userDefaults.boolForKey(Constants.General.OnboardingShown.key())) {
             loadOnboardingInterface()
         } else {
