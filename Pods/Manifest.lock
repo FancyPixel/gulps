@@ -1,0 +1,72 @@
+PODS:
+  - AHKActionSheet (0.5.4)
+  - AMPopTip (0.10.2)
+  - AMWaveTransition (0.6.2)
+  - BAFluidView (0.1.8)
+  - BubbleTransition (1.0.3)
+  - FBSnapshotTestCase (2.1.2):
+    - FBSnapshotTestCase/SwiftSupport (= 2.1.2)
+  - FBSnapshotTestCase/Core (2.1.2)
+  - FBSnapshotTestCase/SwiftSupport (2.1.2):
+    - FBSnapshotTestCase/Core
+  - JTCalendar (1.1.16)
+  - Nimble (4.1.0)
+  - Nimble-Snapshots (4.1.0):
+    - FBSnapshotTestCase (~> 2.0)
+    - Nimble
+    - Quick
+  - pop (1.0.9)
+  - Quick (0.9.3)
+  - Realm (1.0.2):
+    - Realm/Headers (= 1.0.2)
+  - Realm/Headers (1.0.2)
+  - RealmSwift (1.0.2):
+    - Realm (= 1.0.2)
+  - SwiftDate (1.2)
+  - UICountingLabel (1.4.0)
+
+DEPENDENCIES:
+  - AHKActionSheet (~> 0.5)
+  - AMPopTip (~> 0.7)
+  - AMWaveTransition (~> 0.5)
+  - BAFluidView (~> 0.1.6)
+  - BubbleTransition (~> 1.0.0)
+  - JTCalendar (from `https://github.com/andreamazz/JTCalendar`, branch `develop`)
+  - Nimble
+  - Nimble-Snapshots
+  - pop (~> 1.0)
+  - Quick
+  - RealmSwift
+  - SwiftDate (~> 1.2)
+  - UICountingLabel (~> 1.2)
+
+EXTERNAL SOURCES:
+  JTCalendar:
+    :branch: develop
+    :git: https://github.com/andreamazz/JTCalendar
+
+CHECKOUT OPTIONS:
+  JTCalendar:
+    :commit: c70c46b438ef48e9dc35e7721498080c61a82e22
+    :git: https://github.com/andreamazz/JTCalendar
+
+SPEC CHECKSUMS:
+  AHKActionSheet: f0b312b5c689f72924d231c39dae140ecd5c1d46
+  AMPopTip: 0788a9452806049e3aa0d6d09324606fc41ea646
+  AMWaveTransition: 98952310574779e4ca7e7f4d89f8b1043cdad171
+  BAFluidView: c7d93c030171c9644ab03f57cbfccf993ebd04e5
+  BubbleTransition: a7ae6678721406d60f604cbbea1ace505563119d
+  FBSnapshotTestCase: 918c55861356ee83aee7843d759f55a18ff6982b
+  JTCalendar: 4cc527e2babd446ce4b96a23c257e5a02fbdac26
+  Nimble: 97a0a4cae5124c117115634b2d055d8c97d0af19
+  Nimble-Snapshots: 2da4d2ec829b458d6886c06812c52493fce284c9
+  pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
+  Quick: 13a2a2b19a5d8e3ed4fd0c36ee46597fd77ebf71
+  Realm: 9d5c46a4d7d27958530a8dfc58f63a99e5c2cba3
+  RealmSwift: 82f3ac5e24530143dddfde2033acc0d308f27d96
+  SwiftDate: 49ebd4efb5f82336cfc2b1d8a6622f47d4b17370
+  UICountingLabel: ed5ce5b6d5ef278ff40d99cfa49577a30ab0c87b
+
+PODFILE CHECKSUM: 29ba4de9cf79de8d789814808228f81e71da8aab
+
+COCOAPODS: 1.0.1

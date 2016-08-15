@@ -25,8 +25,8 @@ end
 target 'GulpsTests' do
   common_pods
   pod 'Nimble', '~> 3.0.0'
-  pod 'Quick', '~> 0.8.0'
-  pod 'Nimble-Snapshots', '~> 3.0.0'
+  pod 'Quick', '~> 4.1.0'
+  pod 'Nimble-Snapshots', '~> 4.1.0'
 end
 
 inhibit_all_warnings!

@@ -11,8 +11,8 @@ class GoalViewController: OnboardingViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.goalTextField.inputAccessoryView = Globals.numericToolbar(self, selector: Selector("dismissAndSave"))
-        self.goalBackgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self.goalTextField, action: Selector("becomeFirstResponder")))
+        self.goalTextField.inputAccessoryView = Globals.numericToolbar(self, selector: #selector(GoalViewController.dismissAndSave))
+        self.goalBackgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self.goalTextField, action: #selector(UIResponder.becomeFirstResponder)))
     }
 
     func dismissAndSave() {

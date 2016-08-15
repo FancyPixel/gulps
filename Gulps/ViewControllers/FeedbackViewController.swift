@@ -10,30 +10,30 @@ import UIKit
 
 class FeedbackViewController: UIViewController {
 
-    @IBOutlet weak var negativeButton: UIButton?
-    override func viewDidLoad() {
-        super.viewDidLoad()
+  @IBOutlet weak var negativeButton: UIButton?
+  override func viewDidLoad() {
+    super.viewDidLoad()
 
-        negativeButton?.layer.borderColor = UIColor.whiteColor().CGColor
-    }
+    negativeButton?.layer.borderColor = UIColor.whiteColor().CGColor
+  }
 
-    override func prefersStatusBarHidden() -> Bool {
-        return true
-    }
-    
-    @IBAction func reviewAction() {
-        self.dismissViewControllerAnimated(true) {
-            UIApplication.sharedApplication().openURL(NSURL(string: "itms-apps://itunes.apple.com/app/id979057304")!)
-        }
-    }
-    
-    @IBAction func negativeAction() {
-        self.dismissViewControllerAnimated(true) {}
-    }
+  override func prefersStatusBarHidden() -> Bool {
+    return true
+  }
 
-    @IBAction func contactAction() {
-        self.dismissViewControllerAnimated(true) {
-            UIApplication.sharedApplication().openURL(NSURL(string: "mailto:gulps@fancypixel.it")!)
-        }
+  @IBAction func reviewAction() {
+    self.dismissViewControllerAnimated(true) {
+      UIApplication.sharedApplication().openURL(NSURL(string: "itms-apps://itunes.apple.com/app/id979057304")!)
     }
+  }
+
+  @IBAction func negativeAction() {
+    self.dismissViewControllerAnimated(true) {}
+  }
+
+  @IBAction func contactAction() {
+    self.dismissViewControllerAnimated(true) {
+      UIApplication.sharedApplication().openURL(NSURL(string: "mailto:gulps@fancypixel.it")!)
+    }
+  }
 }

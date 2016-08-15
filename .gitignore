@@ -14,10 +14,6 @@ xcuserdata
 DerivedData
 *.xcuserstate
 
-### Cocoapods ###
-Pods
-Podfile.lock
-*.xcworkspace
 # OS X Finder
 .DS_Store
 # Xcode per-user config
@@ -33,7 +29,6 @@ Podfile.lock
 *~
 *.dat
 *.dep
-# Cocoapods
 # AppCode specific files
 .idea/
 *.iml

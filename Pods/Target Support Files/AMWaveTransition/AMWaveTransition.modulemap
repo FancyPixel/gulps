@@ -1,0 +1,6 @@
+framework module AMWaveTransition {
+  umbrella header "AMWaveTransition-umbrella.h"
+
+  export *
+  module * { export * }
+}

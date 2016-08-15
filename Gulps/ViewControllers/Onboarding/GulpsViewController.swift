@@ -16,14 +16,14 @@ class GulpsViewController: OnboardingViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.smallGulpText.inputAccessoryView = Globals.numericToolbar(self, selector: Selector("dismissAndSave"))
-        self.bigGulpText.inputAccessoryView = Globals.numericToolbar(self, selector: Selector("dismissAndSave"))
+        self.smallGulpText.inputAccessoryView = Globals.numericToolbar(self, selector: #selector(GulpsViewController.dismissAndSave))
+        self.bigGulpText.inputAccessoryView = Globals.numericToolbar(self, selector: #selector(GulpsViewController.dismissAndSave))
 
-        self.smallBackgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self.smallGulpText, action: Selector("becomeFirstResponder")))
-        self.bigBackgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self.bigGulpText, action: Selector("becomeFirstResponder")))
+        self.smallBackgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self.smallGulpText, action: #selector(UIResponder.becomeFirstResponder)))
+        self.bigBackgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self.bigGulpText, action: #selector(UIResponder.becomeFirstResponder)))
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GulpsViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GulpsViewController.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
     }
 
     func dismissAndSave() {
