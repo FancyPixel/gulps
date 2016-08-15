@@ -7,51 +7,51 @@ let NotificationWatchGulpAdded = "NotificationWatchGulpAdded"
 
 class InterfaceController: WKInterfaceController, WCSessionDelegate {
 
-    @IBOutlet weak var goalLabel: WKInterfaceLabel!
-    @IBOutlet weak var progressImage: WKInterfaceImage!
-    lazy var notificationCenter: NSNotificationCenter = {
-        return NSNotificationCenter.defaultCenter()
-    }()
-    var previousPercentage = 0.0
+  @IBOutlet weak var goalLabel: WKInterfaceLabel!
+  @IBOutlet weak var progressImage: WKInterfaceImage!
+  lazy var notificationCenter: NSNotificationCenter = {
+    return NSNotificationCenter.defaultCenter()
+  }()
+  var previousPercentage = 0.0
 
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
-        setupNotificationCenter()
+  override func awakeWithContext(context: AnyObject?) {
+    super.awakeWithContext(context)
+    setupNotificationCenter()
 
-        progressImage.setImageNamed("activity-")
+    progressImage.setImageNamed("activity-")
+  }
+
+  override func handleActionWithIdentifier(identifier: String?, forLocalNotification localNotification: UILocalNotification) {
+    reloadAndUpdateUI()
+  }
+
+  override func willActivate() {
+    super.willActivate()
+    reloadAndUpdateUI()
+  }
+
+  override func didDeactivate() {
+    super.didDeactivate()
+    notificationCenter.removeObserver(self)
+  }
+
+  //MARK: - Actions
+
+  @IBAction func addSmallGulpAction() {
+    updateWithGulp(Constants.Gulp.Small.key())
+  }
+
+  @IBAction func addBigGulpAction() {
+    updateWithGulp(Constants.Gulp.Big.key())
+  }
+
+  // MARK: - Notification Center
+
+  private func setupNotificationCenter() {
+    notificationCenter.addObserverForName(NotificationContextReceived, object: nil, queue: nil) { _ in
+      self.reloadAndUpdateUI()
     }
-
-    override func handleActionWithIdentifier(identifier: String?, forLocalNotification localNotification: UILocalNotification) {
-        reloadAndUpdateUI()
-    }
-
-    override func willActivate() {
-        super.willActivate()
-        reloadAndUpdateUI()
-    }
-
-    override func didDeactivate() {
-        super.didDeactivate()
-        notificationCenter.removeObserver(self)
-    }
-
-    //MARK: - Actions
-
-    @IBAction func addSmallGulpAction() {
-        updateWithGulp(Constants.Gulp.Small.key())
-    }
-
-    @IBAction func addBigGulpAction() {
-        updateWithGulp(Constants.Gulp.Big.key())
-    }
-
-    // MARK: - Notification Center
-
-    private func setupNotificationCenter() {
-        notificationCenter.addObserverForName(NotificationContextReceived, object: nil, queue: nil) { _ in
-            self.reloadAndUpdateUI()
-        }
-    }
+  }
 }
 
 // MARK: - Private Helper Methods
@@ -59,35 +59,35 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
 typealias InterfaceHelper = InterfaceController
 private extension InterfaceHelper {
 
-    func reloadAndUpdateUI() {
-        if NSUserDefaults.standardUserDefaults().doubleForKey(Constants.Gulp.Goal.key()) == 0 {
-            progressImage.setHidden(true)
-            goalLabel.setText(NSLocalizedString("watch.please_onboard", comment: "Shown when the user did not start the iPhone app yet"))
-            return
-        }
-
-        progressImage.setHidden(false)
-
-        let percentage = WatchEntryHelper.sharedHelper.percentage() ?? 0
-        var delta = (percentage > 100 ? 100 : percentage) - Int(previousPercentage)
-        if (delta < 0) {
-            // animate in reverse using negative duration
-            progressImage.startAnimatingWithImagesInRange(NSMakeRange(percentage, -delta), duration: -1.0, repeatCount: 1)
-        } else {
-            if (delta == 0) {
-                // if the range's length is 0, no image is loaded
-                delta = 1
-            }
-            progressImage.startAnimatingWithImagesInRange(NSMakeRange(Int(previousPercentage), delta), duration: 1.0, repeatCount: 1)
-        }
-        goalLabel.setText("\(NSLocalizedString("daily goal:", comment: "")) \(percentage)%")
-        previousPercentage = Double(percentage)
+  func reloadAndUpdateUI() {
+    if NSUserDefaults.standardUserDefaults().doubleForKey(Constants.Gulp.Goal.key()) == 0 {
+      progressImage.setHidden(true)
+      goalLabel.setText(NSLocalizedString("watch.please_onboard", comment: "Shown when the user did not start the iPhone app yet"))
+      return
     }
 
-    func updateWithGulp(gulp: String) {
-        WatchEntryHelper.sharedHelper.addGulp(gulp)
-        reloadAndUpdateUI()
-        NSNotificationCenter.defaultCenter().postNotificationName(NotificationWatchGulpAdded, object: gulp)
+    progressImage.setHidden(false)
+
+    let percentage = WatchEntryHelper.sharedHelper.percentage() ?? 0
+    var delta = (percentage > 100 ? 100 : percentage) - Int(previousPercentage)
+    if (delta < 0) {
+      // animate in reverse using negative duration
+      progressImage.startAnimatingWithImagesInRange(NSMakeRange(percentage, -delta), duration: -1.0, repeatCount: 1)
+    } else {
+      if (delta == 0) {
+        // if the range's length is 0, no image is loaded
+        delta = 1
+      }
+      progressImage.startAnimatingWithImagesInRange(NSMakeRange(Int(previousPercentage), delta), duration: 1.0, repeatCount: 1)
     }
+    goalLabel.setText("\(NSLocalizedString("daily goal:", comment: "")) \(percentage)%")
+    previousPercentage = Double(percentage)
+  }
+
+  func updateWithGulp(gulp: String) {
+    WatchEntryHelper.sharedHelper.addGulp(gulp)
+    reloadAndUpdateUI()
+    NSNotificationCenter.defaultCenter().postNotificationName(NotificationWatchGulpAdded, object: gulp)
+  }
 }
 
