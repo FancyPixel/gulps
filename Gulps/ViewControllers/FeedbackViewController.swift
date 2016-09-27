@@ -14,26 +14,26 @@ class FeedbackViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    negativeButton?.layer.borderColor = UIColor.whiteColor().CGColor
+    negativeButton?.layer.borderColor = UIColor.white.cgColor
   }
 
-  override func prefersStatusBarHidden() -> Bool {
+  override var prefersStatusBarHidden : Bool {
     return true
   }
 
   @IBAction func reviewAction() {
-    self.dismissViewControllerAnimated(true) {
-      UIApplication.sharedApplication().openURL(NSURL(string: "itms-apps://itunes.apple.com/app/id979057304")!)
+    self.dismiss(animated: true) {
+      UIApplication.shared.openURL(URL(string: "itms-apps://itunes.apple.com/app/id979057304")!)
     }
   }
 
   @IBAction func negativeAction() {
-    self.dismissViewControllerAnimated(true) {}
+    self.dismiss(animated: true) {}
   }
 
   @IBAction func contactAction() {
-    self.dismissViewControllerAnimated(true) {
-      UIApplication.sharedApplication().openURL(NSURL(string: "mailto:gulps@fancypixel.it")!)
+    self.dismiss(animated: true) {
+      UIApplication.shared.openURL(URL(string: "mailto:gulps@fancypixel.it")!)
     }
   }
 }

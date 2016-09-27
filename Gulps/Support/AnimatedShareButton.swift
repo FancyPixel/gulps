@@ -36,59 +36,59 @@ class AnimatedShareButton: UIButton {
     let strokeWidth = CGFloat(1.5)
 
     box.path = {
-      let path = CGPathCreateMutable()
-      CGPathMoveToPoint(path, nil, frame.size.width - strokeWidth / 2, frame.size.height * 0.2)
-      CGPathAddLineToPoint(path, nil, strokeWidth / 2, frame.size.height * 0.2)
-      CGPathAddLineToPoint(path, nil, strokeWidth / 2, frame.size.height - strokeWidth / 2)
-      CGPathAddLineToPoint(path, nil, frame.size.width - strokeWidth / 2, frame.size.height - strokeWidth / 2)
-      CGPathAddLineToPoint(path, nil, frame.size.width - strokeWidth / 2, frame.size.height * 0.2)
-      CGPathAddLineToPoint(path, nil, strokeWidth / 2, frame.size.height * 0.2)
+      let path = CGMutablePath()
+      path.move(to: CGPoint(x: frame.size.width - strokeWidth / 2, y: frame.size.height * 0.2))
+      path.addLine(to: CGPoint(x: strokeWidth / 2, y: frame.size.height * 0.2))
+      path.addLine(to: CGPoint(x: strokeWidth / 2, y: frame.size.height - strokeWidth / 2))
+      path.addLine(to: CGPoint(x: frame.size.width - strokeWidth / 2, y: frame.size.height - strokeWidth / 2))
+      path.addLine(to: CGPoint(x: frame.size.width - strokeWidth / 2, y: frame.size.height * 0.2))
+      path.addLine(to: CGPoint(x: strokeWidth / 2, y: frame.size.height * 0.2))
       return path
     }()
 
     arrowBody.path = {
-      let path = CGPathCreateMutable()
-      CGPathMoveToPoint(path, nil, frame.size.width * 0.5 - strokeWidth / 2, 0)
-      CGPathAddLineToPoint(path, nil, frame.size.width * 0.5 - strokeWidth / 2, frame.size.width * 0.7 - strokeWidth / 2)
+      let path = CGMutablePath()
+      path.move(to: CGPoint(x: frame.size.width * 0.5 - strokeWidth / 2, y: 0))
+      path.addLine(to: CGPoint(x: frame.size.width * 0.5 - strokeWidth / 2, y: frame.size.width * 0.7 - strokeWidth / 2))
       return path
     }()
 
     leftShoulder.path = {
-      let path = CGPathCreateMutable()
-      CGPathMoveToPoint(path, nil, frame.size.width * 0.15, -frame.size.height * 0.15)
-      CGPathAddLineToPoint(path, nil, 0, 0)
-      CGPathAddLineToPoint(path, nil, 0, frame.size.width * 0.2 - strokeWidth / 2)
+      let path = CGMutablePath()
+      path.move(to: CGPoint(x: frame.size.width * 0.15, y: -frame.size.height * 0.15))
+      path.addLine(to: CGPoint(x: 0, y: 0))
+      path.addLine(to: CGPoint(x: 0, y: frame.size.width * 0.2 - strokeWidth / 2))
       return path
     }()
 
     rightShoulder.path = {
-      let path = CGPathCreateMutable()
-      CGPathMoveToPoint(path, nil, -frame.size.width * 0.15, -frame.size.height * 0.15)
-      CGPathAddLineToPoint(path, nil, 0, 0)
-      CGPathAddLineToPoint(path, nil, 0, frame.size.width * 0.2 - strokeWidth / 2)
+      let path = CGMutablePath()
+      path.move(to: CGPoint(x: -frame.size.width * 0.15, y: -frame.size.height * 0.15))
+      path.addLine(to: CGPoint(x: 0, y: 0))
+      path.addLine(to: CGPoint(x: 0, y: frame.size.width * 0.2 - strokeWidth / 2))
       return path
     }()
 
 
     for layer in [box, arrowBody, leftShoulder, rightShoulder] {
-      layer.fillColor = nil
-      layer.strokeColor = UIColor.whiteColor().CGColor
-      layer.lineWidth = strokeWidth
-      layer.miterLimit = strokeWidth
-      layer.lineCap = kCALineCapRound
-      layer.masksToBounds = true
+      layer?.fillColor = nil
+      layer?.strokeColor = UIColor.white.cgColor
+      layer?.lineWidth = strokeWidth
+      layer?.miterLimit = strokeWidth
+      layer?.lineCap = kCALineCapRound
+      layer?.masksToBounds = true
 
-      let strokingPath = CGPathCreateCopyByStrokingPath(layer.path, nil, strokeWidth, CGLineCap.Round, CGLineJoin.Miter, strokeWidth)
+      let strokingPath = CGPath(__byStroking: (layer?.path!)!, transform: nil, lineWidth: strokeWidth, lineCap: CGLineCap.round, lineJoin: CGLineJoin.miter, miterLimit: strokeWidth)
 
-      layer.bounds = CGPathGetPathBoundingBox(strokingPath)
+      layer?.bounds = (strokingPath?.boundingBoxOfPath)!
 
-      layer.actions = [
+      layer?.actions = [
         "strokeStart": NSNull(),
         "strokeEnd": NSNull(),
         "transform": NSNull()
       ]
 
-      self.layer.addSublayer(layer)
+      self.layer.addSublayer(layer!)
     }
 
     self.box.strokeStart = boxStrokeStart
@@ -178,14 +178,14 @@ class AnimatedShareButton: UIButton {
 
 extension CALayer {
   // Thanks to https://github.com/robb/hamburger-button
-  func ocb_applyAnimation(animation: CABasicAnimation) {
+  func ocb_applyAnimation(_ animation: CABasicAnimation) {
     if let copy = animation.copy() as? CABasicAnimation, let keyPath = copy.keyPath {
 
       if copy.fromValue == nil {
-        copy.fromValue = self.presentationLayer()?.valueForKeyPath(keyPath)
+        copy.fromValue = self.presentation()?.value(forKeyPath: keyPath)
       }
 
-      self.addAnimation(copy, forKey: copy.keyPath)
+      self.add(copy, forKey: copy.keyPath)
       self.setValue(copy.toValue, forKeyPath:keyPath)
     }
   }

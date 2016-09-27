@@ -4,20 +4,20 @@ import RealmSwift
 /**
  Helper singleton to perform operations on the Realm database
  */
-public class EntryHandler: NSObject {
+open class EntryHandler: NSObject {
 
-  public static let sharedHandler = EntryHandler()
-  public lazy var userDefaults = NSUserDefaults.groupUserDefaults()
+  open static let sharedHandler = EntryHandler()
+  open lazy var userDefaults = UserDefaults.groupUserDefaults()
 
   /**
    Realm is initialized lazily, using the group bundle identifier.
    */
-  public lazy var realm: Realm = {
-    guard let directory: NSURL = NSFileManager.defaultManager().containerURLForSecurityApplicationGroupIdentifier("group.\(Constants.bundle())") else {
+  open lazy var realm: Realm = {
+    guard let directory: URL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.\(Constants.bundle())") else {
       fatalError("Unable to setup Realm. Make sure to setup your app group in the developer portal")
     }
 
-    let realmPath = directory.URLByAppendingPathComponent("db.realm")
+    let realmPath = directory.appendingPathComponent("db.realm")
     var config = Realm.Configuration()
     config.fileURL = realmPath
     Realm.Configuration.defaultConfiguration = config
@@ -29,8 +29,8 @@ public class EntryHandler: NSObject {
    Returns the current entry
    - returns: Entry?
    */
-  public func entryForToday() -> Entry? {
-    return entryForDate(NSDate())
+  open func entryForToday() -> Entry? {
+    return entryForDate(Date())
   }
 
   /**
@@ -38,11 +38,11 @@ public class EntryHandler: NSObject {
    - parameter date: The desired date
    - returns: Entry?
    */
-  public func entryForDate(date: NSDate) -> Entry? {
-    let dateFormat = NSDateFormatter()
+  open func entryForDate(_ date: Date) -> Entry? {
+    let dateFormat = DateFormatter()
     dateFormat.dateFormat = "yyyy-MM-dd"
-    let p: NSPredicate = NSPredicate(format: "date = %@", argumentArray: [ dateFormat.stringFromDate(date) ])
-    let objects = realm.objects(Entry).filter(p)
+    let p: NSPredicate = NSPredicate(format: "date = %@", argumentArray: [ dateFormat.string(from: date) ])
+    let objects = realm.objects(Entry.self).filter(p)
     return objects.first
   }
 
@@ -50,7 +50,7 @@ public class EntryHandler: NSObject {
    Returns the current entry if available, or creates a new one instead
    - returns: Entry
    */
-  public func currentEntry() -> Entry {
+  open func currentEntry() -> Entry {
     if let entry = entryForToday() {
       return entry
     } else {
@@ -66,7 +66,7 @@ public class EntryHandler: NSObject {
    Gets the current percentage
    - returns: Double
    */
-  public func currentPercentage() -> Double {
+  open func currentPercentage() -> Double {
     return currentEntry().percentage
   }
 
@@ -74,7 +74,7 @@ public class EntryHandler: NSObject {
    Adds a portion to the current entry. If available, the sample is saved in HealthKit as well
    - parameter quantity: The sample value
    */
-  public func addGulp(quantity: Double) {
+  open func addGulp(_ quantity: Double) {
     addGulp(quantity, date: nil)
   }
 
@@ -83,18 +83,18 @@ public class EntryHandler: NSObject {
    - parameter quantity: The sample value
    - parameter date: The sample date
    */
-  public func addGulp(quantity: Double, date: NSDate?) {
+  open func addGulp(_ quantity: Double, date: Date?) {
     HealthKitHelper.sharedHelper.saveSample(quantity)
     let entry = currentEntry()
     try! realm.write {
-      entry.addGulp(quantity, goal: self.userDefaults.doubleForKey(Constants.Gulp.Goal.key()), date: date)
+      entry.addGulp(quantity, goal: self.userDefaults.double(forKey: Constants.Gulp.goal.key()), date: date)
     }
   }
 
   /**
    Removes the last portion to the current entry. If available, the sample is removed in HealthKit as well
    */
-  public func removeLastGulp() {
+  open func removeLastGulp() {
     HealthKitHelper.sharedHelper.removeLastSample()
     let entry = currentEntry()
     if let gulp = entry.gulps.last {
@@ -109,15 +109,15 @@ public class EntryHandler: NSObject {
    Returns the value of all the portions recorded
    - returns: Double
    */
-  public func overallQuantity() -> Double {
-    return realm.objects(Entry).sum("quantity") as Double
+  open func overallQuantity() -> Double {
+    return realm.objects(Entry.self).sum(ofProperty: "quantity") as Double
   }
 
   /**
    Returns the value number of days tracked
    - returns: Int
    */
-  public func daysTracked() -> Int {
-    return realm.objects(Entry).count
+  open func daysTracked() -> Int {
+    return realm.objects(Entry.self).count
   }
 }

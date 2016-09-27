@@ -7,33 +7,33 @@
 //
 
 import Foundation
-import Realm
+import RealmSwift
 import WatchConnectivity
 
 /**
  `WatchConnectivityHelper` handles the connection with WatchOS2
  */
 public struct WatchConnectivityHelper {
+  fileprivate let session: WCSession? = WCSession.isSupported() ? WCSession.default() : nil
 
   /**
    Establishes the connection between the app and WatchOS2
    - Parameter delegate: an object implementing `WCSessionDelegate`
    */
-  public func setupWatchConnectivity(delegate delegate: WCSessionDelegate) {
+  public func setupWatchConnectivity(delegate: WCSessionDelegate) {
     guard WCSession.isSupported() else {
       return
     }
 
-    let session = WCSession.defaultSession()
-    session.delegate = delegate
-    session.activateSession()
+    session?.delegate = delegate
+    session?.activate()
   }
 
   /**
    Updates data on WatchOS, and listens for changes
    - Returns: RLMNotificationToken that needs to be retained
    */
-  public func setupWatchUpdates() -> RLMNotificationToken {
+  public func setupWatchUpdates() -> NotificationToken {
     sendWatchData()
     return EntryHandler.sharedHandler.realm.addNotificationBlock { note, realm in
       // Once a change in Realm is triggered, refresh the watch data
@@ -45,14 +45,11 @@ public struct WatchConnectivityHelper {
    Sends the current data to WatchOS
    */
   public func sendWatchData() {
-    guard WCSession.isSupported() else {
-      return
-    }
+    guard let session = session else { return }
 
     let watchData = Settings.watchData(current: EntryHandler.sharedHandler.currentEntry().quantity)
-    let session = WCSession.defaultSession()
-    session.activateSession()
-    if session.watchAppInstalled {
+    session.activate()
+    if session.isWatchAppInstalled {
       do {
         try session.updateApplicationContext(watchData)
       } catch {
@@ -65,13 +62,11 @@ public struct WatchConnectivityHelper {
    Reads the new applications context and updates Realm if needed.
    It's triggered when a new portion is added on the watch
    */
-  public func session(session: WCSession, didReceiveApplicationContext applicationContext: [String : AnyObject]) {
+  public func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String : Any]) {
     print("Receiving Context: \(applicationContext)")
-    guard let new = applicationContext[Constants.WatchContext.Current.key()] as? Double else {
-      return
-    }
+    guard let new = applicationContext[Constants.WatchContext.current.key()] as? Double else { return }
 
-    dispatch_async(dispatch_get_main_queue()) {
+    DispatchQueue.main.async {
       let current = EntryHandler.sharedHandler.currentEntry().quantity
       print("current: \(current)")
       if new > current {

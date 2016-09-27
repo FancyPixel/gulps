@@ -8,17 +8,17 @@ class OnboardingViewController: AMWaveViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    self.navigationController?.view.backgroundColor = UIColor.mainColor()
-    self.view.backgroundColor = UIColor.clearColor()
+    navigationController?.view.backgroundColor = .palette_main
+    view.backgroundColor = .clear
 
     updateUI()
   }
 
-  override func prefersStatusBarHidden() -> Bool {
+  override var prefersStatusBarHidden : Bool {
     return true
   }
 
-  override func visibleCells() -> [AnyObject]! {
+  override func visibleCells() -> [Any]! {
     return self.viewArray
   }
 
@@ -27,10 +27,10 @@ class OnboardingViewController: AMWaveViewController {
   }
 
   @IBAction func backAction() {
-    self.navigationController?.popViewControllerAnimated(true)
+    _ = navigationController?.popViewController(animated: true)
   }
 
-  func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+  func textField(_ textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
     return Globals.numericTextField(textField, shouldChangeCharactersInRange: range, replacementString: string)
   }
 }

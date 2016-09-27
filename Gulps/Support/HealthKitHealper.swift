@@ -5,7 +5,7 @@ import HealthKit
  HealthKit Helper
  Handles the insertion and deletion of items in HealthKit
  */
-public class HealthKitHelper {
+open class HealthKitHelper {
   static let sharedHelper = HealthKitHelper()
   let healthKitStore = HKHealthStore()
 
@@ -14,13 +14,13 @@ public class HealthKitHelper {
    */
   @available(iOS 9.0, *)
   func askPermission() {
-    let types = Set(arrayLiteral: HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietaryWater)!)
+    let types = Set(arrayLiteral: HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryWater)!)
 
     if !HKHealthStore.isHealthDataAvailable() {
       return;
     }
 
-    healthKitStore.requestAuthorizationToShareTypes(types, readTypes: nil) {
+    healthKitStore.requestAuthorization(toShare: types, read: nil) {
       (success, error) in
       if !success {
         print(error)
@@ -34,31 +34,31 @@ public class HealthKitHelper {
    - Parameter value: The sample value
    */
   @available(iOS 9.0, *)
-  func saveSample(value: Double) {
-    if !NSUserDefaults.groupUserDefaults().boolForKey(Constants.Health.On.key()) {
+  func saveSample(_ value: Double) {
+    if !UserDefaults.groupUserDefaults().bool(forKey: Constants.Health.on.key()) {
       return
     }
 
-    if !HKHealthStore.isHealthDataAvailable() || healthKitStore.authorizationStatusForType(HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietaryWater)!) != HKAuthorizationStatus.SharingAuthorized {
+    if !HKHealthStore.isHealthDataAvailable() || healthKitStore.authorizationStatus(for: HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryWater)!) != HKAuthorizationStatus.sharingAuthorized {
       return;
     }
 
-    guard let type = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietaryWater) else {
+    guard let type = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryWater) else {
       return
     }
 
-    let unit = Constants.UnitsOfMeasure(rawValue: NSUserDefaults.groupUserDefaults().integerForKey(Constants.General.UnitOfMeasure.key()))
-    var quantity = HKQuantity(unit: HKUnit.literUnit(), doubleValue: value)
-    if (unit == Constants.UnitsOfMeasure.Ounces) {
-      quantity = HKQuantity(unit: HKUnit.fluidOunceUSUnit(), doubleValue: value)
+    let unit = Constants.UnitsOfMeasure(rawValue: UserDefaults.groupUserDefaults().integer(forKey: Constants.General.unitOfMeasure.key()))
+    var quantity = HKQuantity(unit: HKUnit.liter(), doubleValue: value)
+    if (unit == Constants.UnitsOfMeasure.ounces) {
+      quantity = HKQuantity(unit: HKUnit.fluidOunceUS(), doubleValue: value)
     }
-    let sample = HKQuantitySample(type: type, quantity: quantity, startDate: NSDate(), endDate: NSDate())
-    healthKitStore.saveObject(sample) {
+    let sample = HKQuantitySample(type: type, quantity: quantity, start: Date(), end: Date())
+    healthKitStore.save(sample, withCompletion: {
       (success, error) in
       if let error = error {
         print("Error saving sample: \(error.localizedDescription)")
       }
-    }
+    }) 
   }
 
   /**
@@ -66,15 +66,15 @@ public class HealthKitHelper {
    */
   @available(iOS 9.0, *)
   func removeLastSample() {
-    if !NSUserDefaults.groupUserDefaults().boolForKey(Constants.Health.On.key()) {
+    if !UserDefaults.groupUserDefaults().bool(forKey: Constants.Health.on.key()) {
       return
     }
 
-    if !HKHealthStore.isHealthDataAvailable() || healthKitStore.authorizationStatusForType(HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietaryWater)!) != HKAuthorizationStatus.SharingAuthorized {
+    if !HKHealthStore.isHealthDataAvailable() || healthKitStore.authorizationStatus(for: HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryWater)!) != HKAuthorizationStatus.sharingAuthorized {
       return;
     }
 
-    guard let type = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietaryWater) else {
+    guard let type = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryWater) else {
       return
     }
 
@@ -82,16 +82,16 @@ public class HealthKitHelper {
     let query = HKSampleQuery(sampleType: type, predicate: nil, limit: 1, sortDescriptors: [sortDescriptor]) {
       [unowned self] (query, results, error) in
       if let results = results as? [HKQuantitySample], let sample = results.first {
-        self.healthKitStore.deleteObject(sample) {
+        self.healthKitStore.delete(sample, withCompletion: {
           (success, error) in
           if let error = error {
             print(error)
           }
-        }
+        }) 
       }
     }
 
-    healthKitStore.executeQuery(query)
+    healthKitStore.execute(query)
   }
 
 }

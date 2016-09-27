@@ -5,19 +5,19 @@ import Realm
 import BubbleTransition
 import CoreMotion
 
-public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewControllerTransitioningDelegate {
+open class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewControllerTransitioningDelegate {
 
-  @IBOutlet public weak var percentageLabel: UICountingLabel!
-  @IBOutlet public weak var addButton: UIButton!
-  @IBOutlet public weak var smallButton: UIButton!
-  @IBOutlet public weak var largeButton: UIButton!
-  @IBOutlet public weak var minusButton: UIButton!
+  @IBOutlet open weak var percentageLabel: UICountingLabel!
+  @IBOutlet open weak var addButton: UIButton!
+  @IBOutlet open weak var smallButton: UIButton!
+  @IBOutlet open weak var largeButton: UIButton!
+  @IBOutlet open weak var minusButton: UIButton!
   @IBOutlet weak var starButton: UIButton!
   @IBOutlet weak var meterContainerView: UIView!
   @IBOutlet weak var maskImage: UIImageView!
 
-  public var userDefaults = NSUserDefaults.groupUserDefaults()
-  public var progressMeter: BAFluidView?
+  open var userDefaults = UserDefaults.groupUserDefaults()
+  open var progressMeter: BAFluidView?
   var realmNotification: RLMNotificationToken?
   var expanded = false
   let transition = BubbleTransition()
@@ -25,7 +25,7 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
 
   // MARK: - Life cycle
 
-  public override func viewDidLoad() {
+  open override func viewDidLoad() {
     super.viewDidLoad()
 
     self.title = NSLocalizedString("drink title", comment: "")
@@ -37,11 +37,11 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
 
     manager.accelerometerUpdateInterval = 0.01
     manager.deviceMotionUpdateInterval = 0.01;
-    manager.startDeviceMotionUpdatesToQueue(NSOperationQueue.mainQueue()) {
+    manager.startDeviceMotionUpdates(to: OperationQueue.main) {
       (motion, error) in
       if let motion = motion {
         let roation = atan2(motion.gravity.x, motion.gravity.y) - M_PI
-        self.progressMeter?.transform = CGAffineTransformMakeRotation(CGFloat(roation))
+        self.progressMeter?.transform = CGAffineTransform(rotationAngle: CGFloat(roation))
       }
     }
 
@@ -49,18 +49,18 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
       self.updateUI()
     }
 
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DrinkViewController.updateUI), name: UIApplicationDidBecomeActiveNotification, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(DrinkViewController.updateUI), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
   }
 
-  public override func prefersStatusBarHidden() -> Bool {
+  open override var prefersStatusBarHidden : Bool {
     return false
   }
 
-  public override func preferredStatusBarStyle() -> UIStatusBarStyle {
-    return .LightContent
+  open override var preferredStatusBarStyle : UIStatusBarStyle {
+    return .lightContent
   }
 
-  public override func viewWillAppear(animated: Bool) {
+  open override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
 
     view.layoutIfNeeded()
@@ -69,8 +69,8 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
     if progressMeter == nil {
       let width = meterContainerView.frame.size.width
       progressMeter = BAFluidView(frame: CGRect(x: 0, y: 0, width: width, height: width), maxAmplitude: 40, minAmplitude: 8, amplitudeIncrement: 1)
-      progressMeter!.backgroundColor = .clearColor()
-      progressMeter!.fillColor = .mainColor()
+      progressMeter!.backgroundColor = .clear
+      progressMeter!.fillColor = .palette_main
       progressMeter!.fillAutoReverse = false
       progressMeter!.fillDuration = 1.5
       progressMeter!.fillRepeatCount = 0;
@@ -79,48 +79,52 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
       updateUI()
     }
 
-    if !userDefaults.boolForKey("FEEDBACK") {
+    // Ask (just once) the user for feedback once he's logged more than 10 liters/ounces
+    if !userDefaults.bool(forKey: "FEEDBACK") {
       if EntryHandler.sharedHandler.overallQuantity() > 10 {
         animateStarButton()
       }
     }
   }
 
-  public override func viewDidAppear(animated: Bool) {
+  open override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
 
     Globals.showPopTipOnceForKey("HEALTH_HINT", userDefaults: userDefaults,
                                  popTipText: NSLocalizedString("health.poptip", comment: ""),
                                  inView: view,
-                                 fromFrame: CGRect(x: view.frame.width - 60, y: view.frame.height, width: 1, height: 1), direction: .Up, color: .destructiveColor())
+                                 fromFrame: CGRect(x: view.frame.width - 60, y: view.frame.height, width: 1, height: 1), direction: .up, color: .palette_destructive)
   }
 
   // MARK: - UI update
 
-  func updateCurrentEntry(delta: Double) {
+  func updateCurrentEntry(_ delta: Double) {
     EntryHandler.sharedHandler.addGulp(delta)
   }
 
   func updateUI() {
     let percentage = EntryHandler.sharedHandler.currentPercentage()
-    percentageLabel.countFromCurrentValueTo(CGFloat(round(percentage)))
-    let fillTo = CGFloat(percentage / 100.0)
-    progressMeter?.fillTo(fillTo > 1 ? 1 : fillTo)
+    percentageLabel.countFromCurrentValue(to: CGFloat(round(percentage)))
+    var fillTo = Double(percentage / 100.0)
+    if fillTo > 1 {
+      fillTo = 1
+    }
+    progressMeter?.fill(to: NSNumber(value: fillTo))
   }
 
-  override public func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+  override open func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "feedback" {
-      let controller = segue.destinationViewController
+      let controller = segue.destination
       controller.transitioningDelegate = self
-      controller.modalPresentationStyle = .Custom
-      userDefaults.setBool(true, forKey: "FEEDBACK")
+      controller.modalPresentationStyle = .custom
+      userDefaults.set(true, forKey: "FEEDBACK")
       userDefaults.synchronize()
     }
   }
 
   // MARK: - Actions
 
-  @IBAction func addButtonAction(sender: UIButton) {
+  @IBAction func addButtonAction(_ sender: UIButton) {
     if (expanded) {
       contractAddButton()
     } else {
@@ -128,47 +132,47 @@ public class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewC
     }
   }
 
-  @IBAction public func selectionButtonAction(sender: UIButton) {
+  @IBAction open func selectionButtonAction(_ sender: UIButton) {
     contractAddButton()
     Globals.showPopTipOnceForKey("UNDO_HINT", userDefaults: userDefaults,
                                  popTipText: NSLocalizedString("undo poptip", comment: ""),
                                  inView: view,
                                  fromFrame: minusButton.frame)
-    let portion = smallButton == sender ? Constants.Gulp.Small.key() : Constants.Gulp.Big.key()
-    updateCurrentEntry(userDefaults.doubleForKey(portion))
+    let portion = smallButton == sender ? Constants.Gulp.small.key() : Constants.Gulp.big.key()
+    updateCurrentEntry(userDefaults.double(forKey: portion))
   }
 
   @IBAction func removeGulpAction() {
-    let controller = UIAlertController(title: NSLocalizedString("undo title", comment: ""), message: NSLocalizedString("undo message", comment: ""), preferredStyle: .Alert)
-    let no = UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .Default) { _ in }
-    let yes = UIAlertAction(title: NSLocalizedString("Yes", comment: ""), style: .Cancel) { _ in
+    let controller = UIAlertController(title: NSLocalizedString("undo title", comment: ""), message: NSLocalizedString("undo message", comment: ""), preferredStyle: .alert)
+    let no = UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .default) { _ in }
+    let yes = UIAlertAction(title: NSLocalizedString("Yes", comment: ""), style: .cancel) { _ in
       EntryHandler.sharedHandler.removeLastGulp()
     }
-    _ = [yes, no].map { controller.addAction($0) }
-    self.presentViewController(controller, animated: true) {}
+    [yes, no].forEach { controller.addAction($0) }
+    present(controller, animated: true) {}
   }
 
   // MARK: - UIViewControllerTransitioningDelegate
 
-  public func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-    transition.transitionMode = .Present
+  open func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    transition.transitionMode = .present
     let center = CGPoint(x: starButton.center.x, y: starButton.center.y + 64)
     transition.startingPoint = center
     transition.bubbleColor = UIColor(red: 245.0/255.0, green: 192.0/255.0, blue: 24.0/255.0, alpha: 1)
     return transition
   }
 
-  public func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-    transition.transitionMode = .Dismiss
+  open func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    transition.transitionMode = .dismiss
     transition.startingPoint = CGPoint(x: starButton.center.x, y: starButton.center.y + 64)
-    transition.bubbleColor = UIColor(red: 245.0/255.0, green: 192.0/255.0, blue: 24.0/255.0, alpha: 1)
-    starButton.transform = CGAffineTransformMakeScale(0.0001, 0.0001)
+    transition.bubbleColor = UIColor.palette_yellow
+    starButton.transform = CGAffineTransform(scaleX: 0.0001, y: 0.0001)
     return transition
   }
 
   // MARK: - Tear down
 
   deinit {
-    NSNotificationCenter.defaultCenter().removeObserver(self)
+    NotificationCenter.default.removeObserver(self)
   }
 }

@@ -4,8 +4,8 @@ import ClockKit
 
 class ExtensionDelegate: NSObject, WKExtensionDelegate, WCSessionDelegate {
 
-  lazy var notificationCenter: NSNotificationCenter = {
-    return NSNotificationCenter.defaultCenter()
+  lazy var notificationCenter: NotificationCenter = {
+    return NotificationCenter.default
   }()
 
   func applicationDidFinishLaunching() {
@@ -15,9 +15,9 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, WCSessionDelegate {
 
   // MARK: - Notification Center
 
-  private func setupNotificationCenter() {
-    notificationCenter.addObserverForName(NotificationWatchGulpAdded, object: nil, queue: nil) {
-      (notification: NSNotification) in
+  fileprivate func setupNotificationCenter() {
+    notificationCenter.addObserver(forName: NSNotification.Name(rawValue: NotificationWatchGulpAdded), object: nil, queue: nil) {
+      (notification: Notification) in
       self.sendApplicationContext()
       self.reloadComplications()
     }
@@ -25,46 +25,51 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, WCSessionDelegate {
 
   // MARK: - Watch Connectivity
 
-  private func setupWatchConnectivity() {
+  fileprivate func setupWatchConnectivity() {
     guard WCSession.isSupported() else {
       return
     }
 
-    let session  = WCSession.defaultSession()
+    let session  = WCSession.default()
     session.delegate = self
-    session.activateSession()
+    session.activate()
   }
 
-  private func sendApplicationContext() {
+  fileprivate func sendApplicationContext() {
     guard WCSession.isSupported() else {
       return
     }
 
     do {
       let context = WatchEntryHelper.sharedHelper.applicationContext()
-      try WCSession.defaultSession().updateApplicationContext(context)
+      try WCSession.default().updateApplicationContext(context)
     } catch {
       print("Unable to send cache data to WCSession: \(error)")
     }
   }
 
-  func session(session: WCSession, didReceiveApplicationContext applicationContext: [String : AnyObject]) {
-    if let goal = applicationContext[Constants.Gulp.Goal.key()] as? Double,
-      let current = applicationContext[Constants.WatchContext.Current.key()] as? Double,
-      let small = applicationContext[Constants.Gulp.Small.key()] as? Double,
-      let big = applicationContext[Constants.Gulp.Big.key()] as? Double {
+  @available(watchOS 2.2, *)
+  public func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+
+  }
+
+  func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String : Any]) {
+    if let goal = applicationContext[Constants.Gulp.goal.key()] as? Double,
+      let current = applicationContext[Constants.WatchContext.current.key()] as? Double,
+      let small = applicationContext[Constants.Gulp.small.key()] as? Double,
+      let big = applicationContext[Constants.Gulp.big.key()] as? Double {
       WatchEntryHelper.sharedHelper.saveSettings(goal: goal, current: current, small: small, big: big)
-      NSNotificationCenter.defaultCenter().postNotificationName(NotificationContextReceived, object: nil)
+      NotificationCenter.default.post(name: Notification.Name(rawValue: NotificationContextReceived), object: nil)
       self.reloadComplications()
     }
   }
 
   func reloadComplications() {
-    dispatch_async(dispatch_get_main_queue()) {
+    DispatchQueue.main.async {
       if let complications: [CLKComplication] = CLKComplicationServer.sharedInstance().activeComplications {
         complications.forEach({
           (complication: CLKComplication) in
-          CLKComplicationServer.sharedInstance().reloadTimelineForComplication(complication)
+          CLKComplicationServer.sharedInstance().reloadTimeline(for: complication)
         })
       }
     }

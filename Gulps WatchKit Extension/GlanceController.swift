@@ -5,8 +5,8 @@ class GlanceController: WKInterfaceController {
 
   @IBOutlet weak var percentageLabel: WKInterfaceLabel!
 
-  override func awakeWithContext(context: AnyObject?) {
-    super.awakeWithContext(context)
+  override func awake(withContext context: Any?) {
+    super.awake(withContext: context)
   }
 
   override func willActivate() {

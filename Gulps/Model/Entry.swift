@@ -4,24 +4,24 @@ import RealmSwift
 /**
  An Entry represents an entire day worth of input
  */
-public class Entry: Object {
-  dynamic public var date = Entry.defaultDate()
-  dynamic public var quantity = 0.0
-  dynamic public var percentage = 0.0
-  dynamic public var goal = 0.0
-  public let gulps = List<Gulp>()
+open class Entry: Object {
+  dynamic open var date = Entry.defaultDate()
+  dynamic open var quantity = 0.0
+  dynamic open var percentage = 0.0
+  dynamic open var goal = 0.0
+  open let gulps = List<Gulp>()
 
   /**
    The date is the primary key. `defaultDate` provides the current day in string format.
    The string format is required by Realm for primary keys
    */
   class func defaultDate() -> String {
-    let dateFormat = NSDateFormatter()
+    let dateFormat = DateFormatter()
     dateFormat.dateFormat = "yyyy-MM-dd"
-    return dateFormat.stringFromDate(NSDate())
+    return dateFormat.string(from: Date())
   }
 
-  override public class func primaryKey() -> String {
+  override open class func primaryKey() -> String {
     return "date"
   }
 
@@ -31,7 +31,7 @@ public class Entry: Object {
    - parameter goal: The daily goal
    - parameter date: The date of the portion
    */
-  func addGulp(quantity: Double, goal: Double, date: NSDate?) {
+  func addGulp(_ quantity: Double, goal: Double, date: Date?) {
     let gulp = Gulp(quantity: quantity)
     self.gulps.append(gulp)
     self.quantity += quantity

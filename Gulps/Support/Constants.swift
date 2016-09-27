@@ -6,87 +6,87 @@ public enum Constants {
   }
 
   public enum WatchContext: Int {
-    case Current, Date
+    case current, date
     public func key() -> String {
       switch self {
-      case .Current:
+      case .current:
         return "WATCH_CURRENT"
-      case .Date:
+      case .date:
         return "WATCH_DATE"
       }
     }
   }
 
   public enum UnitsOfMeasure: Int {
-    case Liters, Ounces
+    case liters, ounces
 
     func nameForUnitOfMeasure() -> String {
       switch self {
-      case .Liters:
+      case .liters:
         return NSLocalizedString("Liters", comment: "")
-      case .Ounces:
+      case .ounces:
         return NSLocalizedString("Ounces", comment: "")
       }
     }
 
     func suffixForUnitOfMeasure() -> String {
       switch self {
-      case .Liters:
+      case .liters:
         return "L"
-      case .Ounces:
+      case .ounces:
         return "Oz"
       }
     }
   }
 
   public enum General: Int {
-    case UnitOfMeasure, OnboardingShown
+    case unitOfMeasure, onboardingShown
 
     public func key() -> String {
       switch self {
-      case .UnitOfMeasure:
+      case .unitOfMeasure:
         return "UNIT_OF_MEASURE"
-      case .OnboardingShown:
+      case .onboardingShown:
         return "ONBOARDING_SHOWN"
       }
     }
   }
 
   public enum Gulp: Int {
-    case Big, Small, Goal
+    case big, small, goal
     public func key() -> String {
       switch self {
-      case .Big:
+      case .big:
         return "GULP_BIG"
-      case .Small:
+      case .small:
         return "GULP_SMALL"
-      case .Goal:
+      case .goal:
         return "PORTION_GOAL"
       }
     }
   }
 
   public enum Health: Int {
-    case On
+    case on
     public func key() -> String {
       switch self {
-      case .On:
+      case .on:
         return "HEALTH_ON"
       }
     }
   }
 
   public enum Notification: Int {
-    case On, From, To, Interval
+    case on, from, to, interval
     public func key() -> String {
       switch self {
-      case .On:
+      case .on:
         return "NOTIFICATION_ON"
-      case .From:
+      case .from:
         return "NOTIFICATION_FROM"
-      case .To:
+      case .to:
         return "NOTIFICATION_TO"
-      case .Interval:
+      case .interval:
         return "NOTIFICATION_INTERVAL"
       }
     }

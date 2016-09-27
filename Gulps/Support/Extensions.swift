@@ -1,36 +1,37 @@
 import Foundation
 import UIKit
 
-extension NSUserDefaults {
-  class func groupUserDefaults() -> NSUserDefaults {
-    return NSUserDefaults(suiteName: "group.\(Constants.bundle())")!
+extension UserDefaults {
+  class func groupUserDefaults() -> UserDefaults {
+    return UserDefaults(suiteName: "group.\(Constants.bundle())")!
   }
 }
 
 extension Double {
   func formattedPercentage() -> String {
-    let percentageFormatter = NSNumberFormatter()
-    percentageFormatter.numberStyle = .PercentStyle
-    return percentageFormatter.stringFromNumber(round(self) / 100.0) ?? "\(self)%"
+    let value = self.rounded()
+    let percentageFormatter = NumberFormatter()
+    percentageFormatter.numberStyle = .percent
+    return percentageFormatter.string(for: value / 100.0) ?? "\(self)%"
   }
 }
 
 extension NSRange {
-  func toRange(string: String) -> Range<String.Index> {
-    let startIndex = string.startIndex.advancedBy(location)
-    let endIndex = startIndex.advancedBy(length)
+  func toRange(_ string: String) -> Range<String.Index> {
+    let startIndex = string.characters.index(string.startIndex, offsetBy: location)
+    let endIndex = string.characters.index(startIndex, offsetBy: length)
     return startIndex..<endIndex
   }
 }
 
-extension NSDate {
-  var startOfDay: NSDate {
-    return NSCalendar.currentCalendar().startOfDayForDate(self)
+extension Date {
+  var startOfDay: Date {
+    return Calendar.current.startOfDay(for: self)
   }
 
-  var startOfTomorrow: NSDate? {
-    let components = NSDateComponents()
+  var startOfTomorrow: Date? {
+    var components = DateComponents()
     components.day = 1
-    return NSCalendar.currentCalendar().dateByAddingComponents(components, toDate: startOfDay, options: NSCalendarOptions())
+    return (Calendar.current as NSCalendar).date(byAdding: components, to: startOfDay, options: NSCalendar.Options())
   }
 }

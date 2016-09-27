@@ -1,6 +1,4 @@
-<!-- Hiding until we have Swift 2 on CI: [![Build Status](https://travis-ci.org/ashfurrow/Nimble-Snapshots.svg)](https://travis-ci.org/ashfurrow/Nimble-Snapshots) -->
-
-Nimble-Snapshots [![Build Status](https://travis-ci.org/Moya/Moya.svg?branch=master)](https://travis-ci.org/Moya/Moya)
+Nimble-Snapshots [![Build Status](https://travis-ci.org/ashfurrow/Nimble-Snapshots.svg)](https://travis-ci.org/ashfurrow/Nimble-Snapshots)
 =============================
 
 [Nimble](https://github.com/Quick/Nimble) matchers for [FBSnapshotTestCase](https://github.com/facebook/ios-snapshot-test-case).
@@ -48,7 +46,7 @@ class MySpec: QuickSpec {
                 let view = ... // some view you want to test
                 expect(view).to( haveValidSnapshot() )
             }
-        });
+        })
     }
 }
 ```

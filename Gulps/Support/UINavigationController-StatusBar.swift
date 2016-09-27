@@ -5,11 +5,11 @@ import UIKit
  and visible in the others, with a light status bar
  */
 extension UINavigationController {
-  public override func preferredStatusBarStyle() -> UIStatusBarStyle {
-    return .LightContent
+  open override var preferredStatusBarStyle : UIStatusBarStyle {
+    return .lightContent
   }
 
-  public override func childViewControllerForStatusBarHidden() -> UIViewController? {
+  open override var childViewControllerForStatusBarHidden : UIViewController? {
     return self.topViewController
   }
 }

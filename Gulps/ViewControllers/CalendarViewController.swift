@@ -5,7 +5,7 @@ import UICountingLabel
 
 class CalendarViewController: UIViewController, JTCalendarDataSource {
 
-  let userDefaults = NSUserDefaults.groupUserDefaults()
+  let userDefaults = UserDefaults.groupUserDefaults()
 
   @IBOutlet weak var calendarMenu: JTCalendarMenuView!
   @IBOutlet weak var calendarContent: JTCalendarContentView!
@@ -29,8 +29,8 @@ class CalendarViewController: UIViewController, JTCalendarDataSource {
   var animating = false
 
   let shareExclusions = [
-    UIActivityTypeAirDrop, UIActivityTypeAssignToContact, UIActivityTypeAddToReadingList,
-    UIActivityTypePrint, UIActivityTypePostToWeibo, UIActivityTypePostToVimeo, UIActivityTypePostToTencentWeibo
+    UIActivityType.airDrop, UIActivityType.assignToContact, UIActivityType.addToReadingList,
+    UIActivityType.print, UIActivityType.postToWeibo, UIActivityType.postToVimeo, UIActivityType.postToTencentWeibo
   ]
 
   override func viewDidLoad() {
@@ -40,12 +40,12 @@ class CalendarViewController: UIViewController, JTCalendarDataSource {
 
     dailyLabel.text = ""
     [daysCountLabel, quantityLabel].forEach { $0.format = "%d" }
-    [quantityLabel, daysLabel, daysCountLabel, measureLabel].forEach { $0.textColor = .mainColor() }
-    shareButton.backgroundColor = .mainColor()
+    [quantityLabel, daysLabel, daysCountLabel, measureLabel].forEach { $0.textColor = .palette_main }
+    shareButton.backgroundColor = .palette_main
 
     self.navigationItem.rightBarButtonItem = {
       let animatedButton = AnimatedShareButton(frame: CGRect(x: 0, y: 0, width: 22, height: 22))
-      animatedButton.addTarget(self, action: #selector(CalendarViewController.presentStats(_:)), forControlEvents: .TouchUpInside)
+      animatedButton.addTarget(self, action: #selector(CalendarViewController.presentStats(_:)), for: .touchUpInside)
       let button = UIBarButtonItem(customView: animatedButton)
       return button
     }()
@@ -54,11 +54,11 @@ class CalendarViewController: UIViewController, JTCalendarDataSource {
     initAnimations()
   }
 
-  func presentStats(sender: UIBarButtonItem) {
+  func presentStats(_ sender: UIBarButtonItem) {
     animateShareView()
   }
 
-  override func viewDidAppear(animated: Bool) {
+  override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
 
     Globals.showPopTipOnceForKey("SHARE_HINT", userDefaults: userDefaults,
@@ -69,30 +69,28 @@ class CalendarViewController: UIViewController, JTCalendarDataSource {
     updateStats()
 
     calendar.reloadData()
-    dailyLabel.text = dateLabelString(calendar.currentDateSelected ?? NSDate())
+    dailyLabel.text = dateLabelString(calendar.currentDateSelected ?? Date())
   }
 
-  @IBAction func shareAction(sender: AnyObject) {
+  @IBAction func shareAction(_ sender: AnyObject) {
     let quantity = Int(EntryHandler.sharedHandler.overallQuantity())
     let days = EntryHandler.sharedHandler.daysTracked()
     let text = String(format: NSLocalizedString("share text", comment: ""), quantity, unitName(), days)
     let activityController = UIActivityViewController(activityItems: [text], applicationActivities: nil)
     activityController.excludedActivityTypes = shareExclusions
-    presentViewController(activityController, animated: true, completion: nil)
+    present(activityController, animated: true, completion: nil)
   }
 
   // MARK: - JTCalendarDataSource
-
-  func calendar(calendar: JTCalendar!, dataForDate date: NSDate!) -> AnyObject? {
-    let entry = EntryHandler.sharedHandler.entryForDate(date)
-    if let entry = entry {
-      return 1 - (entry.percentage / 100.0)
+  func calendar(_ calendar: JTCalendar!, dataFor date: Date!) -> Any! {
+    if let entry = EntryHandler.sharedHandler.entryForDate(date) {
+      return 1 - Double(entry.percentage / 100.0)
     } else {
       return nil
     }
   }
 
-  func calendar(calendar: JTCalendar!, didSelectDate date: NSDate!) {
+  func calendar(_ calendar: JTCalendar!, didSelect date: Date!) {
     dailyLabel.text = dateLabelString(date)
   }
 }
@@ -101,7 +99,7 @@ private extension CalendarViewController {
   func setupCalendar() {
     let font = UIFont(name: "KaushanScript-Regular", size: 16)
 
-    calendar.calendarAppearance.calendar().firstWeekday = 2
+//    calendar.calendarAppearance.calendar().firstWeekday = 2
     calendar.calendarAppearance.dayDotRatio = 1.0 / 7.0
     calendar.menuMonthsView = calendarMenu
     calendar.contentView = calendarContent
@@ -113,19 +111,19 @@ private extension CalendarViewController {
   }
 
   func updateStats() {
-    daysCountLabel.countFromZeroTo(CGFloat(EntryHandler.sharedHandler.daysTracked()))
-    quantityLabel.countFromZeroTo(CGFloat(EntryHandler.sharedHandler.overallQuantity()))
+    daysCountLabel.countFromZero(to: CGFloat(EntryHandler.sharedHandler.daysTracked()))
+    quantityLabel.countFromZero(to: CGFloat(EntryHandler.sharedHandler.overallQuantity()))
     measureLabel.text = String(format: NSLocalizedString("unit format", comment: ""), unitName())
   }
 
   func unitName() -> String {
-    if let unit = Constants.UnitsOfMeasure(rawValue: userDefaults.integerForKey(Constants.General.UnitOfMeasure.key())) {
+    if let unit = Constants.UnitsOfMeasure(rawValue: userDefaults.integer(forKey: Constants.General.unitOfMeasure.key())) {
       return unit.nameForUnitOfMeasure()
     }
     return ""
   }
 
-  func dateLabelString(date: NSDate = NSDate()) -> String {
+  func dateLabelString(_ date: Date = Date()) -> String {
     if let entry = EntryHandler.sharedHandler.entryForDate(date) {
       if (entry.percentage >= 100) {
         return NSLocalizedString("goal met", comment: "")

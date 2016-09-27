@@ -10,8 +10,8 @@ def common_pods
   pod 'UICountingLabel', '~> 1.2'
   pod 'JTCalendar', git: 'https://github.com/andreamazz/JTCalendar', branch: 'develop'
   pod 'BAFluidView', '~> 0.1.6'
-  pod 'BubbleTransition', '~> 1.0.0'
-  pod 'SwiftDate', '~> 1.2'
+  pod 'BubbleTransition', '~> 2.0.0'
+#  pod 'SwiftDate', '~> 1.2'
 end
 
 target 'Gulps' do
@@ -24,9 +24,10 @@ end
 
 target 'GulpsTests' do
   common_pods
-  pod 'Nimble', '~> 3.0.0'
-  pod 'Quick', '~> 4.1.0'
-  pod 'Nimble-Snapshots', '~> 4.1.0'
+  pod 'Nimble', '~> 5.0.0'
+  pod 'Quick', '~> 0.10.0'
+  pod 'Nimble-Snapshots', '~> 4.2.0'
+  pod 'FBSnapshotTestCase', '2.1.3'
 end
 
 inhibit_all_warnings!

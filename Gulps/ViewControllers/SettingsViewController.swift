@@ -15,11 +15,11 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
   @IBOutlet weak var notificationIntervalLabel: UILabel!
   @IBOutlet var uomLabels: [UILabel]!
 
-  let userDefaults = NSUserDefaults.groupUserDefaults()
+  let userDefaults = UserDefaults.groupUserDefaults()
 
-  let numberFormatter: NSNumberFormatter = {
-    let formatter = NSNumberFormatter()
-    formatter.numberStyle = .DecimalStyle
+  let numberFormatter: NumberFormatter = {
+    let formatter = NumberFormatter()
+    formatter.numberStyle = .decimal
     return formatter
   }()
 
@@ -27,46 +27,46 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
     super.viewDidLoad()
     self.title = NSLocalizedString("settings title", comment: "")
     for element in [smallPortionText, largePortionText, dailyGoalText] {
-      element.inputAccessoryView = Globals.numericToolbar(element,
+      element?.inputAccessoryView = Globals.numericToolbar(element,
                                                           selector: #selector(UIResponder.resignFirstResponder),
-                                                          barColor: .mainColor(),
-                                                          textColor: .whiteColor())
+                                                          barColor: .palette_main,
+                                                          textColor: .white)
     }
 
     if (WCSession.isSupported()) {
-      WCSession.defaultSession().activateSession()
+      WCSession.default().activate()
     }
   }
 
-  override func viewWillAppear(animated: Bool) {
+  override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     updateUI()
   }
 
   func updateUI() {
-    let numberFormatter = NSNumberFormatter()
-    numberFormatter.numberStyle = .DecimalStyle
+    let numberFormatter = NumberFormatter()
+    numberFormatter.numberStyle = .decimal
     var suffix = ""
-    if let unit = Constants.UnitsOfMeasure(rawValue: userDefaults.integerForKey(Constants.General.UnitOfMeasure.key())) {
+    if let unit = Constants.UnitsOfMeasure(rawValue: userDefaults.integer(forKey: Constants.General.unitOfMeasure.key())) {
       unitOfMesureLabel.text = unit.nameForUnitOfMeasure()
       suffix = unit.suffixForUnitOfMeasure()
     }
 
     _ = uomLabels.map({$0.text = suffix})
-    largePortionText.text = numberFormatter.stringFromNumber(userDefaults.doubleForKey(Constants.Gulp.Big.key()))
-    smallPortionText.text = numberFormatter.stringFromNumber(userDefaults.doubleForKey(Constants.Gulp.Small.key()))
-    dailyGoalText.text = numberFormatter.stringFromNumber(userDefaults.doubleForKey(Constants.Gulp.Goal.key()))
+    largePortionText.text = numberFormatter.string(for: userDefaults.double(forKey: Constants.Gulp.big.key()))
+    smallPortionText.text = numberFormatter.string(for: userDefaults.double(forKey: Constants.Gulp.small.key()))
+    dailyGoalText.text = numberFormatter.string(for: userDefaults.double(forKey: Constants.Gulp.goal.key()))
 
-    healthSwitch.on = userDefaults.boolForKey(Constants.Health.On.key())
+    healthSwitch.isOn = userDefaults.bool(forKey: Constants.Health.on.key())
 
-    notificationSwitch.on = userDefaults.boolForKey(Constants.Notification.On.key())
-    notificationFromLabel.text = "\(userDefaults.integerForKey(Constants.Notification.From.key())):00"
-    notificationToLabel.text = "\(userDefaults.integerForKey(Constants.Notification.To.key())):00"
-    notificationIntervalLabel.text = "\(userDefaults.integerForKey(Constants.Notification.Interval.key())) " +  NSLocalizedString("hours", comment: "")
+    notificationSwitch.isOn = userDefaults.bool(forKey: Constants.Notification.on.key())
+    notificationFromLabel.text = "\(userDefaults.integer(forKey: Constants.Notification.from.key())):00"
+    notificationToLabel.text = "\(userDefaults.integer(forKey: Constants.Notification.to.key())):00"
+    notificationIntervalLabel.text = "\(userDefaults.integer(forKey: Constants.Notification.interval.key())) " +  NSLocalizedString("hours", comment: "")
   }
 
   func updateNotificationPreferences() {
-    if (notificationSwitch.on) {
+    if (notificationSwitch.isOn) {
       NotificationHelper.unscheduleNotifications()
       NotificationHelper.askPermission()
     } else {
@@ -74,45 +74,45 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
     }
   }
 
-  override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
     var actionSheet: AHKActionSheet?
-    if (indexPath.section == 0 && indexPath.row == 0) {
+    if ((indexPath as NSIndexPath).section == 0 && (indexPath as NSIndexPath).row == 0) {
       actionSheet = AHKActionSheet(title: NSLocalizedString("unit of measure title", comment: ""))
-      actionSheet?.addButtonWithTitle(Constants.UnitsOfMeasure.Liters.nameForUnitOfMeasure(), type: .Default) { _ in
-        self.userDefaults.setInteger(Constants.UnitsOfMeasure.Liters.rawValue, forKey: Constants.General.UnitOfMeasure.key())
+      actionSheet?.addButton(withTitle: Constants.UnitsOfMeasure.liters.nameForUnitOfMeasure(), type: .default) { _ in
+        self.userDefaults.set(Constants.UnitsOfMeasure.liters.rawValue, forKey: Constants.General.unitOfMeasure.key())
         self.userDefaults.synchronize()
         self.updateUI()
       }
-      actionSheet?.addButtonWithTitle(Constants.UnitsOfMeasure.Ounces.nameForUnitOfMeasure(), type: .Default) { _ in
-        self.userDefaults.setInteger(Constants.UnitsOfMeasure.Ounces.rawValue, forKey: Constants.General.UnitOfMeasure.key())
+      actionSheet?.addButton(withTitle: Constants.UnitsOfMeasure.ounces.nameForUnitOfMeasure(), type: .default) { _ in
+        self.userDefaults.set(Constants.UnitsOfMeasure.ounces.rawValue, forKey: Constants.General.unitOfMeasure.key())
         self.userDefaults.synchronize()
         self.updateUI()
       }
     }
-    if (indexPath.section == 2 && indexPath.row == 1) {
+    if ((indexPath as NSIndexPath).section == 2 && (indexPath as NSIndexPath).row == 1) {
       actionSheet = AHKActionSheet(title: NSLocalizedString("from:", comment: ""))
       for index in 5...22 {
-        actionSheet?.addButtonWithTitle("\(index):00", type: .Default) { _ in
-          self.updateNotificationSetting(Constants.Notification.From.key(), value: index)
+        actionSheet?.addButton(withTitle: "\(index):00", type: .default) { _ in
+          self.updateNotificationSetting(Constants.Notification.from.key(), value: index)
         }
       }
     }
-    if (indexPath.section == 2 && indexPath.row == 2) {
+    if ((indexPath as NSIndexPath).section == 2 && (indexPath as NSIndexPath).row == 2) {
       actionSheet = AHKActionSheet(title: NSLocalizedString("to:", comment: ""))
-      let upper = self.userDefaults.integerForKey(Constants.Notification.From.key()) + 1
+      let upper = self.userDefaults.integer(forKey: Constants.Notification.from.key()) + 1
       for index in upper...24 {
-        actionSheet?.addButtonWithTitle("\(index):00", type: .Default) { _ in
-          self.updateNotificationSetting(Constants.Notification.To.key(), value: index)
+        actionSheet?.addButton(withTitle: "\(index):00", type: .default) { _ in
+          self.updateNotificationSetting(Constants.Notification.to.key(), value: index)
         }
       }
     }
-    if (indexPath.section == 2 && indexPath.row == 3) {
+    if ((indexPath as NSIndexPath).section == 2 && (indexPath as NSIndexPath).row == 3) {
       actionSheet = AHKActionSheet(title: NSLocalizedString("every:", comment: ""))
       for index in 1...8 {
         let hour = index > 1 ? NSLocalizedString("hours", comment: "") : NSLocalizedString("hour", comment: "")
-        actionSheet?.addButtonWithTitle("\(index) \(hour)", type: .Default) { _ in
-          self.updateNotificationSetting(Constants.Notification.Interval.key(), value: index)
+        actionSheet?.addButton(withTitle: "\(index) \(hour)", type: .default) { _ in
+          self.updateNotificationSetting(Constants.Notification.interval.key(), value: index)
         }
       }
     }
@@ -121,44 +121,44 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
     }
   }
 
-  func updateNotificationSetting(key: String, value: Int) {
-    userDefaults.setInteger(value, forKey: key)
+  func updateNotificationSetting(_ key: String, value: Int) {
+    userDefaults.set(value, forKey: key)
     userDefaults.synchronize()
     updateUI()
     updateNotificationPreferences()
   }
 
-  override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+  override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 44
   }
 
-  @IBAction func healthAction(sender: UISwitch) {
-    userDefaults.setBool(sender.on, forKey: Constants.Health.On.key())
+  @IBAction func healthAction(_ sender: UISwitch) {
+    userDefaults.set(sender.isOn, forKey: Constants.Health.on.key())
     userDefaults.synchronize()
     self.tableView.reloadData()
-    if sender.on {
+    if sender.isOn {
       HealthKitHelper.sharedHelper.askPermission()
     }
   }
 
-  @IBAction func reminderAction(sender: UISwitch) {
-    userDefaults.setBool(sender.on, forKey: Constants.Notification.On.key())
+  @IBAction func reminderAction(_ sender: UISwitch) {
+    userDefaults.set(sender.isOn, forKey: Constants.Notification.on.key())
     userDefaults.synchronize()
     self.tableView.reloadData()
     updateNotificationPreferences()
   }
 
-  override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+  override func numberOfSections(in tableView: UITableView) -> Int {
     return 4
   }
 
-  override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     if (section == 0) {
       return 1
     } else if (section == 1) {
       return 3
     } else if (section == 2) {
-      if NSUserDefaults.groupUserDefaults().boolForKey(Constants.Notification.On.key()) {
+      if UserDefaults.groupUserDefaults().bool(forKey: Constants.Notification.on.key()) {
         return 4
       } else {
         return 1
@@ -168,31 +168,31 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
     }
   }
 
-  func textFieldDidEndEditing(textField: UITextField) {
+  func textFieldDidEndEditing(_ textField: UITextField) {
     if (textField == smallPortionText) {
-      storeText(smallPortionText, toKey: Constants.Gulp.Small.key())
+      storeText(smallPortionText, toKey: Constants.Gulp.small.key())
     }
     if (textField == largePortionText) {
-      storeText(largePortionText, toKey: Constants.Gulp.Big.key())
+      storeText(largePortionText, toKey: Constants.Gulp.big.key())
     }
     if (textField == dailyGoalText) {
-      storeText(dailyGoalText, toKey: Constants.Gulp.Goal.key())
+      storeText(dailyGoalText, toKey: Constants.Gulp.goal.key())
     }
   }
 
-  func storeText(textField: UITextField, toKey key: String) {
+  func storeText(_ textField: UITextField, toKey key: String) {
     guard let text = textField.text else {
       return
     }
-    let number = numberFormatter.numberFromString(text) as? Double
-    userDefaults.setDouble(number ?? 0.0, forKey: key)
+    let number = numberFormatter.number(from: text) as? Double
+    userDefaults.set(number ?? 0.0, forKey: key)
     userDefaults.synchronize()
 
     // Update the settings on the watch
     WatchConnectivityHelper().sendWatchData()
   }
 
-  func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+  func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
     return Globals.numericTextField(textField, shouldChangeCharactersInRange: range, replacementString: string)
   }
 }

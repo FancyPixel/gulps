@@ -7,31 +7,31 @@ class NotificationViewController: OnboardingViewController, UIActionSheetDelegat
   @IBOutlet weak var fromLabel: UILabel!
   @IBOutlet weak var intervalLabel: UILabel!
   @IBOutlet weak var toLabel: UILabel!
-  let userDefaults = NSUserDefaults.groupUserDefaults()
+  let userDefaults = UserDefaults.groupUserDefaults()
 
   lazy var fromActionSheet: AHKActionSheet = {
     var actionSheet = AHKActionSheet(title: NSLocalizedString("from:", comment: ""))
     for index in 5...22 {
-      actionSheet.addButtonWithTitle("\(index):00", type: .Default) { _ in
-        self.userDefaults.setInteger(index, forKey: Constants.Notification.From.key())
+      actionSheet?.addButton(withTitle: "\(index):00", type: .default) { _ in
+        self.userDefaults.set(index, forKey: Constants.Notification.from.key())
         self.userDefaults.synchronize()
         self.updateUI()
       }
     }
-    return actionSheet
+    return actionSheet!
   }()
 
   lazy var intervalActionSheet: AHKActionSheet = {
     var actionSheet = AHKActionSheet(title: NSLocalizedString("every:", comment: ""))
     for index in 1...8 {
       let hour = index > 1 ? NSLocalizedString("hours", comment: "") : NSLocalizedString("hour", comment: "")
-      actionSheet.addButtonWithTitle("\(index) \(hour)", type: .Default) { _ in
-        self.userDefaults.setInteger(index, forKey: Constants.Notification.Interval.key())
+      actionSheet?.addButton(withTitle: "\(index) \(hour)", type: .default) { _ in
+        self.userDefaults.set(index, forKey: Constants.Notification.interval.key())
         self.userDefaults.synchronize()
         self.updateUI()
       }
     }
-    return actionSheet
+    return actionSheet!
   }()
 
   override func viewDidLoad() {
@@ -39,48 +39,48 @@ class NotificationViewController: OnboardingViewController, UIActionSheetDelegat
   }
 
   override func updateUI() {
-    self.fromLabel.text = "\(self.userDefaults.integerForKey(Constants.Notification.From.key())):00"
-    self.toLabel.text = "\(self.userDefaults.integerForKey(Constants.Notification.To.key())):00"
-    let interval = self.userDefaults.integerForKey(Constants.Notification.Interval.key())
+    self.fromLabel.text = "\(self.userDefaults.integer(forKey: Constants.Notification.from.key())):00"
+    self.toLabel.text = "\(self.userDefaults.integer(forKey: Constants.Notification.to.key())):00"
+    let interval = self.userDefaults.integer(forKey: Constants.Notification.interval.key())
     let hour = interval > 1 ? NSLocalizedString("hours", comment: "") : NSLocalizedString("hour", comment: "")
     self.intervalLabel.text = "\(interval) \(hour)"
-    self.notificationSwitch.on = self.userDefaults.boolForKey(Constants.Notification.On.key())
+    self.notificationSwitch.isOn = self.userDefaults.bool(forKey: Constants.Notification.on.key())
   }
 
-  @IBAction func openFromSelection(sender: UIButton) {
+  @IBAction func openFromSelection(_ sender: UIButton) {
     self.fromActionSheet.show()
   }
 
-  @IBAction func openIntervalSelection(sender: UIButton) {
+  @IBAction func openIntervalSelection(_ sender: UIButton) {
     self.intervalActionSheet.show()
   }
 
-  @IBAction func openToSelection(sender: UIButton) {
+  @IBAction func openToSelection(_ sender: UIButton) {
     let toActionSheet = AHKActionSheet(title: NSLocalizedString("to:", comment: ""))
-    let upper = self.userDefaults.integerForKey(Constants.Notification.From.key()) + 1
+    let upper = self.userDefaults.integer(forKey: Constants.Notification.from.key()) + 1
     for index in upper...24 {
-      toActionSheet!.addButtonWithTitle("\(index):00", type: .Default) { _ in
-        self.userDefaults.setInteger(index, forKey: Constants.Notification.To.key())
+      toActionSheet!.addButton(withTitle: "\(index):00", type: .default) { _ in
+        self.userDefaults.set(index, forKey: Constants.Notification.to.key())
         self.userDefaults.synchronize()
         self.updateUI()
       }
     }
-    toActionSheet.show()
+    toActionSheet?.show()
   }
 
-  @IBAction func enableNotifications(sender: UISwitch) {
-    self.userDefaults.setBool(sender.on, forKey: Constants.Notification.On.key())
+  @IBAction func enableNotifications(_ sender: UISwitch) {
+    self.userDefaults.set(sender.isOn, forKey: Constants.Notification.on.key())
     self.userDefaults.synchronize()
   }
 
   @IBAction func doneAction() {
-    userDefaults.setBool(true, forKey: Constants.General.OnboardingShown.key())
+    userDefaults.set(true, forKey: Constants.General.onboardingShown.key())
     NotificationHelper.unscheduleNotifications()
-    if notificationSwitch.on {
+    if notificationSwitch.isOn {
       NotificationHelper.askPermission()
     }
 
-    if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
+    if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
       appDelegate.loadMainInterface()
     }
   }

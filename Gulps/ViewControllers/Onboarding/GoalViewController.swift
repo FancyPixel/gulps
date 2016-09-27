@@ -6,7 +6,7 @@ class GoalViewController: OnboardingViewController, UITextFieldDelegate {
   @IBOutlet weak var goalSuffixLabel: UILabel!
   @IBOutlet weak var headerLabel: UILabel!
   @IBOutlet weak var goalBackgroundView: UIView!
-  let userDefaults = NSUserDefaults.groupUserDefaults()
+  let userDefaults = UserDefaults.groupUserDefaults()
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -20,21 +20,21 @@ class GoalViewController: OnboardingViewController, UITextFieldDelegate {
       return
     }
 
-    let numberFormatter = NSNumberFormatter()
-    numberFormatter.numberStyle = .DecimalStyle
+    let numberFormatter = NumberFormatter()
+    numberFormatter.numberStyle = .decimal
 
     self.goalTextField.resignFirstResponder()
 
     var goal = 0.0
-    if let number = numberFormatter.numberFromString(text) {
+    if let number = numberFormatter.number(from: text) {
       goal = number as Double
     }
 
-    self.userDefaults.setDouble(goal, forKey: Constants.Gulp.Goal.key())
+    self.userDefaults.set(goal, forKey: Constants.Gulp.goal.key())
     self.userDefaults.synchronize()
   }
 
-  func textFieldShouldReturn(textField: UITextField) -> Bool {
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     textField.resignFirstResponder()
 
     dismissAndSave()
@@ -43,10 +43,10 @@ class GoalViewController: OnboardingViewController, UITextFieldDelegate {
   }
 
   override func updateUI() {
-    let numberFormatter = NSNumberFormatter()
-    numberFormatter.numberStyle = .DecimalStyle
-    self.goalTextField.text = numberFormatter.stringFromNumber(self.userDefaults.doubleForKey(Constants.Gulp.Goal.key()))
-    let unit = Constants.UnitsOfMeasure(rawValue: self.userDefaults.integerForKey(Constants.General.UnitOfMeasure.key()))
+    let numberFormatter = NumberFormatter()
+    numberFormatter.numberStyle = .decimal
+    self.goalTextField.text = numberFormatter.string(for: self.userDefaults.double(forKey: Constants.Gulp.goal.key()))
+    let unit = Constants.UnitsOfMeasure(rawValue: self.userDefaults.integer(forKey: Constants.General.unitOfMeasure.key()))
 
     if let unit = unit {
       self.goalSuffixLabel.text = unit.suffixForUnitOfMeasure()

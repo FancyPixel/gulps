@@ -5,8 +5,8 @@ class NotificationHelper {
 
   /// Version 1.4 introduces a new sound. Users from previous versions need to reschedule the local notifications
   class func rescheduleNotifications() {
-    let userDefaults = NSUserDefaults.groupUserDefaults()
-    if (!userDefaults.boolForKey(Constants.Notification.On.key())) {
+    let userDefaults = UserDefaults.groupUserDefaults()
+    if (!userDefaults.bool(forKey: Constants.Notification.on.key())) {
       return
     }
     unscheduleNotifications()
@@ -14,75 +14,75 @@ class NotificationHelper {
   }
 
   class func registerNotifications() {
-    let userDefaults = NSUserDefaults.groupUserDefaults()
-    if (!userDefaults.boolForKey(Constants.Notification.On.key())) {
+    let userDefaults = UserDefaults.groupUserDefaults()
+    if (!userDefaults.bool(forKey: Constants.Notification.on.key())) {
       return
     }
 
-    let startHour = userDefaults.integerForKey(Constants.Notification.From.key())
-    let endHour = userDefaults.integerForKey(Constants.Notification.To.key())
-    let interval = userDefaults.integerForKey(Constants.Notification.Interval.key())
+    let startHour = userDefaults.integer(forKey: Constants.Notification.from.key())
+    let endHour = userDefaults.integer(forKey: Constants.Notification.to.key())
+    let interval = userDefaults.integer(forKey: Constants.Notification.interval.key())
 
     var hour = startHour
     while (hour < endHour) {
-      let cal = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-      let date = cal.dateBySettingHour(hour, minute: 0, second: 0, ofDate: NSDate(), options: NSCalendarOptions())
+      let cal = Calendar(identifier: Calendar.Identifier.gregorian)
+      let date = (cal as NSCalendar).date(bySettingHour: hour, minute: 0, second: 0, of: Date(), options: NSCalendar.Options())
       let reminder = UILocalNotification()
 
       reminder.fireDate = date
-      reminder.repeatInterval = NSCalendarUnit.Day
+      reminder.repeatInterval = NSCalendar.Unit.day
       reminder.alertBody = NSLocalizedString("notification text", comment: "")
       reminder.alertAction = "Ok"
       reminder.soundName = "drop.caf"
       reminder.category = "GULP_CATEGORY"
 
-      UIApplication.sharedApplication().scheduleLocalNotification(reminder)
+      UIApplication.shared.scheduleLocalNotification(reminder)
 
       hour += interval
     }
   }
 
   class func unscheduleNotifications() {
-    UIApplication.sharedApplication().scheduledLocalNotifications?.removeAll(keepCapacity: false)
+    UIApplication.shared.scheduledLocalNotifications?.removeAll(keepingCapacity: false)
   }
 
   class func askPermission() {
     let smallAction = UIMutableUserNotificationAction()
     smallAction.identifier = "SMALL_ACTION"
     smallAction.title = "Small Gulp"
-    smallAction.activationMode = .Background
-    smallAction.authenticationRequired = false
-    smallAction.destructive = false
+    smallAction.activationMode = .background
+    smallAction.isAuthenticationRequired = false
+    smallAction.isDestructive = false
 
     let bigAction = UIMutableUserNotificationAction()
     bigAction.identifier = "BIG_ACTION"
     bigAction.title = "Big Gulp"
-    bigAction.activationMode = .Background
-    bigAction.authenticationRequired = false
-    bigAction.destructive = false
+    bigAction.activationMode = .background
+    bigAction.isAuthenticationRequired = false
+    bigAction.isDestructive = false
 
     let gulpCategory = UIMutableUserNotificationCategory()
     gulpCategory.identifier = "GULP_CATEGORY"
-    gulpCategory.setActions([smallAction, bigAction], forContext: .Default)
-    gulpCategory.setActions([smallAction, bigAction], forContext: .Minimal)
+    gulpCategory.setActions([smallAction, bigAction], for: .default)
+    gulpCategory.setActions([smallAction, bigAction], for: .minimal)
 
     let categories = NSSet(object: gulpCategory) as! Set<UIUserNotificationCategory>
-    let settings = UIUserNotificationSettings(forTypes: [.Alert, .Sound], categories: categories)
-    UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+    let settings = UIUserNotificationSettings(types: [.alert, .sound], categories: categories)
+    UIApplication.shared.registerUserNotificationSettings(settings)
   }
 
-  class func handleNotification(notification: UILocalNotification, identifier: String) {
+  class func handleNotification(_ notification: UILocalNotification, identifier: String) {
     if (notification.category == "GULP_CATEGORY") {
       if (identifier == "BIG_ACTION") {
-        NotificationHelper.addGulp(Constants.Gulp.Big.key())
+        NotificationHelper.addGulp(Constants.Gulp.big.key())
       }
       if (identifier == "SMALL_ACTION") {
-        NotificationHelper.addGulp(Constants.Gulp.Small.key())
+        NotificationHelper.addGulp(Constants.Gulp.small.key())
       }
     }
   }
 
-  class func addGulp(size: String) {
-    EntryHandler.sharedHandler.addGulp(NSUserDefaults.groupUserDefaults().doubleForKey(size))
+  class func addGulp(_ size: String) {
+    EntryHandler.sharedHandler.addGulp(UserDefaults.groupUserDefaults().double(forKey: size))
   }
 }

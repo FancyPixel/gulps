@@ -3,8 +3,8 @@ import RealmSwift
 
 /// Represents the single portion. Multiple portions will be recorded throughout the day 
 /// - SeeAlso: `Entry`
-public class Gulp: Object {
-  dynamic var date = NSDate()
+open class Gulp: Object {
+  dynamic var date = Date()
   dynamic var quantity = 0.0
 
   public convenience init(quantity: Double) {

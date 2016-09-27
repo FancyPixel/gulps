@@ -2,7 +2,7 @@ import Foundation
 
 class WatchEntryHelper {
   static let sharedHelper = WatchEntryHelper()
-  lazy var userDefaults = NSUserDefaults.standardUserDefaults()
+  lazy var userDefaults = UserDefaults.standard
 
   /**
    Save settings received by
@@ -11,12 +11,12 @@ class WatchEntryHelper {
    - parameter small: The small portion size
    - parameter big: The big portion size
    */
-  func saveSettings(goal goal: Double, current: Double, small: Double, big: Double) {
-    userDefaults.setDouble(goal, forKey: Constants.Gulp.Goal.key())
-    userDefaults.setDouble(small, forKey: Constants.Gulp.Small.key())
-    userDefaults.setDouble(big, forKey: Constants.Gulp.Big.key())
-    userDefaults.setObject(NSDate(), forKey: Constants.WatchContext.Date.key())
-    userDefaults.setDouble(current, forKey: Constants.WatchContext.Current.key())
+  func saveSettings(goal: Double, current: Double, small: Double, big: Double) {
+    userDefaults.set(goal, forKey: Constants.Gulp.goal.key())
+    userDefaults.set(small, forKey: Constants.Gulp.small.key())
+    userDefaults.set(big, forKey: Constants.Gulp.big.key())
+    userDefaults.set(Date(), forKey: Constants.WatchContext.date.key())
+    userDefaults.set(current, forKey: Constants.WatchContext.current.key())
     userDefaults.synchronize()
   }
 
@@ -24,10 +24,10 @@ class WatchEntryHelper {
    Save settings received by
    - parameter portion: The portion key
    */
-  func addGulp(portion: String) {
-    let portion = userDefaults.doubleForKey(portion)
-    userDefaults.setDouble(quantity() + portion, forKey: Constants.WatchContext.Current.key())
-    userDefaults.setObject(NSDate(), forKey: Constants.WatchContext.Date.key())
+  func addGulp(_ portion: String) {
+    let portion = userDefaults.double(forKey: portion)
+    userDefaults.set(quantity() + portion, forKey: Constants.WatchContext.current.key())
+    userDefaults.set(Date(), forKey: Constants.WatchContext.date.key())
     userDefaults.synchronize()
   }
 
@@ -37,10 +37,10 @@ class WatchEntryHelper {
    */
   func applicationContext() -> [String: Double] {
     return [
-      Constants.Gulp.Goal.key(): userDefaults.doubleForKey(Constants.Gulp.Goal.key()),
-      Constants.WatchContext.Current.key(): quantity(),
-      Constants.Gulp.Small.key(): userDefaults.doubleForKey(Constants.Gulp.Small.key()),
-      Constants.Gulp.Big.key(): userDefaults.doubleForKey(Constants.Gulp.Big.key())]
+      Constants.Gulp.goal.key(): userDefaults.double(forKey: Constants.Gulp.goal.key()),
+      Constants.WatchContext.current.key(): quantity(),
+      Constants.Gulp.small.key(): userDefaults.double(forKey: Constants.Gulp.small.key()),
+      Constants.Gulp.big.key(): userDefaults.double(forKey: Constants.Gulp.big.key())]
   }
 
   /**
@@ -49,10 +49,10 @@ class WatchEntryHelper {
    - Returns: Double the current quantity
    */
   func quantity() -> Double {
-    let quantity = userDefaults.doubleForKey(Constants.WatchContext.Current.key())
+    let quantity = userDefaults.double(forKey: Constants.WatchContext.current.key())
 
-    if let date = userDefaults.objectForKey(Constants.WatchContext.Date.key()) as? NSDate {
-      if let tomorrow = date.startOfTomorrow where NSDate().compare(tomorrow) != NSComparisonResult.OrderedAscending {
+    if let date = userDefaults.object(forKey: Constants.WatchContext.date.key()) as? Date {
+      if let tomorrow = date.startOfTomorrow , Date().compare(tomorrow) != ComparisonResult.orderedAscending {
         // Data is stale, reset the counter
         return 0
       }
@@ -67,7 +67,7 @@ class WatchEntryHelper {
    - Returns: Int? the current percentage
    */
   func percentage() -> Int? {
-    let goal = userDefaults.doubleForKey(Constants.Gulp.Goal.key())
+    let goal = userDefaults.double(forKey: Constants.Gulp.goal.key())
     return Int(round(quantity() / goal * 100.0))
   }
 }
