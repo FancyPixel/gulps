@@ -52,11 +52,11 @@ open class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewCon
     NotificationCenter.default.addObserver(self, selector: #selector(DrinkViewController.updateUI), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
   }
 
-  open override var prefersStatusBarHidden : Bool {
+  open override var prefersStatusBarHidden: Bool {
     return false
   }
 
-  open override var preferredStatusBarStyle : UIStatusBarStyle {
+  open override var preferredStatusBarStyle: UIStatusBarStyle {
     return .lightContent
   }
 
@@ -109,7 +109,9 @@ open class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewCon
     if fillTo > 1 {
       fillTo = 1
     }
-    progressMeter?.fill(to: NSNumber(value: fillTo))
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+      self.progressMeter?.fill(to: NSNumber(value: fillTo))
+    }
   }
 
   override open func prepare(for segue: UIStoryboardSegue, sender: Any?) {

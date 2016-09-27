@@ -9,9 +9,8 @@ def common_pods
   pod 'AMPopTip', '~> 0.7'
   pod 'UICountingLabel', '~> 1.2'
   pod 'JTCalendar', git: 'https://github.com/andreamazz/JTCalendar', branch: 'develop'
-  pod 'BAFluidView', '~> 0.1.6'
+  pod 'BAFluidView', '~> 0.2.3'
   pod 'BubbleTransition', '~> 2.0.0'
-#  pod 'SwiftDate', '~> 1.2'
 end
 
 target 'Gulps' do
