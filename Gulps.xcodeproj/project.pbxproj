@@ -68,7 +68,6 @@
 		65F44C511AF24B780093A3E9 /* GulpsToday.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 65F44C441AF24B770093A3E9 /* GulpsToday.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		65F44C601AF24B8A0093A3E9 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F44C5F1AF24B8A0093A3E9 /* InterfaceController.swift */; };
 		65F44C621AF24B8A0093A3E9 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F44C611AF24B8A0093A3E9 /* NotificationController.swift */; };
-		65F44C641AF24B8A0093A3E9 /* GlanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F44C631AF24B8A0093A3E9 /* GlanceController.swift */; };
 		65F44C661AF24B8A0093A3E9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65F44C651AF24B8A0093A3E9 /* Images.xcassets */; };
 		65F44C721AF24B8A0093A3E9 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65F44C701AF24B8A0093A3E9 /* Interface.storyboard */; };
 		65F44C741AF24B8A0093A3E9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65F44C731AF24B8A0093A3E9 /* Images.xcassets */; };
@@ -216,7 +215,6 @@
 		65F44C5E1AF24B8A0093A3E9 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
 		65F44C5F1AF24B8A0093A3E9 /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
 		65F44C611AF24B8A0093A3E9 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
-		65F44C631AF24B8A0093A3E9 /* GlanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlanceController.swift; sourceTree = "<group>"; };
 		65F44C651AF24B8A0093A3E9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		65F44C691AF24B8A0093A3E9 /* Gulps WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gulps WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		65F44C6F1AF24B8A0093A3E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -489,7 +487,6 @@
 				653039881BDF703200263D77 /* ExtensionDelegate.swift */,
 				65F44C5F1AF24B8A0093A3E9 /* InterfaceController.swift */,
 				65F44C611AF24B8A0093A3E9 /* NotificationController.swift */,
-				65F44C631AF24B8A0093A3E9 /* GlanceController.swift */,
 				653039911BDFE5FC00263D77 /* ComplicationController.swift */,
 				65F44C651AF24B8A0093A3E9 /* Images.xcassets */,
 				65F44C5C1AF24B8A0093A3E9 /* Supporting Files */,
@@ -595,7 +592,6 @@
 				65F44C401AF24B770093A3E9 /* Sources */,
 				65F44C411AF24B770093A3E9 /* Frameworks */,
 				65F44C421AF24B770093A3E9 /* Resources */,
-				658BE4AD1BFCC60A003BBB18 /* Strip frameworks */,
 				743B96E775AA283E843B807F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -654,6 +650,7 @@
 				TargetAttributes = {
 					654764B31AF267D100C68C2A = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = H72GR44F4M;
 						LastSwiftMigration = 0800;
 						TestTargetID = 65F44C1A1AF24B440093A3E9;
 					};
@@ -661,6 +658,7 @@
 						CreatedOnToolsVersion = 6.3.1;
 						DevelopmentTeam = H72GR44F4M;
 						LastSwiftMigration = 0800;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -674,6 +672,7 @@
 						CreatedOnToolsVersion = 6.3.1;
 						DevelopmentTeam = H72GR44F4M;
 						LastSwiftMigration = 0800;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -684,6 +683,7 @@
 						CreatedOnToolsVersion = 6.3.1;
 						DevelopmentTeam = H72GR44F4M;
 						LastSwiftMigration = 0800;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 0;
@@ -694,6 +694,7 @@
 						CreatedOnToolsVersion = 6.3.1;
 						DevelopmentTeam = H72GR44F4M;
 						LastSwiftMigration = 0800;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -790,20 +791,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GulpsTests/Pods-GulpsTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
-		};
-		658BE4AD1BFCC60A003BBB18 /* Strip frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Strip frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "cd \"${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\"\nif [[ -d \"Frameworks\" ]]; then\nrm -fr Frameworks\nfi";
 		};
 		6933A05350F7D8F44F7B5238 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -981,7 +968,6 @@
 				65C92DA91BB184DC00E2DFE7 /* HealthKitHealper.swift in Sources */,
 				65F44C601AF24B8A0093A3E9 /* InterfaceController.swift in Sources */,
 				6537A83F1AF24CE900EC16E9 /* Settings.swift in Sources */,
-				65F44C641AF24B8A0093A3E9 /* GlanceController.swift in Sources */,
 				653039921BDFE5FC00263D77 /* ComplicationController.swift in Sources */,
 				653039871BDF6F9000263D77 /* WatchEntryHelper.swift in Sources */,
 				650DCE671AF3CD4100E12764 /* Constants.swift in Sources */,
@@ -1074,8 +1060,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F8B4C7511CC6AFD599BF0ECB /* Pods-GulpsTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = H72GR44F4M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -1099,8 +1086,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0949E3042AD24736A6E5C665 /* Pods-GulpsTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = H72GR44F4M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -1216,6 +1204,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gulps/Gulps.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = H72GR44F4M;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1227,6 +1216,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = it.fancypixel.BigGulp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -1239,7 +1229,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Gulps/Gulps.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = H72GR44F4M;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1251,6 +1242,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = it.fancypixel.BigGulp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -1263,6 +1255,7 @@
 				CODE_SIGN_ENTITLEMENTS = GulpsToday/GulpsToday.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = H72GR44F4M;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1278,6 +1271,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "it.fancypixel.BigGulp.Gulps-Today";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
 			};
@@ -1290,7 +1284,8 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CODE_SIGN_ENTITLEMENTS = GulpsToday/GulpsToday.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = H72GR44F4M;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1302,6 +1297,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "it.fancypixel.BigGulp.Gulps-Today";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
 			};
@@ -1313,7 +1309,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				ENABLE_BITCODE = YES;
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = H72GR44F4M;
+				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1322,11 +1320,13 @@
 				INFOPLIST_FILE = "Gulps WatchKit App/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = it.fancypixel.BigGulp.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
 			};
 			name = Debug;
 		};
@@ -1337,16 +1337,20 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				ENABLE_BITCODE = YES;
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = H72GR44F4M;
+				ENABLE_BITCODE = NO;
 				IBSC_MODULE = Gulps_WatchKit_Extension;
 				INFOPLIST_FILE = "Gulps WatchKit App/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = it.fancypixel.BigGulp.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
 			};
 			name = Release;
 		};
@@ -1355,7 +1359,9 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				ENABLE_BITCODE = YES;
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = H72GR44F4M;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1370,6 +1376,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = it.fancypixel.BigGulp.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
@@ -1383,7 +1390,9 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				ENABLE_BITCODE = YES;
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = H72GR44F4M;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1394,6 +1403,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = it.fancypixel.BigGulp.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;

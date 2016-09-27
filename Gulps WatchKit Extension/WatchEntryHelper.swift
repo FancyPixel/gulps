@@ -5,7 +5,7 @@ class WatchEntryHelper {
   lazy var userDefaults = UserDefaults.standard
 
   /**
-   Save settings received by
+   Save settings received from the phone
    - parameter goal: The daily goal
    - parameter current: The current progress
    - parameter small: The small portion size
@@ -21,7 +21,7 @@ class WatchEntryHelper {
   }
 
   /**
-   Save settings received by
+   Save settings received from the phone
    - parameter portion: The portion key
    */
   func addGulp(_ portion: String) {

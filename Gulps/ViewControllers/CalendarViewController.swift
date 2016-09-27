@@ -99,7 +99,6 @@ private extension CalendarViewController {
   func setupCalendar() {
     let font = UIFont(name: "KaushanScript-Regular", size: 16)
 
-//    calendar.calendarAppearance.calendar().firstWeekday = 2
     calendar.calendarAppearance.dayDotRatio = 1.0 / 7.0
     calendar.menuMonthsView = calendarMenu
     calendar.contentView = calendarContent
