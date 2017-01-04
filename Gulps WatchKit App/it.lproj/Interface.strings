@@ -1,0 +1,21 @@
+
+/* Class = "WKInterfaceLabel"; text = "Gulps"; ObjectID = "3Gi-pF-rdn"; */
+"3Gi-pF-rdn.text" = "Gulps";
+
+/* Class = "WKInterfaceLabel"; text = "Remember to drink some water!"; ObjectID = "XkS-y5-khE"; */
+"XkS-y5-khE.text" = "Ricordati di bere dell'acqua!";
+
+/* Class = "WKInterfaceMenuItem"; title = "+ Small Gulp"; ObjectID = "bMN-XA-clU"; */
+"bMN-XA-clU.title" = "+ Small Gulp";
+
+/* Class = "WKInterfaceMenuItem"; title = "+ Big Gulp"; ObjectID = "d2z-2A-k0p"; */
+"d2z-2A-k0p.title" = "+ Big Gulp";
+
+/* Class = "WKInterfaceLabel"; text = "0%"; ObjectID = "fos-hc-9XJ"; */
+"fos-hc-9XJ.text" = "0%";
+
+/* Class = "WKInterfaceLabel"; text = "DAILY GOAL: 0%"; ObjectID = "jsO-fa-6Yq"; */
+"jsO-fa-6Yq.text" = "OBIETTIVO: 0%";
+
+/* Class = "WKInterfaceLabel"; text = "of your daily goal"; ObjectID = "x2p-3r-dBm"; */
+"x2p-3r-dBm.text" = "del tuo obiettivo";

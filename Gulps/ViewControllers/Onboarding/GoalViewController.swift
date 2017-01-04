@@ -2,50 +2,54 @@ import UIKit
 
 class GoalViewController: OnboardingViewController, UITextFieldDelegate {
 
-    @IBOutlet weak var goalTextField: UITextField!
-    @IBOutlet weak var goalSuffixLabel: UILabel!
-    @IBOutlet weak var headerLabel: UILabel!
-    @IBOutlet weak var goalBackgroundView: UIView!
-    let userDefaults = NSUserDefaults.groupUserDefaults()
+  @IBOutlet weak var goalTextField: UITextField!
+  @IBOutlet weak var goalSuffixLabel: UILabel!
+  @IBOutlet weak var headerLabel: UILabel!
+  @IBOutlet weak var goalBackgroundView: UIView!
+  let userDefaults = UserDefaults.groupUserDefaults()
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+  override func viewDidLoad() {
+    super.viewDidLoad()
 
-        self.goalTextField.inputAccessoryView = Globals.numericToolbar(self, selector: Selector("dismissAndSave"))
-        self.goalBackgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self.goalTextField, action: Selector("becomeFirstResponder")))
+    self.goalTextField.inputAccessoryView = Globals.numericToolbar(self, selector: #selector(GoalViewController.dismissAndSave))
+    self.goalBackgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self.goalTextField, action: #selector(UIResponder.becomeFirstResponder)))
+  }
+
+  func dismissAndSave() {
+    guard let text = goalTextField.text else {
+      return
     }
 
-    func dismissAndSave() {
-        let numberFormatter = NSNumberFormatter()
-        numberFormatter.numberStyle = .DecimalStyle
+    let numberFormatter = NumberFormatter()
+    numberFormatter.numberStyle = .decimal
 
-        self.goalTextField.resignFirstResponder()
+    self.goalTextField.resignFirstResponder()
 
-        var goal = 0.0
-        if let number = numberFormatter.numberFromString(self.goalTextField.text) {
-            goal = number as Double
-        }
-
-        self.userDefaults.setDouble(goal, forKey: Settings.Gulp.Goal.key())
-        self.userDefaults.synchronize()
+    var goal = 0.0
+    if let number = numberFormatter.number(from: text) {
+      goal = number as Double
     }
 
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
+    self.userDefaults.set(goal, forKey: Constants.Gulp.goal.key())
+    self.userDefaults.synchronize()
+  }
 
-        dismissAndSave()
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    textField.resignFirstResponder()
 
-        return true
+    dismissAndSave()
+
+    return true
+  }
+
+  override func updateUI() {
+    let numberFormatter = NumberFormatter()
+    numberFormatter.numberStyle = .decimal
+    self.goalTextField.text = numberFormatter.string(for: self.userDefaults.double(forKey: Constants.Gulp.goal.key()))
+    let unit = Constants.UnitsOfMeasure(rawValue: self.userDefaults.integer(forKey: Constants.General.unitOfMeasure.key()))
+
+    if let unit = unit {
+      self.goalSuffixLabel.text = unit.suffixForUnitOfMeasure()
     }
-
-    override func updateUI() {
-        let numberFormatter = NSNumberFormatter()
-        numberFormatter.numberStyle = .DecimalStyle
-        self.goalTextField.text = numberFormatter.stringFromNumber(self.userDefaults.doubleForKey(Settings.Gulp.Goal.key()))
-        let unit = UnitsOfMeasure(rawValue: self.userDefaults.integerForKey(Settings.General.UnitOfMeasure.key()))
-
-        if let unit = unit {
-            self.goalSuffixLabel.text = unit.suffixForUnitOfMeasure()
-        }
-    }
+  }
 }

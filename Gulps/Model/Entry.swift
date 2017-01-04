@@ -1,64 +1,70 @@
 import Foundation
-import Realm
+import RealmSwift
 
-public class Entry: RLMObject {
-    dynamic public var date = Entry.defaultDate()
-    dynamic public var quantity = 0.0
-    dynamic public var percentage = 0.0
-    dynamic public var goal = 0.0
-    dynamic public var gulps = RLMArray(objectClassName: Gulp.className())
+/**
+ An Entry represents an entire day worth of input
+ */
+open class Entry: Object {
+  dynamic open var date = Entry.defaultDate()
+  dynamic open var quantity = 0.0
+  dynamic open var percentage = 0.0
+  dynamic open var goal = 0.0
+  open let gulps = List<Gulp>()
 
-    class func defaultDate() -> String {
-        let dateFormat = NSDateFormatter()
-        dateFormat.dateFormat = "yyyy-MM-dd"
-        return dateFormat.stringFromDate(NSDate())
+  /**
+   The date is the primary key. `defaultDate` provides the current day in string format.
+   The string format is required by Realm for primary keys
+   */
+  class func defaultDate() -> String {
+    let dateFormat = DateFormatter()
+    dateFormat.dateFormat = "yyyy-MM-dd"
+    return dateFormat.string(from: Date())
+  }
+
+  override open class func primaryKey() -> String {
+    return "date"
+  }
+
+  /**
+   Adds a portion of water to the current day
+   - parameter quantity: The portion size
+   - parameter goal: The daily goal
+   - parameter date: The date of the portion
+   */
+  func addGulp(_ quantity: Double, goal: Double, date: Date?) {
+    let gulp = Gulp(quantity: quantity)
+    self.gulps.append(gulp)
+    self.quantity += quantity
+    self.goal = goal
+    if let date = date {
+      gulp.date = date
     }
-
-    override public class func primaryKey() -> String {
-        return "date"
+    if goal > 0 {
+      self.percentage = (self.quantity / self.goal) * 100.0
     }
+  }
 
-    class func entryForToday() -> Entry? {
-        return entryForDate(NSDate())
+  /**
+   Removes the last portion
+   */
+  func removeLastGulp() {
+    if let gulp = self.gulps.last {
+      self.quantity -= gulp.quantity
+      if goal > 0 {
+        self.percentage = (self.quantity / self.goal) * 100.0
+      }
+      if (self.percentage < 0) {
+        self.percentage = 0
+      }
+      self.gulps.removeLast()
     }
+  }
 
-    class func entryForDate(date: NSDate) -> Entry? {
-        let dateFormat = NSDateFormatter()
-        dateFormat.dateFormat = "yyyy-MM-dd"
-        let p: NSPredicate = NSPredicate(format: "date = %@", argumentArray: [ dateFormat.stringFromDate(date) ])
-        let objects = Entry.objectsWithPredicate(p)
-        return objects.firstObject() as? Entry
-    }
-
-    func addGulp(quantity: Double, goal: Double) {
-        let gulp = Gulp()
-        gulp.quantity = quantity
-        self.gulps.addObject(gulp)
-        self.quantity += quantity
-        self.goal = goal
-        self.percentage = self.quantity / self.goal * 100.0
-        if (self.percentage > 100) {
-            self.percentage = 100
-        }
-    }
-
-    func removeLastGulp() {
-        if let gulp = self.gulps.lastObject() as? Gulp {
-            self.quantity -= gulp.quantity
-            self.percentage = self.quantity / self.goal * 100.0
-            if (self.percentage < 0) {
-                self.percentage = 0
-            }
-            if (self.percentage > 100) {
-                self.percentage = 100
-            }
-            self.gulps.removeLastObject()
-        }
-    }
-
-    func formattedPercentage() -> String {
-        let percentageFormatter = NSNumberFormatter()
-        percentageFormatter.numberStyle = .PercentStyle
-        return percentageFormatter.stringFromNumber(round(percentage) / 100.0) ?? "\(percentage)%"
-    }
+  /**
+   Returns the formatted percentage value
+   - returns: String
+   */
+  func formattedPercentage() -> String {
+    return percentage.formattedPercentage()
+  }
 }

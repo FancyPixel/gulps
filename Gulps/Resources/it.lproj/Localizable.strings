@@ -1,0 +1,41 @@
+/* Globals */
+"notification text" = "Ricordati di bere dell'acqua!";
+"Liters" = "Litri";
+"Ounces" = "Once";
+
+/* Main */
+"drink title" = "Bevi!"; 
+"undo poptip" = "Qui puoi annulare la tua ultima azione";
+"undo title" = "Annulla";
+"undo message" = "Annulla l'ultima azione?";
+"No" = "No";
+"Yes" = "Sì";
+
+/* Calendar */
+"progress title" = "Progressi";
+"share poptip" = "Qui puoi verificare il tuo progresso complessivo";
+"share text" = "Mi mantengo in forma! Ho bevuto %d %@ d'acqua negli ultimi %d giorni. https://goo.gl/reTyQU @GulpsApp";
+"unit format" = "%@ bevuti negli ultimi";
+"goal met" = "Obiettivo raggiunto!";
+
+/* Settings */
+"settings title" = "Preferenze";
+"hours" = "ore";
+"hour" = "ora";
+"unit of measure title" = "Unità di misura:";
+"from:" = "Da:";
+"to:" = "A:";
+"every:" = "Ogni:";
+
+/* Today ext */
+"way to go" = "Ottimo!";
+"today extension format" = "%@ %@ bevuti oggi (%@ del tuo obiettivo)";
+"confirm" = "Conferma";
+"never mind" = "Annulla";
+
+/* WatchKit */
+"daily goal:" = "OBIETTIVO: ";
+"watch.please_onboard" = "Avvia l'applicazione sul tuo iPhone almeno una volta per iniziare";
+
+/* HealthKit */
+"health.poptip" = "Puoi abilitare l'esportazione verso l'app Salute nelle preferenze";

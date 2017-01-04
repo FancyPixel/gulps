@@ -1,0 +1,6 @@
+framework module Pods_GulpsTests {
+  umbrella header "Pods-GulpsTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

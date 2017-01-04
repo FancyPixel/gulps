@@ -3,30 +3,34 @@ import AMWaveTransition
 
 class OnboardingViewController: AMWaveViewController {
 
-    @IBOutlet var viewArray: [UIView]!
+  @IBOutlet var viewArray: [UIView]!
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+  override func viewDidLoad() {
+    super.viewDidLoad()
 
-        self.navigationController?.view.backgroundColor = UIColor.mainColor()
-        self.view.backgroundColor = UIColor.clearColor()
+    navigationController?.view.backgroundColor = .palette_main
+    view.backgroundColor = .clear
 
-        updateUI()
-    }
+    updateUI()
+  }
 
-    override func visibleCells() -> [AnyObject]! {
-        return self.viewArray
-    }
+  override var prefersStatusBarHidden : Bool {
+    return true
+  }
 
-    func updateUI() {
+  override func visibleCells() -> [Any]! {
+    return self.viewArray
+  }
 
-    }
+  func updateUI() {
 
-    @IBAction func backAction() {
-        self.navigationController?.popViewControllerAnimated(true)
-    }
+  }
 
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        return Globals.numericTextField(textField, shouldChangeCharactersInRange: range, replacementString: string)
-    }
+  @IBAction func backAction() {
+    _ = navigationController?.popViewController(animated: true)
+  }
+
+  func textField(_ textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    return Globals.numericTextField(textField, shouldChangeCharactersInRange: range, replacementString: string)
+  }
 }

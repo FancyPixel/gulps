@@ -1,0 +1,41 @@
+/* Globals */
+"notification text" = "Remember to drink some water!";
+"Liters" = "Liters";
+"Ounces" = "Ounces";
+
+/* Main */
+"drink title" = "Drink!";
+"undo poptip" = "Tap here to undo your latest action";
+"undo title" = "Undo";
+"undo message" = "Undo latest action?";
+"No" = "No";
+"Yes" = "Yes";
+
+/* Calendar */
+"progress title" = "My progress";
+"share poptip" = "Here you can checkout your overall progress";
+"share text" = "Keeping healthy! I drank %d %@ of water over %d days. https://goo.gl/reTyQU @GulpsApp";
+"unit format" = "%@ drank over";
+"goal met" = "Goal Met!";
+
+/* Settings */
+"settings title" = "Preferences";
+"hours" = "hours";
+"hour" = "hour";
+"unit of measure title" = "Unit Of Measure:";
+"from:" = "From:";
+"to:" = "To:";
+"every:" = "Every:";
+
+/* Today ext */
+"way to go" = "Way to go!";
+"today extension format" = "%@ %@ drank today (%@ of your goal)";
+"confirm" = "Confirm";
+"never mind" = "Never mind";
+
+/* WatchKit */
+"daily goal:" = "DAILY GOAL: ";
+"watch.please_onboard" = "Please make sure to run the app on your iPhone first!";
+
+/* HealthKit */
+"health.poptip" = "You can enable the Apple Health export in the settings";

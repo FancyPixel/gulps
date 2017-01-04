@@ -1,117 +1,114 @@
 import UIKit
 import NotificationCenter
-import Realm
+import RealmSwift
 
 class TodayViewController: UIViewController, NCWidgetProviding {
 
-    @IBOutlet weak var bigGulpButton: UIButton!
-    @IBOutlet weak var smallGulpButton: UIButton!
-    @IBOutlet weak var smallConfirmButton: UIButton!
-    @IBOutlet weak var bigConfirmButton: UIButton!
-    @IBOutlet weak var summaryLabel: UILabel!
-    @IBOutlet weak var smallLabel: UILabel!
-    @IBOutlet weak var bigLabel: UILabel!
-    @IBOutlet var entryHandler: EntryHandler!
-    var realmToken: RLMNotificationToken?
-    var gulpSize = Settings.Gulp.Small
+  @IBOutlet weak var bigGulpButton: UIButton!
+  @IBOutlet weak var smallGulpButton: UIButton!
+  @IBOutlet weak var smallConfirmButton: UIButton!
+  @IBOutlet weak var bigConfirmButton: UIButton!
+  @IBOutlet weak var summaryLabel: UILabel!
+  @IBOutlet weak var smallLabel: UILabel!
+  @IBOutlet weak var bigLabel: UILabel!
+  var realmToken: NotificationToken?
+  var gulpSize = Constants.Gulp.small
 
-    let userDefaults = NSUserDefaults.groupUserDefaults()
-    let numberFormatter: NSNumberFormatter = {
-        let formatter = NSNumberFormatter()
-        formatter.numberStyle = .DecimalStyle
-        return formatter
-        }()
+  let userDefaults = UserDefaults.groupUserDefaults()
+  let numberFormatter: NumberFormatter = {
+    let formatter = NumberFormatter()
+    formatter.numberStyle = .decimal
+    return formatter
+  }()
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+  override func viewDidLoad() {
+    super.viewDidLoad()
 
-        EntryHandler.bootstrapRealm()
-
-        realmToken = RLMRealm.defaultRealm().addNotificationBlock { note, realm in
-            self.updateUI()
-        }
-
-        [bigConfirmButton, smallConfirmButton].map({$0.transform = CGAffineTransformMakeScale(0.001, 0.001)})
-        self.title = "Gulps"
-        self.preferredContentSize = CGSizeMake(0, 108)
-        updateUI()
-        updateLabels()
+    realmToken = EntryHandler.sharedHandler.realm.addNotificationBlock { note, realm in
+      self.updateUI()
     }
 
-    func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)!) {
-        updateUI()
-        updateLabels()
-        completionHandler(NCUpdateResult.NewData)
+    [bigConfirmButton, smallConfirmButton].forEach {$0.transform = CGAffineTransform(scaleX: 0.001, y: 0.001)}
+    title = "Gulps"
+    preferredContentSize = CGSize(width: 0, height: 108)
+    updateUI()
+    updateLabels()
+  }
+
+  func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
+    updateUI()
+    updateLabels()
+    completionHandler(NCUpdateResult.newData)
+  }
+
+  func widgetMarginInsets(forProposedMarginInsets defaultMarginInsets: UIEdgeInsets) -> UIEdgeInsets {
+    return UIEdgeInsetsMake(0, 0, 0, 0)
+  }
+
+  func updateUI() {
+    UIView.transition(with: self.summaryLabel, duration: 0.5, options: .transitionCrossDissolve, animations: {
+      let quantity = self.numberFormatter.string(for: EntryHandler.sharedHandler.currentEntry().quantity)!
+      let percentage = EntryHandler.sharedHandler.currentEntry().formattedPercentage()
+      if let unit = Constants.UnitsOfMeasure(rawValue: self.userDefaults.integer(forKey: Constants.General.unitOfMeasure.key())) {
+        let unitName = unit.nameForUnitOfMeasure()
+        self.summaryLabel.text = String(format: NSLocalizedString("today extension format", comment: ""), quantity, unitName, percentage)
+      }
+      }, completion: nil)
+  }
+
+  func updateLabels() {
+    var suffix = ""
+    if let unit = Constants.UnitsOfMeasure(rawValue: userDefaults.integer(forKey: Constants.General.unitOfMeasure.key())) {
+      suffix = unit.suffixForUnitOfMeasure()
     }
 
-    func widgetMarginInsetsForProposedMarginInsets(defaultMarginInsets: UIEdgeInsets) -> UIEdgeInsets {
-        return UIEdgeInsetsMake(0, 0, 0, 0)
+    smallLabel.text = "\(numberFormatter.string(for: userDefaults.double(forKey: Constants.Gulp.small.key()))!)\(suffix)"
+    bigLabel.text = "\(numberFormatter.string(for: userDefaults.double(forKey: Constants.Gulp.big.key()))!)\(suffix)"
+  }
+
+  func confirmAction() {
+    smallConfirmButton.backgroundColor = (gulpSize == .small) ? .palette_confirm : .palette_destructive
+    bigConfirmButton.backgroundColor = (gulpSize == .big) ? .palette_confirm : .palette_destructive
+    smallConfirmButton.setImage(UIImage(named: (gulpSize == .small) ? "tiny-check" : "tiny-x"), for: UIControlState())
+    bigConfirmButton.setImage(UIImage(named: (gulpSize == .big) ? "tiny-check" : "tiny-x"), for: UIControlState())
+    smallLabel.text = (gulpSize == .small) ? NSLocalizedString("confirm", comment: "") : NSLocalizedString("never mind", comment: "")
+    bigLabel.text = (gulpSize == .small) ? NSLocalizedString("never mind", comment: "") : NSLocalizedString("confirm", comment: "")
+    showConfirmButtons()
+  }
+
+  @IBAction func smallGulp(_ sender: UIButton) {
+    gulpSize = Constants.Gulp.small
+    confirmAction()
+  }
+
+  @IBAction func bigGulp(_ sender: UIButton) {
+    gulpSize = Constants.Gulp.big
+    confirmAction()
+  }
+
+  @IBAction func smallConfirmAction() {
+    if (gulpSize == .small) {
+      addGulp(UserDefaults.groupUserDefaults().double(forKey: Constants.Gulp.small.key()))
     }
+    hideConfirmButtons()
+    updateLabels()
+  }
 
-    func updateUI() {
-        UIView.transitionWithView(self.summaryLabel, duration: 0.5, options: .TransitionCrossDissolve, animations: { () -> Void in
-            let quantity = self.numberFormatter.stringFromNumber(self.entryHandler.currentEntry().quantity)!
-            let percentage = self.entryHandler.currentEntry().formattedPercentage()
-            if let unit = UnitsOfMeasure(rawValue: self.userDefaults.integerForKey(Settings.General.UnitOfMeasure.key())) {
-                let unitName = unit.nameForUnitOfMeasure()
-                self.summaryLabel.text = "\(quantity) \(unitName) drank today (\(percentage) of your goal)"
-            }
-            }, completion: nil)
+  @IBAction func bigConfirmAction() {
+    if (self.gulpSize == .big) {
+      addGulp(UserDefaults.groupUserDefaults().double(forKey: Constants.Gulp.big.key()))
     }
+    updateLabels()
+    hideConfirmButtons()
+  }
 
-    func updateLabels() {
-        var suffix = ""
-        if let unit = UnitsOfMeasure(rawValue: userDefaults.integerForKey(Settings.General.UnitOfMeasure.key())) {
-            suffix = unit.suffixForUnitOfMeasure()
-        }
+  func addGulp(_ quantity: Double) {
+    EntryHandler.sharedHandler.addGulp(quantity)
+    summaryLabel.text = NSLocalizedString("way to go", comment: "")
+    updateLabels()
 
-        smallLabel.text = "\(numberFormatter.stringFromNumber(userDefaults.doubleForKey(Settings.Gulp.Small.key()))!)\(suffix)"
-        bigLabel.text = "\(numberFormatter.stringFromNumber(userDefaults.doubleForKey(Settings.Gulp.Big.key()))!)\(suffix)"
+    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) {
+      self.updateUI()
     }
-
-    func confirmAction() {
-        smallConfirmButton.backgroundColor = (gulpSize == .Small) ? .confirmColor() : .destructiveColor()
-        bigConfirmButton.backgroundColor = (gulpSize == .Big) ? .confirmColor() : .destructiveColor()
-        smallConfirmButton.setImage(UIImage(named: (gulpSize == .Small) ? "tiny-check" : "tiny-x"), forState: .Normal)
-        bigConfirmButton.setImage(UIImage(named: (gulpSize == .Big) ? "tiny-check" : "tiny-x"), forState: .Normal)
-        smallLabel.text = (gulpSize == .Small) ? "Confirm" : "Never mind"
-        bigLabel.text = (gulpSize == .Small) ? "Never mind" : "Confirm"
-        showConfirmButtons()
-    }
-
-    @IBAction func smallGulp(sender: UIButton) {
-        self.gulpSize = Settings.Gulp.Small
-        confirmAction()
-    }
-
-    @IBAction func bigGulp(sender: UIButton) {
-        self.gulpSize = Settings.Gulp.Big
-        confirmAction()
-    }
-
-    @IBAction func smallConfirmAction() {
-        if (self.gulpSize == .Small) {
-            addGulp(NSUserDefaults.groupUserDefaults().doubleForKey(Settings.Gulp.Small.key()))
-        }
-        hideConfirmButtons()
-        updateLabels()
-    }
-
-    @IBAction func bigConfirmAction() {
-        if (self.gulpSize == .Big) {
-            addGulp(NSUserDefaults.groupUserDefaults().doubleForKey(Settings.Gulp.Big.key()))
-        }
-        updateLabels()
-        hideConfirmButtons()
-    }
-
-    func addGulp(quantity: Double) {
-        entryHandler.addGulp(quantity)
-        summaryLabel.text = "Way to go!"
-        updateLabels()
-
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { () -> Void in
-            self.updateUI()
-        }
-    }
+  }
 }
