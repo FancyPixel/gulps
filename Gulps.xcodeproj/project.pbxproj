@@ -159,6 +159,12 @@
 
 /* Begin PBXFileReference section */
 		0949E3042AD24736A6E5C665 /* Pods-GulpsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GulpsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GulpsTests/Pods-GulpsTests.release.xcconfig"; sourceTree = "<group>"; };
+		2AB916D31E82B36600301C45 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Main.strings; sourceTree = "<group>"; };
+		2AB916D41E82B36600301C45 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		2AB916D51E82B36600301C45 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Onboarding.strings; sourceTree = "<group>"; };
+		2AB916D61E82B36600301C45 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Interface.strings; sourceTree = "<group>"; };
+		2AB916D71E82B36600301C45 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		2AB916D81E82B36600301C45 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		58E28A47EF2AA14E880CD719 /* Pods_GulpsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GulpsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		650DCE641AF3CD4100E12764 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		653039861BDF6F9000263D77 /* WatchEntryHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchEntryHelper.swift; sourceTree = "<group>"; };
@@ -706,6 +712,7 @@
 				en,
 				Base,
 				it,
+				tr,
 			);
 			mainGroup = 65F44C121AF24B440093A3E9;
 			productRefGroup = 65F44C1C1AF24B440093A3E9 /* Products */;
@@ -1005,6 +1012,7 @@
 			children = (
 				6537A80C1AF24CA700EC16E9 /* Base */,
 				65F55F281B593A0A008653F2 /* it */,
+				2AB916D51E82B36600301C45 /* tr */,
 			);
 			name = Onboarding.storyboard;
 			sourceTree = "<group>";
@@ -1014,6 +1022,7 @@
 			children = (
 				65E94C6B1BBC13B400A65B30 /* Base */,
 				65E94C6D1BBC13BF00A65B30 /* it */,
+				2AB916D81E82B36600301C45 /* tr */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1023,6 +1032,7 @@
 			children = (
 				65F44C251AF24B440093A3E9 /* Base */,
 				65F55F261B5938BE008653F2 /* it */,
+				2AB916D31E82B36600301C45 /* tr */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1031,6 +1041,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				65F44C2A1AF24B440093A3E9 /* Base */,
+				2AB916D41E82B36600301C45 /* tr */,
 			);
 			name = LaunchScreen.xib;
 			sourceTree = "<group>";
@@ -1040,6 +1051,7 @@
 			children = (
 				65F44C711AF24B8A0093A3E9 /* Base */,
 				65F55F2A1B593C16008653F2 /* it */,
+				2AB916D61E82B36600301C45 /* tr */,
 			);
 			name = Interface.storyboard;
 			sourceTree = "<group>";
@@ -1049,6 +1061,7 @@
 			children = (
 				65F55F221B592D91008653F2 /* it */,
 				65F55F241B592DA2008653F2 /* en */,
+				2AB916D71E82B36600301C45 /* tr */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
