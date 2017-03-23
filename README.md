@@ -28,6 +28,7 @@ Feel free to edit the file, we'll include your translation in the next release a
 
 - Thanks to [Donny Wals](https://github.com/donnywals) for the Dutch translation. 
 - Thanks to [Alexandre Thomas](https://github.com/thomalexandre) for the French translation. 
+- Thanks to [Durul Dalkanat](https://github.com/durul) for the Turkish translation.
 
 #Imitation is the sincerest form of flattery
 

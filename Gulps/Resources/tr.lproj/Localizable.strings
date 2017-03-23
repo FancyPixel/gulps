@@ -1,0 +1,41 @@
+/* Globals */
+"notification text" = "Biraz su içmeyi unutma!";
+"Liters" = "Litre";
+"Ounces" = "Ons";
+
+/* Main */
+"drink title" = "Su İç!";
+"undo poptip" = "Son işleminizi geri almak için buraya dokunun";
+"undo title" = "Geri al";
+"undo message" = "Son işlemi geri al?";
+"No" = "Hayır";
+"Yes" = "Evet";
+
+/* Calendar */
+"progress title" = "Geçmiş";
+"share poptip" = "Buradan geçmişinizi kontrol edebilirsiniz";
+"share text" = "Sağlıklı kalmak için! % D gün boyunca% d% @ su içtim. https://goo.gl/reTyQU @GulpsApp";
+"unit format" = "%@ Limitin üzerinde içtin";
+"goal met" = "Hedef başarıldı!";
+
+/* Settings */
+"settings title" = "Tercihler";
+"hours" = "Saat";
+"hour" = "Saat";
+"unit of measure title" = "Ölçü Birimi:";
+"from:" = "Bitiş:";
+"to:" = "Başlangıç:";
+"every:" = "Yenileme:";
+
+/* Today ext */
+"way to go" = "Yürü be!";
+"today extension format" = "%@ %@ su içtin (Hedefin %@ başarıldı.)";
+"confirm" = "Onayla";
+"never mind" = "Boşver";
+
+/* WatchKit */
+"daily goal:" = "GÜNLÜK HEDEF: ";
+"watch.please_onboard" = "Lütfen uygulamayı ilk olarak iPhone'dan çalıştırdığınıza emin olun.!";
+
+/* HealthKit */
+"health.poptip" = "Apple Health dışa aktarmayı ayarlardan etkinleştirebilirsiniz.";
