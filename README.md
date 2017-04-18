@@ -8,29 +8,29 @@ Gulps lets you track your daily water intake in a simple and intuitive way: set 
 
 This app is available in the [AppStore](https://itunes.apple.com/us/app/gulps/id979057304?ls=1&mt=8). Learn more [here](http://www.fancypixel.it/gulps/index.html).
 
-#Description
+# Description
 
 You can learn how to share data between an iOS app and its extension using Realm.  
 
-#Setup
+# Setup
 * Run ```pod install```
 * Run ```open Gulps.xcworkspace```
 * Run `bundle`
 * Run `ruby change_bundle.rb your.bundle.identifier.BigGulp`
 * Match the bundle identifier in `Constants.swift`
 
-#Contribute
+# Contribute
 Want to contribute? We would really appreciate a hand with the localization in other languages. You can find a spreadsheet with all the strings in the project [here](https://docs.google.com/spreadsheets/d/1vh_b1VNcrsiV3mtwOY1V7tW0LR18wHoE1xCMuigc8pg/edit?usp=sharing).  
 
 Feel free to edit the file, we'll include your translation in the next release and attribute your work.  
 
-###Contributors
+### Contributors
 
 - Thanks to [Donny Wals](https://github.com/donnywals) for the Dutch translation. 
 - Thanks to [Alexandre Thomas](https://github.com/thomalexandre) for the French translation. 
 - Thanks to [Durul Dalkanat](https://github.com/durul) for the Turkish translation.
 
-#Imitation is the sincerest form of flattery
+# Imitation is the sincerest form of flattery
 
 That's why we want to thank these fellow developers for the vote of confidence:  
 
@@ -40,9 +40,9 @@ That's why we want to thank these fellow developers for the vote of confidence:
 
 We are ok with that (hence the MIT license), but when cloning this we encourage you to take the [DBAA](http://urbandictionary.com/define.php?term=DBAA) clause in mind. 
 
-#MIT License
+# MIT License
 
-	Copyright (c) 2015 Fancy Pixel S.r.l. All rights reserved.
+	Copyright (c) 2017 Fancy Pixel S.r.l. All rights reserved.
 
 	Permission is hereby granted, free of charge, to any person obtaining a
 	copy of this software and associated documentation files (the "Software"),
