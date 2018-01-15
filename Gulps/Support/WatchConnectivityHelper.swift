@@ -14,7 +14,7 @@ import WatchConnectivity
  `WatchConnectivityHelper` handles the connection with WatchOS2
  */
 public struct WatchConnectivityHelper {
-  fileprivate let session: WCSession? = WCSession.isSupported() ? WCSession.default() : nil
+  fileprivate let session: WCSession? = WCSession.isSupported() ? WCSession.default : nil
 
   /**
    Establishes the connection between the app and WatchOS2

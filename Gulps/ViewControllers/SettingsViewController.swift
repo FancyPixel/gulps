@@ -34,7 +34,7 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
     }
 
     if (WCSession.isSupported()) {
-      WCSession.default().activate()
+      WCSession.default.activate()
     }
   }
 

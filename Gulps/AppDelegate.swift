@@ -51,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     UITabBar.appearance().tintColor = .palette_main
 
     if let font = UIFont(name: "KaushanScript-Regular", size: 22) {
-      UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName: font, NSForegroundColorAttributeName: UIColor.white]
+      UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.font: font, NSAttributedStringKey.foregroundColor: UIColor.white]
     }
 
     UINavigationBar.appearance().barTintColor = .palette_main

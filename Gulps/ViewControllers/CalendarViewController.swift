@@ -3,12 +3,12 @@ import JTCalendar
 import pop
 import UICountingLabel
 
-class CalendarViewController: UIViewController, JTCalendarDataSource {
+class CalendarViewController: UIViewController, JTCalendarDelegate {
 
   let userDefaults = UserDefaults.groupUserDefaults()
 
   @IBOutlet weak var calendarMenu: JTCalendarMenuView!
-  @IBOutlet weak var calendarContent: JTCalendarContentView!
+  @IBOutlet weak var calendarContent: JTHorizontalCalendarView!
   @IBOutlet weak var dailyLabel: UILabel!
   @IBOutlet weak var calendarConstraint: NSLayoutConstraint!
 
@@ -24,7 +24,7 @@ class CalendarViewController: UIViewController, JTCalendarDataSource {
   var quantityLabelStartingConstant = 0.0
   var daysLabelStartingConstant = 0.0
   var shareButtonStartingConstant = 0.0
-  let calendar = JTCalendar()
+  let calendar = JTCalendarManager()
   var showingStats = false
   var animating = false
 
@@ -54,7 +54,7 @@ class CalendarViewController: UIViewController, JTCalendarDataSource {
     initAnimations()
   }
 
-  func presentStats(_ sender: UIBarButtonItem) {
+  @objc func presentStats(_ sender: UIBarButtonItem) {
     animateShareView()
   }
 
@@ -68,8 +68,8 @@ class CalendarViewController: UIViewController, JTCalendarDataSource {
 
     updateStats()
 
-    calendar.reloadData()
-    dailyLabel.text = dateLabelString(calendar.currentDateSelected ?? Date())
+    calendar.reload()
+    dailyLabel.text = dateLabelString(calendar.date() ?? Date())
   }
 
   @IBAction func shareAction(_ sender: AnyObject) {
@@ -81,32 +81,39 @@ class CalendarViewController: UIViewController, JTCalendarDataSource {
     present(activityController, animated: true, completion: nil)
   }
 
-  // MARK: - JTCalendarDataSource
-  func calendar(_ calendar: JTCalendar!, dataFor date: Date!) -> Any! {
-    if let entry = EntryHandler.sharedHandler.entryForDate(date) {
-      return 1 - Double(entry.percentage / 100.0)
-    } else {
-      return nil
-    }
+  // MARK: - JTCalendarDelegate
+  func calendar(_ calendar: JTCalendarManager!, prepareDayView dayView: (UIView & JTCalendarDay)!) {
+    guard let dayView = dayView as? JTCalendarDayView else { return }
+    guard let date = dayView.date else { return }
+    dayView.dotRatio = 1.0 / 7.0
+    guard let entry = EntryHandler.sharedHandler.entryForDate(date) else { return }
+    let percentage = 1 - Double(entry.percentage / 100.0)
+    dayView.dotView.backgroundColor = percentage > 0 ? .blue : .clear
   }
 
-  func calendar(_ calendar: JTCalendar!, didSelect date: Date!) {
-    dailyLabel.text = dateLabelString(date)
-  }
+  //  func calendar(_ calendar: JTCalendar!, dataFor date: Date!) -> Any! {
+  //    if let entry = EntryHandler.sharedHandler.entryForDate(date) {
+  //      return 1 - Double(entry.percentage / 100.0)
+  //    } else {
+  //      return nil
+  //    }
+  //  }
+  //
+  //  func calendar(_ calendar: JTCalendar!, didSelect date: Date!) {
+  //    dailyLabel.text = dateLabelString(date)
+  //  }
 }
 
 private extension CalendarViewController {
   func setupCalendar() {
-    let font = UIFont(name: "KaushanScript-Regular", size: 16)
-
-    calendar.calendarAppearance.dayDotRatio = 1.0 / 7.0
-    calendar.menuMonthsView = calendarMenu
+    calendar.delegate = self
+    calendar.menuView = calendarMenu
     calendar.contentView = calendarContent
-    calendar.dataSource = self
-    if let font = font {
-      calendar.calendarAppearance.menuMonthTextFont = font
-    }
-    calendarMenu.reloadAppearance()
+    calendar.setDate(Date())
+    //    if let font = UIFont(name: "KaushanScript-Regular", size: 16) {
+    //      calendar.calendarAppearance.menuMonthTextFont = font
+    //    }
+    //    calendarMenu.reloadAppearance()
   }
 
   func updateStats() {

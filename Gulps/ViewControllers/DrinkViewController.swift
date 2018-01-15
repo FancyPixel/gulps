@@ -102,7 +102,7 @@ open class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewCon
     EntryHandler.sharedHandler.addGulp(delta)
   }
 
-  func updateUI() {
+  @objc func updateUI() {
     let percentage = EntryHandler.sharedHandler.currentPercentage()
     percentageLabel.countFromCurrentValue(to: CGFloat(round(percentage)))
     var fillTo = Double(percentage / 100.0)
