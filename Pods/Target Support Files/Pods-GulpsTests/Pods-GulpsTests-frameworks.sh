@@ -102,32 +102,12 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "${BUILT_PRODUCTS_DIR}/AHKActionSheet/AHKActionSheet.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/AMPopTip/AMPopTip.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/AMWaveTransition/AMWaveTransition.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/BAFluidView/BAFluidView.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/BubbleTransition/BubbleTransition.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/JTCalendar/JTCalendar.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/Realm/Realm.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/UICountingLabel/UICountingLabel.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/pop/pop.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/FBSnapshotTestCase/FBSnapshotTestCase.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Nimble-Snapshots/Nimble_Snapshots.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Quick/Quick.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "${BUILT_PRODUCTS_DIR}/AHKActionSheet/AHKActionSheet.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/AMPopTip/AMPopTip.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/AMWaveTransition/AMWaveTransition.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/BAFluidView/BAFluidView.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/BubbleTransition/BubbleTransition.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/JTCalendar/JTCalendar.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/Realm/Realm.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/UICountingLabel/UICountingLabel.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/pop/pop.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/FBSnapshotTestCase/FBSnapshotTestCase.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Nimble-Snapshots/Nimble_Snapshots.framework"
