@@ -19,7 +19,7 @@
 #ifndef REALM_ROW_HPP
 #define REALM_ROW_HPP
 
-#include <stdint.h>
+#include <cstdint>
 
 #include <realm/util/type_traits.hpp>
 #include <realm/mixed.hpp>
@@ -29,7 +29,7 @@
 
 namespace realm {
 
-template<class>
+template <class>
 class BasicRow;
 
 
@@ -59,7 +59,7 @@ class BasicRow;
 ///
 /// \sa Table
 /// \sa BasicRow
-template<class T, class R>
+template <class T, class R>
 class RowFuncs {
 public:
     typedef T table_type;
@@ -91,10 +91,13 @@ public:
     size_t get_link_count(size_t col_ndx) const noexcept;
     Mixed get_mixed(size_t col_ndx) const noexcept;
     DataType get_mixed_type(size_t col_ndx) const noexcept;
-    template<typename U> U get(size_t col_ndx) const noexcept;
+
+    template <typename U>
+    U get(size_t col_ndx) const noexcept;
 
     void set_int(size_t col_ndx, int_fast64_t value);
     void set_int_unique(size_t col_ndx, int_fast64_t value);
+    void add_int(size_t col_ndx, int_fast64_t value);
     void set_bool(size_t col_ndx, bool value);
     void set_float(size_t col_ndx, float value);
     void set_double(size_t col_ndx, double value);
@@ -109,6 +112,13 @@ public:
     void set_mixed(size_t col_ndx, Mixed value);
     void set_mixed_subtable(size_t col_ndx, const Table* value);
     void set_null(size_t col_ndx);
+    void set_null_unique(size_t col_ndx);
+
+    template <typename U>
+    void set(size_t col_ndx, U&& value, bool is_default = false);
+
+    template <typename U>
+    void set_unique(size_t col_ndx, U&& value);
 
     void insert_substring(size_t col_ndx, size_t pos, StringData);
     void remove_substring(size_t col_ndx, size_t pos, size_t size);
@@ -119,10 +129,9 @@ public:
     void move_last_over();
     //@}
 
-    size_t get_backlink_count(const Table& src_table,
-                                   size_t src_col_ndx) const noexcept;
-    size_t get_backlink(const Table& src_table, size_t src_col_ndx,
-                             size_t backlink_ndx) const noexcept;
+    size_t get_backlink_count() const noexcept;
+    size_t get_backlink_count(const Table& src_table, size_t src_col_ndx) const noexcept;
+    size_t get_backlink(const Table& src_table, size_t src_col_ndx, size_t backlink_ndx) const noexcept;
 
     size_t get_column_count() const noexcept;
     DataType get_column_type(size_t col_ndx) const noexcept;
@@ -182,18 +191,20 @@ private:
 /// row insertions and row removals like real row accessors are.
 ///
 /// \sa BasicRow
-template<class T>
-class BasicRowExpr:
-        public RowFuncs<T, BasicRowExpr<T>> {
+template <class T>
+class BasicRowExpr : public RowFuncs<T, BasicRowExpr<T>> {
 public:
-    BasicRowExpr() noexcept;
+    BasicRowExpr() noexcept = default;
 
-    template<class U>
+    template <class U>
     BasicRowExpr(const BasicRowExpr<U>&) noexcept;
 
+    template <class U>
+    BasicRowExpr(const BasicRow<U>&) noexcept;
+
 private:
-    T* m_table; // nullptr if detached.
-    size_t m_row_ndx; // Undefined if detached.
+    T* m_table = nullptr;       // nullptr if detached.
+    size_t m_row_ndx = 0; // Undefined if detached.
 
     BasicRowExpr(T*, size_t init_row_ndx) noexcept;
 
@@ -205,14 +216,14 @@ private:
     // from RowFuncs.
     friend class RowFuncs<T, BasicRowExpr<T>>;
 
-    // Make m_table and m_col_ndx accessible from BasicRowExpr(const
+    // Make m_table and m_row_ndx accessible from BasicRowExpr(const
     // BasicRowExpr<U>&) for any U.
-    template<class>
+    template <class>
     friend class BasicRowExpr;
 
-    // Make m_table and m_col_ndx accessible from
+    // Make m_table and m_row_ndx accessible from
     // BasicRow::BaicRow(BasicRowExpr<U>) for any U.
-    template<class>
+    template <class>
     friend class BasicRow;
 
     // Make BasicRowExpr(T*, size_t) accessible from Table.
@@ -230,21 +241,26 @@ protected:
     void attach(Table*, size_t row_ndx) noexcept;
     void reattach(Table*, size_t row_ndx) noexcept;
     void impl_detach() noexcept;
-    RowBase() { }
 
+    RowBase()
+    {
+    }
+
+    RowBase(const RowBase&) = delete;
     using HandoverPatch = RowBaseHandoverPatch;
 
     RowBase(const RowBase& source, HandoverPatch& patch);
+
 public:
     static void generate_patch(const RowBase& source, HandoverPatch& patch);
     void apply_patch(HandoverPatch& patch, Group& group);
+
 private:
     RowBase* m_prev = nullptr; // nullptr if first, undefined if detached.
     RowBase* m_next = nullptr; // nullptr if last, undefined if detached.
 
     // Table needs to be able to modify m_table and m_row_ndx.
     friend class Table;
-
 };
 
 
@@ -277,25 +293,23 @@ private:
 ///     size_t i = row.get_index(); // The current row index
 ///
 /// \sa RowFuncs
-template<class T>
-class BasicRow:
-        private RowBase,
-        public RowFuncs<T, BasicRow<T>> {
+template <class T>
+class BasicRow : private RowBase, public RowFuncs<T, BasicRow<T>> {
 public:
     BasicRow() noexcept;
 
-    template<class U>
+    template <class U>
     BasicRow(BasicRowExpr<U>) noexcept;
 
     BasicRow(const BasicRow<T>&) noexcept;
 
-    template<class U>
+    template <class U>
     BasicRow(const BasicRow<U>&) noexcept;
 
-    template<class U>
+    template <class U>
     BasicRow& operator=(BasicRowExpr<U>) noexcept;
 
-    template<class U>
+    template <class U>
     BasicRow& operator=(BasicRow<U>) noexcept;
 
     BasicRow& operator=(const BasicRow<T>&) noexcept;
@@ -310,10 +324,15 @@ private:
     // from RowFuncs.
     friend class RowFuncs<T, BasicRow<T>>;
 
-    // Make m_table and m_col_ndx accessible from BasicRow(const BasicRow<U>&)
+    // Make m_table and m_row_ndx accessible from BasicRow(const BasicRow<U>&)
     // for any U.
-    template<class>
+    template <class>
     friend class BasicRow;
+
+    // Make m_table and m_row_ndx accessible from BasicRowExpr(const
+    // BasicRow<U>&) for any U.
+    template <class>
+    friend class BasicRowExpr;
 
 public:
     std::unique_ptr<BasicRow<T>> clone_for_handover(std::unique_ptr<HandoverPatch>& patch) const
@@ -352,421 +371,451 @@ typedef BasicRow<Table> Row;
 typedef BasicRow<const Table> ConstRow;
 
 
-
-
 // Implementation
 
-template<class T, class R>
-inline int_fast64_t RowFuncs<T,R>::get_int(size_t col_ndx) const noexcept
+template <class T, class R>
+inline int_fast64_t RowFuncs<T, R>::get_int(size_t col_ndx) const noexcept
 {
     return table()->get_int(col_ndx, row_ndx());
 }
 
-template<class T, class R>
-inline bool RowFuncs<T,R>::get_bool(size_t col_ndx) const noexcept
+template <class T, class R>
+inline bool RowFuncs<T, R>::get_bool(size_t col_ndx) const noexcept
 {
     return table()->get_bool(col_ndx, row_ndx());
 }
 
-template<class T, class R>
-inline float RowFuncs<T,R>::get_float(size_t col_ndx) const noexcept
+template <class T, class R>
+inline float RowFuncs<T, R>::get_float(size_t col_ndx) const noexcept
 {
     return table()->get_float(col_ndx, row_ndx());
 }
 
-template<class T, class R>
-inline double RowFuncs<T,R>::get_double(size_t col_ndx) const noexcept
+template <class T, class R>
+inline double RowFuncs<T, R>::get_double(size_t col_ndx) const noexcept
 {
     return table()->get_double(col_ndx, row_ndx());
 }
 
-template<class T, class R>
-inline StringData RowFuncs<T,R>::get_string(size_t col_ndx) const noexcept
+template <class T, class R>
+inline StringData RowFuncs<T, R>::get_string(size_t col_ndx) const noexcept
 {
     return table()->get_string(col_ndx, row_ndx());
 }
 
-template<class T, class R>
-inline BinaryData RowFuncs<T,R>::get_binary(size_t col_ndx) const noexcept
+template <class T, class R>
+inline BinaryData RowFuncs<T, R>::get_binary(size_t col_ndx) const noexcept
 {
     return table()->get_binary(col_ndx, row_ndx());
 }
 
-template<class T, class R>
+template <class T, class R>
 inline OldDateTime RowFuncs<T, R>::get_olddatetime(size_t col_ndx) const noexcept
 {
     return table()->get_olddatetime(col_ndx, row_ndx());
 }
 
-template<class T, class R>
+template <class T, class R>
 inline Timestamp RowFuncs<T, R>::get_timestamp(size_t col_ndx) const noexcept
 {
     return table()->get_timestamp(col_ndx, row_ndx());
 }
 
-template<class T, class R>
-inline typename RowFuncs<T,R>::ConstTableRef RowFuncs<T,R>::get_subtable(size_t col_ndx) const
+template <class T, class R>
+inline typename RowFuncs<T, R>::ConstTableRef RowFuncs<T, R>::get_subtable(size_t col_ndx) const
 {
     return table()->get_subtable(col_ndx, row_ndx()); // Throws
 }
 
-template<class T, class R>
-inline typename RowFuncs<T,R>::TableRef RowFuncs<T,R>::get_subtable(size_t col_ndx)
+template <class T, class R>
+inline typename RowFuncs<T, R>::TableRef RowFuncs<T, R>::get_subtable(size_t col_ndx)
 {
     return table()->get_subtable(col_ndx, row_ndx()); // Throws
 }
 
-template<class T, class R>
-inline size_t RowFuncs<T,R>::get_subtable_size(size_t col_ndx) const noexcept
+template <class T, class R>
+inline size_t RowFuncs<T, R>::get_subtable_size(size_t col_ndx) const noexcept
 {
     return table()->get_subtable_size(col_ndx, row_ndx());
 }
 
-template<class T, class R>
-inline size_t RowFuncs<T,R>::get_link(size_t col_ndx) const noexcept
+template <class T, class R>
+inline size_t RowFuncs<T, R>::get_link(size_t col_ndx) const noexcept
 {
     return table()->get_link(col_ndx, row_ndx());
 }
 
-template<class T, class R>
-inline bool RowFuncs<T,R>::is_null_link(size_t col_ndx) const noexcept
+template <class T, class R>
+inline bool RowFuncs<T, R>::is_null_link(size_t col_ndx) const noexcept
 {
     return table()->is_null_link(col_ndx, row_ndx());
 }
 
-template<class T, class R>
-inline bool RowFuncs<T,R>::is_null(size_t col_ndx) const noexcept
+template <class T, class R>
+inline bool RowFuncs<T, R>::is_null(size_t col_ndx) const noexcept
 {
     return table()->is_null(col_ndx, row_ndx());
 }
 
-template<class T, class R>
-inline typename RowFuncs<T,R>::ConstLinkViewRef
-RowFuncs<T,R>::get_linklist(size_t col_ndx) const
+template <class T, class R>
+inline typename RowFuncs<T, R>::ConstLinkViewRef RowFuncs<T, R>::get_linklist(size_t col_ndx) const
 {
     return table()->get_linklist(col_ndx, row_ndx()); // Throws
 }
 
-template<class T, class R>
-inline typename RowFuncs<T,R>::LinkViewRef RowFuncs<T,R>::get_linklist(size_t col_ndx)
+template <class T, class R>
+inline typename RowFuncs<T, R>::LinkViewRef RowFuncs<T, R>::get_linklist(size_t col_ndx)
 {
     return table()->get_linklist(col_ndx, row_ndx()); // Throws
 }
 
-template<class T, class R>
-inline bool RowFuncs<T,R>::linklist_is_empty(size_t col_ndx) const noexcept
+template <class T, class R>
+inline bool RowFuncs<T, R>::linklist_is_empty(size_t col_ndx) const noexcept
 {
     return table()->linklist_is_empty(col_ndx, row_ndx());
 }
 
-template<class T, class R>
-inline size_t RowFuncs<T,R>::get_link_count(size_t col_ndx) const noexcept
+template <class T, class R>
+inline size_t RowFuncs<T, R>::get_link_count(size_t col_ndx) const noexcept
 {
     return table()->get_link_count(col_ndx, row_ndx());
 }
 
-template<class T, class R>
-inline Mixed RowFuncs<T,R>::get_mixed(size_t col_ndx) const noexcept
+template <class T, class R>
+inline Mixed RowFuncs<T, R>::get_mixed(size_t col_ndx) const noexcept
 {
     return table()->get_mixed(col_ndx, row_ndx());
 }
 
-template<class T, class R>
-inline DataType RowFuncs<T,R>::get_mixed_type(size_t col_ndx) const noexcept
+template <class T, class R>
+inline DataType RowFuncs<T, R>::get_mixed_type(size_t col_ndx) const noexcept
 {
     return table()->get_mixed_type(col_ndx, row_ndx());
 }
 
-template<class T, class R>
-template<class U>
-inline U RowFuncs<T,R>::get(size_t col_ndx) const noexcept
+template <class T, class R>
+template <class U>
+inline U RowFuncs<T, R>::get(size_t col_ndx) const noexcept
 {
     return table()->template get<U>(col_ndx, row_ndx());
 }
 
-template<class T, class R>
-inline void RowFuncs<T,R>::set_int(size_t col_ndx, int_fast64_t value)
+template <class T, class R>
+inline void RowFuncs<T, R>::set_int(size_t col_ndx, int_fast64_t value)
 {
     table()->set_int(col_ndx, row_ndx(), value); // Throws
 }
 
-template<class T, class R>
-inline void RowFuncs<T,R>::set_int_unique(size_t col_ndx, int_fast64_t value)
+template <class T, class R>
+inline void RowFuncs<T, R>::set_int_unique(size_t col_ndx, int_fast64_t value)
 {
     table()->set_int_unique(col_ndx, row_ndx(), value); // Throws
 }
 
-template<class T, class R>
-inline void RowFuncs<T,R>::set_bool(size_t col_ndx, bool value)
+template <class T, class R>
+inline void RowFuncs<T, R>::add_int(size_t col_ndx, int_fast64_t value)
+{
+    table()->add_int(col_ndx, row_ndx(), value); // Throws
+}
+
+template <class T, class R>
+inline void RowFuncs<T, R>::set_bool(size_t col_ndx, bool value)
 {
     table()->set_bool(col_ndx, row_ndx(), value); // Throws
 }
 
-template<class T, class R>
-inline void RowFuncs<T,R>::set_float(size_t col_ndx, float value)
+template <class T, class R>
+inline void RowFuncs<T, R>::set_float(size_t col_ndx, float value)
 {
     table()->set_float(col_ndx, row_ndx(), value); // Throws
 }
 
-template<class T, class R>
-inline void RowFuncs<T,R>::set_double(size_t col_ndx, double value)
+template <class T, class R>
+inline void RowFuncs<T, R>::set_double(size_t col_ndx, double value)
 {
     table()->set_double(col_ndx, row_ndx(), value); // Throws
 }
 
-template<class T, class R>
-inline void RowFuncs<T,R>::set_string(size_t col_ndx, StringData value)
+template <class T, class R>
+inline void RowFuncs<T, R>::set_string(size_t col_ndx, StringData value)
 {
     table()->set_string(col_ndx, row_ndx(), value); // Throws
 }
 
-template<class T, class R>
-inline void RowFuncs<T,R>::set_string_unique(size_t col_ndx, StringData value)
+template <class T, class R>
+inline void RowFuncs<T, R>::set_string_unique(size_t col_ndx, StringData value)
 {
     table()->set_string_unique(col_ndx, row_ndx(), value); // Throws
 }
 
-template<class T, class R>
-inline void RowFuncs<T,R>::set_binary(size_t col_ndx, BinaryData value)
+template <class T, class R>
+inline void RowFuncs<T, R>::set_binary(size_t col_ndx, BinaryData value)
 {
     table()->set_binary(col_ndx, row_ndx(), value); // Throws
 }
 
-template<class T, class R>
+template <class T, class R>
 inline void RowFuncs<T, R>::set_olddatetime(size_t col_ndx, OldDateTime value)
 {
     table()->set_olddatetime(col_ndx, row_ndx(), value); // Throws
 }
 
-template<class T, class R>
+template <class T, class R>
 inline void RowFuncs<T, R>::set_timestamp(size_t col_ndx, Timestamp value)
 {
     table()->set_timestamp(col_ndx, row_ndx(), value); // Throws
 }
 
-template<class T, class R>
-inline void RowFuncs<T,R>::set_subtable(size_t col_ndx, const Table* value)
+template <class T, class R>
+inline void RowFuncs<T, R>::set_subtable(size_t col_ndx, const Table* value)
 {
     table()->set_subtable(col_ndx, row_ndx(), value); // Throws
 }
 
-template<class T, class R>
-inline void RowFuncs<T,R>::set_link(size_t col_ndx, size_t value)
+template <class T, class R>
+inline void RowFuncs<T, R>::set_link(size_t col_ndx, size_t value)
 {
     table()->set_link(col_ndx, row_ndx(), value); // Throws
 }
 
-template<class T, class R>
-inline void RowFuncs<T,R>::nullify_link(size_t col_ndx)
+template <class T, class R>
+inline void RowFuncs<T, R>::nullify_link(size_t col_ndx)
 {
     table()->nullify_link(col_ndx, row_ndx()); // Throws
 }
 
-template<class T, class R>
-inline void RowFuncs<T,R>::set_mixed(size_t col_ndx, Mixed value)
+template <class T, class R>
+inline void RowFuncs<T, R>::set_mixed(size_t col_ndx, Mixed value)
 {
     table()->set_mixed(col_ndx, row_ndx(), value); // Throws
 }
 
-template<class T, class R>
-inline void RowFuncs<T,R>::set_mixed_subtable(size_t col_ndx, const Table* value)
+template <class T, class R>
+inline void RowFuncs<T, R>::set_mixed_subtable(size_t col_ndx, const Table* value)
 {
     table()->set_mixed_subtable(col_ndx, row_ndx(), value); // Throws
 }
 
-template<class T, class R>
-inline void RowFuncs<T,R>::set_null(size_t col_ndx)
+template <class T, class R>
+inline void RowFuncs<T, R>::set_null(size_t col_ndx)
 {
     table()->set_null(col_ndx, row_ndx()); // Throws
 }
 
-template<class T, class R>
-inline void RowFuncs<T,R>::insert_substring(size_t col_ndx, size_t pos, StringData value)
+template <class T, class R>
+inline void RowFuncs<T, R>::set_null_unique(size_t col_ndx)
+{
+    table()->set_null_unique(col_ndx, row_ndx()); // Throws
+}
+
+template <class T, class R>
+template <class U>
+inline void RowFuncs<T, R>::set(size_t col_ndx, U&& value, bool is_default)
+{
+    table()->set(col_ndx, row_ndx(), std::forward<U>(value), is_default); // Throws
+}
+
+template <class T, class R>
+template <class U>
+inline void RowFuncs<T, R>::set_unique(size_t col_ndx, U&& value)
+{
+    table()->set_unique(col_ndx, row_ndx(), std::forward<U>(value)); // Throws
+}
+
+template <class T, class R>
+inline void RowFuncs<T, R>::insert_substring(size_t col_ndx, size_t pos, StringData value)
 {
     table()->insert_substring(col_ndx, row_ndx(), pos, value); // Throws
 }
 
-template<class T, class R>
-inline void RowFuncs<T,R>::remove_substring(size_t col_ndx, size_t pos, size_t size)
+template <class T, class R>
+inline void RowFuncs<T, R>::remove_substring(size_t col_ndx, size_t pos, size_t size)
 {
     table()->remove_substring(col_ndx, row_ndx(), pos, size); // Throws
 }
 
-template<class T, class R>
-inline void RowFuncs<T,R>::remove()
+template <class T, class R>
+inline void RowFuncs<T, R>::remove()
 {
     table()->remove(row_ndx()); // Throws
 }
 
-template<class T, class R>
-inline void RowFuncs<T,R>::move_last_over()
+template <class T, class R>
+inline void RowFuncs<T, R>::move_last_over()
 {
     table()->move_last_over(row_ndx()); // Throws
 }
 
-template<class T, class R>
-inline size_t RowFuncs<T,R>::get_backlink_count(const Table& src_table, size_t src_col_ndx) const noexcept
+template <class T, class R>
+inline size_t RowFuncs<T, R>::get_backlink_count() const noexcept
+{
+    return table()->get_backlink_count(row_ndx());
+}
+
+template <class T, class R>
+inline size_t RowFuncs<T, R>::get_backlink_count(const Table& src_table, size_t src_col_ndx) const noexcept
 {
     return table()->get_backlink_count(row_ndx(), src_table, src_col_ndx);
 }
 
-template<class T, class R>
-inline size_t RowFuncs<T,R>::get_backlink(const Table& src_table, size_t src_col_ndx,
-                                          size_t backlink_ndx) const noexcept
+template <class T, class R>
+inline size_t RowFuncs<T, R>::get_backlink(const Table& src_table, size_t src_col_ndx, size_t backlink_ndx) const
+    noexcept
 {
     return table()->get_backlink(row_ndx(), src_table, src_col_ndx, backlink_ndx);
 }
 
-template<class T, class R>
-inline size_t RowFuncs<T,R>::get_column_count() const noexcept
+template <class T, class R>
+inline size_t RowFuncs<T, R>::get_column_count() const noexcept
 {
     return table()->get_column_count();
 }
 
-template<class T, class R>
-inline DataType RowFuncs<T,R>::get_column_type(size_t col_ndx) const noexcept
+template <class T, class R>
+inline DataType RowFuncs<T, R>::get_column_type(size_t col_ndx) const noexcept
 {
     return table()->get_column_type(col_ndx);
 }
 
-template<class T, class R>
-inline StringData RowFuncs<T,R>::get_column_name(size_t col_ndx) const noexcept
+template <class T, class R>
+inline StringData RowFuncs<T, R>::get_column_name(size_t col_ndx) const noexcept
 {
     return table()->get_column_name(col_ndx);
 }
 
-template<class T, class R>
-inline size_t RowFuncs<T,R>::get_column_index(StringData name) const noexcept
+template <class T, class R>
+inline size_t RowFuncs<T, R>::get_column_index(StringData name) const noexcept
 {
     return table()->get_column_index(name);
 }
 
-template<class T, class R>
-inline bool RowFuncs<T,R>::is_attached() const noexcept
+template <class T, class R>
+inline bool RowFuncs<T, R>::is_attached() const noexcept
 {
     return static_cast<const R*>(this)->impl_get_table();
 }
 
-template<class T, class R>
-inline void RowFuncs<T,R>::detach() noexcept
+template <class T, class R>
+inline void RowFuncs<T, R>::detach() noexcept
 {
     static_cast<R*>(this)->impl_detach();
 }
 
-template<class T, class R>
-inline const T* RowFuncs<T,R>::get_table() const noexcept
+template <class T, class R>
+inline const T* RowFuncs<T, R>::get_table() const noexcept
 {
     return table();
 }
 
-template<class T, class R>
-inline T* RowFuncs<T,R>::get_table() noexcept
+template <class T, class R>
+inline T* RowFuncs<T, R>::get_table() noexcept
 {
     return table();
 }
 
-template<class T, class R>
-inline size_t RowFuncs<T,R>::get_index() const noexcept
+template <class T, class R>
+inline size_t RowFuncs<T, R>::get_index() const noexcept
 {
     return row_ndx();
 }
 
-template<class T, class R>
-inline RowFuncs<T,R>::operator bool() const noexcept
+template <class T, class R>
+inline RowFuncs<T, R>::operator bool() const noexcept
 {
     return is_attached();
 }
 
-template<class T, class R>
-inline const T* RowFuncs<T,R>::table() const noexcept
+template <class T, class R>
+inline const T* RowFuncs<T, R>::table() const noexcept
 {
     return static_cast<const R*>(this)->impl_get_table();
 }
 
-template<class T, class R>
-inline T* RowFuncs<T,R>::table() noexcept
+template <class T, class R>
+inline T* RowFuncs<T, R>::table() noexcept
 {
     return static_cast<R*>(this)->impl_get_table();
 }
 
-template<class T, class R>
-inline size_t RowFuncs<T,R>::row_ndx() const noexcept
+template <class T, class R>
+inline size_t RowFuncs<T, R>::row_ndx() const noexcept
 {
     return static_cast<const R*>(this)->impl_get_row_ndx();
 }
 
 
-template<class T>
-inline BasicRowExpr<T>::BasicRowExpr() noexcept:
-    m_table(0),
-    m_row_ndx(0)
+template <class T>
+template <class U>
+inline BasicRowExpr<T>::BasicRowExpr(const BasicRowExpr<U>& expr) noexcept
+    : m_table(expr.m_table)
+    , m_row_ndx(expr.m_row_ndx)
 {
 }
 
-template<class T>
-template<class U>
-inline BasicRowExpr<T>::BasicRowExpr(const BasicRowExpr<U>& expr) noexcept:
-    m_table(expr.m_table),
-    m_row_ndx(expr.m_row_ndx)
+template <class T>
+template <class U>
+inline BasicRowExpr<T>::BasicRowExpr(const BasicRow<U>& row) noexcept
+    : m_table(row.m_table.get())
+    , m_row_ndx(row.m_row_ndx)
 {
 }
 
-template<class T>
-inline BasicRowExpr<T>::BasicRowExpr(T* init_table, size_t init_row_ndx) noexcept:
-    m_table(init_table),
-    m_row_ndx(init_row_ndx)
+template <class T>
+inline BasicRowExpr<T>::BasicRowExpr(T* init_table, size_t init_row_ndx) noexcept
+    : m_table(init_table)
+    , m_row_ndx(init_row_ndx)
 {
 }
 
-template<class T>
+template <class T>
 inline T* BasicRowExpr<T>::impl_get_table() const noexcept
 {
     return m_table;
 }
 
-template<class T>
+template <class T>
 inline size_t BasicRowExpr<T>::impl_get_row_ndx() const noexcept
 {
     return m_row_ndx;
 }
 
-template<class T>
+template <class T>
 inline void BasicRowExpr<T>::impl_detach() noexcept
 {
     m_table = nullptr;
 }
 
 
-template<class T>
+template <class T>
 inline BasicRow<T>::BasicRow() noexcept
 {
 }
 
-template<class T>
-inline BasicRow<T>::BasicRow(const BasicRow<T>& row) noexcept:
-    RowBase(row)
+template <class T>
+inline BasicRow<T>::BasicRow(const BasicRow<T>& row) noexcept
+    : RowBase()
 {
     attach(const_cast<Table*>(row.m_table.get()), row.m_row_ndx);
 }
 
-template<class T>
-template<class U>
+template <class T>
+template <class U>
 inline BasicRow<T>::BasicRow(BasicRowExpr<U> expr) noexcept
 {
     T* expr_table = expr.m_table; // Check that pointer types are compatible
     attach(const_cast<Table*>(expr_table), expr.m_row_ndx);
 }
 
-template<class T>
-template<class U>
+template <class T>
+template <class U>
 inline BasicRow<T>::BasicRow(const BasicRow<U>& row) noexcept
 {
     T* row_table = row.m_table.get(); // Check that pointer types are compatible
     attach(const_cast<Table*>(row_table), row.m_row_ndx);
 }
 
-template<class T>
-template<class U>
+template <class T>
+template <class U>
 inline BasicRow<T>& BasicRow<T>::operator=(BasicRowExpr<U> expr) noexcept
 {
     T* expr_table = expr.m_table; // Check that pointer types are compatible
@@ -774,8 +823,8 @@ inline BasicRow<T>& BasicRow<T>::operator=(BasicRowExpr<U> expr) noexcept
     return *this;
 }
 
-template<class T>
-template<class U>
+template <class T>
+template <class U>
 inline BasicRow<T>& BasicRow<T>::operator=(BasicRow<U> row) noexcept
 {
     T* row_table = row.m_table.get(); // Check that pointer types are compatible
@@ -783,26 +832,26 @@ inline BasicRow<T>& BasicRow<T>::operator=(BasicRow<U> row) noexcept
     return *this;
 }
 
-template<class T>
+template <class T>
 inline BasicRow<T>& BasicRow<T>::operator=(const BasicRow<T>& row) noexcept
 {
     reattach(const_cast<Table*>(row.m_table.get()), row.m_row_ndx);
     return *this;
 }
 
-template<class T>
+template <class T>
 inline BasicRow<T>::~BasicRow() noexcept
 {
     RowBase::impl_detach();
 }
 
-template<class T>
+template <class T>
 inline T* BasicRow<T>::impl_get_table() const noexcept
 {
     return m_table.get();
 }
 
-template<class T>
+template <class T>
 inline size_t BasicRow<T>::impl_get_row_ndx() const noexcept
 {
     return m_row_ndx;

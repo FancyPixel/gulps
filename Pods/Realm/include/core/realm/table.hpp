@@ -24,6 +24,7 @@
 #include <utility>
 #include <typeinfo>
 #include <memory>
+#include <mutex>
 
 #include <realm/util/features.h>
 #include <realm/util/thread.hpp>
@@ -51,29 +52,29 @@ class StringIndex;
 class TableView;
 class TableViewBase;
 class TimestampColumn;
-template<class>
+template <class>
 class Columns;
-template<class>
+template <class>
 class SubQuery;
 struct LinkTargetInfo;
 
-struct Link {};
+struct SubTable {
+};
+struct Link {
+};
 typedef Link LinkList;
 typedef Link BackLink;
 
-namespace _impl { class TableFriend; }
+namespace _impl {
+class TableFriend;
+}
+namespace metrics {
+class QueryInfo;
+}
 
 class Replication;
 
 
-/// The Table class is non-polymorphic, that is, it has no virtual
-/// functions. This is important because it ensures that there is no run-time
-/// distinction between a Table instance and an instance of any variation of
-/// BasicTable<T>, and this, in turn, makes it valid to cast a pointer from
-/// Table to BasicTable<T> even when the instance is constructed as a Table. Of
-/// course, this also assumes that BasicTable<> is non-polymorphic, has no
-/// destructor, and adds no extra data members.
-///
 /// FIXME: Table assignment (from any group to any group) could be made aliasing
 /// safe as follows: Start by cloning source table into target allocator. On
 /// success, assign, and then deallocate any previous structure at the target.
@@ -168,8 +169,8 @@ public:
     /// These functions behave as if they were called on the descriptor returned
     /// by get_descriptor().
     size_t get_column_count() const noexcept;
-    DataType    get_column_type(size_t column_ndx) const noexcept;
-    StringData  get_column_name(size_t column_ndx) const noexcept;
+    DataType get_column_type(size_t column_ndx) const noexcept;
+    StringData get_column_name(size_t column_ndx) const noexcept;
     size_t get_column_index(StringData name) const noexcept;
     //@}
 
@@ -223,21 +224,22 @@ public:
     /// added to the specified column. Rather than throwing, it returns false if
     /// the table accessor is detached or the specified index is out of range.
     ///
-    /// add_search_index() adds a search index to the specified column of this
+    /// add_search_index() adds a search index to the specified column of the
     /// table. It has no effect if a search index has already been added to the
     /// specified column (idempotency).
     ///
     /// remove_search_index() removes the search index from the specified column
-    /// of this table. It has no effect if the specified column has no search
+    /// of the table. It has no effect if the specified column has no search
     /// index. The search index cannot be removed from the primary key of a
     /// table.
     ///
     /// This table must be a root table; that is, it must have an independent
     /// descriptor. Freestanding tables, group-level tables, and subtables in a
     /// column of type 'mixed' are all examples of root tables. See add_column()
-    /// for more on this.
+    /// for more on this. If you want to manipulate subtable indexes, you must use
+    /// the Descriptor interface.
     ///
-    /// \param column_ndx The index of a column of this table.
+    /// \param column_ndx The index of a column of the table.
 
     bool has_search_index(size_t column_ndx) const noexcept;
     void add_search_index(size_t column_ndx);
@@ -296,8 +298,7 @@ public:
     /// \sa Descriptor::add_column()
     /// \sa has_shared_type()
     size_t add_subcolumn(const path_vec& path, DataType type, StringData name);
-    void insert_subcolumn(const path_vec& path, size_t column_ndx,
-                          DataType type, StringData name);
+    void insert_subcolumn(const path_vec& path, size_t column_ndx, DataType type, StringData name);
     void remove_subcolumn(const path_vec& path, size_t column_ndx);
     void rename_subcolumn(const path_vec& path, size_t column_ndx, StringData new_name);
     //@}
@@ -327,14 +328,14 @@ public:
     bool has_shared_type() const noexcept;
 
 
-    template<class T>
+    template <class T>
     Columns<T> column(size_t column); // FIXME: Should this one have been declared noexcept?
-    template<class T>
+    template <class T>
     Columns<T> column(const Table& origin, size_t origin_column_ndx);
 
-    template<class T>
+    template <class T>
     SubQuery<T> column(size_t column, Query subquery);
-    template<class T>
+    template <class T>
     SubQuery<T> column(const Table& origin, size_t origin_column_ndx, Query subquery);
 
     // Table size and deletion
@@ -371,6 +372,9 @@ public:
     /// vacated slot. This operation assumes that the table is unordered, and it
     /// may therfore be used on tables with link columns.
     ///
+    /// remove_recursive() will delete linked rows if the removed link was the
+    /// last one holding on to the row in question. This will be done recursively.
+    ///
     /// The removal of a row from an unordered table (move_last_over()) may
     /// cause other linked rows to be cascade-removed. The clearing of a table
     /// may also cause linked rows to be cascade-removed, but in this respect,
@@ -379,37 +383,65 @@ public:
 
     size_t add_empty_row(size_t num_rows = 1);
     void insert_empty_row(size_t row_ndx, size_t num_rows = 1);
+    size_t add_row_with_key(size_t col_ndx, int64_t key);
     void remove(size_t row_ndx);
+    void remove_recursive(size_t row_ndx);
     void remove_last();
     void move_last_over(size_t row_ndx);
     void clear();
     void swap_rows(size_t row_ndx_1, size_t row_ndx_2);
+    void move_row(size_t from_ndx, size_t to_ndx);
     //@}
 
     /// Replaces all links to \a row_ndx with links to \a new_row_ndx.
     ///
     /// This operation is usually followed by Table::move_last_over()
     /// as part of Table::set_int_unique() or Table::set_string_unique()
-    /// detecting a collision.
+    /// or Table::set_null_unique() detecting a collision.
     ///
     /// \sa Table::move_last_over()
     /// \sa Table::set_int_unique()
     /// \sa Table::set_string_unique()
-    void change_link_targets(size_t row_ndx, size_t new_row_ndx);
+    /// \sa Table::set_null_unique()
+    void merge_rows(size_t row_ndx, size_t new_row_ndx);
 
-    // Get cell values. Will assert if the requested type does not match the column type
-    int64_t     get_int(size_t column_ndx, size_t row_ndx) const noexcept;
-    bool        get_bool(size_t column_ndx, size_t row_ndx) const noexcept;
+    //@{
+
+    /// Get cell values.
+    /// Will assert if the requested type does not match the column type.
+    ///
+    /// When fetching from a nullable column and the value is null, a default
+    /// value will be returned, except for object like types (StringData,
+    /// BinaryData, Timestamp) which have support for storing nulls. In that
+    /// case, call the `is_null()` method on the returned object to check
+    /// whether the stored value was null. If nullability matters and returning
+    /// a default value is unacceptable, check Table::is_null() before getting a
+    /// cell value.
+    ///
+    /// \sa Table::is_nullable(size_t col_ndx)
+    /// \sa Table::is_null(size_t col_ndx, size_t row_ndx)
+    /// \sa StringData::is_null()
+    int64_t get_int(size_t column_ndx, size_t row_ndx) const noexcept;
+    bool get_bool(size_t column_ndx, size_t row_ndx) const noexcept;
     OldDateTime get_olddatetime(size_t column_ndx, size_t row_ndx) const noexcept;
-    float       get_float(size_t column_ndx, size_t row_ndx) const noexcept;
-    double      get_double(size_t column_ndx, size_t row_ndx) const noexcept;
-    StringData  get_string(size_t column_ndx, size_t row_ndx) const noexcept;
-    BinaryData  get_binary(size_t column_ndx, size_t row_ndx) const noexcept;
-    Mixed       get_mixed(size_t column_ndx, size_t row_ndx) const noexcept;
-    DataType    get_mixed_type(size_t column_ndx, size_t row_ndx) const noexcept;
-    Timestamp   get_timestamp(size_t column_ndx, size_t row_ndx) const noexcept;
+    float get_float(size_t column_ndx, size_t row_ndx) const noexcept;
+    double get_double(size_t column_ndx, size_t row_ndx) const noexcept;
+    StringData get_string(size_t column_ndx, size_t row_ndx) const noexcept;
+    BinaryData get_binary(size_t column_ndx, size_t row_ndx) const noexcept;
+    Mixed get_mixed(size_t column_ndx, size_t row_ndx) const noexcept;
+    DataType get_mixed_type(size_t column_ndx, size_t row_ndx) const noexcept;
+    Timestamp get_timestamp(size_t column_ndx, size_t row_ndx) const noexcept;
 
-    template<class T> T get(size_t c, size_t r) const noexcept;
+    //@}
+
+    /// Return data from position 'pos' and onwards. If the blob is distributed
+    /// across multiple arrays, you will only get data from one array. 'pos'
+    /// will be updated to be an index to next available data. It will be 0
+    /// if no more data.
+    BinaryData get_binary_at(size_t col_ndx, size_t ndx, size_t& pos) const noexcept;
+
+    template <class T>
+    T get(size_t c, size_t r) const noexcept;
 
     size_t get_link(size_t column_ndx, size_t row_ndx) const noexcept;
     bool is_null_link(size_t column_ndx, size_t row_ndx) const noexcept;
@@ -421,9 +453,6 @@ public:
 
     TableRef get_link_target(size_t column_ndx) noexcept;
     ConstTableRef get_link_target(size_t column_ndx) const noexcept;
-
-    template<class T>
-    typename T::RowAccessor get_link_accessor(size_t column_ndx, size_t row_ndx);
 
     //@{
 
@@ -440,14 +469,32 @@ public:
     /// producing an oversized string or binary data value will cause an
     /// exception to be thrown.
     ///
-    /// The "unique" variants (set_int_unique(), set_string_unique()) are
-    /// intended to be used in the implementation of primary key support. They
+    /// The "unique" variants (set_int_unique(), set_string_unique(), set_null_unique())
+    /// are intended to be used in the implementation of primary key support. They
     /// check if the given column already contains one or more values that are
     /// equal to \a value, and if there are conflicts, it calls
-    /// Table::change_link_targets() for the conflicting row to be replaced by
-    /// \a row_ndx, followed by a Table::move_last_over() of the offending row.
-    /// Users intending to implement primary keys must therefore manually check
-    /// for duplicates if they want to raise an error instead.
+    /// Table::merge_rows() for the row_ndx to be replaced by the
+    /// existing row, followed by a Table::move_last_over() of row_ndx. The
+    /// return value is always a row index of a row that contains \a value in
+    /// the specified column, possibly different from \a row_ndx if a conflict
+    /// occurred.  Users intending to implement primary keys must therefore
+    /// manually check for duplicates if they want to raise an error instead.
+    ///
+    /// NOTE:  It is an error to call either function after adding elements to a
+    /// linklist in the object. In general, calling set_int_unique() or
+    /// set_string_unique() or set_null_unique() should be the first thing that
+    /// happens after creating a row. These limitations are imposed by limitations
+    /// in the Realm Object Server and may be relaxed in the future. A violation of
+    /// these rules results in a LogicError being thrown.
+    ///
+    /// add_int() adds a 64-bit signed integer to the current value of the
+    /// cell.  If the addition would cause signed integer overflow or
+    /// underflow, the addition "wraps around" with semantics similar to
+    /// unsigned integer arithmetic, such that Table::max_integer + 1 ==
+    /// Table::min_integer and Table::min_integer - 1 == Table::max_integer.
+    /// Note that the wrapping is platform-independent (all platforms wrap in
+    /// the same way regardless of integer representation). If the existing
+    /// value in the cell is null, a LogicError exception is thrown.
     ///
     /// insert_substring() inserts the specified string into the currently
     /// stored string at the specified position. The position must be less than
@@ -461,28 +508,49 @@ public:
     ///
     /// String level modifications performed via insert_substring() and
     /// remove_substring() are mergable and subject to operational
-    /// trsnaformation. That is, the effect of two causally unrelated
+    /// transformation. That is, the effect of two causally unrelated
     /// modifications will in general both be retained during synchronization.
 
     static const size_t max_string_size = 0xFFFFF8 - Array::header_size - 1;
     static const size_t max_binary_size = 0xFFFFF8 - Array::header_size;
 
-    void set_int(size_t column_ndx, size_t row_ndx, int_fast64_t value);
-    void set_int_unique(size_t column_ndx, size_t row_ndx, int_fast64_t value);
-    void set_bool(size_t column_ndx, size_t row_ndx, bool value);
-    void set_olddatetime(size_t column_ndx, size_t row_ndx, OldDateTime value);
-    void set_timestamp(size_t column_ndx, size_t row_ndx, Timestamp value);
-    template<class E>
+    // FIXME: These limits should be chosen independently of the underlying
+    // platform's choice to define int64_t and independent of the integer
+    // representation. The current values only work for 2's complement, which is
+    // not guaranteed by the standard.
+    static constexpr int_fast64_t max_integer = std::numeric_limits<int64_t>::max();
+    static constexpr int_fast64_t min_integer = std::numeric_limits<int64_t>::min();
+
+    template <class T>
+    void set(size_t c, size_t r, T value, bool is_default = false);
+
+    template <class T>
+    size_t set_unique(size_t c, size_t r, T value);
+
+    void set_int(size_t column_ndx, size_t row_ndx, int_fast64_t value, bool is_default = false);
+    size_t set_int_unique(size_t column_ndx, size_t row_ndx, int_fast64_t value);
+    void set_bool(size_t column_ndx, size_t row_ndx, bool value, bool is_default = false);
+    void set_olddatetime(size_t column_ndx, size_t row_ndx, OldDateTime value, bool is_default = false);
+    void set_timestamp(size_t column_ndx, size_t row_ndx, Timestamp value, bool is_default = false);
+    template <class E>
     void set_enum(size_t column_ndx, size_t row_ndx, E value);
-    void set_float(size_t column_ndx, size_t row_ndx, float value);
-    void set_double(size_t column_ndx, size_t row_ndx, double value);
-    void set_string(size_t column_ndx, size_t row_ndx, StringData value);
-    void set_string_unique(size_t column_ndx, size_t row_ndx, StringData value);
-    void set_binary(size_t column_ndx, size_t row_ndx, BinaryData value);
-    void set_mixed(size_t column_ndx, size_t row_ndx, Mixed value);
-    void set_link(size_t column_ndx, size_t row_ndx, size_t target_row_ndx);
+    void set_float(size_t column_ndx, size_t row_ndx, float value, bool is_default = false);
+    void set_double(size_t column_ndx, size_t row_ndx, double value, bool is_default = false);
+    void set_string(size_t column_ndx, size_t row_ndx, StringData value, bool is_default = false);
+    size_t set_string_unique(size_t column_ndx, size_t row_ndx, StringData value);
+    void set_binary(size_t column_ndx, size_t row_ndx, BinaryData value, bool is_default = false);
+    void set_mixed(size_t column_ndx, size_t row_ndx, Mixed value, bool is_default = false);
+    void set_link(size_t column_ndx, size_t row_ndx, size_t target_row_ndx, bool is_default = false);
     void nullify_link(size_t column_ndx, size_t row_ndx);
-    void set_null(size_t column_ndx, size_t row_ndx);
+    void set_null(size_t column_ndx, size_t row_ndx, bool is_default = false);
+    void set_null_unique(size_t col_ndx, size_t row_ndx);
+
+    // Sync needs to store blobs bigger than 16 M. This function can be used for that. Data should be read
+    // out again using the get_binary_at() function. Should not be used for user data as normal get_binary()
+    // will just return null if the data is bigger than the limit.
+    void set_binary_big(size_t column_ndx, size_t row_ndx, BinaryData value, bool is_default = false);
+
+    void add_int(size_t column_ndx, size_t row_ndx, int_fast64_t value);
 
     void insert_substring(size_t col_ndx, size_t row_ndx, size_t pos, StringData);
     void remove_substring(size_t col_ndx, size_t row_ndx, size_t pos, size_t substring_size = realm::npos);
@@ -503,16 +571,17 @@ public:
     // 'mixed', for a value in a mixed column that is not a subtable,
     // get_subtable() returns null, get_subtable_size() returns zero,
     // and clear_subtable() replaces the value with an empty table.)
+    // Currently, subtables of subtables are not supported.
     TableRef get_subtable(size_t column_ndx, size_t row_ndx);
     ConstTableRef get_subtable(size_t column_ndx, size_t row_ndx) const;
     size_t get_subtable_size(size_t column_ndx, size_t row_ndx) const noexcept;
     void clear_subtable(size_t column_ndx, size_t row_ndx);
 
     // Backlinks
-    size_t get_backlink_count(size_t row_ndx, const Table& origin,
-                              size_t origin_col_ndx) const noexcept;
-    size_t get_backlink(size_t row_ndx, const Table& origin,
-                        size_t origin_col_ndx, size_t backlink_ndx) const noexcept;
+    size_t get_backlink_count(size_t row_ndx, bool only_strong_links = false) const noexcept;
+    size_t get_backlink_count(size_t row_ndx, const Table& origin, size_t origin_col_ndx) const noexcept;
+    size_t get_backlink(size_t row_ndx, const Table& origin, size_t origin_col_ndx, size_t backlink_ndx) const
+        noexcept;
 
 
     //@{
@@ -554,68 +623,70 @@ public:
     size_t count_double(size_t column_ndx, double value) const;
 
     int64_t sum_int(size_t column_ndx) const;
-    double  sum_float(size_t column_ndx) const;
-    double  sum_double(size_t column_ndx) const;
+    double sum_float(size_t column_ndx) const;
+    double sum_double(size_t column_ndx) const;
     int64_t maximum_int(size_t column_ndx, size_t* return_ndx = nullptr) const;
-    float   maximum_float(size_t column_ndx, size_t* return_ndx = nullptr) const;
-    double  maximum_double(size_t column_ndx, size_t* return_ndx = nullptr) const;
+    float maximum_float(size_t column_ndx, size_t* return_ndx = nullptr) const;
+    double maximum_double(size_t column_ndx, size_t* return_ndx = nullptr) const;
     OldDateTime maximum_olddatetime(size_t column_ndx, size_t* return_ndx = nullptr) const;
     Timestamp maximum_timestamp(size_t column_ndx, size_t* return_ndx = nullptr) const;
     int64_t minimum_int(size_t column_ndx, size_t* return_ndx = nullptr) const;
-    float   minimum_float(size_t column_ndx, size_t* return_ndx = nullptr) const;
-    double  minimum_double(size_t column_ndx, size_t* return_ndx = nullptr) const;
+    float minimum_float(size_t column_ndx, size_t* return_ndx = nullptr) const;
+    double minimum_double(size_t column_ndx, size_t* return_ndx = nullptr) const;
     OldDateTime minimum_olddatetime(size_t column_ndx, size_t* return_ndx = nullptr) const;
     Timestamp minimum_timestamp(size_t column_ndx, size_t* return_ndx = nullptr) const;
-    double  average_int(size_t column_ndx, size_t* value_count = nullptr) const;
-    double  average_float(size_t column_ndx, size_t* value_count = nullptr) const;
-    double  average_double(size_t column_ndx, size_t* value_count = nullptr) const;
+    double average_int(size_t column_ndx, size_t* value_count = nullptr) const;
+    double average_float(size_t column_ndx, size_t* value_count = nullptr) const;
+    double average_double(size_t column_ndx, size_t* value_count = nullptr) const;
 
     // Searching
-    size_t    find_first_link(size_t target_row_index) const;
-    size_t    find_first_int(size_t column_ndx, int64_t value) const;
-    size_t    find_first_bool(size_t column_ndx, bool value) const;
-    size_t    find_first_olddatetime(size_t column_ndx, OldDateTime value) const;
-    size_t    find_first_timestamp(size_t column_ndx, Timestamp value) const;
-    size_t    find_first_float(size_t column_ndx, float value) const;
-    size_t    find_first_double(size_t column_ndx, double value) const;
-    size_t    find_first_string(size_t column_ndx, StringData value) const;
-    size_t    find_first_binary(size_t column_ndx, BinaryData value) const;
-    size_t    find_first_null(size_t column_ndx) const;
+    template <class T>
+    size_t find_first(size_t column_ndx, T value) const;
 
-    TableView      find_all_link(size_t target_row_index);
+    size_t find_first_link(size_t target_row_index) const;
+    size_t find_first_int(size_t column_ndx, int64_t value) const;
+    size_t find_first_bool(size_t column_ndx, bool value) const;
+    size_t find_first_olddatetime(size_t column_ndx, OldDateTime value) const;
+    size_t find_first_timestamp(size_t column_ndx, Timestamp value) const;
+    size_t find_first_float(size_t column_ndx, float value) const;
+    size_t find_first_double(size_t column_ndx, double value) const;
+    size_t find_first_string(size_t column_ndx, StringData value) const;
+    size_t find_first_binary(size_t column_ndx, BinaryData value) const;
+    size_t find_first_null(size_t column_ndx) const;
+
+    TableView find_all_link(size_t target_row_index);
     ConstTableView find_all_link(size_t target_row_index) const;
-    TableView      find_all_int(size_t column_ndx, int64_t value);
+    TableView find_all_int(size_t column_ndx, int64_t value);
     ConstTableView find_all_int(size_t column_ndx, int64_t value) const;
-    TableView      find_all_bool(size_t column_ndx, bool value);
+    TableView find_all_bool(size_t column_ndx, bool value);
     ConstTableView find_all_bool(size_t column_ndx, bool value) const;
-    TableView      find_all_olddatetime(size_t column_ndx, OldDateTime value);
+    TableView find_all_olddatetime(size_t column_ndx, OldDateTime value);
     ConstTableView find_all_olddatetime(size_t column_ndx, OldDateTime value) const;
-    TableView      find_all_float(size_t column_ndx, float value);
+    TableView find_all_float(size_t column_ndx, float value);
     ConstTableView find_all_float(size_t column_ndx, float value) const;
-    TableView      find_all_double(size_t column_ndx, double value);
+    TableView find_all_double(size_t column_ndx, double value);
     ConstTableView find_all_double(size_t column_ndx, double value) const;
-    TableView      find_all_string(size_t column_ndx, StringData value);
+    TableView find_all_string(size_t column_ndx, StringData value);
     ConstTableView find_all_string(size_t column_ndx, StringData value) const;
-    TableView      find_all_binary(size_t column_ndx, BinaryData value);
+    TableView find_all_binary(size_t column_ndx, BinaryData value);
     ConstTableView find_all_binary(size_t column_ndx, BinaryData value) const;
-    TableView      find_all_null(size_t column_ndx);
+    TableView find_all_null(size_t column_ndx);
     ConstTableView find_all_null(size_t column_ndx) const;
 
     /// The following column types are supported: String, Integer, OldDateTime, Bool
-    TableView      get_distinct_view(size_t column_ndx);
+    TableView get_distinct_view(size_t column_ndx);
     ConstTableView get_distinct_view(size_t column_ndx) const;
 
-    TableView      get_sorted_view(size_t column_ndx, bool ascending = true);
+    TableView get_sorted_view(size_t column_ndx, bool ascending = true);
     ConstTableView get_sorted_view(size_t column_ndx, bool ascending = true) const;
 
-    TableView      get_sorted_view(SortDescriptor order);
+    TableView get_sorted_view(SortDescriptor order);
     ConstTableView get_sorted_view(SortDescriptor order) const;
 
-    TableView      get_range_view(size_t begin, size_t end);
+    TableView get_range_view(size_t begin, size_t end);
     ConstTableView get_range_view(size_t begin, size_t end) const;
 
-    TableView      get_backlink_view(size_t row_ndx, Table *src_table,
-                                     size_t src_col_ndx);
+    TableView get_backlink_view(size_t row_ndx, Table* src_table, size_t src_col_ndx);
 
 
     // Pivot / aggregate operation types. Experimental! Please do not document method publicly.
@@ -624,11 +695,12 @@ public:
         aggr_sum,
         aggr_avg,
         aggr_min,
-        aggr_max
+        aggr_max,
     };
 
     // Simple pivot aggregate method. Experimental! Please do not document method publicly.
-    void aggregate(size_t group_by_column, size_t aggr_column, AggrType op, Table& result, const IntegerColumn* viewrefs = nullptr) const;
+    void aggregate(size_t group_by_column, size_t aggr_column, AggrType op, Table& result,
+                   const IntegerColumn* viewrefs = nullptr) const;
 
     /// Report the current versioning counter for the table. The versioning counter is guaranteed to
     /// change when the contents of the table changes after advance_read() or promote_to_write(), or
@@ -640,14 +712,12 @@ public:
     /// from this table, or linking to this table, is changed. The version counter *may* also change
     /// without any apparent reason.
     uint_fast64_t get_version_counter() const noexcept;
+
 private:
-    template<class T>
-    size_t find_first(size_t column_ndx, T value) const; // called by above methods
-    template<class T>
+    template <class T>
     TableView find_all(size_t column_ndx, T value);
+
 public:
-
-
     //@{
     /// Find the lower/upper bound according to a column that is
     /// already sorted in ascending order.
@@ -692,13 +762,22 @@ public:
     // Queries
     // Using where(tv) is the new method to perform queries on TableView. The 'tv' can have any order; it does not
     // need to be sorted, and, resulting view retains its order.
-    Query where(TableViewBase* tv = nullptr) { return Query(*this, tv); }
+    Query where(TableViewBase* tv = nullptr)
+    {
+        return Query(*this, tv);
+    }
 
     // FIXME: We need a ConstQuery class or runtime check against modifications in read transaction.
-    Query where(TableViewBase* tv = nullptr) const { return Query(*this, tv); }
+    Query where(TableViewBase* tv = nullptr) const
+    {
+        return Query(*this, tv);
+    }
 
     // Perform queries on a LinkView. The returned Query holds a reference to lv.
-    Query where(const LinkViewRef& lv) { return Query(*this, lv); }
+    Query where(const LinkViewRef& lv)
+    {
+        return Query(*this, lv);
+    }
 
     Table& link(size_t link_column);
     Table& backlink(const Table& origin, size_t origin_col_ndx);
@@ -723,12 +802,17 @@ public:
     /// (see add_search_index()) will not be carried over to the new
     /// table.
     ///
+    /// \param out The destination output stream buffer.
+    ///
     /// \param offset Index of first row to include (if `slice_size >
     /// 0`). Must be less than, or equal to size().
     ///
-    /// \param slice_size Number of rows to include. May be zero. If 
-    /// `slice_size > size() - offset`, then the effective size of 
+    /// \param slice_size Number of rows to include. May be zero. If
+    /// `slice_size > size() - offset`, then the effective size of
     /// the written slice will be `size() - offset`.
+    ///
+    /// \param override_table_name Custom name to write out instead of
+    /// the actual table name.
     ///
     /// \throw std::out_of_range If `offset > size()`.
     ///
@@ -737,18 +821,24 @@ public:
     /// of general utility. This is unfortunate, because it pulls
     /// quite a large amount of code into the core library to support
     /// it.
-    void write(std::ostream&, size_t offset = 0, size_t slice_size = npos,
+    void write(std::ostream& out, size_t offset = 0, size_t slice_size = npos,
                StringData override_table_name = StringData()) const;
 
     // Conversion
-    void to_json(std::ostream& out, size_t link_depth = 0, std::map<std::string,
-                 std::string>* renames = nullptr) const;
+    void to_json(std::ostream& out, size_t link_depth = 0,
+                 std::map<std::string, std::string>* renames = nullptr) const;
     void to_string(std::ostream& out, size_t limit = 500) const;
     void row_to_string(size_t row_ndx, std::ostream& out) const;
 
     // Get a reference to this table
-    TableRef get_table_ref() { return TableRef(this); }
-    ConstTableRef get_table_ref() const { return ConstTableRef(this); }
+    TableRef get_table_ref()
+    {
+        return TableRef(this);
+    }
+    ConstTableRef get_table_ref() const
+    {
+        return ConstTableRef(this);
+    }
 
     /// \brief Compare two tables for equality.
     ///
@@ -777,23 +867,29 @@ public:
     /// where it takes up a minimal amout of space. This function returns true
     /// if, and only if the table accessor is attached to such a subtable. This
     /// function is mainly intended for debugging purposes.
-    bool is_degenerate() const noexcept;
+    bool is_degenerate() const;
+
+    /// Compute the sum of the sizes in number of bytes of all the array nodes
+    /// that currently make up this table. See also
+    /// Group::compute_aggregate_byte_size().
+    ///
+    /// If this table accessor is the detached state, this function returns
+    /// zero.
+    size_t compute_aggregated_byte_size() const noexcept;
 
     // Debug
-#ifdef REALM_DEBUG
     void verify() const;
+#ifdef REALM_DEBUG
     void to_dot(std::ostream&, StringData title = StringData()) const;
     void print() const;
     MemStats stats() const;
     void dump_node_structure() const; // To std::cerr (for GDB)
     void dump_node_structure(std::ostream&, int level) const;
-#else
-    void verify() const {}
 #endif
 
     class Parent;
     using HandoverPatch = TableHandoverPatch;
-    static void generate_patch(const TableRef& ref, std::unique_ptr<HandoverPatch>& patch);
+    static void generate_patch(const Table* ref, std::unique_ptr<HandoverPatch>& patch);
     static TableRef create_from_and_consume_patch(std::unique_ptr<HandoverPatch>& patch, Group& group);
 
 protected:
@@ -802,10 +898,10 @@ protected:
     ///
     /// The returned table pointer must **always** end up being
     /// wrapped in some instantiation of BasicTableRef<>.
-    Table* get_subtable_ptr(size_t col_ndx, size_t row_ndx);
+    TableRef get_subtable_tableref(size_t col_ndx, size_t row_ndx);
 
-    /// See non-const get_subtable_ptr().
-    const Table* get_subtable_ptr(size_t col_ndx, size_t row_ndx) const;
+    /// See non-const get_subtable_tableref().
+    ConstTableRef get_subtable_tableref(size_t col_ndx, size_t row_ndx) const;
 
     /// Compare the rows of two tables under the assumption that the two tables
     /// have the same number of columns, and the same data type at each column
@@ -813,6 +909,8 @@ protected:
     bool compare_rows(const Table&) const;
 
     void set_into_mixed(Table* parent, size_t col_ndx, size_t row_ndx) const;
+
+    void check_lists_are_empty(size_t row_ndx) const;
 
 private:
     class SliceWriter;
@@ -848,7 +946,70 @@ private:
     // degenerate state in a different way.
     Array m_top;
     Array m_columns; // 2nd slot in m_top (for root tables)
-    Spec m_spec;     // 1st slot in m_top (for root tables)
+
+    // Management class for the spec object. Only if the table has an independent
+    // spec, the spec object should be deleted when the table object is deleted.
+    // If the table has a shared spec, the spec object is managed by the spec object
+    // of the containing table.
+    class SpecPtr {
+    public:
+        ~SpecPtr()
+         {
+            optionally_delete();
+         }
+        void manage(Spec* ptr)
+        {
+            optionally_delete();
+            m_p = ptr;
+            m_is_managed = true;
+        }
+        void detach()
+        {
+            if (m_is_managed) {
+                m_p->detach();
+            }
+        }
+        SpecPtr& operator=(Spec* ptr)
+        {
+            optionally_delete();
+            m_p = ptr;
+            m_is_managed = false;
+            return *this;
+        }
+        Spec* operator->() const
+        {
+            return m_p;
+        }
+        Spec* get() const
+        {
+            return m_p;
+        }
+        Spec& operator*() const
+        {
+            return *m_p;
+        }
+        operator bool() const
+        {
+            return m_p != nullptr;
+        }
+        bool is_managed() const
+        {
+            return m_is_managed;
+        }
+
+    private:
+        Spec* m_p = nullptr;
+        bool m_is_managed = false;
+
+        void optionally_delete()
+        {
+            if (m_is_managed) {
+                delete m_p;
+            }
+        }
+    };
+
+    SpecPtr m_spec; // 1st slot in m_top (for root tables)
 
     // Is guaranteed to be empty for a detached accessor. Otherwise it is empty
     // when the table accessor is attached to a degenerate subtable (unattached
@@ -874,7 +1035,7 @@ private:
     // point in time. Subdescriptors are kept unique by means of a
     // registry in the parent descriptor. Table::m_descriptor is
     // always null for tables with shared descriptor.
-    mutable Descriptor* m_descriptor;
+    mutable std::weak_ptr<Descriptor> m_descriptor;
 
     // Table view instances
     // Access needs to be protected by m_accessor_mutex
@@ -901,14 +1062,22 @@ private:
     void do_remove(size_t row_ndx, bool broken_reciprocal_backlinks);
     void do_move_last_over(size_t row_ndx, bool broken_reciprocal_backlinks);
     void do_swap_rows(size_t row_ndx_1, size_t row_ndx_2);
-    void do_change_link_targets(size_t row_ndx, size_t new_row_ndx);
+    void do_move_row(size_t from_ndx, size_t to_ndx);
+    void do_merge_rows(size_t row_ndx, size_t new_row_ndx);
     void do_clear(bool broken_reciprocal_backlinks);
     size_t do_set_link(size_t col_ndx, size_t row_ndx, size_t target_row_ndx);
-    template<class ColType, class T>
-    size_t do_set_unique(ColType& column, size_t row_ndx, T&& value);
+    template <class ColType, class T>
+    size_t do_find_unique(ColType& col, size_t ndx, T&& value, bool& conflict);
+    template <class ColType>
+    size_t do_set_unique_null(ColType& col, size_t ndx, bool& conflict);
+    template <class ColType, class T>
+    size_t do_set_unique(ColType& column, size_t row_ndx, T&& value, bool& conflict);
 
-    void upgrade_file_format();
-    
+    void _add_search_index(size_t column_ndx);
+    void _remove_search_index(size_t column_ndx);
+
+    void rebuild_search_index(size_t current_file_format_version);
+
     // Upgrades OldDateTime columns to Timestamp columns
     void upgrade_olddatetime();
 
@@ -940,39 +1109,41 @@ private:
     /// assign() would not check for spec compatibility. This would
     /// make it ideal as a basis for implementing operator=() for
     /// typed tables.
-    Table& operator=(const Table&);
+    Table& operator=(const Table&) = delete;
 
     /// Used when constructing an accessor whose lifetime is going to be managed
     /// by reference counting. The lifetime of accessors of free-standing tables
     /// allocated on the stack by the application is not managed by reference
     /// counting, so that is a case where this tag must **not** be specified.
-    class ref_count_tag {};
+    class ref_count_tag {
+    };
 
     /// Create an uninitialized accessor whose lifetime is managed by reference
     /// counting.
     Table(ref_count_tag, Allocator&);
 
-    void init(ref_type top_ref, ArrayParent*, size_t ndx_in_parent,
-              bool skip_create_column_accessors = false);
-    void init(ConstSubspecRef shared_spec, ArrayParent* parent_column,
-              size_t parent_row_ndx);
+    void init(ref_type top_ref, ArrayParent*, size_t ndx_in_parent, bool skip_create_column_accessors = false);
+    void init(Spec* shared_spec, ArrayParent* parent_column, size_t parent_row_ndx);
 
-    static void do_insert_column(Descriptor&, size_t col_ndx, DataType type,
-                                 StringData name, LinkTargetInfo& link_target_info, bool nullable = false);
-    static void do_insert_column_unless_exists(Descriptor&, size_t col_ndx, DataType type,
-                                               StringData name, LinkTargetInfo& link, bool nullable = false,
+    static void do_insert_column(Descriptor&, size_t col_ndx, DataType type, StringData name,
+                                 LinkTargetInfo& link_target_info, bool nullable = false);
+    static void do_insert_column_unless_exists(Descriptor&, size_t col_ndx, DataType type, StringData name,
+                                               LinkTargetInfo& link, bool nullable = false,
                                                bool* was_inserted = nullptr);
     static void do_erase_column(Descriptor&, size_t col_ndx);
     static void do_rename_column(Descriptor&, size_t col_ndx, StringData name);
     static void do_move_column(Descriptor&, size_t col_ndx_1, size_t col_ndx_2);
+
+    static void do_add_search_index(Descriptor&, size_t col_ndx);
+    static void do_remove_search_index(Descriptor&, size_t col_ndx);
 
     struct InsertSubtableColumns;
     struct EraseSubtableColumns;
     struct RenameSubtableColumns;
     struct MoveSubtableColumns;
 
-    void insert_root_column(size_t col_ndx, DataType type, StringData name,
-                            LinkTargetInfo& link_target, bool nullable = false);
+    void insert_root_column(size_t col_ndx, DataType type, StringData name, LinkTargetInfo& link_target,
+                            bool nullable = false);
     void erase_root_column(size_t col_ndx);
     void move_root_column(size_t from, size_t to);
     void do_insert_root_column(size_t col_ndx, ColumnType, StringData name, bool nullable = false);
@@ -987,19 +1158,21 @@ private:
     struct SubtableUpdater {
         virtual void update(const SubtableColumn&, Array& subcolumns) = 0;
         virtual void update_accessor(Table&) = 0;
-        virtual ~SubtableUpdater() {}
+        virtual ~SubtableUpdater()
+        {
+        }
     };
     static void update_subtables(Descriptor&, SubtableUpdater*);
-    void update_subtables(const size_t* col_path_begin, const size_t* col_path_end,
-                          SubtableUpdater*);
+    void update_subtables(const size_t* col_path_begin, const size_t* col_path_end, SubtableUpdater*);
 
     struct AccessorUpdater {
         virtual void update(Table&) = 0;
         virtual void update_parent(Table&) = 0;
-        virtual ~AccessorUpdater() {}
+        virtual ~AccessorUpdater()
+        {
+        }
     };
-    void update_accessors(const size_t* col_path_begin, const size_t* col_path_end,
-                          AccessorUpdater&);
+    void update_accessors(const size_t* col_path_begin, const size_t* col_path_end, AccessorUpdater&);
 
     void create_degen_subtab_columns();
     ColumnBase* create_column_accessor(ColumnType, size_t col_ndx, size_t ndx_in_parent);
@@ -1014,8 +1187,7 @@ private:
 
     // Support function for conversions
     void to_string_header(std::ostream& out, std::vector<size_t>& widths) const;
-    void to_string_row(size_t row_ndx, std::ostream& out,
-                       const std::vector<size_t>& widths) const;
+    void to_string_row(size_t row_ndx, std::ostream& out, const std::vector<size_t>& widths) const;
 
     // recursive methods called by to_json, to follow links
     void to_json(std::ostream& out, size_t link_depth, std::map<std::string, std::string>& renames,
@@ -1061,8 +1233,7 @@ private:
 
     void register_view(const TableViewBase* view);
     void unregister_view(const TableViewBase* view) noexcept;
-    void move_registered_view(const TableViewBase* old_addr,
-                              const TableViewBase* new_addr) noexcept;
+    void move_registered_view(const TableViewBase* old_addr, const TableViewBase* new_addr) noexcept;
     void discard_views() noexcept;
 
     void register_row_accessor(RowBase*) const noexcept;
@@ -1080,10 +1251,13 @@ private:
     const ColumnBase& get_column_base(size_t column_ndx) const noexcept;
     ColumnBase& get_column_base(size_t column_ndx);
 
-    template<class T, ColumnType col_type>
+    const ColumnBaseWithIndex& get_column_base_indexed(size_t ndx) const noexcept;
+    ColumnBaseWithIndex& get_column_base_indexed(size_t ndx);
+
+    template <class T, ColumnType col_type>
     T& get_column(size_t ndx);
 
-    template<class T, ColumnType col_type>
+    template <class T, ColumnType col_type>
     const T& get_column(size_t ndx) const noexcept;
 
     IntegerColumn& get_column(size_t column_ndx);
@@ -1115,13 +1289,13 @@ private:
     const BacklinkColumn& get_column_backlink(size_t ndx) const noexcept;
     BacklinkColumn& get_column_backlink(size_t ndx);
 
+    void verify_column(size_t col_ndx, const ColumnBase* col) const;
+
     void instantiate_before_change();
-    void validate_column_type(const ColumnBase& col, ColumnType expected_type,
-                              size_t ndx) const;
+    void validate_column_type(const ColumnBase& col, ColumnType expected_type, size_t ndx) const;
 
     static size_t get_size_from_ref(ref_type top_ref, Allocator&) noexcept;
-    static size_t get_size_from_ref(ref_type spec_ref, ref_type columns_ref,
-                                         Allocator&) noexcept;
+    static size_t get_size_from_ref(ref_type spec_ref, ref_type columns_ref, Allocator&) noexcept;
 
     const Table* get_parent_table_ptr(size_t* column_ndx_out = nullptr) const noexcept;
     Table* get_parent_table_ptr(size_t* column_ndx_out = nullptr) noexcept;
@@ -1150,10 +1324,7 @@ private:
     /// True for `col_type_Link` and `col_type_LinkList`.
     static bool is_link_type(ColumnType) noexcept;
 
-    void connect_opposite_link_columns(size_t link_col_ndx, Table& target_table,
-                                       size_t backlink_col_ndx) noexcept;
-
-    size_t get_num_strong_backlinks(size_t row_ndx) const noexcept;
+    void connect_opposite_link_columns(size_t link_col_ndx, Table& target_table, size_t backlink_col_ndx) noexcept;
 
     //@{
 
@@ -1248,7 +1419,7 @@ private:
     /// that the specified column index in a valid index into `m_cols` but does
     /// not otherwise assume more than minimal accessor consistency (see
     /// AccessorConsistencyLevels.)
-    Table* get_subtable_accessor(size_t col_ndx, size_t row_ndx) noexcept;
+    TableRef get_subtable_accessor(size_t col_ndx, size_t row_ndx) noexcept;
 
     /// Unless the column accessor is missing, this function returns the
     /// accessor for the target table of the specified link-type column. The
@@ -1267,6 +1438,8 @@ private:
     void adj_acc_insert_rows(size_t row_ndx, size_t num_rows) noexcept;
     void adj_acc_erase_row(size_t row_ndx) noexcept;
     void adj_acc_swap_rows(size_t row_ndx_1, size_t row_ndx_2) noexcept;
+    void adj_acc_move_row(size_t from_ndx, size_t to_ndx) noexcept;
+    void adj_acc_merge_rows(size_t old_row_ndx, size_t new_row_ndx) noexcept;
 
     /// Adjust this table accessor and its subordinates after move_last_over()
     /// (or its inverse).
@@ -1306,6 +1479,8 @@ private:
     void adj_row_acc_insert_rows(size_t row_ndx, size_t num_rows) noexcept;
     void adj_row_acc_erase_row(size_t row_ndx) noexcept;
     void adj_row_acc_swap_rows(size_t row_ndx_1, size_t row_ndx_2) noexcept;
+    void adj_row_acc_move_row(size_t from_ndx, size_t to_ndx) noexcept;
+    void adj_row_acc_merge_rows(size_t old_row_ndx, size_t new_row_ndx) noexcept;
 
     /// Called by adj_acc_move_over() to adjust row accessors.
     void adj_row_acc_move_over(size_t from_row_ndx, size_t to_row_ndx) noexcept;
@@ -1360,6 +1535,8 @@ private:
     ///    root ref is stored in the parent (see AccessorConsistencyLevels).
     void refresh_accessor_tree();
 
+    void refresh_spec_accessor();
+
     void refresh_column_accessors(size_t col_ndx_begin = 0);
 
     // Look for link columns starting from col_ndx_begin.
@@ -1368,7 +1545,7 @@ private:
     void refresh_link_target_accessors(size_t col_ndx_begin = 0);
 
     bool is_cross_table_link_target() const noexcept;
-
+    std::recursive_mutex* get_parent_accessor_management_lock() const;
 #ifdef REALM_DEBUG
     void to_dot_internal(std::ostream&) const;
 #endif
@@ -1376,17 +1553,18 @@ private:
     friend class SubtableNode;
     friend class _impl::TableFriend;
     friend class Query;
-    template<class>
+    friend class metrics::QueryInfo;
+    template <class>
     friend class util::bind_ptr;
-    template<class>
+    template <class>
     friend class SimpleQuerySupport;
     friend class LangBindHelper;
     friend class TableViewBase;
-    template<class T>
+    template <class T>
     friend class Columns;
     friend class Columns<StringData>;
     friend class ParentNode;
-    template<class>
+    template <class>
     friend class SequentialGetter;
     friend class RowBase;
     friend class LinksToNode;
@@ -1395,11 +1573,11 @@ private:
     friend class Group;
 };
 
-
-
-class Table::Parent: public ArrayParent {
+class Table::Parent : public ArrayParent {
 public:
-    ~Parent() noexcept override {}
+    ~Parent() noexcept override
+    {
+    }
 
 protected:
     virtual StringData get_child_name(size_t child_ndx) const noexcept;
@@ -1416,6 +1594,8 @@ protected:
     /// when this table parent is a column in a parent table.
     virtual Table* get_parent_table(size_t* column_ndx_out = nullptr) noexcept;
 
+    virtual Spec* get_subtable_spec() noexcept;
+
     /// Must be called whenever a child table accessor is about to be destroyed.
     ///
     /// Note that the argument is a pointer to the child Table rather than its
@@ -1423,7 +1603,9 @@ protected:
     /// consistency can be assumed by this function.
     virtual void child_accessor_destroyed(Table* child) noexcept = 0;
 
+
     virtual size_t* record_subtable_path(size_t* begin, size_t* end) noexcept;
+    virtual std::recursive_mutex* get_accessor_management_lock() noexcept = 0;
 
     friend class Table;
 };
@@ -1432,7 +1614,10 @@ protected:
 // Implementation:
 
 
-inline uint_fast64_t Table::get_version_counter() const noexcept { return m_version; }
+inline uint_fast64_t Table::get_version_counter() const noexcept
+{
+    return m_version;
+}
 
 inline void Table::bump_version(bool bump_global) const noexcept
 {
@@ -1474,7 +1659,7 @@ inline void Table::move_last_over(size_t row_ndx)
 inline void Table::remove_last()
 {
     if (!is_empty())
-        remove(size()-1);
+        remove(size() - 1);
 }
 
 // A good place to start if you want to understand the memory ordering
@@ -1492,11 +1677,21 @@ inline void Table::unbind_ptr() const noexcept
     // any changes, so it is a convenient place to do a release.
     // The release will then be observed by the acquire fence in
     // the case where delete is actually called (the count reaches 0)
-    if (m_ref_count.fetch_sub(1, std::memory_order_release) != 1)
+    if (m_ref_count.fetch_sub(1, std::memory_order_release) != 1) {
         return;
+    }
 
     std::atomic_thread_fence(std::memory_order_acquire);
-    delete this;
+
+    std::recursive_mutex* lock = get_parent_accessor_management_lock();
+    if (lock) {
+        std::lock_guard<std::recursive_mutex> lg(*lock);
+        if (m_ref_count == 0)
+            delete this;
+    }
+    else {
+        delete this;
+    }
 }
 
 inline void Table::register_view(const TableViewBase* view)
@@ -1537,34 +1732,34 @@ inline StringData Table::get_name() const noexcept
 inline size_t Table::get_column_count() const noexcept
 {
     REALM_ASSERT(is_attached());
-    return m_spec.get_public_column_count();
+    return m_spec->get_public_column_count();
 }
 
 inline StringData Table::get_column_name(size_t ndx) const noexcept
 {
     REALM_ASSERT_3(ndx, <, get_column_count());
-    return m_spec.get_column_name(ndx);
+    return m_spec->get_column_name(ndx);
 }
 
 inline size_t Table::get_column_index(StringData name) const noexcept
 {
     REALM_ASSERT(is_attached());
-    return m_spec.get_column_index(name);
+    return m_spec->get_column_index(name);
 }
 
 inline ColumnType Table::get_real_column_type(size_t ndx) const noexcept
 {
-    REALM_ASSERT_3(ndx, <, m_spec.get_column_count());
-    return m_spec.get_column_type(ndx);
+    REALM_ASSERT_3(ndx, <, m_spec->get_column_count());
+    return m_spec->get_column_type(ndx);
 }
 
 inline DataType Table::get_column_type(size_t ndx) const noexcept
 {
-    REALM_ASSERT_3(ndx, <, m_spec.get_column_count());
-    return m_spec.get_public_column_type(ndx);
+    REALM_ASSERT_3(ndx, <, m_spec->get_column_count());
+    return m_spec->get_public_column_type(ndx);
 }
 
-template<class Col, ColumnType col_type>
+template <class Col, ColumnType col_type>
 inline Col& Table::get_column(size_t ndx)
 {
     ColumnBase& col = get_column_base(ndx);
@@ -1575,7 +1770,7 @@ inline Col& Table::get_column(size_t ndx)
     return static_cast<Col&>(col);
 }
 
-template<class Col, ColumnType col_type>
+template <class Col, ColumnType col_type>
 inline const Col& Table::get_column(size_t ndx) const noexcept
 {
     const ColumnBase& col = get_column_base(ndx);
@@ -1592,10 +1787,23 @@ inline bool Table::has_shared_type() const noexcept
     return !m_top.is_attached();
 }
 
+inline void Table::verify_column(size_t col_ndx, const ColumnBase* col) const
+{
+    // Check if the column exists at the expected location
+    if (REALM_LIKELY(col_ndx < m_cols.size() && m_cols[col_ndx] == col))
+        return;
+    // The column might be elsewhere in the list
+    for (auto c : m_cols) {
+        if (c == col)
+            return;
+    }
+    throw LogicError(LogicError::column_does_not_exist);
+}
 
 class Table::UnbindGuard {
 public:
-    UnbindGuard(Table* table) noexcept: m_table(table)
+    UnbindGuard(Table* table) noexcept
+        : m_table(table)
     {
     }
 
@@ -1632,13 +1840,11 @@ private:
 };
 
 
-inline Table::Table(Allocator& alloc):
-    m_top(alloc),
-    m_columns(alloc),
-    m_spec(alloc)
+inline Table::Table(Allocator& alloc)
+    : m_top(alloc)
+    , m_columns(alloc)
 {
-    m_ref_count = 1; // Explicitely managed lifetime
-    m_descriptor = nullptr;
+    m_ref_count = 1; // Explicitly managed lifetime
 
     ref_type ref = create_empty_table(alloc); // Throws
     Parent* parent = nullptr;
@@ -1646,13 +1852,11 @@ inline Table::Table(Allocator& alloc):
     init(ref, parent, ndx_in_parent);
 }
 
-inline Table::Table(const Table& t, Allocator& alloc):
-    m_top(alloc),
-    m_columns(alloc),
-    m_spec(alloc)
+inline Table::Table(const Table& t, Allocator& alloc)
+    : m_top(alloc)
+    , m_columns(alloc)
 {
-    m_ref_count = 1; // Explicitely managed lifetime
-    m_descriptor = nullptr;
+    m_ref_count = 1; // Explicitly managed lifetime
 
     ref_type ref = t.clone(alloc); // Throws
     Parent* parent = nullptr;
@@ -1660,13 +1864,11 @@ inline Table::Table(const Table& t, Allocator& alloc):
     init(ref, parent, ndx_in_parent);
 }
 
-inline Table::Table(ref_count_tag, Allocator& alloc):
-    m_top(alloc),
-    m_columns(alloc),
-    m_spec(alloc)
+inline Table::Table(ref_count_tag, Allocator& alloc)
+    : m_top(alloc)
+    , m_columns(alloc)
 {
     m_ref_count = 0; // Lifetime managed by reference counting
-    m_descriptor = nullptr;
 }
 
 inline Allocator& Table::get_alloc() const
@@ -1677,7 +1879,7 @@ inline Allocator& Table::get_alloc() const
 inline TableRef Table::create(Allocator& alloc)
 {
     std::unique_ptr<Table> table(new Table(ref_count_tag(), alloc)); // Throws
-    ref_type ref = create_empty_table(alloc); // Throws
+    ref_type ref = create_empty_table(alloc);                        // Throws
     Parent* parent = nullptr;
     size_t ndx_in_parent = 0;
     table->init(ref, parent, ndx_in_parent); // Throws
@@ -1687,7 +1889,7 @@ inline TableRef Table::create(Allocator& alloc)
 inline TableRef Table::copy(Allocator& alloc) const
 {
     std::unique_ptr<Table> table(new Table(ref_count_tag(), alloc)); // Throws
-    ref_type ref = clone(alloc); // Throws
+    ref_type ref = clone(alloc);                                     // Throws
     Parent* parent = nullptr;
     size_t ndx_in_parent = 0;
     table->init(ref, parent, ndx_in_parent); // Throws
@@ -1695,7 +1897,7 @@ inline TableRef Table::copy(Allocator& alloc) const
 }
 
 // For use by queries
-template<class T>
+template <class T>
 inline Columns<T> Table::column(size_t column_ndx)
 {
     std::vector<size_t> link_chain = std::move(m_link_chain);
@@ -1724,14 +1926,14 @@ inline Columns<T> Table::column(size_t column_ndx)
     return Columns<T>(column_ndx, this, std::move(link_chain));
 }
 
-template<class T>
+template <class T>
 inline Columns<T> Table::column(const Table& origin, size_t origin_col_ndx)
 {
     static_assert(std::is_same<T, BackLink>::value, "");
 
     size_t origin_table_ndx = origin.get_index_in_group();
     const Table& current_target_table = *get_link_chain_target(m_link_chain);
-    size_t backlink_col_ndx = current_target_table.m_spec.find_backlink_column(origin_table_ndx, origin_col_ndx);
+    size_t backlink_col_ndx = current_target_table.m_spec->find_backlink_column(origin_table_ndx, origin_col_ndx);
 
     std::vector<size_t> link_chain = std::move(m_link_chain);
     m_link_chain.clear();
@@ -1740,14 +1942,14 @@ inline Columns<T> Table::column(const Table& origin, size_t origin_col_ndx)
     return Columns<T>(backlink_col_ndx, this, std::move(link_chain));
 }
 
-template<class T>
+template <class T>
 SubQuery<T> Table::column(size_t column_ndx, Query subquery)
 {
     static_assert(std::is_same<T, LinkList>::value, "A subquery must involve a link list or backlink column");
     return SubQuery<T>(column<T>(column_ndx), std::move(subquery));
 }
 
-template<class T>
+template <class T>
 SubQuery<T> Table::column(const Table& origin, size_t origin_col_ndx, Query subquery)
 {
     static_assert(std::is_same<T, BackLink>::value, "A subquery must involve a link list or backlink column");
@@ -1765,7 +1967,7 @@ inline Table& Table::backlink(const Table& origin, size_t origin_col_ndx)
 {
     size_t origin_table_ndx = origin.get_index_in_group();
     const Table& current_target_table = *get_link_chain_target(m_link_chain);
-    size_t backlink_col_ndx = current_target_table.m_spec.find_backlink_column(origin_table_ndx, origin_col_ndx);
+    size_t backlink_col_ndx = current_target_table.m_spec->find_backlink_column(origin_table_ndx, origin_col_ndx);
     return link(backlink_col_ndx);
 }
 
@@ -1803,12 +2005,12 @@ inline Table::ConstRowExpr Table::front() const noexcept
 
 inline Table::RowExpr Table::back() noexcept
 {
-    return get(m_size-1);
+    return get(m_size - 1);
 }
 
 inline Table::ConstRowExpr Table::back() const noexcept
 {
-    return get(m_size-1);
+    return get(m_size - 1);
 }
 
 inline Table::RowExpr Table::operator[](size_t row_ndx) noexcept
@@ -1825,12 +2027,12 @@ inline size_t Table::add_empty_row(size_t num_rows)
 {
     size_t row_ndx = m_size;
     insert_empty_row(row_ndx, num_rows); // Throws
-    return row_ndx; // Return index of first new row
+    return row_ndx;                      // Return index of first new row
 }
 
-inline const Table* Table::get_subtable_ptr(size_t col_ndx, size_t row_ndx) const
+inline ConstTableRef Table::get_subtable_tableref(size_t col_ndx, size_t row_ndx) const
 {
-    return const_cast<Table*>(this)->get_subtable_ptr(col_ndx, row_ndx); // Throws
+    return const_cast<Table*>(this)->get_subtable_tableref(col_ndx, row_ndx); // Throws
 }
 
 inline bool Table::is_null_link(size_t col_ndx, size_t row_ndx) const noexcept
@@ -1843,7 +2045,7 @@ inline ConstTableRef Table::get_link_target(size_t col_ndx) const noexcept
     return const_cast<Table*>(this)->get_link_target(col_ndx);
 }
 
-template<class E>
+template <class E>
 inline void Table::set_enum(size_t column_ndx, size_t row_ndx, E value)
 {
     set_int(column_ndx, row_ndx, value);
@@ -1856,12 +2058,12 @@ inline void Table::nullify_link(size_t col_ndx, size_t row_ndx)
 
 inline TableRef Table::get_subtable(size_t column_ndx, size_t row_ndx)
 {
-    return TableRef(get_subtable_ptr(column_ndx, row_ndx));
+    return get_subtable_tableref(column_ndx, row_ndx);
 }
 
 inline ConstTableRef Table::get_subtable(size_t column_ndx, size_t row_ndx) const
 {
-    return ConstTableRef(get_subtable_ptr(column_ndx, row_ndx));
+    return get_subtable_tableref(column_ndx, row_ndx);
 }
 
 inline ConstTableRef Table::get_parent_table(size_t* column_ndx_out) const noexcept
@@ -1881,7 +2083,7 @@ inline bool Table::is_group_level() const noexcept
 
 inline bool Table::operator==(const Table& t) const
 {
-    return m_spec == t.m_spec && compare_rows(t); // Throws
+    return *m_spec == *t.m_spec && compare_rows(t); // Throws
 }
 
 inline bool Table::operator!=(const Table& t) const
@@ -1889,8 +2091,12 @@ inline bool Table::operator!=(const Table& t) const
     return !(*this == t); // Throws
 }
 
-inline bool Table::is_degenerate() const noexcept
+inline bool Table::is_degenerate() const
 {
+    if (!is_attached()) {
+        throw LogicError{LogicError::detached_accessor};
+    }
+
     return !m_columns.is_attached();
 }
 
@@ -1935,17 +2141,6 @@ inline size_t* Table::Parent::record_subtable_path(size_t* begin, size_t*) noexc
     return begin;
 }
 
-template<class T>
-typename T::RowAccessor Table::get_link_accessor(size_t column_ndx, size_t row_ndx)
-{
-    size_t row_pos_in_target = get_link(column_ndx, row_ndx);
-    TableRef target_table = get_link_target(column_ndx);
-
-    Table* table = &*target_table;
-    T* typed_table = reinterpret_cast<T*>(table);
-    return (*typed_table)[row_pos_in_target];
-}
-
 inline bool Table::is_marked() const noexcept
 {
     return m_mark;
@@ -1978,12 +2173,169 @@ inline void Table::set_ndx_in_parent(size_t ndx_in_parent) noexcept
     }
 }
 
+// Declare our explicit specializations so that the inline wrappers don't try
+// to instantiate them
+template<> int64_t Table::get<int64_t>(size_t, size_t) const noexcept;
+template<> util::Optional<int64_t> Table::get<util::Optional<int64_t>>(size_t, size_t) const noexcept;
+template<> bool Table::get<bool>(size_t, size_t) const noexcept;
+template<> Optional<bool> Table::get<Optional<bool>>(size_t, size_t) const noexcept;
+template<> float Table::get<float>(size_t, size_t) const noexcept;
+template<> util::Optional<float> Table::get<util::Optional<float>>(size_t, size_t) const noexcept;
+template<> double Table::get<double>(size_t, size_t) const noexcept;
+template<> util::Optional<double> Table::get<util::Optional<double>>(size_t, size_t) const noexcept;
+template<> OldDateTime Table::get<OldDateTime>(size_t, size_t) const noexcept;
+template<> Timestamp Table::get<Timestamp>(size_t, size_t) const noexcept;
+template<> StringData Table::get<StringData>(size_t, size_t) const noexcept;
+template<> BinaryData Table::get<BinaryData>(size_t, size_t) const noexcept;
+template<> Mixed Table::get<Mixed>(size_t, size_t) const noexcept;
+
+template<> void Table::set<int64_t>(size_t, size_t, int64_t, bool);
+template<> void Table::set<bool>(size_t, size_t, bool, bool);
+template<> void Table::set<float>(size_t, size_t, float, bool);
+template<> void Table::set<double>(size_t, size_t, double, bool);
+template<> void Table::set<OldDateTime>(size_t, size_t, OldDateTime, bool);
+template<> void Table::set<Timestamp>(size_t, size_t, Timestamp, bool);
+template<> void Table::set<StringData>(size_t, size_t, StringData, bool);
+template<> void Table::set<BinaryData>(size_t, size_t, BinaryData, bool);
+template<> void Table::set<Mixed>(size_t, size_t, Mixed, bool);
+template<> void Table::set<null>(size_t, size_t, null, bool);
+
+template<> size_t Table::set_unique<int64_t>(size_t, size_t, int64_t);
+template<> size_t Table::set_unique<StringData>(size_t, size_t, StringData);
+template<> size_t Table::set_unique<null>(size_t, size_t, null);
+
+
+inline int64_t Table::get_int(size_t col_ndx, size_t ndx) const noexcept
+{
+    if (is_nullable(col_ndx))
+        return get<util::Optional<int64_t>>(col_ndx, ndx).value_or(0);
+    else
+        return get<int64_t>(col_ndx, ndx);
+}
+
+inline size_t Table::set_int_unique(size_t col_ndx, size_t ndx, int_fast64_t value)
+{
+    return set_unique(col_ndx, ndx, value);
+}
+
+inline void Table::set_int(size_t col_ndx, size_t ndx, int_fast64_t value, bool is_default)
+{
+    return set(col_ndx, ndx, value, is_default);
+}
+
+inline Timestamp Table::get_timestamp(size_t col_ndx, size_t ndx) const noexcept
+{
+    return get<Timestamp>(col_ndx, ndx);
+}
+
+inline void Table::set_timestamp(size_t col_ndx, size_t ndx, Timestamp value, bool is_default)
+{
+    return set(col_ndx, ndx, value, is_default);
+}
+
+inline bool Table::get_bool(size_t col_ndx, size_t ndx) const noexcept
+{
+    if (is_nullable(col_ndx))
+        return get<util::Optional<bool>>(col_ndx, ndx).value_or(false);
+    else
+        return get<bool>(col_ndx, ndx);
+}
+
+inline void Table::set_bool(size_t col_ndx, size_t ndx, bool value, bool is_default)
+{
+    return set(col_ndx, ndx, value, is_default);
+}
+
+inline OldDateTime Table::get_olddatetime(size_t col_ndx, size_t ndx) const noexcept
+{
+    return get<OldDateTime>(col_ndx, ndx);
+}
+
+inline void Table::set_olddatetime(size_t col_ndx, size_t ndx, OldDateTime value, bool is_default)
+{
+    return set(col_ndx, ndx, value, is_default);
+}
+
+inline float Table::get_float(size_t col_ndx, size_t ndx) const noexcept
+{
+    float f = get<float>(col_ndx, ndx);
+    return null::is_null_float(f) ? 0.0f : f;
+}
+
+inline void Table::set_float(size_t col_ndx, size_t ndx, float value, bool is_default)
+{
+    return set(col_ndx, ndx, value, is_default);
+}
+
+inline double Table::get_double(size_t col_ndx, size_t ndx) const noexcept
+{
+    double d = get<double>(col_ndx, ndx);
+    return null::is_null_float(d) ? 0.0 : d;
+}
+
+inline void Table::set_double(size_t col_ndx, size_t ndx, double value, bool is_default)
+{
+    return set(col_ndx, ndx, value, is_default);
+}
+
+inline StringData Table::get_string(size_t col_ndx, size_t ndx) const noexcept
+{
+    return get<StringData>(col_ndx, ndx);
+}
+
+inline void Table::set_string(size_t col_ndx, size_t ndx, StringData value, bool is_default)
+{
+    return set(col_ndx, ndx, value, is_default);
+}
+
+inline size_t Table::set_string_unique(size_t col_ndx, size_t ndx, StringData value)
+{
+    return set_unique(col_ndx, ndx, value);
+}
+
+inline BinaryData Table::get_binary(size_t col_ndx, size_t ndx) const noexcept
+{
+    return get<BinaryData>(col_ndx, ndx);
+}
+
+inline void Table::set_binary(size_t col_ndx, size_t ndx, BinaryData value, bool is_default)
+{
+    set(col_ndx, ndx, value, is_default);
+}
+
+inline Mixed Table::get_mixed(size_t col_ndx, size_t ndx) const noexcept
+{
+    return get<Mixed>(col_ndx, ndx);
+}
+
+inline void Table::set_mixed(size_t col_ndx, size_t ndx, Mixed value, bool is_default)
+{
+    set(col_ndx, ndx, value, is_default);
+}
+
+inline void Table::set_null(size_t col_ndx, size_t ndx, bool is_default)
+{
+    set(col_ndx, ndx, null(), is_default);
+}
+
+inline void Table::set_null_unique(size_t col_ndx, size_t ndx)
+{
+    set_unique(col_ndx, ndx, null());
+}
+
+
 // This class groups together information about the target of a link column
 // This is not a valid link if the target table == nullptr
 struct LinkTargetInfo {
     LinkTargetInfo(Table* target = nullptr, size_t backlink_ndx = realm::npos)
-        : m_target_table(target), m_backlink_col_ndx(backlink_ndx) {}
-    bool is_valid() const { return (m_target_table != nullptr); }
+        : m_target_table(target)
+        , m_backlink_col_ndx(backlink_ndx)
+    {
+    }
+    bool is_valid() const
+    {
+        return (m_target_table != nullptr);
+    }
     Table* m_target_table;
     size_t m_backlink_col_ndx; // a value of npos indicates the backlink should be appended
 };
@@ -2009,26 +2361,24 @@ public:
         return table.clone_columns(alloc); // Throws
     }
 
-    static Table* create_accessor(Allocator& alloc, ref_type top_ref,
-                                  Table::Parent* parent, size_t ndx_in_parent)
+    static Table* create_accessor(Allocator& alloc, ref_type top_ref, Table::Parent* parent, size_t ndx_in_parent)
     {
         std::unique_ptr<Table> table(new Table(Table::ref_count_tag(), alloc)); // Throws
-        table->init(top_ref, parent, ndx_in_parent); // Throws
+        table->init(top_ref, parent, ndx_in_parent);                            // Throws
         return table.release();
     }
 
-    static Table* create_accessor(ConstSubspecRef shared_spec, Table::Parent* parent_column,
-                                  size_t parent_row_ndx)
+    static Table* create_accessor(Spec* shared_spec, Table::Parent* parent_column, size_t parent_row_ndx)
     {
-        Allocator& alloc = shared_spec.get_alloc();
+        Allocator& alloc = shared_spec->get_alloc();
         std::unique_ptr<Table> table(new Table(Table::ref_count_tag(), alloc)); // Throws
-        table->init(shared_spec, parent_column, parent_row_ndx); // Throws
+        table->init(shared_spec, parent_column, parent_row_ndx);                // Throws
         return table.release();
     }
 
     // Intended to be used only by Group::create_table_accessor()
-    static Table* create_incomplete_accessor(Allocator& alloc, ref_type top_ref,
-                                             Table::Parent* parent, size_t ndx_in_parent)
+    static Table* create_incomplete_accessor(Allocator& alloc, ref_type top_ref, Table::Parent* parent,
+                                             size_t ndx_in_parent)
     {
         std::unique_ptr<Table> table(new Table(Table::ref_count_tag(), alloc)); // Throws
         bool skip_create_column_accessors = true;
@@ -2042,8 +2392,7 @@ public:
         table.refresh_column_accessors(); // Throws
     }
 
-    static void set_top_parent(Table& table, ArrayParent* parent,
-                               size_t ndx_in_parent) noexcept
+    static void set_top_parent(Table& table, ArrayParent* parent, size_t ndx_in_parent) noexcept
     {
         table.m_top.set_parent(parent, ndx_in_parent);
     }
@@ -2093,20 +2442,19 @@ public:
         return Table::get_size_from_ref(ref, alloc);
     }
 
-    static size_t get_size_from_ref(ref_type spec_ref, ref_type columns_ref,
-                                         Allocator& alloc) noexcept
+    static size_t get_size_from_ref(ref_type spec_ref, ref_type columns_ref, Allocator& alloc) noexcept
     {
         return Table::get_size_from_ref(spec_ref, columns_ref, alloc);
     }
 
     static Spec& get_spec(Table& table) noexcept
     {
-        return table.m_spec;
+        return *table.m_spec;
     }
 
     static const Spec& get_spec(const Table& table) noexcept
     {
-        return table.m_spec;
+        return *table.m_spec;
     }
 
     static ColumnBase& get_column(const Table& table, size_t col_ndx)
@@ -2131,9 +2479,14 @@ public:
         table.do_swap_rows(row_ndx_1, row_ndx_2); // Throws
     }
 
-    static void do_change_link_targets(Table& table, size_t row_ndx, size_t new_row_ndx)
+    static void do_move_row(Table& table, size_t from_ndx, size_t to_ndx)
     {
-        table.do_change_link_targets(row_ndx, new_row_ndx); // Throws
+        table.do_move_row(from_ndx, to_ndx); // Throws
+    }
+
+    static void do_merge_rows(Table& table, size_t row_ndx, size_t new_row_ndx)
+    {
+        table.do_merge_rows(row_ndx, new_row_ndx); // Throws
     }
 
     static void do_clear(Table& table)
@@ -2142,20 +2495,17 @@ public:
         table.do_clear(broken_reciprocal_backlinks); // Throws
     }
 
-    static void do_set_link(Table& table, size_t col_ndx, size_t row_ndx,
-                            size_t target_row_ndx)
+    static void do_set_link(Table& table, size_t col_ndx, size_t row_ndx, size_t target_row_ndx)
     {
         table.do_set_link(col_ndx, row_ndx, target_row_ndx); // Throws
     }
 
-    static size_t get_num_strong_backlinks(const Table& table,
-                                                size_t row_ndx) noexcept
+    static size_t get_backlink_count(const Table& table, size_t row_ndx, bool only_strong_links) noexcept
     {
-        return table.get_num_strong_backlinks(row_ndx);
+        return table.get_backlink_count(row_ndx, only_strong_links);
     }
 
-    static void cascade_break_backlinks_to(Table& table, size_t row_ndx,
-                                           CascadeState& state)
+    static void cascade_break_backlinks_to(Table& table, size_t row_ndx, CascadeState& state)
     {
         table.cascade_break_backlinks_to(row_ndx, state); // Throws
     }
@@ -2165,21 +2515,19 @@ public:
         table.remove_backlink_broken_rows(rows); // Throws
     }
 
-    static size_t* record_subtable_path(const Table& table, size_t* begin,
-                                             size_t* end) noexcept
+    static size_t* record_subtable_path(const Table& table, size_t* begin, size_t* end) noexcept
     {
         return table.record_subtable_path(begin, end);
     }
 
-    static void insert_column(Descriptor& desc, size_t column_ndx, DataType type,
-                              StringData name, LinkTargetInfo& link, bool nullable = false)
+    static void insert_column(Descriptor& desc, size_t column_ndx, DataType type, StringData name,
+                              LinkTargetInfo& link, bool nullable = false)
     {
         Table::do_insert_column(desc, column_ndx, type, name, link, nullable); // Throws
     }
 
-    static void insert_column_unless_exists(Descriptor& desc, size_t column_ndx, DataType type,
-                                            StringData name, LinkTargetInfo link, bool nullable = false,
-                                            bool* was_inserted = nullptr)
+    static void insert_column_unless_exists(Descriptor& desc, size_t column_ndx, DataType type, StringData name,
+                                            LinkTargetInfo link, bool nullable = false, bool* was_inserted = nullptr)
     {
         Table::do_insert_column_unless_exists(desc, column_ndx, type, name, link, nullable, was_inserted); // Throws
     }
@@ -2192,6 +2540,16 @@ public:
     static void rename_column(Descriptor& desc, size_t column_ndx, StringData name)
     {
         Table::do_rename_column(desc, column_ndx, name); // Throws
+    }
+
+    static void add_search_index(Descriptor& desc, size_t column_ndx)
+    {
+        Table::do_add_search_index(desc, column_ndx); // Throws
+    }
+
+    static void remove_search_index(Descriptor& desc, size_t column_ndx)
+    {
+        Table::do_remove_search_index(desc, column_ndx); // Throws
     }
 
     static void move_column(Descriptor& desc, size_t col_ndx_1, size_t col_ndx_2)
@@ -2209,26 +2567,17 @@ public:
         table.erase_row(row_ndx, is_move_last_over); // Throws
     }
 
-    static void batch_erase_rows(Table& table, const IntegerColumn& row_indexes,
-                                 bool is_move_last_over)
+    static void batch_erase_rows(Table& table, const IntegerColumn& row_indexes, bool is_move_last_over)
     {
         table.batch_erase_rows(row_indexes, is_move_last_over); // Throws
     }
 
-    static void clear_root_table_desc(const Table& root_table) noexcept
-    {
-        REALM_ASSERT(!root_table.has_shared_type());
-        root_table.m_descriptor = nullptr;
-    }
-
-    static Table* get_subtable_accessor(Table& table, size_t col_ndx,
-                                        size_t row_ndx) noexcept
+    static TableRef get_subtable_accessor(Table& table, size_t col_ndx, size_t row_ndx) noexcept
     {
         return table.get_subtable_accessor(col_ndx, row_ndx);
     }
 
-    static const Table* get_link_target_table_accessor(const Table& table,
-                                                       size_t col_ndx) noexcept
+    static const Table* get_link_target_table_accessor(const Table& table, size_t col_ndx) noexcept
     {
         return const_cast<Table&>(table).get_link_target_table_accessor(col_ndx);
     }
@@ -2238,8 +2587,7 @@ public:
         return table.get_link_target_table_accessor(col_ndx);
     }
 
-    static void adj_acc_insert_rows(Table& table, size_t row_ndx,
-                                    size_t num_rows) noexcept
+    static void adj_acc_insert_rows(Table& table, size_t row_ndx, size_t num_rows) noexcept
     {
         table.adj_acc_insert_rows(row_ndx, num_rows);
     }
@@ -2254,8 +2602,17 @@ public:
         table.adj_acc_swap_rows(row_ndx_1, row_ndx_2);
     }
 
-    static void adj_acc_move_over(Table& table, size_t from_row_ndx,
-                                  size_t to_row_ndx) noexcept
+    static void adj_acc_move_row(Table& table, size_t from_ndx, size_t to_ndx) noexcept
+    {
+        table.adj_acc_move_row(from_ndx, to_ndx);
+    }
+
+    static void adj_acc_merge_rows(Table& table, size_t row_ndx_1, size_t row_ndx_2) noexcept
+    {
+        table.adj_acc_merge_rows(row_ndx_1, row_ndx_2);
+    }
+
+    static void adj_acc_move_over(Table& table, size_t from_row_ndx, size_t to_row_ndx) noexcept
     {
         table.adj_acc_move_over(from_row_ndx, to_row_ndx);
     }
@@ -2321,14 +2678,14 @@ public:
         table.mark_opposite_link_tables();
     }
 
-    static Descriptor* get_root_table_desc_accessor(Table& root_table) noexcept
+    static DescriptorRef get_root_table_desc_accessor(Table& root_table) noexcept
     {
-        return root_table.m_descriptor;
+        return root_table.m_descriptor.lock();
     }
 
     typedef Table::AccessorUpdater AccessorUpdater;
-    static void update_accessors(Table& table, const size_t* col_path_begin,
-                                 const size_t* col_path_end, AccessorUpdater& updater)
+    static void update_accessors(Table& table, const size_t* col_path_begin, const size_t* col_path_end,
+                                 AccessorUpdater& updater)
     {
         table.update_accessors(col_path_begin, col_path_end, updater); // Throws
     }
@@ -2338,14 +2695,14 @@ public:
         table.refresh_accessor_tree(); // Throws
     }
 
+    static void refresh_spec_accessor(Table& table)
+    {
+        table.refresh_spec_accessor(); // Throws
+    }
+
     static void set_ndx_in_parent(Table& table, size_t ndx_in_parent) noexcept
     {
         table.set_ndx_in_parent(ndx_in_parent);
-    }
-
-    static void set_shared_subspec_ndx_in_parent(Table& table, size_t spec_ndx_in_parent) noexcept
-    {
-        table.m_spec.set_ndx_in_parent(spec_ndx_in_parent);
     }
 
     static bool is_link_type(ColumnType type) noexcept

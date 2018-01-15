@@ -1,70 +1,61 @@
 PODS:
   - AHKActionSheet (0.5.4)
-  - AMPopTip (0.10.2)
+  - AMPopTip (3.1.1)
   - AMWaveTransition (0.6.2)
   - BAFluidView (0.2.3)
-  - BubbleTransition (2.0.0)
-  - FBSnapshotTestCase (2.1.3):
-    - FBSnapshotTestCase/SwiftSupport (= 2.1.3)
-  - FBSnapshotTestCase/Core (2.1.3)
-  - FBSnapshotTestCase/SwiftSupport (2.1.3):
+  - BubbleTransition (2.0.2)
+  - FBSnapshotTestCase (2.1.4):
+    - FBSnapshotTestCase/SwiftSupport (= 2.1.4)
+  - FBSnapshotTestCase/Core (2.1.4)
+  - FBSnapshotTestCase/SwiftSupport (2.1.4):
     - FBSnapshotTestCase/Core
-  - JTCalendar (1.1.16)
-  - Nimble (5.0.0)
-  - Nimble-Snapshots (4.2.0):
+  - JTCalendar (2.2.1)
+  - Nimble (7.0.3)
+  - Nimble-Snapshots (6.3.0):
+    - Nimble-Snapshots/Core (= 6.3.0)
+  - Nimble-Snapshots/Core (6.3.0):
     - FBSnapshotTestCase (~> 2.0)
-    - Nimble
-    - Quick
-  - pop (1.0.9)
-  - Quick (0.10.0)
-  - Realm (1.1.0):
-    - Realm/Headers (= 1.1.0)
-  - Realm/Headers (1.1.0)
-  - RealmSwift (1.1.0):
-    - Realm (= 1.1.0)
-  - UICountingLabel (1.4.0)
+    - Nimble (~> 7.0)
+  - pop (1.0.10)
+  - Quick (1.2.0)
+  - Realm (3.0.2):
+    - Realm/Headers (= 3.0.2)
+  - Realm/Headers (3.0.2)
+  - RealmSwift (3.0.2):
+    - Realm (= 3.0.2)
+  - UICountingLabel (1.4.1)
 
 DEPENDENCIES:
   - AHKActionSheet (~> 0.5)
-  - AMPopTip (~> 0.7)
+  - AMPopTip (~> 3.1.1)
   - AMWaveTransition (~> 0.5)
   - BAFluidView (~> 0.2.3)
   - BubbleTransition (~> 2.0.0)
-  - FBSnapshotTestCase (= 2.1.3)
-  - JTCalendar (from `https://github.com/andreamazz/JTCalendar`, branch `develop`)
-  - Nimble (~> 5.0.0)
-  - Nimble-Snapshots (~> 4.2.0)
+  - FBSnapshotTestCase (= 2.1.4)
+  - JTCalendar (~> 2.2.1)
+  - Nimble (~> 7.0.3)
+  - Nimble-Snapshots (~> 6.3.0)
   - pop (~> 1.0)
-  - Quick (~> 0.10.0)
+  - Quick (~> 1.2.0)
   - RealmSwift
   - UICountingLabel (~> 1.2)
 
-EXTERNAL SOURCES:
-  JTCalendar:
-    :branch: develop
-    :git: https://github.com/andreamazz/JTCalendar
-
-CHECKOUT OPTIONS:
-  JTCalendar:
-    :commit: c70c46b438ef48e9dc35e7721498080c61a82e22
-    :git: https://github.com/andreamazz/JTCalendar
-
 SPEC CHECKSUMS:
   AHKActionSheet: f0b312b5c689f72924d231c39dae140ecd5c1d46
-  AMPopTip: 0788a9452806049e3aa0d6d09324606fc41ea646
+  AMPopTip: e50789f3b3c1eefcaf56bcadc44079c0b8e6ae1b
   AMWaveTransition: 98952310574779e4ca7e7f4d89f8b1043cdad171
   BAFluidView: 5d84ef109831b97740f75b6d785e51f13fa08398
-  BubbleTransition: bdb9d71993b8d3513008e2dda6bada1ddad25d4f
-  FBSnapshotTestCase: 4607968e0dfa1e2772ec0d0098354f8b870c5753
-  JTCalendar: 4cc527e2babd446ce4b96a23c257e5a02fbdac26
-  Nimble: 56fc9f5020effa2206de22c3dd910f4fb011b92f
-  Nimble-Snapshots: 4826e3ee211d2c7af27645e35d68b9e9917882e7
-  pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
-  Quick: 5d290df1c69d5ee2f0729956dcf0fd9a30447eaa
-  Realm: ceecf1a4540c4ce9efe196fe73fa9855bce05bd8
-  RealmSwift: 838058b2db95b12cb86bd0cf209df642c33fb60a
-  UICountingLabel: ed5ce5b6d5ef278ff40d99cfa49577a30ab0c87b
+  BubbleTransition: 7d98ed7d56f0940e83f350a98103ad473491c769
+  FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
+  JTCalendar: be9e781229c6e539d9b71267560410886cd65cfb
+  Nimble: 7f5a9c447a33002645a071bddafbfb24ea70e0ac
+  Nimble-Snapshots: f5459b5b091678dc942d03ec4741cacb58ba4a52
+  pop: 82ca6b068ce9278fd350fd9dd09482a0ce9492e6
+  Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
+  Realm: 6f23fd1f178a09342eac21bfa7c2bf4312a7a180
+  RealmSwift: 695393add1b8f9d5fa75dd16e6355cf3935f71e2
+  UICountingLabel: faf890b505d96312e324a86718f031fafffb0ccb
 
-PODFILE CHECKSUM: 8c0ac70b44ea8464b80dbbb39aac47effe749ba0
+PODFILE CHECKSUM: ffbf2c424f8fe3e575b0de7d5b89479396a6c96a
 
 COCOAPODS: 1.3.1

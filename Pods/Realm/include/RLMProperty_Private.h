@@ -24,8 +24,35 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-BOOL RLMPropertyTypeIsNullable(RLMPropertyType propertyType);
 BOOL RLMPropertyTypeIsComputed(RLMPropertyType propertyType);
+FOUNDATION_EXTERN void RLMValidateSwiftPropertyName(NSString *name);
+
+// Translate an rlmtype to a string representation
+static inline NSString *RLMTypeToString(RLMPropertyType type) {
+    switch (type) {
+        case RLMPropertyTypeString:
+            return @"string";
+        case RLMPropertyTypeInt:
+            return @"int";
+        case RLMPropertyTypeBool:
+            return @"bool";
+        case RLMPropertyTypeDate:
+            return @"date";
+        case RLMPropertyTypeData:
+            return @"data";
+        case RLMPropertyTypeDouble:
+            return @"double";
+        case RLMPropertyTypeFloat:
+            return @"float";
+        case RLMPropertyTypeAny:
+            return @"any";
+        case RLMPropertyTypeObject:
+            return @"object";
+        case RLMPropertyTypeLinkingObjects:
+            return @"linking objects";
+    }
+    return @"Unknown";
+}
 
 // private property interface
 @interface RLMProperty () {
@@ -46,8 +73,7 @@ BOOL RLMPropertyTypeIsComputed(RLMPropertyType propertyType);
                                  instance:(RLMObjectBase *)objectInstance;
 
 - (instancetype)initSwiftListPropertyWithName:(NSString *)name
-                                         ivar:(Ivar)ivar
-                              objectClassName:(nullable NSString *)objectClassName;
+                                     instance:(id)object;
 
 - (instancetype)initSwiftOptionalPropertyWithName:(NSString *)name
                                           indexed:(BOOL)indexed
@@ -68,8 +94,6 @@ BOOL RLMPropertyTypeIsComputed(RLMPropertyType propertyType);
 
 // private properties
 @property (nonatomic, assign) NSUInteger index;
-@property (nonatomic, assign) char objcType;
-@property (nonatomic, copy) NSString *objcRawType;
 @property (nonatomic, assign) BOOL isPrimary;
 @property (nonatomic, assign) Ivar swiftIvar;
 
@@ -88,11 +112,11 @@ BOOL RLMPropertyTypeIsComputed(RLMPropertyType propertyType);
  This method is useful only in specialized circumstances, for example, in conjunction with
  +[RLMObjectSchema initWithClassName:objectClass:properties:]. If you are simply building an
  app on Realm, it is not recommened to use this method.
- 
+
  Initialize an RLMProperty
- 
+
  @warning This method is useful only in specialized circumstances.
- 
+
  @param name            The property name.
  @param type            The property type.
  @param objectClassName The object type used for Object and Array types.

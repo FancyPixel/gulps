@@ -20,6 +20,7 @@
 #define REALM_NULL_HPP
 
 #include <cmath>
+#include <cstring>
 
 #include <realm/util/features.h>
 #include <realm/util/optional.hpp>
@@ -56,46 +57,81 @@ The `S` bit is at position 22 (float) or 51 (double).
 */
 
 struct null {
-    null() {}
-    operator int64_t() { throw(LogicError::type_mismatch); }
-    template<class T>
-    operator util::Optional<T>() { return util::none; }
+    null()
+    {
+    }
+    operator int64_t()
+    {
+        throw(LogicError::type_mismatch);
+    }
+    template <class T>
+    operator util::Optional<T>()
+    {
+        return util::none;
+    }
 
-    template<class T>
-    bool operator == (const T&) const { REALM_ASSERT(false); return false; }
-    template<class T>
-    bool operator != (const T&) const { REALM_ASSERT(false); return false; }
-    template<class T>
-    bool operator > (const T&) const { REALM_ASSERT(false); return false; }
-    template<class T>
-    bool operator >= (const T&) const { REALM_ASSERT(false); return false; }
-    template<class T>
-    bool operator <= (const T&) const { REALM_ASSERT(false); return false; }
-    template<class T>
-    bool operator < (const T&) const { REALM_ASSERT(false); return false; }
+    template <class T>
+    bool operator==(const T&) const
+    {
+        REALM_ASSERT(false);
+        return false;
+    }
+    template <class T>
+    bool operator!=(const T&) const
+    {
+        REALM_ASSERT(false);
+        return false;
+    }
+    template <class T>
+    bool operator>(const T&) const
+    {
+        REALM_ASSERT(false);
+        return false;
+    }
+    template <class T>
+    bool operator>=(const T&) const
+    {
+        REALM_ASSERT(false);
+        return false;
+    }
+    template <class T>
+    bool operator<=(const T&) const
+    {
+        REALM_ASSERT(false);
+        return false;
+    }
+    template <class T>
+    bool operator<(const T&) const
+    {
+        REALM_ASSERT(false);
+        return false;
+    }
 
     /// Returns whether `v` bitwise equals the null bit-pattern
-    template<class T>
-    static bool is_null_float(T v) {
+    template <class T>
+    static bool is_null_float(T v)
+    {
         T i = null::get_null_float<T>();
         return std::memcmp(&i, &v, sizeof(T)) == 0;
     }
 
     /// Returns the quiet NaNs that represent null for floats/doubles in Realm in stored payload.
-    template<class T>
-    static T get_null_float() {
+    template <class T>
+    static T get_null_float()
+    {
         typename std::conditional<std::is_same<T, float>::value, uint32_t, uint64_t>::type i;
         int64_t double_nan = 0x7ff80000000000aa;
         i = std::is_same<T, float>::value ? 0x7fc000aa : static_cast<decltype(i)>(double_nan);
         T d = type_punning<T, decltype(i)>(i);
-        REALM_ASSERT_DEBUG(std::isnan(static_cast<double>(d)));
+        REALM_ASSERT_DEBUG(std::isnan(d));
         REALM_ASSERT_DEBUG(!is_signaling(d));
         return d;
     }
 
     /// Takes a NaN as argument and returns whether or not it's signaling
-    template<class T>
-    static bool is_signaling(T v) {
+    template <class T>
+    static bool is_signaling(T v)
+    {
         REALM_ASSERT(std::isnan(static_cast<double>(v)));
         typename std::conditional<std::is_same<T, float>::value, uint32_t, uint64_t>::type i;
         size_t signal_bit = std::is_same<T, float>::value ? 22 : 51; // If this bit is set, it's quiet
@@ -105,8 +141,9 @@ struct null {
 
     /// Converts any signaling or quiet NaN to their their respective bit patterns that are used on x64 gcc+clang,
     /// ARM clang and x64 Java.
-    template<class T>
-    static T to_realm(T v) {
+    template <class T>
+    static T to_realm(T v)
+    {
         if (std::isnan(static_cast<double>(v))) {
             typename std::conditional<std::is_same<T, float>::value, uint32_t, uint64_t>::type i;
             if (std::is_same<T, float>::value) {
@@ -121,8 +158,14 @@ struct null {
             return v;
         }
     }
-
 };
+
+template <class OS>
+OS& operator<<(OS& os, const null&)
+{
+    os << "(null)";
+    return os;
+}
 
 } // namespace realm
 

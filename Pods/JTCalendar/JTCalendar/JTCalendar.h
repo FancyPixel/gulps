@@ -2,38 +2,28 @@
 //  JTCalendar.h
 //  JTCalendar
 //
-//  Created by Jonathan Tribouharet
+//  Created by Created by Jonathan Tribouharet
 //
 
 #import <UIKit/UIKit.h>
 
-#import "JTCalendarViewDataSource.h"
-#import "JTCalendarAppearance.h"
+//! Project version number for JTCalendar.
+FOUNDATION_EXPORT double JTCalendarVersionNumber;
+
+//! Project version string for JTCalendar.
+FOUNDATION_EXPORT const unsigned char JTCalendarVersionString[];
+
+// In this header, you should import all the public headers of your framework using statements
+#import "JTCalendarManager.h"
+
+#import "JTHorizontalCalendarView.h"
+#import "JTVerticalCalendarView.h"
 
 #import "JTCalendarMenuView.h"
-#import "JTCalendarContentView.h"
 
-#import "JTCalendarDataCache.h"
+#import "JTCalendarPageView.h"
+#import "JTCalendarWeekDayView.h"
+#import "JTCalendarWeekView.h"
+#import "JTCalendarDayView.h"
 
-@interface JTCalendar : NSObject<UIScrollViewDelegate>
 
-@property (weak, nonatomic) JTCalendarMenuView *menuMonthsView;
-@property (weak, nonatomic) JTCalendarContentView *contentView;
-
-@property (weak, nonatomic) id<JTCalendarDataSource> dataSource;
-
-@property (strong, nonatomic) NSDate *currentDate;
-@property (strong, nonatomic) NSDate *currentDateSelected;
-
-@property (strong, nonatomic, readonly) JTCalendarDataCache *dataCache;
-@property (strong, nonatomic, readonly) JTCalendarAppearance *calendarAppearance;
-
-- (void)reloadData;
-- (void)reloadAppearance;
-
-- (void)loadPreviousMonth;
-- (void)loadNextMonth;
-
-- (void)repositionViews;
-
-@end

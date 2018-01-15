@@ -36,17 +36,17 @@
 #import <unistd.h>
 
 // Global realm state
-static std::mutex s_realmCacheMutex;
-static std::map<std::string, NSMapTable *> s_realmsPerPath;
+static std::mutex& s_realmCacheMutex = *new std::mutex();
+static std::map<std::string, NSMapTable *>& s_realmsPerPath = *new std::map<std::string, NSMapTable *>();
 
-void RLMCacheRealm(std::string const& path, RLMRealm *realm) {
+void RLMCacheRealm(std::string const& path, __unsafe_unretained RLMRealm *const realm) {
     std::lock_guard<std::mutex> lock(s_realmCacheMutex);
     NSMapTable *realms = s_realmsPerPath[path];
     if (!realms) {
-        s_realmsPerPath[path] = realms = [NSMapTable mapTableWithKeyOptions:NSPointerFunctionsObjectPersonality
+        s_realmsPerPath[path] = realms = [NSMapTable mapTableWithKeyOptions:NSPointerFunctionsOpaquePersonality|NSPointerFunctionsOpaqueMemory
                                                                valueOptions:NSPointerFunctionsWeakMemory];
     }
-    [realms setObject:realm forKey:@(pthread_mach_thread_np(pthread_self()))];
+    [realms setObject:realm forKey:(__bridge id)pthread_self()];
 }
 
 RLMRealm *RLMGetAnyCachedRealmForPath(std::string const& path) {
@@ -55,9 +55,8 @@ RLMRealm *RLMGetAnyCachedRealmForPath(std::string const& path) {
 }
 
 RLMRealm *RLMGetThreadLocalCachedRealmForPath(std::string const& path) {
-    mach_port_t threadID = pthread_mach_thread_np(pthread_self());
     std::lock_guard<std::mutex> lock(s_realmCacheMutex);
-    return [s_realmsPerPath[path] objectForKey:@(threadID)];
+    return [s_realmsPerPath[path] objectForKey:(__bridge id)pthread_self()];
 }
 
 void RLMClearRealmCache() {
@@ -111,11 +110,13 @@ public:
         }
     }
 
-    void did_change(std::vector<ObserverState> const& observed, std::vector<void*> const& invalidated) override {
+    void did_change(std::vector<ObserverState> const& observed, std::vector<void*> const& invalidated, bool version_changed) override {
         try {
             @autoreleasepool {
                 RLMDidChange(observed, invalidated);
-                [_realm sendNotifications:RLMRealmDidChangeNotification];
+                if (version_changed) {
+                    [_realm sendNotifications:RLMRealmDidChangeNotification];
+                }
             }
         }
         catch (...) {
@@ -137,6 +138,6 @@ private:
 } // anonymous namespace
 
 
-std::unique_ptr<realm::BindingContext> RLMCreateBindingContext(RLMRealm *realm) {
+std::unique_ptr<realm::BindingContext> RLMCreateBindingContext(__unsafe_unretained RLMRealm *const realm) {
     return std::unique_ptr<realm::BindingContext>(new RLMNotificationHelper(realm));
 }

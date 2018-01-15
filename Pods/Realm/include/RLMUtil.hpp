@@ -45,12 +45,18 @@ NSError *RLMMakeError(RLMError code, std::exception const& exception);
 NSError *RLMMakeError(RLMError code, const realm::util::File::AccessError&);
 NSError *RLMMakeError(RLMError code, const realm::RealmFileException&);
 NSError *RLMMakeError(std::system_error const& exception);
-NSError *RLMMakeError(NSException *exception);
 
 void RLMSetErrorOrThrow(NSError *error, NSError **outError);
 
 // returns if the object can be inserted as the given type
 BOOL RLMIsObjectValidForProperty(id obj, RLMProperty *prop);
+// throw an exception if the object is not a valid value for the property
+void RLMValidateValueForProperty(id obj, RLMObjectSchema *objectSchema,
+                                 RLMProperty *prop, bool validateObjects=false);
+BOOL RLMValidateValue(id value, RLMPropertyType type, bool optional, bool array,
+                      NSString *objectClassName);
+
+void RLMThrowTypeError(id obj, RLMObjectSchema *objectSchema, RLMProperty *prop);
 
 // gets default values for the given schema (+defaultPropertyValues)
 // merges with native property defaults if Swift class
@@ -67,12 +73,6 @@ static inline BOOL RLMIsKindOfClass(Class class1, Class class2) {
     }
     return NO;
 }
-
-// Returns whether the class is a descendent of RLMObjectBase
-BOOL RLMIsObjectOrSubclass(Class klass);
-
-// Returns whether the class is an indirect descendant of RLMObjectBase
-BOOL RLMIsObjectSubclass(Class klass);
 
 template<typename T>
 static inline T *RLMDynamicCast(__unsafe_unretained id obj) {
@@ -93,35 +93,6 @@ static inline T RLMCoerceToNil(__unsafe_unretained T obj) {
     return obj;
 }
 
-// Translate an rlmtype to a string representation
-static inline NSString *RLMTypeToString(RLMPropertyType type) {
-    switch (type) {
-        case RLMPropertyTypeString:
-            return @"string";
-        case RLMPropertyTypeInt:
-            return @"int";
-        case RLMPropertyTypeBool:
-            return @"bool";
-        case RLMPropertyTypeDate:
-            return @"date";
-        case RLMPropertyTypeData:
-            return @"data";
-        case RLMPropertyTypeDouble:
-            return @"double";
-        case RLMPropertyTypeFloat:
-            return @"float";
-        case RLMPropertyTypeAny:
-            return @"any";
-        case RLMPropertyTypeObject:
-            return @"object";
-        case RLMPropertyTypeArray:
-            return @"array";
-        case RLMPropertyTypeLinkingObjects:
-            return @"linking objects";
-    }
-    return @"Unknown";
-}
-
 // String conversion utilities
 static inline NSString * RLMStringDataToNSString(realm::StringData stringData) {
     static_assert(sizeof(NSUInteger) >= sizeof(size_t),
@@ -140,7 +111,7 @@ static inline realm::StringData RLMStringDataWithNSString(__unsafe_unretained NS
     static_assert(sizeof(size_t) >= sizeof(NSUInteger),
                   "Need runtime overflow check for NSUInteger to size_t conversion");
     return realm::StringData(string.UTF8String,
-                               [string lengthOfBytesUsingEncoding:NSUTF8StringEncoding]);
+                             [string lengthOfBytesUsingEncoding:NSUTF8StringEncoding]);
 }
 
 // Binary conversion utilities
@@ -167,6 +138,8 @@ static inline NSDate *RLMTimestampToNSDate(realm::Timestamp ts) NS_RETURNS_RETAI
 }
 
 static inline realm::Timestamp RLMTimestampForNSDate(__unsafe_unretained NSDate *const date) {
+    if (!date)
+        return {};
     auto timeInterval = date.timeIntervalSinceReferenceDate;
     if (isnan(timeInterval))
         return {0, 0}; // Arbitrary choice
@@ -195,6 +168,6 @@ static inline NSUInteger RLMConvertNotFound(size_t index) {
 
 id RLMMixedToObjc(realm::Mixed const& value);
 
-// For unit testing purposes, allow an Objective-C class named FakeObject to also be used
-// as the base class of managed objects. This allows for testing invalid schemas.
-void RLMSetTreatFakeObjectAsRLMObject(BOOL flag);
+// Given a bundle identifier, return the base directory on the disk within which Realm database and support files should
+// be stored.
+NSString *RLMDefaultDirectoryForBundleIdentifier(NSString *bundleIdentifier);

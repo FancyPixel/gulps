@@ -19,14 +19,14 @@
 #ifndef REALM_BINARY_DATA_HPP
 #define REALM_BINARY_DATA_HPP
 
-#include <cstddef>
-#include <algorithm>
-#include <string>
-#include <ostream>
-
+#include <realm/owned_data.hpp>
 #include <realm/util/features.h>
 #include <realm/utilities.hpp>
-#include <realm/owned_data.hpp>
+
+#include <algorithm>
+#include <cstddef>
+#include <ostream>
+#include <string>
 
 namespace realm {
 
@@ -38,22 +38,45 @@ namespace realm {
 /// \sa StringData
 class BinaryData {
 public:
-    BinaryData() noexcept : m_data(nullptr), m_size(0) {}
-    BinaryData(const char* external_data, size_t data_size) noexcept:
-        m_data(external_data), m_size(data_size) {}
-    template<size_t N>
-    explicit BinaryData(const char (&external_data)[N]):
-        m_data(external_data), m_size(N) {}
-    template<class T, class A>
+    BinaryData() noexcept
+        : m_data(nullptr)
+        , m_size(0)
+    {
+    }
+    BinaryData(const char* external_data, size_t data_size) noexcept
+        : m_data(external_data)
+        , m_size(data_size)
+    {
+    }
+    template <size_t N>
+    explicit BinaryData(const char (&external_data)[N])
+        : m_data(external_data)
+        , m_size(N)
+    {
+    }
+    template <class T, class A>
     explicit BinaryData(const std::basic_string<char, T, A>&);
 
-    template<class T, class A>
+    // BinaryData does not store data, callers must manage their own strings.
+    template <class T, class A>
+    BinaryData(const std::basic_string<char, T, A>&&) = delete;
+
+    template <class T, class A>
     explicit operator std::basic_string<char, T, A>() const;
 
-    char operator[](size_t i) const noexcept { return m_data[i]; }
+    char operator[](size_t i) const noexcept
+    {
+        return m_data[i];
+    }
 
-    const char* data() const noexcept { return m_data; }
-    size_t size() const noexcept { return m_size; }
+    const char* data() const noexcept
+    {
+        return m_data;
+    }
+    size_t size() const noexcept
+    {
+        return m_size;
+    }
 
     /// Is this a null reference?
     ///
@@ -94,8 +117,8 @@ public:
     bool ends_with(BinaryData) const noexcept;
     bool contains(BinaryData) const noexcept;
 
-    template<class C, class T>
-    friend std::basic_ostream<C,T>& operator<<(std::basic_ostream<C,T>&, const BinaryData&);
+    template <class C, class T>
+    friend std::basic_ostream<C, T>& operator<<(std::basic_ostream<C, T>&, const BinaryData&);
 
     explicit operator bool() const noexcept;
 
@@ -110,27 +133,28 @@ public:
     using OwnedData::OwnedData;
 
     OwnedBinaryData() = default;
-    OwnedBinaryData(const BinaryData& binary_data):
-        OwnedData(binary_data.data(), binary_data.size()) { }
+    OwnedBinaryData(const BinaryData& binary_data)
+        : OwnedData(binary_data.data(), binary_data.size())
+    {
+    }
 
     BinaryData get() const
     {
-        return { data(), size() };
+        return {data(), size()};
     }
 };
 
 
-
 // Implementation:
 
-template<class T, class A>
-inline BinaryData::BinaryData(const std::basic_string<char, T, A>& s):
-    m_data(s.data()),
-    m_size(s.size())
+template <class T, class A>
+inline BinaryData::BinaryData(const std::basic_string<char, T, A>& s)
+    : m_data(s.data())
+    , m_size(s.size())
 {
 }
 
-template<class T, class A>
+template <class T, class A>
 inline BinaryData::operator std::basic_string<char, T, A>() const
 {
     return std::basic_string<char, T, A>(m_data, m_size);
@@ -156,8 +180,7 @@ inline bool operator<(const BinaryData& a, const BinaryData& b) noexcept
     if (a.is_null() || b.is_null())
         return !a.is_null() < !b.is_null();
 
-    return std::lexicographical_compare(a.m_data, a.m_data + a.m_size,
-                                        b.m_data, b.m_data + b.m_size);
+    return std::lexicographical_compare(a.m_data, a.m_data + a.m_size, b.m_data, b.m_data + b.m_size);
 }
 
 inline bool operator>(const BinaryData& a, const BinaryData& b) noexcept
@@ -196,14 +219,13 @@ inline bool BinaryData::contains(BinaryData d) const noexcept
     if (is_null() && !d.is_null())
         return false;
 
-    return d.m_size == 0 ||
-        std::search(m_data, m_data + m_size, d.m_data, d.m_data + d.m_size) != m_data + m_size;
+    return d.m_size == 0 || std::search(m_data, m_data + m_size, d.m_data, d.m_data + d.m_size) != m_data + m_size;
 }
 
-template<class C, class T>
-inline std::basic_ostream<C,T>& operator<<(std::basic_ostream<C,T>& out, const BinaryData& d)
+template <class C, class T>
+inline std::basic_ostream<C, T>& operator<<(std::basic_ostream<C, T>& out, const BinaryData& d)
 {
-    out << "BinaryData("<<static_cast<const void*>(d.m_data)<<", "<<d.m_size<<")";
+    out << "BinaryData(" << static_cast<const void*>(d.m_data) << ", " << d.m_size << ")";
     return out;
 }
 

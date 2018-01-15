@@ -45,7 +45,7 @@ open class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewCon
       }
     }
 
-    realmNotification = EntryHandler.sharedHandler.realm.addNotificationBlock { note, realm in
+    realmNotification = EntryHandler.sharedHandler.realm.observe { note, realm in
       self.updateUI()
     }
 

@@ -35,7 +35,7 @@ public struct WatchConnectivityHelper {
    */
   public func setupWatchUpdates() -> NotificationToken {
     sendWatchData()
-    return EntryHandler.sharedHandler.realm.addNotificationBlock { note, realm in
+    return EntryHandler.sharedHandler.realm.observe { note, realm in
       // Once a change in Realm is triggered, refresh the watch data
       self.sendWatchData()
     }

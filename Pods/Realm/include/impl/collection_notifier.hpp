@@ -21,7 +21,8 @@
 
 #include "impl/collection_change_builder.hpp"
 
-#include <realm/group_shared.hpp>
+#include <realm/util/assert.hpp>
+#include <realm/version_id.hpp>
 
 #include <array>
 #include <atomic>
@@ -32,8 +33,12 @@
 
 namespace realm {
 class Realm;
+class SharedGroup;
+class Table;
 
 namespace _impl {
+class RealmCoordinator;
+
 struct ListChangeInfo {
     size_t table_ndx;
     size_t row_ndx;
@@ -46,6 +51,10 @@ struct TransactionChangeInfo {
     std::vector<bool> table_moves_needed;
     std::vector<ListChangeInfo> lists;
     std::vector<CollectionChangeBuilder> tables;
+    std::vector<std::vector<size_t>> column_indices;
+    std::vector<size_t> table_indices;
+    bool track_all;
+    bool schema_changed;
 };
 
 class DeepChangeChecker {
@@ -82,7 +91,7 @@ private:
         size_t col;
         bool depth_exceeded;
     };
-    std::array<Path, 16> m_current_path;
+    std::array<Path, 4> m_current_path;
 
     bool check_row(Table const& table, size_t row_ndx, size_t depth = 0);
     bool check_outgoing_links(size_t table_ndx, Table const& table,
@@ -109,20 +118,24 @@ public:
     // Add a callback to be called each time the collection changes
     // This can only be called from the target collection's thread
     // Returns a token which can be passed to remove_callback()
-    size_t add_callback(CollectionChangeCallback callback);
+    uint64_t add_callback(CollectionChangeCallback callback);
     // Remove a previously added token. The token is no longer valid after
     // calling this function and must not be used again. This function can be
     // called from any thread.
-    void remove_callback(size_t token);
+    void remove_callback(uint64_t token);
+
+    void suppress_next_notification(uint64_t token);
 
     // ------------------------------------------------------------------------
     // API for RealmCoordinator to manage running things and calling callbacks
 
+    bool is_for_realm(Realm&) const noexcept;
     Realm* get_realm() const noexcept { return m_realm.get(); }
 
     // Get the SharedGroup version which this collection can attach to (if it's
     // in handover mode), or can deliver to (if it's been handed over to the BG worker alredad)
-    SharedGroup::VersionID version() const noexcept { return m_sg_version; }
+    // precondition: RealmCoordinator::m_notifier_mutex is locked
+    VersionID version() const noexcept { return m_sg_version; }
 
     // Release references to all core types
     // This is called on the worker thread to ensure that non-thread-safe things
@@ -130,34 +143,57 @@ public:
     // CollectionNotifier is released on a different thread
     virtual void release_data() noexcept = 0;
 
-    // Call each of the currently registered callbacks, if there have been any
-    // changes since the last time each of those callbacks was called
-    void call_callbacks();
+    // Prepare to deliver the new collection and call callbacks.
+    // Returns whether or not it has anything to deliver.
+    // precondition: RealmCoordinator::m_notifier_mutex is locked
+    bool package_for_delivery();
+
+    // Deliver the new state to the target collection using the given SharedGroup
+    // precondition: RealmCoordinator::m_notifier_mutex is unlocked
+    virtual void deliver(SharedGroup&) { }
+
+    // Pass the given error to all registered callbacks, then remove them
+    // precondition: RealmCoordinator::m_notifier_mutex is unlocked
+    void deliver_error(std::exception_ptr);
+
+    // Call each of the given callbacks with the changesets prepared by package_for_delivery()
+    // precondition: RealmCoordinator::m_notifier_mutex is unlocked
+    void before_advance();
+    void after_advance();
 
     bool is_alive() const noexcept;
 
+    // precondition: RealmCoordinator::m_notifier_mutex is locked *or* is called on worker thread
+    bool has_run() const noexcept { return m_has_run; }
+
     // Attach the handed-over query to `sg`. Must not be already attached to a SharedGroup.
+    // precondition: RealmCoordinator::m_notifier_mutex is locked
     void attach_to(SharedGroup& sg);
     // Create a new query handover object and stop using the previously attached
     // SharedGroup
+    // precondition: RealmCoordinator::m_notifier_mutex is locked
     void detach();
 
     // Set `info` as the new ChangeInfo that will be populated by the next
     // transaction advance, and register all required information in it
+    // precondition: RealmCoordinator::m_notifier_mutex is locked
     void add_required_change_info(TransactionChangeInfo& info);
 
+    // precondition: RealmCoordinator::m_notifier_mutex is unlocked
     virtual void run() = 0;
+
+    // precondition: RealmCoordinator::m_notifier_mutex is locked
     void prepare_handover();
-    bool deliver(Realm&, SharedGroup&, std::exception_ptr);
 
     template <typename T>
     class Handle;
 
-protected:
     bool have_callbacks() const noexcept { return m_have_callbacks; }
-    void add_changes(CollectionChangeBuilder change) { m_accumulated_changes.merge(std::move(change)); }
+protected:
+    void add_changes(CollectionChangeBuilder change);
     void set_table(Table const& table);
     std::unique_lock<std::mutex> lock_target();
+    SharedGroup& source_shared_group();
 
     std::function<bool (size_t)> get_modification_checker(TransactionChangeInfo const&, Table const&);
 
@@ -165,25 +201,26 @@ private:
     virtual void do_attach_to(SharedGroup&) = 0;
     virtual void do_detach_from(SharedGroup&) = 0;
     virtual void do_prepare_handover(SharedGroup&) = 0;
-    virtual bool do_deliver(SharedGroup&) { return true; }
     virtual bool do_add_required_change_info(TransactionChangeInfo&) = 0;
+    virtual bool prepare_to_deliver() { return true; }
 
     mutable std::mutex m_realm_mutex;
     std::shared_ptr<Realm> m_realm;
 
-    SharedGroup::VersionID m_sg_version;
+    VersionID m_sg_version;
     SharedGroup* m_sg = nullptr;
 
-    std::exception_ptr m_error;
-    CollectionChangeBuilder m_accumulated_changes;
-    CollectionChangeSet m_changes_to_deliver;
-
+    bool m_has_run = false;
+    bool m_error = false;
     std::vector<DeepChangeChecker::RelatedTable> m_related_tables;
 
     struct Callback {
         CollectionChangeCallback fn;
-        size_t token;
+        CollectionChangeBuilder accumulated_changes;
+        CollectionChangeSet changes_to_deliver;
+        uint64_t token;
         bool initial_delivered;
+        bool skip_next;
     };
 
     // Currently registered callbacks and a mutex which must always be held
@@ -199,9 +236,19 @@ private:
 
     // Iteration variable for looping over callbacks
     // remove_callback() updates this when needed
-    size_t m_callback_index = npos;
+    size_t m_callback_index = -1;
+    // The number of callbacks which were present when the notifier was packaged
+    // for delivery which are still present.
+    // Updated by packaged_for_delivery and removd_callback(), and used in
+    // for_each_callback() to avoid calling callbacks registered during delivery.
+    size_t m_callback_count = -1;
 
-    CollectionChangeCallback next_callback();
+    uint64_t m_next_token = 0;
+
+    template<typename Fn>
+    void for_each_callback(Fn&& fn);
+
+    std::vector<Callback>::iterator find_callback(uint64_t token);
 };
 
 // A smart pointer to a CollectionNotifier that unregisters the notifier when
@@ -228,7 +275,14 @@ public:
     Handle& operator=(Handle&& other)
     {
         reset();
-        std::shared_ptr<T>::shared_ptr::operator=(std::move(other));
+        std::shared_ptr<T>::operator=(std::move(other));
+        return *this;
+    }
+
+    Handle& operator=(std::shared_ptr<T>&& other)
+    {
+        reset();
+        std::shared_ptr<T>::operator=(std::move(other));
         return *this;
     }
 
@@ -240,6 +294,59 @@ public:
         }
     }
 };
+
+// A package of CollectionNotifiers for a single Realm instance which is passed
+// around to the various places which need to actually trigger the notifications
+class NotifierPackage {
+public:
+    NotifierPackage() = default;
+    NotifierPackage(std::exception_ptr error,
+                    std::vector<std::shared_ptr<CollectionNotifier>> notifiers,
+                    RealmCoordinator* coordinator);
+
+    explicit operator bool() { return !m_notifiers.empty(); }
+
+    // Get the version which this package can deliver into, or VersionID{} if
+    // it has not yet been packaged
+    util::Optional<VersionID> version() { return m_version; }
+
+    // Package the notifiers for delivery, blocking if they aren't ready for
+    // the given version.
+    // No-op if called multiple times
+    void package_and_wait(util::Optional<VersionID::version_type> target_version);
+
+    // Send the before-change notifications
+    void before_advance();
+    // Deliver the payload associated with the contained notifiers and/or the error
+    void deliver(SharedGroup& sg);
+    // Send the after-change notifications
+    void after_advance();
+
+    void add_notifier(std::shared_ptr<CollectionNotifier> notifier);
+
+private:
+    util::Optional<VersionID> m_version;
+    std::vector<std::shared_ptr<CollectionNotifier>> m_notifiers;
+
+    RealmCoordinator* m_coordinator = nullptr;
+    std::exception_ptr m_error;
+};
+
+// Find which column of the row in the table contains the given container.
+//
+// LinkViews and Subtables know what row of their parent they're in, but not
+// what column, so we have to just check each one.
+template<typename Table, typename T, typename U>
+size_t find_container_column(Table& table, size_t row_ndx, T const& expected, int type, U (Table::*getter)(size_t, size_t))
+{
+    for (size_t i = 0, count = table.get_column_count(); i != count; ++i) {
+        if (table.get_column_type(i) == type && (table.*getter)(i, row_ndx) == expected) {
+            return i;
+        }
+    }
+    REALM_UNREACHABLE();
+}
+
 
 } // namespace _impl
 } // namespace realm

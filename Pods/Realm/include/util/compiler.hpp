@@ -25,10 +25,20 @@
 #define REALM_HAS_CPP_ATTRIBUTE(attr) 0
 #endif
 
-#if REALM_HAS_CPP_ATTRIBUTE(clang::fallthrough)
+#if REALM_HAS_CPP_ATTRIBUTE(fallthrough)
+#define REALM_FALLTHROUGH [[fallthrough]]
+#elif REALM_HAS_CPP_ATTRIBUTE(clang::fallthrough)
 #define REALM_FALLTHROUGH [[clang::fallthrough]]
 #else
 #define REALM_FALLTHROUGH
+#endif
+
+// This should be renamed to REALM_UNREACHABLE as soon as REALM_UNREACHABLE is renamed to
+// REALM_ASSERT_NOT_REACHED which will better reflect its nature
+#if __GNUC__ || __clang__
+#define REALM_COMPILER_HINT_UNREACHABLE __builtin_unreachable
+#else
+#define REALM_COMPILER_HINT_UNREACHABLE abort
 #endif
 
 #endif // REALM_UTIL_COMPILER_HPP

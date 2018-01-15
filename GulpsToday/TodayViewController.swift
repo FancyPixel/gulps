@@ -24,7 +24,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    realmToken = EntryHandler.sharedHandler.realm.addNotificationBlock { note, realm in
+    realmToken = EntryHandler.sharedHandler.realm.observe { note, realm in
       self.updateUI()
     }
 

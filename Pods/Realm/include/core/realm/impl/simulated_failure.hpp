@@ -19,19 +19,19 @@
 #ifndef REALM_IMPL_SIMULATED_FAILURE_HPP
 #define REALM_IMPL_SIMULATED_FAILURE_HPP
 
-#include <stdint.h>
+#include <cstdint>
 #include <system_error>
 
 #include <realm/util/features.h>
 
 #ifdef REALM_DEBUG
-#  define REALM_ENABLE_SIMULATED_FAILURE
+#define REALM_ENABLE_SIMULATED_FAILURE
 #endif
 
 namespace realm {
 namespace _impl {
 
-class SimulatedFailure: public std::system_error {
+class SimulatedFailure : public std::system_error {
 public:
     enum FailureType {
         generic,
@@ -89,12 +89,12 @@ private:
 };
 
 std::error_code make_error_code(SimulatedFailure::FailureType) noexcept;
-
-
+    
 class SimulatedFailure::OneShotPrimeGuard {
 public:
     OneShotPrimeGuard(FailureType);
     ~OneShotPrimeGuard() noexcept;
+
 private:
     const FailureType m_type;
 };
@@ -104,12 +104,26 @@ class SimulatedFailure::RandomPrimeGuard {
 public:
     RandomPrimeGuard(FailureType, int n, int m, uint_fast64_t seed = 0);
     ~RandomPrimeGuard() noexcept;
+
 private:
     const FailureType m_type;
 };
 
+std::error_code make_error_code(SimulatedFailure::FailureType) noexcept;
 
+} // namespace _impl
+} // namespace realm
 
+namespace std {
+
+template<> struct is_error_code_enum<realm::_impl::SimulatedFailure::FailureType> {
+    static const bool value = true;
+};
+
+} // namespace std
+
+namespace realm {
+namespace _impl {
 
 
 // Implementation
@@ -123,8 +137,7 @@ inline void SimulatedFailure::prime_one_shot(FailureType failure_type)
 #endif
 }
 
-inline void SimulatedFailure::prime_random(FailureType failure_type, int n, int m,
-                                           uint_fast64_t seed)
+inline void SimulatedFailure::prime_random(FailureType failure_type, int n, int m, uint_fast64_t seed)
 {
 #ifdef REALM_ENABLE_SIMULATED_FAILURE
     do_prime_random(failure_type, n, m, seed);
@@ -155,8 +168,7 @@ inline bool SimulatedFailure::check_trigger(FailureType failure_type) noexcept
 #endif
 }
 
-inline std::error_code SimulatedFailure::trigger(FailureType failure_type,
-                                                 std::error_code& ec) noexcept
+inline std::error_code SimulatedFailure::trigger(FailureType failure_type, std::error_code& ec) noexcept
 {
     if (check_trigger(failure_type)) {
         ec = make_error_code(failure_type);
@@ -182,13 +194,13 @@ inline constexpr bool SimulatedFailure::is_enabled()
 #endif
 }
 
-inline SimulatedFailure::SimulatedFailure(std::error_code ec):
-    std::system_error(ec)
+inline SimulatedFailure::SimulatedFailure(std::error_code ec)
+    : std::system_error(ec)
 {
 }
 
-inline SimulatedFailure::OneShotPrimeGuard::OneShotPrimeGuard(FailureType failure_type):
-    m_type(failure_type)
+inline SimulatedFailure::OneShotPrimeGuard::OneShotPrimeGuard(FailureType failure_type)
+    : m_type(failure_type)
 {
     prime_one_shot(m_type);
 }
@@ -199,8 +211,8 @@ inline SimulatedFailure::OneShotPrimeGuard::~OneShotPrimeGuard() noexcept
 }
 
 inline SimulatedFailure::RandomPrimeGuard::RandomPrimeGuard(FailureType failure_type, int n, int m,
-                                                            uint_fast64_t seed):
-    m_type(failure_type)
+                                                            uint_fast64_t seed)
+    : m_type(failure_type)
 {
     prime_random(m_type, n, m, seed);
 }
