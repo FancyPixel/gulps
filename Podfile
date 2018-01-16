@@ -10,7 +10,7 @@ target 'Gulps' do
   pod 'pop', '~> 1.0'
   pod 'AMPopTip', '~> 3.1.1'
   pod 'UICountingLabel', '~> 1.2'
-  pod 'JTCalendar', '~> 2.2.1'
+  pod 'CVCalendar', '~> 1.6.0'
   pod 'BAFluidView', '~> 0.2.3'
   pod 'BubbleTransition', '~> 2.0.0'
 

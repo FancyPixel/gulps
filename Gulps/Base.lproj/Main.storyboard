@@ -483,14 +483,14 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6kF-sJ-gnc" customClass="JTCalendarMenuView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6kF-sJ-gnc" customClass="CVCalendarMenuView" customModule="CVCalendar">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
                                 <color key="backgroundColor" red="0.96687578914141414" green="0.96687578914141414" blue="0.96687578914141414" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="u4k-S9-CBs"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3gz-XS-2c7" customClass="JTHorizontalCalendarView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3gz-XS-2c7" customClass="CVCalendarView" customModule="CVCalendar">
                                 <rect key="frame" x="0.0" y="30" width="375" height="300"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -581,8 +581,8 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                     <navigationItem key="navigationItem" id="Ico-aI-BpK"/>
                     <connections>
                         <outlet property="calendarConstraint" destination="qPj-vX-v3s" id="n2K-uZ-EDI"/>
-                        <outlet property="calendarContent" destination="3gz-XS-2c7" id="KfX-cQ-azd"/>
-                        <outlet property="calendarMenu" destination="6kF-sJ-gnc" id="nMw-He-j0i"/>
+                        <outlet property="calendarContent" destination="3gz-XS-2c7" id="Ome-yh-qLv"/>
+                        <outlet property="calendarMenu" destination="6kF-sJ-gnc" id="8oe-2Q-9b0"/>
                         <outlet property="dailyLabel" destination="Nja-Uo-jJw" id="Z5H-ce-i45"/>
                         <outlet property="daysCountLabel" destination="R2u-Oc-VLI" id="ARU-3U-ML9"/>
                         <outlet property="daysLabel" destination="jpZ-Ht-zcx" id="Srn-dK-Gra"/>

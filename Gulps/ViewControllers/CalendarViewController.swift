@@ -1,143 +1,162 @@
 import UIKit
-import JTCalendar
+import CVCalendar
 import pop
 import UICountingLabel
 
-class CalendarViewController: UIViewController, JTCalendarDelegate {
+class CalendarViewController: UIViewController {
 
-  let userDefaults = UserDefaults.groupUserDefaults()
+    let userDefaults = UserDefaults.groupUserDefaults()
 
-  @IBOutlet weak var calendarMenu: JTCalendarMenuView!
-  @IBOutlet weak var calendarContent: JTHorizontalCalendarView!
-  @IBOutlet weak var dailyLabel: UILabel!
-  @IBOutlet weak var calendarConstraint: NSLayoutConstraint!
+    @IBOutlet weak var calendarMenu: CVCalendarMenuView!
+    @IBOutlet weak var calendarContent: CVCalendarView!
+    @IBOutlet weak var dailyLabel: UILabel!
+    @IBOutlet weak var calendarConstraint: NSLayoutConstraint!
 
-  @IBOutlet weak var quantityLabelConstraint: NSLayoutConstraint!
-  @IBOutlet weak var daysLabelConstraint: NSLayoutConstraint!
-  @IBOutlet weak var shareButtonConstraint: NSLayoutConstraint!
-  @IBOutlet weak var daysCountLabel: UICountingLabel!
-  @IBOutlet weak var quantityLabel: UICountingLabel!
-  @IBOutlet weak var measureLabel: UILabel!
-  @IBOutlet weak var daysLabel: UILabel!
-  @IBOutlet weak var shareButton: UIButton!
+    @IBOutlet weak var quantityLabelConstraint: NSLayoutConstraint!
+    @IBOutlet weak var daysLabelConstraint: NSLayoutConstraint!
+    @IBOutlet weak var shareButtonConstraint: NSLayoutConstraint!
+    @IBOutlet weak var daysCountLabel: UICountingLabel!
+    @IBOutlet weak var quantityLabel: UICountingLabel!
+    @IBOutlet weak var measureLabel: UILabel!
+    @IBOutlet weak var daysLabel: UILabel!
+    @IBOutlet weak var shareButton: UIButton!
 
-  var quantityLabelStartingConstant = 0.0
-  var daysLabelStartingConstant = 0.0
-  var shareButtonStartingConstant = 0.0
-  let calendar = JTCalendarManager()
-  var showingStats = false
-  var animating = false
+    var quantityLabelStartingConstant = 0.0
+    var daysLabelStartingConstant = 0.0
+    var shareButtonStartingConstant = 0.0
+    var showingStats = false
+    var animating = false
 
-  let shareExclusions = [
-    UIActivityType.airDrop, UIActivityType.assignToContact, UIActivityType.addToReadingList,
-    UIActivityType.print, UIActivityType.postToWeibo, UIActivityType.postToVimeo, UIActivityType.postToTencentWeibo
-  ]
+    let shareExclusions = [
+        UIActivityType.airDrop, UIActivityType.assignToContact, UIActivityType.addToReadingList,
+        UIActivityType.print, UIActivityType.postToWeibo, UIActivityType.postToVimeo, UIActivityType.postToTencentWeibo
+    ]
 
-  override func viewDidLoad() {
-    super.viewDidLoad()
+    override func viewDidLoad() {
+        super.viewDidLoad()
 
-    self.title = NSLocalizedString("progress title", comment: "")
+        self.title = NSLocalizedString("progress title", comment: "")
 
-    dailyLabel.text = ""
-    [daysCountLabel, quantityLabel].forEach { $0.format = "%d" }
-    [quantityLabel, daysLabel, daysCountLabel, measureLabel].forEach { $0.textColor = .palette_main }
-    shareButton.backgroundColor = .palette_main
+        dailyLabel.text = ""
+        [daysCountLabel, quantityLabel].forEach {
+            $0.format = "%d"
+        }
+        [quantityLabel, daysLabel, daysCountLabel, measureLabel].forEach {
+            $0.textColor = .palette_main
+        }
+        shareButton.backgroundColor = .palette_main
 
-    self.navigationItem.rightBarButtonItem = {
-      let animatedButton = AnimatedShareButton(frame: CGRect(x: 0, y: 0, width: 22, height: 22))
-      animatedButton.addTarget(self, action: #selector(CalendarViewController.presentStats(_:)), for: .touchUpInside)
-      let button = UIBarButtonItem(customView: animatedButton)
-      return button
-    }()
+        self.navigationItem.rightBarButtonItem = {
+            let animatedButton = AnimatedShareButton(frame: CGRect(x: 0, y: 0, width: 22, height: 22))
+            animatedButton.addTarget(self, action: #selector(CalendarViewController.presentStats(_:)), for: .touchUpInside)
+            let button = UIBarButtonItem(customView: animatedButton)
+            return button
+        }()
 
-    setupCalendar()
-    initAnimations()
-  }
+        setupCalendar()
+        initAnimations()
+    }
 
-  @objc func presentStats(_ sender: UIBarButtonItem) {
-    animateShareView()
-  }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
 
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
+        calendarMenu.commitMenuViewUpdate()
+        calendarContent.commitCalendarViewUpdate()
+    }
 
-    Globals.showPopTipOnceForKey("SHARE_HINT", userDefaults: userDefaults,
-                                 popTipText: NSLocalizedString("share poptip", comment: ""),
-                                 inView: view,
-                                 fromFrame: CGRect(x: view.frame.size.width - 28, y: -10, width: 1, height: 1))
+    @objc func presentStats(_ sender: UIBarButtonItem) {
+        animateShareView()
+    }
 
-    updateStats()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
 
-    calendar.reload()
-    dailyLabel.text = dateLabelString(calendar.date() ?? Date())
-  }
+        Globals.showPopTipOnceForKey("SHARE_HINT", userDefaults: userDefaults,
+                popTipText: NSLocalizedString("share poptip", comment: ""),
+                inView: view,
+                fromFrame: CGRect(x: view.frame.size.width - 28, y: -10, width: 1, height: 1))
 
-  @IBAction func shareAction(_ sender: AnyObject) {
-    let quantity = Int(EntryHandler.sharedHandler.overallQuantity())
-    let days = EntryHandler.sharedHandler.daysTracked()
-    let text = String(format: NSLocalizedString("share text", comment: ""), quantity, unitName(), days)
-    let activityController = UIActivityViewController(activityItems: [text], applicationActivities: nil)
-    activityController.excludedActivityTypes = shareExclusions
-    present(activityController, animated: true, completion: nil)
-  }
+        updateStats()
+        dailyLabel.text = dateLabelString(Date())
+    }
 
-  // MARK: - JTCalendarDelegate
-  func calendar(_ calendar: JTCalendarManager!, prepareDayView dayView: (UIView & JTCalendarDay)!) {
-    guard let dayView = dayView as? JTCalendarDayView else { return }
-    guard let date = dayView.date else { return }
-    dayView.dotRatio = 1.0 / 7.0
-    guard let entry = EntryHandler.sharedHandler.entryForDate(date) else { return }
-    let percentage = 1 - Double(entry.percentage / 100.0)
-    dayView.dotView.backgroundColor = percentage > 0 ? .blue : .clear
-  }
-
-  //  func calendar(_ calendar: JTCalendar!, dataFor date: Date!) -> Any! {
-  //    if let entry = EntryHandler.sharedHandler.entryForDate(date) {
-  //      return 1 - Double(entry.percentage / 100.0)
-  //    } else {
-  //      return nil
-  //    }
-  //  }
-  //
-  //  func calendar(_ calendar: JTCalendar!, didSelect date: Date!) {
-  //    dailyLabel.text = dateLabelString(date)
-  //  }
+    @IBAction func shareAction(_ sender: AnyObject) {
+        let quantity = Int(EntryHandler.sharedHandler.overallQuantity())
+        let days = EntryHandler.sharedHandler.daysTracked()
+        let text = String(format: NSLocalizedString("share text", comment: ""), quantity, unitName(), days)
+        let activityController = UIActivityViewController(activityItems: [text], applicationActivities: nil)
+        activityController.excludedActivityTypes = shareExclusions
+        present(activityController, animated: true, completion: nil)
+    }
 }
 
-private extension CalendarViewController {
-  func setupCalendar() {
-    calendar.delegate = self
-    calendar.menuView = calendarMenu
-    calendar.contentView = calendarContent
-    calendar.setDate(Date())
-    //    if let font = UIFont(name: "KaushanScript-Regular", size: 16) {
-    //      calendar.calendarAppearance.menuMonthTextFont = font
-    //    }
-    //    calendarMenu.reloadAppearance()
-  }
-
-  func updateStats() {
-    daysCountLabel.countFromZero(to: CGFloat(EntryHandler.sharedHandler.daysTracked()))
-    quantityLabel.countFromZero(to: CGFloat(EntryHandler.sharedHandler.overallQuantity()))
-    measureLabel.text = String(format: NSLocalizedString("unit format", comment: ""), unitName())
-  }
-
-  func unitName() -> String {
-    if let unit = Constants.UnitsOfMeasure(rawValue: userDefaults.integer(forKey: Constants.General.unitOfMeasure.key())) {
-      return unit.nameForUnitOfMeasure()
+extension CalendarViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
+    func presentationMode() -> CalendarMode {
+        return .monthView
     }
-    return ""
-  }
 
-  func dateLabelString(_ date: Date = Date()) -> String {
-    if let entry = EntryHandler.sharedHandler.entryForDate(date) {
-      if (entry.percentage >= 100) {
-        return NSLocalizedString("goal met", comment: "")
-      } else {
-        return entry.formattedPercentage()
-      }
-    } else {
-      return ""
+    func firstWeekday() -> Weekday {
+        return .monday
     }
-  }
+
+    func didSelectDayView(_ dayView: CVCalendarDayView, animationDidFinish: Bool) {
+        guard let date = dayView.date.convertedDate() else {
+            return
+        }
+        dailyLabel.text = dateLabelString(date)
+    }
+
+    func latestSelectableDate() -> Date {
+        return Date()
+    }
+
+    func dotMarker(shouldShowOnDayView dayView: DayView) -> Bool {
+        guard let date = dayView.date.convertedDate(),
+              let entry = EntryHandler.sharedHandler.entryForDate(date) else {
+            return false
+        }
+        let hasEntry = Double(entry.percentage / 100.0) > 0.0
+        return hasEntry
+    }
+
+    func dotMarker(colorOnDayView dayView: DayView) -> [UIColor] {
+        return [.palette_main]
+    }
+}
+
+extension CalendarViewController {
+    func setupCalendar() {
+        calendarMenu.menuViewDelegate = self
+        calendarContent.calendarDelegate = self
+//        calendar.setDate(Date())
+        //    if let font = UIFont(name: "KaushanScript-Regular", size: 16) {
+        //      calendar.calendarAppearance.menuMonthTextFont = font
+        //    }
+        //    calendarMenu.reloadAppearance()
+    }
+
+    func updateStats() {
+        daysCountLabel.countFromZero(to: CGFloat(EntryHandler.sharedHandler.daysTracked()))
+        quantityLabel.countFromZero(to: CGFloat(EntryHandler.sharedHandler.overallQuantity()))
+        measureLabel.text = String(format: NSLocalizedString("unit format", comment: ""), unitName())
+    }
+
+    func unitName() -> String {
+        if let unit = Constants.UnitsOfMeasure(rawValue: userDefaults.integer(forKey: Constants.General.unitOfMeasure.key())) {
+            return unit.nameForUnitOfMeasure()
+        }
+        return ""
+    }
+
+    func dateLabelString(_ date: Date = Date()) -> String {
+        if let entry = EntryHandler.sharedHandler.entryForDate(date) {
+            if (entry.percentage >= 100) {
+                return NSLocalizedString("goal met", comment: "")
+            } else {
+                return entry.formattedPercentage()
+            }
+        } else {
+            return ""
+        }
+    }
 }
