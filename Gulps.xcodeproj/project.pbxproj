@@ -1116,7 +1116,6 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = H72GR44F4M;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
@@ -1142,7 +1141,6 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = H72GR44F4M;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
