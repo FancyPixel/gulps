@@ -22,7 +22,7 @@
 #include <string>
 #include <vector>
 
-#include "util/compiler.hpp"
+#include <realm/util/features.h>
 
 namespace realm {
 class ObjectSchema;

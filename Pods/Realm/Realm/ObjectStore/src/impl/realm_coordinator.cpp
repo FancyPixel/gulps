@@ -105,9 +105,6 @@ void RealmCoordinator::create_sync_session()
                 self->m_notifier->notify_others();
         }
     });
-    if (m_config.sync_config->error_handler) {
-        SyncSession::Internal::set_error_handler(*m_sync_session, m_config.sync_config->error_handler);
-    }
 #endif
 }
 
@@ -890,5 +887,6 @@ void RealmCoordinator::process_available_async(Realm& realm)
 
 void RealmCoordinator::set_transaction_callback(std::function<void(VersionID, VersionID)> fn)
 {
+    create_sync_session();
     m_transaction_callback = std::move(fn);
 }

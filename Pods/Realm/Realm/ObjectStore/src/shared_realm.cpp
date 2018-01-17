@@ -31,8 +31,6 @@
 #include "schema.hpp"
 #include "thread_safe_reference.hpp"
 
-#include "util/compiler.hpp"
-#include "util/format.hpp"
 
 #include <realm/history.hpp>
 #include <realm/util/scope_exit.hpp>

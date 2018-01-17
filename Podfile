@@ -4,7 +4,7 @@ use_frameworks!
 
 target 'Gulps' do
 
-  pod 'RealmSwift', '~> 3.0.2'
+  pod 'RealmSwift', '~> 3.1.0'
   pod 'AMWaveTransition', '~> 0.5'
   pod 'AHKActionSheet', '~> 0.5'
   pod 'pop', '~> 1.0'
@@ -24,7 +24,7 @@ target 'Gulps' do
 end
 
 target 'GulpsToday' do
-  pod 'RealmSwift', '~> 3.0.2'
+  pod 'RealmSwift', '~> 3.1.0'
 end
 
 post_install do |installer|

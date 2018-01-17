@@ -36,6 +36,7 @@
 #include <realm/mixed.hpp>
 #include <realm/query.hpp>
 #include <realm/column.hpp>
+#include <realm/column_binary.hpp>
 
 namespace realm {
 
@@ -217,7 +218,6 @@ public:
     void remove_column(size_t column_ndx);
     void rename_column(size_t column_ndx, StringData new_name);
     //@}
-
     //@{
 
     /// has_search_index() returns true if, and only if a search index has been
@@ -428,6 +428,7 @@ public:
     double get_double(size_t column_ndx, size_t row_ndx) const noexcept;
     StringData get_string(size_t column_ndx, size_t row_ndx) const noexcept;
     BinaryData get_binary(size_t column_ndx, size_t row_ndx) const noexcept;
+    BinaryIterator get_binary_iterator(size_t column_ndx, size_t row_ndx) const noexcept;
     Mixed get_mixed(size_t column_ndx, size_t row_ndx) const noexcept;
     DataType get_mixed_type(size_t column_ndx, size_t row_ndx) const noexcept;
     Timestamp get_timestamp(size_t column_ndx, size_t row_ndx) const noexcept;
@@ -1081,6 +1082,12 @@ private:
     // Upgrades OldDateTime columns to Timestamp columns
     void upgrade_olddatetime();
 
+    // Indicate that the current global state version has been "observed". Until this
+    // happens, bumping of the global version counter can be bypassed, as any query
+    // checking for a version change will see the older version change anyways.
+    // Also returns the table-local version.
+    uint64_t observe_version() const noexcept;
+
     /// Update the version of this table and all tables which have links to it.
     /// This causes all views referring to those tables to go out of sync, so that
     /// calls to sync_if_needed() will bring the view up to date by reexecuting the
@@ -1132,7 +1139,6 @@ private:
                                                bool* was_inserted = nullptr);
     static void do_erase_column(Descriptor&, size_t col_ndx);
     static void do_rename_column(Descriptor&, size_t col_ndx, StringData name);
-    static void do_move_column(Descriptor&, size_t col_ndx_1, size_t col_ndx_2);
 
     static void do_add_search_index(Descriptor&, size_t col_ndx);
     static void do_remove_search_index(Descriptor&, size_t col_ndx);
@@ -1140,15 +1146,12 @@ private:
     struct InsertSubtableColumns;
     struct EraseSubtableColumns;
     struct RenameSubtableColumns;
-    struct MoveSubtableColumns;
 
     void insert_root_column(size_t col_ndx, DataType type, StringData name, LinkTargetInfo& link_target,
                             bool nullable = false);
     void erase_root_column(size_t col_ndx);
-    void move_root_column(size_t from, size_t to);
     void do_insert_root_column(size_t col_ndx, ColumnType, StringData name, bool nullable = false);
     void do_erase_root_column(size_t col_ndx);
-    void do_move_root_column(size_t from, size_t to);
     void do_set_link_type(size_t col_ndx, LinkType);
     void insert_backlink_column(size_t origin_table_ndx, size_t origin_col_ndx, size_t backlink_col_ndx);
     void erase_backlink_column(size_t origin_table_ndx, size_t origin_col_ndx);
@@ -1487,7 +1490,6 @@ private:
 
     void adj_insert_column(size_t col_ndx);
     void adj_erase_column(size_t col_ndx) noexcept;
-    void adj_move_column(size_t col_ndx_1, size_t col_ndx_2) noexcept;
 
     bool is_marked() const noexcept;
     void mark() noexcept;
@@ -1616,6 +1618,12 @@ protected:
 
 inline uint_fast64_t Table::get_version_counter() const noexcept
 {
+    return observe_version();
+}
+
+inline uint64_t Table::observe_version() const noexcept
+{
+    m_top.get_alloc().observe_version();
     return m_version;
 }
 
@@ -2187,6 +2195,7 @@ template<> OldDateTime Table::get<OldDateTime>(size_t, size_t) const noexcept;
 template<> Timestamp Table::get<Timestamp>(size_t, size_t) const noexcept;
 template<> StringData Table::get<StringData>(size_t, size_t) const noexcept;
 template<> BinaryData Table::get<BinaryData>(size_t, size_t) const noexcept;
+template<> BinaryIterator Table::get<BinaryIterator>(size_t, size_t) const noexcept;
 template<> Mixed Table::get<Mixed>(size_t, size_t) const noexcept;
 
 template<> void Table::set<int64_t>(size_t, size_t, int64_t, bool);
@@ -2296,6 +2305,11 @@ inline size_t Table::set_string_unique(size_t col_ndx, size_t ndx, StringData va
 inline BinaryData Table::get_binary(size_t col_ndx, size_t ndx) const noexcept
 {
     return get<BinaryData>(col_ndx, ndx);
+}
+
+inline BinaryIterator Table::get_binary_iterator(size_t col_ndx, size_t ndx) const noexcept
+{
+    return get<BinaryIterator>(col_ndx, ndx);
 }
 
 inline void Table::set_binary(size_t col_ndx, size_t ndx, BinaryData value, bool is_default)
@@ -2552,11 +2566,6 @@ public:
         Table::do_remove_search_index(desc, column_ndx); // Throws
     }
 
-    static void move_column(Descriptor& desc, size_t col_ndx_1, size_t col_ndx_2)
-    {
-        Table::do_move_column(desc, col_ndx_1, col_ndx_2); // Throws
-    }
-
     static void set_link_type(Table& table, size_t column_ndx, LinkType link_type)
     {
         table.do_set_link_type(column_ndx, link_type); // Throws
@@ -2641,11 +2650,6 @@ public:
     static void adj_erase_column(Table& table, size_t col_ndx) noexcept
     {
         table.adj_erase_column(col_ndx);
-    }
-
-    static void adj_move_column(Table& table, size_t col_ndx_1, size_t col_ndx_2) noexcept
-    {
-        table.adj_move_column(col_ndx_1, col_ndx_2);
     }
 
     static bool is_marked(const Table& table) noexcept

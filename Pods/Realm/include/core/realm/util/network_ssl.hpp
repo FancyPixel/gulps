@@ -276,7 +276,7 @@ public:
     /// Another possible way of using the callback is to collect all the
     /// certificates until depth = 0, and present the entire chain for
     /// independent verification.
-    void use_verify_callback(std::function<SSLVerifyCallback>* callback);
+    void use_verify_callback(const std::function<SSLVerifyCallback>& callback);
 
     /// @{
     ///
@@ -385,7 +385,7 @@ private:
 
     // The callback for certificate verification and an
     // opaque argument that will be supplied to the callback.
-    std::function<SSLVerifyCallback>* m_ssl_verify_callback;
+    const std::function<SSLVerifyCallback>* m_ssl_verify_callback = nullptr;
 
     // See Service::BasicStreamOps for details on these these 6 functions.
     void do_init_read_async(std::error_code&, Want&) noexcept;
@@ -428,7 +428,7 @@ private:
     void ssl_destroy() noexcept;
     void ssl_set_verify_mode(VerifyMode, std::error_code&);
     void ssl_set_check_host(std::string, std::error_code&);
-    void ssl_use_verify_callback(std::function<SSLVerifyCallback>* callback, std::error_code&);
+    void ssl_use_verify_callback(const std::function<SSLVerifyCallback>&, std::error_code&);
 
     void ssl_handshake(std::error_code&, Want& want) noexcept;
     bool ssl_shutdown(std::error_code& ec, Want& want) noexcept;
@@ -585,6 +585,7 @@ public:
     void recycle() noexcept override final
     {
         bool orphaned = !m_stream;
+        REALM_ASSERT(orphaned);
         // Note: do_recycle() commits suicide.
         do_recycle(orphaned);
     }
@@ -650,6 +651,7 @@ public:
     void recycle() noexcept override final
     {
         bool orphaned = !m_stream;
+        REALM_ASSERT(orphaned);
         // Note: do_recycle() commits suicide.
         do_recycle(orphaned);
     }
@@ -733,10 +735,10 @@ inline void Stream::set_server_port(port_type server_port)
     m_server_port = server_port;
 }
 
-inline void Stream::use_verify_callback(std::function<SSLVerifyCallback>* callback)
+inline void Stream::use_verify_callback(const std::function<SSLVerifyCallback>& callback)
 {
     std::error_code ec;
-    ssl_use_verify_callback(callback, ec);
+    ssl_use_verify_callback(callback, ec); // Throws
     if (ec)
         throw std::system_error(ec);
 }

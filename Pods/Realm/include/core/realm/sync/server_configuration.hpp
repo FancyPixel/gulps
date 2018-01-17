@@ -47,8 +47,8 @@ struct Configuration {
     std::string ssl_certificate_path;
     std::string ssl_certificate_key_path;
     std::string dashboard_stats_endpoint = "localhost:28125";
-    uint_fast64_t drop_period_s = 60;
-    uint_fast64_t idle_timeout_s = 1800;
+    uint_fast64_t drop_period_s = 60; // 1 minute
+    uint_fast64_t idle_timeout_s = 1800; // 30 minutes
     realm::sync::Server::Config::OperatingMode operating_mode =
        realm::sync::Server::Config::OperatingMode::MasterWithNoSlave;
     std::string master_address;
@@ -60,7 +60,7 @@ struct Configuration {
     util::Optional<std::string> feature_token;
     util::Optional<std::string> feature_token_path;
     bool enable_download_log_compaction = true;
-    size_t max_download_size = 0x20000; // 128 KB
+    size_t max_download_size = 0x20000; // 128 KiB
 };
 
 #if !REALM_MOBILE

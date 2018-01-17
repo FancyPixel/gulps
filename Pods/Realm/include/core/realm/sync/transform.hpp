@@ -26,6 +26,7 @@
 #include <realm/util/buffer.hpp>
 #include <realm/impl/cont_transact_hist.hpp>
 #include <realm/group_shared.hpp>
+#include <realm/chunked_binary.hpp>
 
 namespace realm {
 namespace sync {
@@ -95,7 +96,7 @@ public:
     version_type remote_version;
 
     /// Referenced memory is not owned by this class.
-    BinaryData changeset;
+    ChunkedBinaryData changeset;
 };
 
 
@@ -142,50 +143,26 @@ public:
     /// criteria.
     virtual version_type find_history_entry(version_type begin_version, version_type end_version,
                                             file_ident_type not_from_remote_client_file_ident,
-                                            bool only_nonempty, HistoryEntry& entry,
-                                            util::Optional<std::unique_ptr<char[]>&> buffer) const noexcept = 0;
+                                            bool only_nonempty, HistoryEntry& entry) const noexcept = 0;
 
-    /// Copy a contiguous sequence of bytes from the specified reciprocally
-    /// transformed changeset into the specified buffer. The targeted history
-    /// entry is the one whose untransformed changeset produced the specified
-    /// version. Copying starts at the specified offset within the transform,
-    /// and will continue until the end of the transform or the end of the
-    /// buffer, whichever comes first. The first copied byte is always placed in
-    /// `buffer[0]`. The number of copied bytes is returned.
+    /// Get the specified reciprocal changeset. The targeted history entry is
+    /// the one whose untransformed changeset produced the specified version.
     ///
     /// \param remote_client_file_ident Zero if the remote peer is the server,
     /// otherwise the peer identifier of a client.
-    virtual size_t read_reciprocal_transform(version_type version,
-                                             file_ident_type remote_client_file_ident,
-                                             size_t offset, char* buffer, size_t size) const = 0;
+    virtual ChunkedBinaryData get_reciprocal_transform(version_type version,
+                                                       file_ident_type remote_client_file_ident) const = 0;
 
-    /// Replace a contiguous chunk of bytes within the specified reciprocally
-    /// transformed changeset. The targeted history entry is the one whose
-    /// untransformed changeset produced the specified version. If the new chunk
-    /// has a different size than the on it replaces, subsequent bytes (those
-    /// beyond the end of the replaced chunk) are shifted to lower or higher
-    /// offsets accordingly. If `replaced_size` is equal to `size_t(-1)`, the
-    /// replaced chunk extends from `offset` to the end of the transform. Let
-    /// `replaced_size_2` be the actual size of the replaced chunk, then the
-    /// total number of bytes in the transform will increase by `size -
-    /// replaced_size_2`. It is an error if `replaced_size` is not `size_t(-1)`
-    /// and `offset + replaced_size` is greater than the size of the transform.
+    /// Replace the specified reciprocally transformed changeset. The targeted
+    /// history entry is the one whose untransformed changeset produced the
+    /// specified version.
     ///
-    /// \param remote_client_file_ident See read_reciprocal_transform().
+    /// \param remote_client_file_ident See get_reciprocal_transform().
     ///
-    /// \param offset The index of the first replaced byte relative to the
-    /// beginning of the transform.
-    ///
-    /// \param replaced_size The number of bytes in the replaced chunk.
-    ///
-    /// \param data The buffer holding the replacing chunk.
-    ///
-    /// \param size The number of bytes in the replacing chunk, which is also
-    /// the number of bytes that will be read from the specified buffer.
-    virtual void write_reciprocal_transform(version_type version,
-                                            file_ident_type remote_client_file_ident,
-                                            size_t offset, size_t replaced_size,
-                                            const char* data, size_t size) = 0;
+    /// \param encoded_changeset The new reciprocally transformed changeset.
+    virtual void set_reciprocal_transform(version_type version,
+                                          file_ident_type remote_client_file_ident,
+                                          BinaryData encoded_changeset) = 0;
 
     virtual ~TransformHistory() noexcept {}
 };
@@ -283,7 +260,7 @@ public:
     version_type last_integrated_local_version = 0;
 
     /// The changeset itself.
-    BinaryData data;
+    ChunkedBinaryData data;
 
     /// Same meaning as `HistoryEntry::origin_timestamp`.
     timestamp_type origin_timestamp = 0;
@@ -296,7 +273,7 @@ public:
     size_t original_changeset_size = 0;
 
     RemoteChangeset() {}
-    RemoteChangeset(version_type rv, version_type lv, BinaryData d, timestamp_type ot,
+    RemoteChangeset(version_type rv, version_type lv, ChunkedBinaryData d, timestamp_type ot,
                     file_ident_type fi);
 };
 
@@ -322,7 +299,7 @@ public:
 };
 
 inline Transformer::RemoteChangeset::RemoteChangeset(version_type rv, version_type lv,
-                                                     BinaryData d, timestamp_type ot,
+                                                     ChunkedBinaryData d, timestamp_type ot,
                                                      file_ident_type fi):
     remote_version(rv),
     last_integrated_local_version(lv),

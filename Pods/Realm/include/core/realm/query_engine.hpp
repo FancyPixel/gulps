@@ -111,6 +111,7 @@ AggregateState      State of the aggregate - contains a state variable that stor
 #include <realm/table.hpp>
 #include <realm/unicode.hpp>
 #include <realm/util/miscellaneous.hpp>
+#include <realm/util/serializer.hpp>
 #include <realm/util/shared_ptr.hpp>
 #include <realm/utilities.hpp>
 
@@ -275,8 +276,7 @@ public:
     virtual std::string describe_column(size_t col_ndx) const
     {
         if (m_table && col_ndx != npos) {
-            return std::string(m_table->get_name()) + metrics::value_separator
-                + std::string(m_table->get_column_name(col_ndx));
+            return std::string(m_table->get_column_name(col_ndx));
         }
         return "";
     }
@@ -808,7 +808,7 @@ public:
 
     virtual std::string describe() const override
     {
-        return this->describe_column() + " " + describe_condition() + " " + metrics::print_value(IntegerNodeBase<ColType>::m_value);
+        return this->describe_column() + " " + describe_condition() + " " + util::serializer::print_value(IntegerNodeBase<ColType>::m_value);
     }
 
     virtual std::string describe_condition() const override
@@ -946,7 +946,7 @@ public:
 
     virtual std::string describe() const override
     {
-        return this->describe_column() + " " + describe_condition() + " " + metrics::print_value(FloatDoubleNode::m_value);
+        return this->describe_column() + " " + describe_condition() + " " + util::serializer::print_value(FloatDoubleNode::m_value);
     }
     virtual std::string describe_condition() const override
     {
@@ -1079,8 +1079,8 @@ public:
 
     virtual std::string describe() const override
     {
-        return this->describe_column() + " " + TConditionFunction::description() + " \""
-            + metrics::print_value(BinaryNode::m_value.data()) + "\"";
+        return this->describe_column() + " " + TConditionFunction::description() + " "
+            + util::serializer::print_value(BinaryNode::m_value.get());
     }
 
     std::unique_ptr<ParentNode> clone(QueryNodeHandoverPatches* patches) const override
@@ -1145,7 +1145,7 @@ public:
 
     virtual std::string describe() const override
     {
-        return this->describe_column() + " " + TConditionFunction::description() + " " + metrics::print_value(TimestampNode::m_value);
+        return this->describe_column() + " " + TConditionFunction::description() + " " + util::serializer::print_value(TimestampNode::m_value);
     }
 
     std::unique_ptr<ParentNode> clone(QueryNodeHandoverPatches* patches) const override
@@ -1219,7 +1219,11 @@ public:
 
     virtual std::string describe() const override
     {
-        return this->describe_column() + " " + describe_condition() + " \"" + metrics::print_value(StringNodeBase::m_value) + "\"";
+        StringData sd;
+        if (bool(StringNodeBase::m_value)) {
+            sd = StringData(StringNodeBase::m_value.value());
+        }
+        return this->describe_column() + " " + describe_condition() + " " + util::serializer::print_value(sd);
     }
 
 protected:
@@ -1654,6 +1658,9 @@ public:
                 }
             }
         }
+        if (m_conditions.size() > 1) {
+            s = "(" + s + ")";
+        }
         return s;
     }
 
@@ -1820,9 +1827,9 @@ public:
     virtual std::string describe() const override
     {
         if (m_condition) {
-            return "not(" + m_condition->describe_expression() + ")";
+            return "!(" + m_condition->describe_expression() + ")";
         }
-        return "not()";
+        return "!()";
     }
 
 
@@ -2033,7 +2040,7 @@ public:
 
     virtual std::string describe() const override
     {
-        return this->describe_column(m_origin_column) + " " + describe_condition() + " " + metrics::print_value(m_target_row.get_index());
+        return this->describe_column(m_origin_column) + " " + describe_condition() + " " + util::serializer::print_value(m_target_row.get_index());
     }
     virtual std::string describe_condition() const override
     {

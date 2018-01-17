@@ -22,7 +22,6 @@
 #include "impl/realm_coordinator.hpp"
 #include "object_schema.hpp"
 #include "object_store.hpp"
-#include "util/format.hpp"
 
 using namespace realm;
 

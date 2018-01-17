@@ -37,8 +37,6 @@ namespace sync {
 
 class Client {
 public:
-    using port_type = util::network::Endpoint::port_type;
-
     enum class Error;
 
     enum class ReconnectMode {
@@ -52,16 +50,20 @@ public:
         ///
         /// A reconnect attempt can be manually scheduled by calling
         /// cancel_reconnect_delay(). In particular, when a connection breaks,
-        /// or when an attempt at establishing the connection fails, the error
-        /// handler is called. If one calls cancel_reconnect_delay() from that
-        /// invocation of the error handler, the effect is to allow another
-        /// reconnect attempt to occur.
+        /// or when an attempt at establishing the connection fails, the
+        /// connection state change listener is called. If one calls
+        /// cancel_reconnect_delay() from that invocation of the listener, the
+        /// effect is to allow another reconnect attempt to occur.
         never,
 
         /// Never delay reconnect attempts. Perform them immediately. For
         /// testing purposes only.
         immediate
     };
+
+    static constexpr std::uint_fast64_t default_ping_keepalive_period_ms  = 600000; // 10 minutes
+    static constexpr std::uint_fast64_t default_pong_keepalive_timeout_ms = 300000; //  5 minutes
+    static constexpr std::uint_fast64_t default_pong_urgent_timeout_ms    =   5000; //  5 seconds
 
     struct Config {
         Config() {}
@@ -75,7 +77,8 @@ public:
         /// specified, the client will use an instance of util::StderrLogger
         /// with the log level threshold set to util::Logger::Level::info. The
         /// client does not require a thread-safe logger, and it guarantees that
-        /// all logging happens on behalf of the thread that executes run().
+        /// all logging happens either on behalf of the constructor or on behalf
+        /// of the invocation of run().
         util::Logger* logger = nullptr;
 
         /// Use ports 80 and 443 by default instead of 7800 and 7801
@@ -89,8 +92,8 @@ public:
         /// Create a separate connection for each session. For testing purposes
         /// only.
         ///
-        // FIXME: This setting is ignored for now, due to limitations in the
-        // load balancer.
+        /// FIXME: This setting needs to be true for now, due to limitations in
+        /// the load balancer.
         bool one_connection_per_session = true;
 
         /// Do not access the local file system. Sessions will act as if
@@ -107,13 +110,13 @@ public:
         std::shared_ptr<ClientHistory::ChangesetCooker> changeset_cooker;
 
         /// The number of ms between periodic keep-alive pings.
-        uint_fast64_t ping_keepalive_period_ms = 600000;
+        std::uint_fast64_t ping_keepalive_period_ms = default_ping_keepalive_period_ms;
 
         /// The number of ms to wait for keep-alive pongs.
-        uint_fast64_t pong_keepalive_timeout_ms = 300000;
+        std::uint_fast64_t pong_keepalive_timeout_ms = default_pong_keepalive_timeout_ms;
 
         /// The number of ms to wait for urgent pongs.
-        uint_fast64_t pong_urgent_timeout_ms = 5000;
+        std::uint_fast64_t pong_urgent_timeout_ms = default_pong_urgent_timeout_ms;
 
         /// If enable_upload_log_compaction is true, every changeset will be
         /// compacted before it is uploaded to the server. Compaction will
@@ -588,37 +591,57 @@ public:
     /// under Session for more on this.
     void set_progress_handler(std::function<ProgressHandler>);
 
-    /// \brief Signature of an error handler.
-    ///
-    /// \param ec The error code. For the list of errors reported by the server,
-    /// see \ref ProtocolError (or `protocol.md`). For the list of errors
-    /// corresponding with protocol violation that are detected by the client,
-    /// see Client::Error.
-    ///
-    /// \param is_fatal The error is of a kind that is likely to persist, and
-    /// cause all future reconnect attempts to fail. The client may choose to
-    /// try to reconnect again later, but if so, the waiting period will be
-    /// substantial.
-    ///
-    /// \param detailed_message The message associated with the error. It is
-    /// usually equal to `ec.message()`, but may also be a more specific message
-    /// (one that provides extra context). The purpose of this message is mostly
-    /// to aid debugging. For non-debugging purposes, `ec.message()` should
-    /// generally be considered sufficient.
-    ///
-    /// \sa set_error_handler().
-    using ErrorHandler = void(std::error_code ec, bool is_fatal,
-                              const std::string& detailed_message);
+    enum class ConnectionState { disconnected, connecting, connected };
 
-    /// \brief Set the error handler for this session.
+    /// \brief Information about an error causing a session to be temporarily
+    /// disconnected from the server.
     ///
-    /// Sets a function to be called when an error causes a connection
-    /// initiation attempt to fail, or an established connection to be broken.
+    /// In general, the connection will be automatically reestablished
+    /// later. Whether this happens quickly, generally depends on \ref
+    /// is_fatal. If \ref is_fatal is true, it means that the error is deemed to
+    /// be of a kind that is likely to persist, and cause all future reconnect
+    /// attempts to fail. In that case, if another attempt is made at
+    /// reconnecting, the delay will be substantial (at least an hour).
     ///
-    /// When a connection is established on behalf of multiple sessions, a
-    /// connection-level error will be reported to all those sessions. A
-    /// session-level error, on the other hand, will only be reported to the
-    /// affected session.
+    /// \ref error_code specifies the error that caused the connection to be
+    /// closed. For the list of errors reported by the server, see \ref
+    /// ProtocolError (or `protocol.md`). For the list of errors corresponding
+    /// to protocol violations that are detected by the client, see
+    /// Client::Error. The error may also be a system level error, or an error
+    /// from one of the potential intermediate protocol layers (SSL or
+    /// WebSocket).
+    ///
+    /// \ref detailed_message is the most detailed message available to describe
+    /// the error. It is generally equal to `error_code.message()`, but may also
+    /// be a more specific message (one that provides extra context). The
+    /// purpose of this message is mostly to aid in debugging. For non-debugging
+    /// purposes, `error_code.message()` should generally be considered
+    /// sufficient.
+    ///
+    /// \sa set_connection_state_change_listener().
+    struct ErrorInfo {
+        std::error_code error_code;
+        bool is_fatal;
+        const std::string& detailed_message;
+    };
+
+    using ConnectionStateChangeListener = void(ConnectionState, const ErrorInfo*);
+
+    /// \brief Install a connection state change listener.
+    ///
+    /// Sets a function to be called whenever the state of the underlying
+    /// network connection changes between "disconnected", "connecting", and
+    /// "connected". The initial state is always "disconnected". The next state
+    /// after "disconnected" is always "connecting". The next state after
+    /// "connecting" is either "connected" or "disconnected". The next state
+    /// after "connected" is always "disconnected". A switch to the
+    /// "disconnected" state only happens when an error occurs.
+    ///
+    /// Whenever the installed function is called, an ErrorInfo object is passed
+    /// when, and only when the passed state is ConnectionState::disconnected.
+    ///
+    /// When multiple sessions share a single connection, the state changes will
+    /// be reported for each session in turn.
     ///
     /// The callback function will always be called by the thread that executes
     /// the event loop (Client::run()), but not until bind() is called. If the
@@ -637,13 +660,13 @@ public:
     /// to bind() returns, and it may get called (or continue to execute) after
     /// the session object is destroyed. Please see "Callback semantics" section
     /// under Session for more on this.
-    void set_error_handler(std::function<ErrorHandler>);
+    void set_connection_state_change_listener(std::function<ConnectionStateChangeListener>);
 
-    /// \brief Override the server address and port.
-    ///
-    /// This causes a reconnection, if the session has an connection object
-    /// associated with it.
-    void override_server(std::string address, port_type port);
+    //@{
+    /// Deprecated! Use set_connection_state_change_listener() instead.
+    using ErrorHandler = void(std::error_code, bool is_fatal, const std::string& detailed_message);
+    void set_error_handler(std::function<ErrorHandler>);
+    //@}
 
     /// @{ \brief Bind this session to the specified server side Realm.
     ///
@@ -841,11 +864,14 @@ public:
     /// thread, and by multiple threads concurrently.
     void cancel_reconnect_delay();
 
+    /// \brief Change address of server for this session.
+    void override_server(std::string address, port_type);
+
 private:
     class Impl;
     Impl* m_impl = nullptr;
 
-    void do_detach() noexcept;
+    void abandon() noexcept;
     void async_wait_for(bool upload_completion, bool download_completion,
                         WaitOperCompletionHandler);
 };
@@ -855,7 +881,8 @@ private:
 ///
 /// These errors will terminate the network connection (disconnect all sessions
 /// associated with the affected connection), and the error will be reported to
-/// the application via the error handlers of the affected sessions.
+/// the application via the connection state change listeners of the affected
+/// sessions.
 enum class Client::Error {
     connection_closed           = 100, ///< Connection closed (no error)
     unknown_message             = 101, ///< Unknown type of input message
@@ -920,12 +947,14 @@ inline Session::Session() noexcept
 
 inline Session::~Session() noexcept
 {
-    do_detach();
+    if (m_impl)
+        abandon();
 }
 
 inline Session& Session::operator=(Session&& sess) noexcept
 {
-    do_detach();
+    if (m_impl)
+        abandon();
     m_impl = sess.m_impl;
     sess.m_impl = nullptr;
     return *this;
@@ -933,8 +962,24 @@ inline Session& Session::operator=(Session&& sess) noexcept
 
 inline void Session::detach() noexcept
 {
-    do_detach();
+    if (m_impl)
+        abandon();
     m_impl = nullptr;
+}
+
+inline void Session::set_error_handler(std::function<ErrorHandler> handler)
+{
+    auto handler_2 = [handler=std::move(handler)](ConnectionState state,
+                                                  const ErrorInfo* error_info) {
+        if (state != ConnectionState::disconnected)
+            return;
+        REALM_ASSERT(error_info);
+        std::error_code ec = error_info->error_code;
+        bool is_fatal = error_info->is_fatal;
+        const std::string& detailed_message = error_info->detailed_message;
+        handler(ec, is_fatal, detailed_message); // Throws
+    };
+    set_connection_state_change_listener(std::move(handler_2)); // Throws
 }
 
 inline void Session::async_wait_for_sync_completion(WaitOperCompletionHandler handler)

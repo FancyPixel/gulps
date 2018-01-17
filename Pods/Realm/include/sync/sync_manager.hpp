@@ -78,6 +78,13 @@ public:
     // The metadata and file management subsystems must also have already been configured.
     bool immediately_run_file_actions(const std::string& original_name);
 
+    // Use a single connection for all sync sessions for each host/port rather
+    // than one per session.
+    // This must be called before any sync sessions are created, cannot be
+    // disabled afterwards, and currently is incompatible with using a load
+    // balancer or automatic failover.
+    void enable_session_multiplexing();
+
     void set_log_level(util::Logger::Level) noexcept;
     void set_logger_factory(SyncLoggerFactory&) noexcept;
 
@@ -183,6 +190,7 @@ private:
     std::unordered_map<std::string, std::shared_ptr<SyncUser>> m_admin_token_users;
 
     mutable std::unique_ptr<_impl::SyncClient> m_sync_client;
+    bool m_multiplex_sessions = false;
 
     // Protects m_file_manager and m_metadata_manager
     mutable std::mutex m_file_system_mutex;

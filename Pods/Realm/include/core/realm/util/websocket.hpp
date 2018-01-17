@@ -40,23 +40,28 @@ using ReadCompletionHandler =
 
 class Config {
 public:
-
     /// The Socket uses the caller supplied logger for logging.
-    virtual util::Logger& get_logger() = 0;
+    virtual util::Logger& websocket_get_logger() noexcept = 0;
 
     /// The Socket needs random numbers to satisfy the Websocket protocol.
     /// The caller must supply a random number generator.
-    virtual std::mt19937_64& get_random() = 0;
+    virtual std::mt19937_64& websocket_get_random() noexcept = 0;
 
+    //@{
     /// The three functions below are used by the Socket to read and write to the underlying
     /// stream. The functions will typically be implemented as wrappers to a TCP/TLS stream,
     /// but could also map to pure memory streams. These functions abstract away the details of
     /// the underlying sockets.
     /// The functions have the same semantics as util::Socket.
+    ///
+    /// FIXME: Require that implementations ensure no callback reentrance, i.e.,
+    /// that the completion handler is never called from within the execution of
+    /// async_write(), async_read(), or async_read_until(). This guarantee is
+    /// provided by both network::Socket and network::ssl::Stream.
     virtual void async_write(const char* data, size_t size, WriteCompletionHandler handler) = 0;
     virtual void async_read(char* buffer, size_t size, ReadCompletionHandler handler) = 0;
     virtual void async_read_until(char* buffer, size_t size, char delim, ReadCompletionHandler handler) = 0;
-
+    //@}
 
     /// websocket_handshake_completion_handler() is called when the websocket is connected, .i.e.
     /// after the handshake is done. It is not allowed to send messages on the socket before the
@@ -156,16 +161,28 @@ public:
     /// websocket_write_error_handler() in Config.
     /// This function is rather low level and should only be used with knowledge of the WebSocket protocol.
     /// The five utility functions below are recommended for message sending.
+    ///
+    /// FIXME: Guarantee no callback reentrance, i.e., that the completion
+    /// handler, or the error handler in case an error occurs, is never called
+    /// from within the execution of async_write_frame().
     void async_write_frame(bool fin, Opcode opcode, const char* data, size_t size, std::function<void()> handler);
 
+    //@{
     /// Five utility functions used to send whole messages. These five functions are implemented in terms of
     /// async_write_frame(). These functions send whole unfragmented messages. These functions should be
     /// preferred over async_write_frame() for most use cases.
+    ///
+    /// FIXME: Guarantee no callback reentrance, i.e., that the completion
+    /// handler, or the error handler in case an error occurs, is never called
+    /// from within the execution of async_write_text(), and its friends. This
+    /// is already assumed by the client and server implementations of the sync
+    /// protocol.
     void async_write_text(const char* data, size_t size, std::function<void()> handler);
     void async_write_binary(const char* data, size_t size, std::function<void()> handler);
     void async_write_close(const char* data, size_t size, std::function<void()> handler);
     void async_write_ping(const char* data, size_t size, std::function<void()> handler);
     void async_write_pong(const char* data, size_t size, std::function<void()> handler);
+    //@}
 
     /// stop() stops the socket. The socket will stop processing incoming data, sending data, and calling callbacks.
     /// It is an error to attempt to send a message after stop() has been called. stop() will typically be called
@@ -200,8 +217,8 @@ enum class Error {
     bad_handshake_request                 = 5,
     bad_handshake_response                = 6,
     bad_handshake_response_404_not_found  = 7,
-    bad_message                           = 8
-
+    bad_handshake_response_50x_temporary  = 8,
+    bad_message                           = 9
 };
 
 const std::error_category& error_category() noexcept;

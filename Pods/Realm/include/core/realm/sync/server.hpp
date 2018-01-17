@@ -101,11 +101,11 @@ public:
         std::string ssl_certificate_key_path;
 
         // A connection which has not been sending any messages or pings for
-        // `idle_timeout_ms` is considered idle and will be dropped by the server.
-        uint_fast64_t idle_timeout_ms = 1800000;
+        // `idle_timeout_ms` is considered dead and will be dropped by the server.
+        uint_fast64_t idle_timeout_ms = 1800000; // 30 minutes
 
         // How often the server scans through the connection list to drop idle ones.
-        uint_fast64_t drop_period_ms = 60000;
+        uint_fast64_t drop_period_ms = 60000; // 1 minute
 
         /// @{ \brief The operating mode of the Sync worker.
         ///
@@ -189,7 +189,7 @@ public:
         /// log compaction and download, at the expense of higher memory pressure,
         /// higher latency for sending the first changeset, and a higher probability
         /// for the need to resend the same changes after network disconnects.
-        size_t max_download_size = 0x20000; // 128 KB
+        size_t max_download_size = 0x20000; // 128 KiB
 
         /// Set the `TCP_NODELAY` option on all TCP/IP sockets. This disables
         /// the Nagle algorithm. Disabling it, can in some cases be used to

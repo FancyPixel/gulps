@@ -88,7 +88,7 @@ struct Contains : public HackClass {
 
     static std::string description()
     {
-        return "contains";
+        return "CONTAINS";
     }
 
     static const int condition = -1;
@@ -132,7 +132,7 @@ struct Like : public HackClass {
 
     static std::string description()
     {
-        return "is like";
+        return "LIKE";
     }
 
     static const int condition = -1;
@@ -168,7 +168,7 @@ struct BeginsWith : public HackClass {
 
     static std::string description()
     {
-        return "begins with";
+        return "BEGINSWITH";
     }
 
     static const int condition = -1;
@@ -204,7 +204,7 @@ struct EndsWith : public HackClass {
 
     static std::string description()
     {
-        return "ends with";
+        return "ENDSWITH";
     }
 
     static const int condition = -1;
@@ -240,7 +240,7 @@ struct Equal {
 
     static std::string description()
     {
-        return "is equal to";
+        return "==";
     }
 };
 
@@ -283,7 +283,7 @@ struct NotEqual {
 
     static std::string description()
     {
-        return "is not equal to";
+        return "!=";
     }
 };
 
@@ -348,7 +348,7 @@ struct ContainsIns : public HackClass {
 
     static std::string description()
     {
-        return "contains (insensitive)";
+        return "CONTAINS[c]";
     }
 
     static const int condition = -1;
@@ -398,7 +398,7 @@ struct LikeIns : public HackClass {
 
     static std::string description()
     {
-        return "is like (insensitive)";
+        return "LIKE[c]";
     }
 
     static const int condition = -1;
@@ -447,7 +447,7 @@ struct BeginsWithIns : public HackClass {
 
     static std::string description()
     {
-        return "begins with (insensitive)";
+        return "BEGINSWITH[c]";
     }
 
     static const int condition = -1;
@@ -497,7 +497,7 @@ struct EndsWithIns : public HackClass {
 
     static std::string description()
     {
-        return "ends with (insensitive)";
+        return "ENDSWITH[c]";
     }
 
     static const int condition = -1;
@@ -546,7 +546,7 @@ struct EqualIns : public HackClass {
 
     static std::string description()
     {
-        return "is equal to (insensitive)";
+        return "==[c]";
     }
 
     static const int condition = -1;
@@ -589,7 +589,7 @@ struct NotEqualIns : public HackClass {
 
     static std::string description()
     {
-        return "is not equal to (insensitive)";
+        return "!=[c]";
     }
 
     static const int condition = -1;
@@ -626,7 +626,7 @@ struct Greater {
 
     static std::string description()
     {
-        return "is greater than";
+        return ">";
     }
 };
 
@@ -693,7 +693,7 @@ struct NotNull {
     }
     static std::string description()
     {
-        return "is not null";
+        return "!= NULL";
     }
 };
 
@@ -727,7 +727,7 @@ struct Less {
     }
     static std::string description()
     {
-        return "is less than";
+        return "<";
     }
 };
 
@@ -749,7 +749,7 @@ struct LessEqual : public HackClass {
     }
     static std::string description()
     {
-        return "is less than or equal to";
+        return "<=";
     }
     static const int condition = -1;
 };
@@ -772,7 +772,7 @@ struct GreaterEqual : public HackClass {
     }
     static std::string description()
     {
-        return "is greater than or equal to";
+        return ">=";
     }
     static const int condition = -1;
 };

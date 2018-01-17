@@ -22,6 +22,8 @@
 #include <functional> // std::hash
 #include <string>
 #include <iosfwd> // operator<<
+#include <map>
+#include <set>
 
 #include <stdint.h>
 
@@ -46,6 +48,7 @@ namespace sync {
 /// on-wire compressibility.
 struct ObjectID {
     constexpr ObjectID(uint64_t hi, uint64_t lo);
+    static ObjectID from_string(StringData);
 
     // FIXME: Remove "empty" ObjectIDs, wrap in Optional instead.
     constexpr ObjectID(realm::util::None = realm::util::none);
@@ -122,6 +125,20 @@ public:
     static ObjectID local_to_global_object_id_squeezed(LocalObjectID);
 
     virtual int_fast64_t get_client_file_ident() const = 0;
+};
+
+// ObjectIDSet is a set of (table name, object id)
+class ObjectIDSet {
+public:
+
+    void insert(StringData table, ObjectID object_id);
+    void erase(StringData table, ObjectID object_id);
+    bool contains(StringData table, ObjectID object_id) const noexcept;
+
+private:
+
+    // A map from table name to a set of object ids.
+    std::map<std::string, std::set<ObjectID>, std::less<>> m_objects;
 };
 
 /// Implementation:

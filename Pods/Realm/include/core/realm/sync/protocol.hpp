@@ -26,9 +26,8 @@
 #include <realm/util/compression.hpp>
 #include <realm/util/logger.hpp>
 #include <realm/util/memory_stream.hpp>
-#include <realm/util/hex_dump.hpp>
 #include <realm/util/optional.hpp>
-
+#include <realm/impl/clamped_hex_dump.hpp>
 #include <realm/sync/transform.hpp>
 #include <realm/sync/history.hpp>
 
@@ -197,6 +196,7 @@ using file_ident_type = uint_fast64_t;
 using version_type = uint_fast64_t;
 using timestamp_type  = uint_fast64_t;
 using request_ident_type    = uint_fast64_t;
+using ReceivedChangesets = std::vector<Transformer::RemoteChangeset>;
 
 
 class ClientProtocol {
@@ -245,7 +245,7 @@ public:
                              util::compression::CompressMemoryArena& compress_memory_arena);
 
         void add_changeset(version_type client_version, version_type server_version,
-                           timestamp_type timestamp, BinaryData changeset);
+                           timestamp_type timestamp, ChunkedBinaryData changeset);
 
         void make_upload_message(OutputBuffer& out, session_ident_type session_ident);
 
@@ -373,7 +373,7 @@ public:
             in.unsetf(std::ios_base::skipws);
             in.set_buffer(uncompressed_body.data(), uncompressed_body.data() + uncompressed_body_size);
 
-            std::vector<Transformer::RemoteChangeset> received_changesets;
+            ReceivedChangesets received_changesets;
 
             // Loop through the body and find the changesets.
             size_t position = 0;
@@ -422,7 +422,8 @@ public:
                                   "origin_timestamp=%3, origin_client_file_ident=%4, original_changeset_size=%5, changeset_size=%6)",
                                   server_version, client_version, origin_timestamp,
                                   origin_client_file_ident, original_changeset_size, changeset_size); // Throws
-                    logger.trace("Changeset: %1", util::hex_dump(changeset_data.data(), changeset_size)); // Throws
+                    logger.trace("Changeset: %1",
+                                 _impl::clamped_hex_dump(changeset_data)); // Throws
                 }
 
                 Transformer::RemoteChangeset changeset_2(server_version, client_version,
@@ -735,8 +736,7 @@ public:
                         client_version, server_version, timestamp,
                         changeset_size); // Throws
                     logger.trace("Changeset: %1",
-                                 util::hex_dump(changeset_data.data(),
-                                                changeset_size)); // Throws
+                                 _impl::clamped_hex_dump(changeset_data)); // Throws
                 }
 
                 UploadChangeset upload_changeset {

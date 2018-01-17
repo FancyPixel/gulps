@@ -301,6 +301,21 @@ public struct SyncCredentials {
     public static func accessToken(_ accessToken: String, identity: String) -> SyncCredentials {
         return SyncCredentials(RLMSyncCredentials(accessToken: accessToken, identity: identity))
     }
+
+    /// Initialize new credentials using a JSON Web Token.
+    public static func jwt(_ token: Token) -> SyncCredentials {
+        return SyncCredentials(RLMSyncCredentials(jwt: token))
+    }
+
+    /// Initialize new credentials using a nickname.
+    public static func nickname(_ nickname: String, isAdmin: Bool = false) -> SyncCredentials {
+        return SyncCredentials(RLMSyncCredentials(nickname: nickname, isAdmin: isAdmin))
+    }
+
+    /// Initialize new credentials anonymously
+    public static func anonymous() -> SyncCredentials {
+        return SyncCredentials(RLMSyncCredentials.anonymous())
+    }
 }
 
 extension RLMSyncCredentials {

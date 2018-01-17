@@ -43,6 +43,7 @@
 
 #include <realm/util/features.h>
 #include <realm/util/assert.hpp>
+#include <realm/util/bind_ptr.hpp>
 #include <realm/util/buffer.hpp>
 #include <realm/util/basic_system_errors.hpp>
 
@@ -97,8 +98,8 @@ namespace util {
 ///
 /// A *service context* is a set of objects consisting of an instance of
 /// Service, and all the objects that are associated with that instance (\ref
-/// Resolver, \ref Socket`, \ref Acceptor`, \ref DeadlineTimer, and \ref
-/// ssl::Stream).
+/// Resolver, \ref Socket`, \ref Acceptor`, \ref DeadlineTimer, \ref Trigger,
+/// and \ref ssl::Stream).
 ///
 /// In general, it is unsafe for two threads to call functions on the same
 /// object, or on different objects in the same service context. This also
@@ -171,6 +172,7 @@ class SocketBase;
 class Socket;
 class Acceptor;
 class DeadlineTimer;
+class Trigger;
 class ReadAheadBuffer;
 namespace ssl {
 class Stream;
@@ -314,7 +316,7 @@ public:
     /// there are no asynchronous operations in progress, run() returns.
     ///
     /// All completion handlers, including handlers submitted via post() will be
-    /// executed from run(), that is by the thread that executes run(). If no
+    /// executed from run(), that is, by the thread that executes run(). If no
     /// thread executes run(), then the completion handlers will not be
     /// executed.
     ///
@@ -335,7 +337,8 @@ public:
     /// handlers submitted by these, will not be executed before run()
     /// returns. Also, if a handler is submitted by a call to post, and that
     /// call happens after stop() returns, then that handler is guaranteed to
-    /// not be executed before run() returns.
+    /// not be executed before run() returns (assuming that reset() is not called
+    /// before run() returns).
     ///
     /// The event loop will remain in the stopped mode until reset() is
     /// called. If reset() is called before run() returns, it may, or may not
@@ -380,6 +383,7 @@ private:
     class Descriptor;
     class AsyncOper;
     class WaitOperBase;
+    class TriggerExecOperBase;
     class PostOperBase;
     template<class H> class PostOper;
     class IoOper;
@@ -412,6 +416,8 @@ private:
     template<class H>
     static PostOperBase* post_oper_constr(void* addr, std::size_t size, Impl&, void* cookie);
     static void recycle_post_oper(Impl&, PostOperBase*) noexcept;
+    static void trigger_exec(Impl&, TriggerExecOperBase&) noexcept;
+    static void reset_trigger_exec(Impl&, TriggerExecOperBase&) noexcept;
 
     using clock = std::chrono::steady_clock;
 
@@ -420,6 +426,7 @@ private:
     friend class Socket;
     friend class Acceptor;
     friend class DeadlineTimer;
+    friend class Trigger;
     friend class ReadAheadBuffer;
     friend class ssl::Stream;
 };
@@ -1316,6 +1323,72 @@ private:
 };
 
 
+/// \brief Register a function whose invocation can be triggered repeatedly.
+///
+/// While the function is always executed by the event loop thread, the
+/// triggering of its execution can be done by any thread, and the triggering
+/// operation is guaranteed to never throw.
+///
+/// The function is guaranteed to not be called after the Trigger object is
+/// destroyed. It is safe, though, to destroy the Trigger object during the
+/// execution of the function.
+///
+/// Note that even though the trigger() function is thread-safe, the Trigger
+/// object, as a whole, is not. In particular, construction and destruction must
+/// not be considered thread-safe.
+///
+/// ### Relation to post()
+///
+/// For a particular execution of trigger() and a particular invocation of
+/// Service::post(), if the execution of trigger() ends before the execution of
+/// Service::post() begins, then it is guaranteed that the function associated
+/// with the trigger gets to execute at least once after the execution of
+/// trigger() begins, and before the post handler gets to execute.
+class Trigger {
+public:
+    template<class F> Trigger(Service&, F func);
+    ~Trigger() noexcept;
+
+    Trigger() noexcept = default;
+    Trigger(Trigger&&) noexcept = default;
+    Trigger& operator=(Trigger&&) noexcept = default;
+
+    /// \brief Trigger another invocation of the associated function.
+    ///
+    /// An invocation of trigger() puts the Trigger object into the triggered
+    /// state. It remains in the triggered state until shortly before the
+    /// function starts to execute. While the Trigger object is in the triggered
+    /// state, trigger() has no effect. This means that the number of executions
+    /// of the function will generally be less that the number of times
+    /// trigger() is invoked().
+    ///
+    /// A particular invocation of trigger() ensures that there will be at least
+    /// one invocation of the associated function whose execution begins after
+    /// the beginning of the execution of trigger(), so long as the event loop
+    /// thread does not exit prematurely from run().
+    ///
+    /// If trigger() is invoked from the event loop thread, the next execution
+    /// of the associated function will not begin until after trigger returns(),
+    /// effectively preventing reentrancy for the associated function.
+    ///
+    /// If trigger() is invoked from another thread, the associated function may
+    /// start to execute before trigger() returns.
+    ///
+    /// Note that the associated function can retrigger itself, i.e., if the
+    /// associated function calls trigger(), then that will lead to another
+    /// invocation of the associated function, but not until the first
+    /// invocation ends (no reentrance).
+    ///
+    /// This function is thread-safe.
+    void trigger() noexcept;
+
+private:
+    template<class H> class ExecOper;
+
+    util::bind_ptr<Service::TriggerExecOperBase> m_exec_oper;
+};
+
+
 class ReadAheadBuffer {
 public:
     ReadAheadBuffer();
@@ -1822,7 +1895,7 @@ protected:
     void do_recycle(bool orphaned) noexcept;
 private:
     std::size_t m_size; // Allocated number of bytes
-    bool m_in_use   = false;
+    bool m_in_use = false;
     // Set to true when the operation completes successfully or fails. If the
     // operation is canceled before this happens, it will never be set to
     // true. Always false when not in use
@@ -1837,7 +1910,8 @@ private:
 
 class Service::WaitOperBase: public AsyncOper {
 public:
-    WaitOperBase(std::size_t size, DeadlineTimer& timer, clock::time_point expiration_time):
+    WaitOperBase(std::size_t size, DeadlineTimer& timer,
+                 clock::time_point expiration_time) noexcept:
         AsyncOper{size, true}, // Second argument is `in_use`
         m_timer{&timer},
         m_expiration_time{expiration_time}
@@ -1850,6 +1924,7 @@ public:
     void recycle() noexcept override final
     {
         bool orphaned = !m_timer;
+        REALM_ASSERT(orphaned);
         // Note: do_recycle() commits suicide.
         do_recycle(orphaned);
     }
@@ -1863,9 +1938,37 @@ protected:
     friend class Service;
 };
 
+class Service::TriggerExecOperBase: public AsyncOper, public AtomicRefCountBase {
+public:
+    TriggerExecOperBase(Impl& service) noexcept:
+        AsyncOper{0, false}, // First arg is `size` (unused), second arg is `in_use`
+        m_service{&service}
+    {
+    }
+    void recycle() noexcept override final
+    {
+        REALM_ASSERT(in_use());
+        REALM_ASSERT(!m_service);
+        // Note: Potential suicide when `self` goes out of scope
+        util::bind_ptr<TriggerExecOperBase> self{this, bind_ptr_base::adopt_tag{}};
+    }
+    void orphan() noexcept override final
+    {
+        REALM_ASSERT(m_service);
+        m_service = nullptr;
+    }
+    void trigger() noexcept
+    {
+        REALM_ASSERT(m_service);
+        Service::trigger_exec(*m_service, *this);
+    }
+protected:
+    Impl* m_service;
+};
+
 class Service::PostOperBase: public AsyncOper {
 public:
-    PostOperBase(std::size_t size, Impl& service):
+    PostOperBase(std::size_t size, Impl& service) noexcept:
         AsyncOper{size, true}, // Second argument is `in_use`
         m_service{service}
     {
@@ -2190,6 +2293,7 @@ public:
     void recycle() noexcept override final
     {
         bool orphaned = !m_stream;
+        REALM_ASSERT(orphaned);
         // Note: do_recycle() commits suicide.
         do_recycle(orphaned);
     }
@@ -2705,6 +2809,7 @@ public:
     void recycle() noexcept override final
     {
         bool orphaned = !m_resolver;
+        REALM_ASSERT(orphaned);
         // Note: do_recycle() commits suicide.
         do_recycle(orphaned);
     }
@@ -2974,6 +3079,7 @@ public:
     void recycle() noexcept override final
     {
         bool orphaned = !m_socket;
+        REALM_ASSERT(orphaned);
         // Note: do_recycle() commits suicide.
         do_recycle(orphaned);
     }
@@ -3281,6 +3387,7 @@ public:
     void recycle() noexcept override final
     {
         bool orphaned = !m_acceptor;
+        REALM_ASSERT(orphaned);
         // Note: do_recycle() commits suicide.
         do_recycle(orphaned);
     }
@@ -3452,6 +3559,47 @@ inline void DeadlineTimer::async_wait(std::chrono::duration<R,P> delay, H handle
         Service::alloc<WaitOper<H>>(m_wait_oper, *this, expiration_time,
                                     std::move(handler)); // Throws
     add_oper(std::move(op)); // Throws
+}
+
+// ---------------- Trigger ----------------
+
+template<class H>
+class Trigger::ExecOper: public Service::TriggerExecOperBase {
+public:
+    ExecOper(Service::Impl& service_impl, H handler):
+        Service::TriggerExecOperBase{service_impl},
+        m_handler{std::move(handler)}
+    {
+    }
+    void recycle_and_execute() override final
+    {
+        REALM_ASSERT(in_use());
+        // Note: Potential suicide when `self` goes out of scope
+        util::bind_ptr<TriggerExecOperBase> self{this, bind_ptr_base::adopt_tag{}};
+        if (m_service) {
+            Service::reset_trigger_exec(*m_service, *this);
+            m_handler(); // Throws
+        }
+    }
+private:
+    H m_handler;
+};
+
+template<class H> inline Trigger::Trigger(Service& service, H handler) :
+    m_exec_oper{new ExecOper<H>{*service.m_impl, std::move(handler)}} // Throws
+{
+}
+
+inline Trigger::~Trigger() noexcept
+{
+    if (m_exec_oper)
+        m_exec_oper->orphan();
+}
+
+inline void Trigger::trigger() noexcept
+{
+    REALM_ASSERT(m_exec_oper);
+    m_exec_oper->trigger();
 }
 
 // ---------------- ReadAheadBuffer ----------------
