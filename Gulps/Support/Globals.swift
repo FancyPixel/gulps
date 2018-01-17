@@ -36,8 +36,8 @@ class Globals {
       return false
     }
     let newValue = text.replacingCharacters(in: range.toRange(text), with: string)
-    if (newValue.characters.count == 0) {
-      return true;
+    if (newValue.isEmpty) {
+      return true
     }
     let numberFormatter = NumberFormatter()
     numberFormatter.numberStyle = .decimal
