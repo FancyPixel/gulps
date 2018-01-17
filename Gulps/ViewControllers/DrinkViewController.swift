@@ -40,7 +40,7 @@ open class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewCon
     manager.startDeviceMotionUpdates(to: OperationQueue.main) {
       (motion, error) in
       if let motion = motion {
-        let roation = atan2(motion.gravity.x, motion.gravity.y) - M_PI
+        let roation = atan2(motion.gravity.x, motion.gravity.y) - Double.pi
         self.progressMeter?.transform = CGAffineTransform(rotationAngle: CGFloat(roation))
       }
     }
