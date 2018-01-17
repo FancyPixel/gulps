@@ -77,7 +77,7 @@ class CalendarViewController: UIViewController {
 
         updateStats()
         dailyLabel.text = dateLabelString(Date())
-        updateCalendarView()
+        calendarContent.contentController.refreshPresentedMonth()
     }
 
     private func updateCalendarView() {
