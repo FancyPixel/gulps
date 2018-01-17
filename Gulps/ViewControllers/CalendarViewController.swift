@@ -7,6 +7,7 @@ class CalendarViewController: UIViewController {
 
     let userDefaults = UserDefaults.groupUserDefaults()
 
+    @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var calendarMenu: CVCalendarMenuView!
     @IBOutlet weak var calendarContent: CVCalendarView!
     @IBOutlet weak var dailyLabel: UILabel!
@@ -139,6 +140,10 @@ extension CalendarViewController: CVCalendarViewDelegate, CVCalendarMenuViewDele
     func dayLabelWeekdaySelectedBackgroundColor() -> UIColor {
         return .palette_main
     }
+
+    func presentedDateUpdated(_ date: CVDate) {
+        monthLabel.text = date.globalDescription
+    }
 }
 
 extension CalendarViewController {
@@ -146,11 +151,12 @@ extension CalendarViewController {
         calendarContent.calendarAppearanceDelegate = self
         calendarMenu.menuViewDelegate = self
         calendarContent.calendarDelegate = self
-//        calendar.setDate(Date())
-        //    if let font = UIFont(name: "KaushanScript-Regular", size: 16) {
-        //      calendar.calendarAppearance.menuMonthTextFont = font
-        //    }
-        //    calendarMenu.reloadAppearance()
+        monthLabel.text = CVDate(date: Date()).globalDescription
+        if let font = UIFont(name: "KaushanScript-Regular", size: 16) {
+            monthLabel.font = font
+            monthLabel.textAlignment = .center
+            monthLabel.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1.00)
+        }
     }
 
     func updateStats() {

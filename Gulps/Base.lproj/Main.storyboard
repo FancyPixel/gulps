@@ -483,13 +483,12 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6kF-sJ-gnc" customClass="CVCalendarMenuView" customModule="CVCalendar">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
-                                <color key="backgroundColor" red="0.96687578914141414" green="0.96687578914141414" blue="0.96687578914141414" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="u4k-S9-CBs"/>
-                                </constraints>
-                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VRE-tj-bJI" userLabel="Month Label">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3gz-XS-2c7" customClass="CVCalendarView" customModule="CVCalendar">
                                 <rect key="frame" x="0.0" y="30" width="375" height="300"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -547,6 +546,13 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                                     <action selector="shareAction:" destination="BxV-3X-jF2" eventType="touchUpInside" id="nWB-cz-1aF"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6kF-sJ-gnc" customClass="CVCalendarMenuView" customModule="CVCalendar">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
+                                <color key="backgroundColor" red="0.96687578914141414" green="0.96687578914141414" blue="0.96687578914141414" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="u4k-S9-CBs"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -556,31 +562,34 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                             <constraint firstAttribute="trailing" secondItem="lon-Jb-3Cm" secondAttribute="trailing" constant="16" id="4ok-kh-18w"/>
                             <constraint firstItem="jpZ-Ht-zcx" firstAttribute="leading" secondItem="qyp-gc-0kQ" secondAttribute="leading" constant="16" id="EKe-le-ZNs"/>
                             <constraint firstItem="4E2-NO-CiF" firstAttribute="top" secondItem="lon-Jb-3Cm" secondAttribute="bottom" id="FBc-uZ-Wzf"/>
+                            <constraint firstItem="VRE-tj-bJI" firstAttribute="leading" secondItem="qyp-gc-0kQ" secondAttribute="leading" id="Fdt-Ul-aSf"/>
                             <constraint firstItem="3gz-XS-2c7" firstAttribute="top" secondItem="6kF-sJ-gnc" secondAttribute="bottom" id="Nfh-yh-JXo"/>
                             <constraint firstAttribute="trailing" secondItem="xk6-tX-JQH" secondAttribute="trailing" constant="16" id="RFp-sV-jZE"/>
                             <constraint firstAttribute="trailing" secondItem="4E2-NO-CiF" secondAttribute="trailing" constant="16" id="TlK-nq-QTC"/>
                             <constraint firstItem="Nja-Uo-jJw" firstAttribute="trailing" secondItem="qyp-gc-0kQ" secondAttribute="trailingMargin" id="Yda-cw-XgW"/>
                             <constraint firstItem="lon-Jb-3Cm" firstAttribute="top" secondItem="7Gy-oT-4T2" secondAttribute="bottom" constant="40" id="YlX-5M-AXr"/>
                             <constraint firstItem="jpZ-Ht-zcx" firstAttribute="top" secondItem="R2u-Oc-VLI" secondAttribute="bottom" id="ZlJ-67-A2a"/>
+                            <constraint firstItem="6kF-sJ-gnc" firstAttribute="top" secondItem="VRE-tj-bJI" secondAttribute="bottom" id="b8q-2p-mOC"/>
                             <constraint firstAttribute="trailing" secondItem="3gz-XS-2c7" secondAttribute="trailing" id="cxL-YF-gS5"/>
                             <constraint firstItem="4E2-NO-CiF" firstAttribute="leading" secondItem="qyp-gc-0kQ" secondAttribute="leading" constant="16" id="e0Q-1l-M4n"/>
                             <constraint firstItem="Nja-Uo-jJw" firstAttribute="top" secondItem="3gz-XS-2c7" secondAttribute="bottom" constant="8" id="iD4-YK-7sY"/>
+                            <constraint firstAttribute="trailing" secondItem="VRE-tj-bJI" secondAttribute="trailing" id="id7-rL-Nyo"/>
                             <constraint firstAttribute="trailing" secondItem="R2u-Oc-VLI" secondAttribute="trailing" constant="16" id="j8a-ZS-aWY"/>
                             <constraint firstItem="xk6-tX-JQH" firstAttribute="leading" secondItem="qyp-gc-0kQ" secondAttribute="leading" constant="16" id="jTT-KW-GGz"/>
                             <constraint firstItem="R2u-Oc-VLI" firstAttribute="leading" secondItem="qyp-gc-0kQ" secondAttribute="leading" constant="16" id="lm1-WP-0mZ"/>
                             <constraint firstItem="xk6-tX-JQH" firstAttribute="top" secondItem="7Gy-oT-4T2" secondAttribute="bottom" constant="330" id="nYW-3w-Rk0"/>
                             <constraint firstItem="3gz-XS-2c7" firstAttribute="leading" secondItem="qyp-gc-0kQ" secondAttribute="leading" id="ogi-43-EGf"/>
-                            <constraint firstItem="6kF-sJ-gnc" firstAttribute="top" secondItem="7Gy-oT-4T2" secondAttribute="bottom" id="qPj-vX-v3s"/>
                             <constraint firstItem="jpZ-Ht-zcx" firstAttribute="top" secondItem="R2u-Oc-VLI" secondAttribute="bottom" id="qtK-fc-vo7"/>
                             <constraint firstAttribute="centerX" secondItem="Nja-Uo-jJw" secondAttribute="centerX" id="we6-Gv-tIF"/>
                             <constraint firstItem="R2u-Oc-VLI" firstAttribute="top" secondItem="7Gy-oT-4T2" secondAttribute="bottom" constant="170" id="y8i-V9-KVl"/>
                             <constraint firstItem="6kF-sJ-gnc" firstAttribute="leading" secondItem="qyp-gc-0kQ" secondAttribute="leading" id="yjb-Yz-TNd"/>
                             <constraint firstItem="lon-Jb-3Cm" firstAttribute="leading" secondItem="qyp-gc-0kQ" secondAttribute="leading" constant="16" id="ylL-6X-iYT"/>
+                            <constraint firstItem="VRE-tj-bJI" firstAttribute="top" secondItem="7Gy-oT-4T2" secondAttribute="bottom" id="zsj-Xq-r2r"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Ico-aI-BpK"/>
                     <connections>
-                        <outlet property="calendarConstraint" destination="qPj-vX-v3s" id="n2K-uZ-EDI"/>
+                        <outlet property="calendarConstraint" destination="zsj-Xq-r2r" id="tXx-zR-8ve"/>
                         <outlet property="calendarContent" destination="3gz-XS-2c7" id="Ome-yh-qLv"/>
                         <outlet property="calendarMenu" destination="6kF-sJ-gnc" id="8oe-2Q-9b0"/>
                         <outlet property="dailyLabel" destination="Nja-Uo-jJw" id="Z5H-ce-i45"/>
@@ -588,6 +597,7 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                         <outlet property="daysLabel" destination="jpZ-Ht-zcx" id="Srn-dK-Gra"/>
                         <outlet property="daysLabelConstraint" destination="y8i-V9-KVl" id="emg-uy-ZYk"/>
                         <outlet property="measureLabel" destination="4E2-NO-CiF" id="3Id-mJ-Jiz"/>
+                        <outlet property="monthLabel" destination="VRE-tj-bJI" id="Rn0-G0-Flc"/>
                         <outlet property="quantityLabel" destination="lon-Jb-3Cm" id="5Vt-Se-wz6"/>
                         <outlet property="quantityLabelConstraint" destination="YlX-5M-AXr" id="9aU-fL-M7Q"/>
                         <outlet property="shareButton" destination="xk6-tX-JQH" id="pcA-Cq-ugm"/>
