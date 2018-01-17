@@ -59,9 +59,7 @@ class CalendarViewController: UIViewController {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-
-        calendarMenu.commitMenuViewUpdate()
-        calendarContent.commitCalendarViewUpdate()
+        updateCalendarView()
     }
 
     @objc func presentStats(_ sender: UIBarButtonItem) {
@@ -78,6 +76,12 @@ class CalendarViewController: UIViewController {
 
         updateStats()
         dailyLabel.text = dateLabelString(Date())
+        updateCalendarView()
+    }
+
+    private func updateCalendarView() {
+        calendarMenu.commitMenuViewUpdate()
+        calendarContent.commitCalendarViewUpdate()
     }
 
     @IBAction func shareAction(_ sender: AnyObject) {
@@ -111,16 +115,29 @@ extension CalendarViewController: CVCalendarViewDelegate, CVCalendarMenuViewDele
     }
 
     func dotMarker(shouldShowOnDayView dayView: DayView) -> Bool {
-        guard let date = dayView.date.convertedDate(),
-              let entry = EntryHandler.sharedHandler.entryForDate(date) else {
+        guard let percentage = percentage(for: dayView.date.convertedDate()) else {
             return false
         }
-        let hasEntry = Double(entry.percentage / 100.0) > 0.0
-        return hasEntry
+        return percentage > 0.0
     }
 
     func dotMarker(colorOnDayView dayView: DayView) -> [UIColor] {
-        return [.palette_main]
+        guard let percentage = percentage(for: dayView.date.convertedDate()) else {
+            return []
+        }
+        return percentage >= 1.0 ? [.palette_main] : [.palette_destructive]
+    }
+
+    private func percentage(for date: Date?) -> Double? {
+        guard let date = date,
+              let entry = EntryHandler.sharedHandler.entryForDate(date) else {
+            return nil
+        }
+        return Double(entry.percentage / 100.0)
+    }
+
+    func dayLabelWeekdaySelectedBackgroundColor() -> UIColor {
+        return .palette_main
     }
 }
 
