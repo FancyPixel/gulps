@@ -94,7 +94,7 @@ class CalendarViewController: UIViewController {
     }
 }
 
-extension CalendarViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
+extension CalendarViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate, CVCalendarViewAppearanceDelegate {
     func presentationMode() -> CalendarMode {
         return .monthView
     }
@@ -143,6 +143,7 @@ extension CalendarViewController: CVCalendarViewDelegate, CVCalendarMenuViewDele
 
 extension CalendarViewController {
     func setupCalendar() {
+        calendarContent.calendarAppearanceDelegate = self
         calendarMenu.menuViewDelegate = self
         calendarContent.calendarDelegate = self
 //        calendar.setDate(Date())
