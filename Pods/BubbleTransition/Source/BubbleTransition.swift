@@ -97,6 +97,12 @@ extension BubbleTransition: UIViewControllerAnimatedTransitioning {
         
         let containerView = transitionContext.containerView
         
+        let fromViewController = transitionContext.viewController(forKey: .from)
+        let toViewController = transitionContext.viewController(forKey: .to)
+
+        fromViewController?.beginAppearanceTransition(false, animated: true)
+        toViewController?.beginAppearanceTransition(true, animated: true)
+
         if transitionMode == .present {
             let presentedControllerView = transitionContext.view(forKey: UITransitionContextViewKey.to)!
             let originalCenter = presentedControllerView.center
@@ -122,7 +128,10 @@ extension BubbleTransition: UIViewControllerAnimatedTransitioning {
                 presentedControllerView.center = originalCenter
                 }, completion: { (_) in
                     transitionContext.completeTransition(true)
-            }) 
+                    self.bubble.isHidden = true
+                    fromViewController?.endAppearanceTransition()
+                    toViewController?.endAppearanceTransition()
+            })
         } else {
             let key = (transitionMode == .pop) ? UITransitionContextViewKey.to : UITransitionContextViewKey.from
             let returningControllerView = transitionContext.view(forKey: key)!
@@ -132,6 +141,7 @@ extension BubbleTransition: UIViewControllerAnimatedTransitioning {
             bubble.frame = frameForBubble(originalCenter, size: originalSize, start: startingPoint)
             bubble.layer.cornerRadius = bubble.frame.size.height / 2
             bubble.center = startingPoint
+            bubble.isHidden = false
 
             UIView.animate(withDuration: duration, animations: {
                 self.bubble.transform = CGAffineTransform(scaleX: 0.001, y: 0.001)
@@ -148,7 +158,10 @@ extension BubbleTransition: UIViewControllerAnimatedTransitioning {
                     returningControllerView.removeFromSuperview()
                     self.bubble.removeFromSuperview()
                     transitionContext.completeTransition(true)
-            }) 
+                    
+                    fromViewController?.endAppearanceTransition()
+                    toViewController?.endAppearanceTransition()
+            })
         }
     }
 }

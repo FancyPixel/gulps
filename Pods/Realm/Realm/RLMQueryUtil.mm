@@ -19,10 +19,10 @@
 #import "RLMQueryUtil.hpp"
 
 #import "RLMArray.h"
-#import "RLMObjectSchema.h"
+#import "RLMObjectSchema_Private.h"
 #import "RLMObject_Private.hpp"
 #import "RLMPredicateUtil.hpp"
-#import "RLMProperty.h"
+#import "RLMProperty_Private.h"
 #import "RLMSchema.h"
 #import "RLMUtil.hpp"
 
@@ -30,6 +30,9 @@
 #import "results.hpp"
 
 #include <realm/query_engine.hpp>
+#include <realm/query_expression.hpp>
+#include <realm/util/cf_ptr.hpp>
+#include <realm/util/overload.hpp>
 
 using namespace realm;
 
@@ -85,33 +88,82 @@ BOOL RLMPropertyTypeIsNumeric(RLMPropertyType propertyType) {
     }
 }
 
-// FIXME: TrueExpression and FalseExpression should be supported by core in some way
+// Equal and ContainsSubstring are used by QueryBuilder::add_string_constraint as the comparator
+// for performing diacritic-insensitive comparisons.
 
-struct TrueExpression : realm::Expression {
-    size_t find_first(size_t start, size_t end) const override
-    {
-        if (start != end)
-            return start;
+bool equal(CFStringCompareFlags options, StringData v1, StringData v2)
+{
+    if (v1.is_null() || v2.is_null()) {
+        return v1.is_null() == v2.is_null();
+    }
 
-        return realm::not_found;
-    }
-    void set_base_table(const Table*) override {}
-    const Table* get_base_table() const override { return nullptr; }
-    std::unique_ptr<Expression> clone(QueryNodeHandoverPatches*) const override
+    auto s1 = util::adoptCF(CFStringCreateWithBytesNoCopy(kCFAllocatorSystemDefault, (const UInt8*)v1.data(), v1.size(),
+                                                          kCFStringEncodingUTF8, false, kCFAllocatorNull));
+    auto s2 = util::adoptCF(CFStringCreateWithBytesNoCopy(kCFAllocatorSystemDefault, (const UInt8*)v2.data(), v2.size(),
+                                                          kCFStringEncodingUTF8, false, kCFAllocatorNull));
+
+    return CFStringCompare(s1.get(), s2.get(), options) == kCFCompareEqualTo;
+}
+
+template <CFStringCompareFlags options>
+struct Equal {
+    using CaseSensitive = Equal<options & ~kCFCompareCaseInsensitive>;
+    using CaseInsensitive = Equal<options | kCFCompareCaseInsensitive>;
+
+    bool operator()(StringData v1, StringData v2, bool v1_null, bool v2_null) const
     {
-        return std::unique_ptr<Expression>(new TrueExpression(*this));
+        REALM_ASSERT_DEBUG(v1_null == v1.is_null());
+        REALM_ASSERT_DEBUG(v2_null == v2.is_null());
+
+        return equal(options, v1, v2);
     }
+
+    // FIXME: Consider the options.
+    static const char* description() { return "equal"; }
 };
 
-struct FalseExpression : realm::Expression {
-    size_t find_first(size_t, size_t) const override { return realm::not_found; }
-    void set_base_table(const Table*) override {}
-    const Table* get_base_table() const override { return nullptr; }
-    std::unique_ptr<Expression> clone(QueryNodeHandoverPatches*) const override
-    {
-        return std::unique_ptr<Expression>(new FalseExpression(*this));
+bool contains_substring(CFStringCompareFlags options, StringData v1, StringData v2)
+{
+    if (v2.is_null()) {
+        // Everything contains NULL
+        return true;
     }
+
+    if (v1.is_null()) {
+        // NULL contains nothing (except NULL, handled above)
+        return false;
+    }
+
+    if (v2.size() == 0) {
+        // Everything (except NULL, handled above) contains the empty string
+        return true;
+    }
+
+    auto s1 = util::adoptCF(CFStringCreateWithBytesNoCopy(kCFAllocatorSystemDefault, (const UInt8*)v1.data(), v1.size(),
+                                                          kCFStringEncodingUTF8, false, kCFAllocatorNull));
+    auto s2 = util::adoptCF(CFStringCreateWithBytesNoCopy(kCFAllocatorSystemDefault, (const UInt8*)v2.data(), v2.size(),
+                                                          kCFStringEncodingUTF8, false, kCFAllocatorNull));
+
+    return CFStringFind(s1.get(), s2.get(), options).location != kCFNotFound;
+}
+
+template <CFStringCompareFlags options>
+struct ContainsSubstring {
+    using CaseSensitive = ContainsSubstring<options & ~kCFCompareCaseInsensitive>;
+    using CaseInsensitive = ContainsSubstring<options | kCFCompareCaseInsensitive>;
+
+    bool operator()(StringData v1, StringData v2, bool v1_null, bool v2_null) const
+    {
+        REALM_ASSERT_DEBUG(v1_null == v1.is_null());
+        REALM_ASSERT_DEBUG(v2_null == v2.is_null());
+
+        return contains_substring(options, v1, v2);
+    }
+
+    // FIXME: Consider the options.
+    static const char* description() { return "contains"; }
 };
+
 
 NSString *operatorName(NSPredicateOperatorType operatorType)
 {
@@ -151,7 +203,7 @@ NSString *operatorName(NSPredicateOperatorType operatorType)
 
 Table& get_table(Group& group, RLMObjectSchema *objectSchema)
 {
-    return *ObjectStore::table_for_object_type(group, objectSchema.className.UTF8String);
+    return *ObjectStore::table_for_object_type(group, objectSchema.objectName.UTF8String);
 }
 
 // A reference to a column within a query. Can be resolved to a Columns<T> for use in query expressions.
@@ -186,20 +238,18 @@ public:
     {
         switch (type()) {
             case RLMPropertyTypeObject:
-            case RLMPropertyTypeArray:
             case RLMPropertyTypeLinkingObjects:
                 return m_schema[property().objectClassName];
             default:
-                REALM_ASSERT(false);
+                REALM_UNREACHABLE();
         }
     }
 
     bool has_links() const { return m_links.size(); }
 
     bool has_any_to_many_links() const {
-        return std::any_of(begin(m_links), end(m_links), [](RLMProperty *property) {
-            return property.type == RLMPropertyTypeArray || property.type == RLMPropertyTypeLinkingObjects;
-        });
+        return std::any_of(begin(m_links), end(m_links),
+                           [](RLMProperty *property) { return property.array; });
     }
 
     ColumnReference last_link_column() const {
@@ -301,7 +351,7 @@ public:
         , m_link_column(std::move(link_column))
         , m_column(std::move(column))
     {
-        RLMPrecondition(m_link_column.type() == RLMPropertyTypeArray || m_link_column.type() == RLMPropertyTypeLinkingObjects,
+        RLMPrecondition(m_link_column.property().array,
                         @"Invalid predicate", @"Collection operation can only be applied to a property of type RLMArray.");
 
         switch (m_type) {
@@ -423,6 +473,12 @@ public:
     template <typename A, typename B>
     void add_bool_constraint(NSPredicateOperatorType operatorType, A lhs, B rhs);
 
+    void add_substring_constraint(null, Query condition);
+    template<typename T>
+    void add_substring_constraint(const T& value, Query condition);
+    template<typename T>
+    void add_substring_constraint(const Columns<T>& value, Query condition);
+
     template <typename T>
     void add_string_constraint(NSPredicateOperatorType operatorType,
                                NSComparisonPredicateOptions predicateOptions,
@@ -446,9 +502,9 @@ public:
 
     void add_between_constraint(const ColumnReference& column, id value);
 
-    template<typename T>
-    void add_binary_constraint(NSPredicateOperatorType operatorType, const ColumnReference& column, T value);
+    void add_binary_constraint(NSPredicateOperatorType operatorType, const ColumnReference& column, BinaryData value);
     void add_binary_constraint(NSPredicateOperatorType operatorType, const ColumnReference& column, id value);
+    void add_binary_constraint(NSPredicateOperatorType operatorType, const ColumnReference& column, null);
     void add_binary_constraint(NSPredicateOperatorType operatorType, id value, const ColumnReference& column);
     void add_binary_constraint(NSPredicateOperatorType, const ColumnReference&, const ColumnReference&);
 
@@ -501,7 +557,8 @@ void QueryBuilder::add_numeric_constraint(RLMPropertyType datatype,
             break;
         default:
             @throw RLMPredicateException(@"Invalid operator type",
-                                         @"Operator '%@' not supported for type %@", operatorName(operatorType), RLMTypeToString(datatype));
+                                         @"Operator '%@' not supported for type %@",
+                                         operatorName(operatorType), RLMTypeToString(datatype));
     }
 }
 
@@ -520,32 +577,105 @@ void QueryBuilder::add_bool_constraint(NSPredicateOperatorType operatorType, A l
     }
 }
 
+void QueryBuilder::add_substring_constraint(null, Query) {
+    // Foundation always returns false for substring operations with a RHS of null or "".
+    m_query.and_query(std::unique_ptr<Expression>(new FalseExpression));
+}
+
+template<typename T>
+void QueryBuilder::add_substring_constraint(const T& value, Query condition) {
+    // Foundation always returns false for substring operations with a RHS of null or "".
+    m_query.and_query(value.size()
+                      ? std::move(condition)
+                      : std::unique_ptr<Expression>(new FalseExpression));
+}
+
+template<typename T>
+void QueryBuilder::add_substring_constraint(const Columns<T>& value, Query condition) {
+    // Foundation always returns false for substring operations with a RHS of null or "".
+    // We don't need to concern ourselves with the possibility of value traversing a link list
+    // and producing multiple values per row as such expressions will have been rejected.
+    m_query.and_query(const_cast<Columns<String>&>(value).size() != 0 && std::move(condition));
+}
+
 template <typename T>
 void QueryBuilder::add_string_constraint(NSPredicateOperatorType operatorType,
                                          NSComparisonPredicateOptions predicateOptions,
                                          Columns<String> &&column,
                                          T value) {
     bool caseSensitive = !(predicateOptions & NSCaseInsensitivePredicateOption);
-    bool diacriticInsensitive = (predicateOptions & NSDiacriticInsensitivePredicateOption);
-    RLMPrecondition(!diacriticInsensitive, @"Invalid predicate option",
-                    @"NSDiacriticInsensitivePredicateOption not supported for string type");
+    bool diacriticSensitive = !(predicateOptions & NSDiacriticInsensitivePredicateOption);
+
+    if (diacriticSensitive) {
+        switch (operatorType) {
+            case NSBeginsWithPredicateOperatorType:
+                add_substring_constraint(value, column.begins_with(value, caseSensitive));
+                break;
+            case NSEndsWithPredicateOperatorType:
+                add_substring_constraint(value, column.ends_with(value, caseSensitive));
+                break;
+            case NSContainsPredicateOperatorType:
+                add_substring_constraint(value, column.contains(value, caseSensitive));
+                break;
+            case NSEqualToPredicateOperatorType:
+                m_query.and_query(column.equal(value, caseSensitive));
+                break;
+            case NSNotEqualToPredicateOperatorType:
+                m_query.and_query(column.not_equal(value, caseSensitive));
+                break;
+            case NSLikePredicateOperatorType:
+                m_query.and_query(column.like(value, caseSensitive));
+                break;
+            default:
+                @throw RLMPredicateException(@"Invalid operator type",
+                                             @"Operator '%@' not supported for string type",
+                                             operatorName(operatorType));
+        }
+        return;
+    }
+
+    auto as_subexpr = util::overload([](StringData value) { return make_subexpr<ConstantStringValue>(value); },
+                                     [](const Columns<String>& c) { return c.clone(); });
+    auto left = as_subexpr(column);
+    auto right = as_subexpr(value);
+
+    auto make_constraint = [&](auto comparator) {
+        using Comparator = decltype(comparator);
+        using CompareCS = Compare<typename Comparator::CaseSensitive, StringData>;
+        using CompareCI = Compare<typename Comparator::CaseInsensitive, StringData>;
+        if (caseSensitive) {
+            return make_expression<CompareCS>(std::move(left), std::move(right));
+        }
+        else {
+            return make_expression<CompareCI>(std::move(left), std::move(right));
+        }
+    };
 
     switch (operatorType) {
-        case NSBeginsWithPredicateOperatorType:
-            m_query.and_query(column.begins_with(value, caseSensitive));
+        case NSBeginsWithPredicateOperatorType: {
+            using C = ContainsSubstring<kCFCompareDiacriticInsensitive | kCFCompareAnchored>;
+            add_substring_constraint(value, make_constraint(C{}));
             break;
-        case NSEndsWithPredicateOperatorType:
-            m_query.and_query(column.ends_with(value, caseSensitive));
+        }
+        case NSEndsWithPredicateOperatorType: {
+            using C = ContainsSubstring<kCFCompareDiacriticInsensitive | kCFCompareAnchored | kCFCompareBackwards>;
+            add_substring_constraint(value, make_constraint(C{}));
             break;
-        case NSContainsPredicateOperatorType:
-            m_query.and_query(column.contains(value, caseSensitive));
+        }
+        case NSContainsPredicateOperatorType: {
+            using C = ContainsSubstring<kCFCompareDiacriticInsensitive>;
+            add_substring_constraint(value, make_constraint(C{}));
             break;
-        case NSEqualToPredicateOperatorType:
-            m_query.and_query(column.equal(value, caseSensitive));
-            break;
+        }
         case NSNotEqualToPredicateOperatorType:
-            m_query.and_query(column.not_equal(value, caseSensitive));
+            m_query.Not();
+            REALM_FALLTHROUGH;
+        case NSEqualToPredicateOperatorType:
+            m_query.and_query(make_constraint(Equal<kCFCompareDiacriticInsensitive>{}));
             break;
+        case NSLikePredicateOperatorType:
+            @throw RLMPredicateException(@"Invalid operator type",
+                                         @"Operator 'LIKE' not supported with diacritic-insensitive modifier.");
         default:
             @throw RLMPredicateException(@"Invalid operator type",
                                          @"Operator '%@' not supported for string type", operatorName(operatorType));
@@ -611,22 +741,23 @@ void QueryBuilder::add_between_constraint(const ColumnReference& column, id valu
     m_query.end_group();
 }
 
-template<typename T>
 void QueryBuilder::add_binary_constraint(NSPredicateOperatorType operatorType,
                                          const ColumnReference& column,
-                                         T value) {
+                                         BinaryData value) {
     RLMPrecondition(!column.has_links(), @"Unsupported operator", @"NSData properties cannot be queried over an object link.");
 
     size_t index = column.index();
+    Query query = m_query.get_table()->where();
+
     switch (operatorType) {
         case NSBeginsWithPredicateOperatorType:
-            m_query.begins_with(index, value);
+            add_substring_constraint(value, query.begins_with(index, value));
             break;
         case NSEndsWithPredicateOperatorType:
-            m_query.ends_with(index, value);
+            add_substring_constraint(value, query.ends_with(index, value));
             break;
         case NSContainsPredicateOperatorType:
-            m_query.contains(index, value);
+            add_substring_constraint(value, query.contains(index, value));
             break;
         case NSEqualToPredicateOperatorType:
             m_query.equal(index, value);
@@ -642,6 +773,10 @@ void QueryBuilder::add_binary_constraint(NSPredicateOperatorType operatorType,
 
 void QueryBuilder::add_binary_constraint(NSPredicateOperatorType operatorType, const ColumnReference& column, id value) {
     add_binary_constraint(operatorType, column, RLMBinaryDataForNSData(value));
+}
+
+void QueryBuilder::add_binary_constraint(NSPredicateOperatorType operatorType, const ColumnReference& column, null) {
+    add_binary_constraint(operatorType, column, BinaryData());
 }
 
 void QueryBuilder::add_binary_constraint(NSPredicateOperatorType operatorType, id value, const ColumnReference& column) {
@@ -677,14 +812,15 @@ void QueryBuilder::add_link_constraint(NSPredicateOperatorType operatorType,
 void QueryBuilder::add_link_constraint(NSPredicateOperatorType operatorType,
                                        const ColumnReference& column,
                                        realm::null) {
-    RLMPrecondition(!column.has_links(), @"Unsupported operator", @"Multi-level object equality link queries are not supported.");
     RLMPrecondition(operatorType == NSEqualToPredicateOperatorType || operatorType == NSNotEqualToPredicateOperatorType,
                     @"Invalid operator type", @"Only 'Equal' and 'Not Equal' operators supported for object comparison");
-    if (operatorType == NSNotEqualToPredicateOperatorType) {
-        m_query.Not();
-    }
 
-    m_query.and_query(column.resolve<Link>().is_null());
+    if (operatorType == NSEqualToPredicateOperatorType) {
+        m_query.and_query(column.resolve<Link>() == null());
+    }
+    else {
+        m_query.and_query(column.resolve<Link>() != null());
+    }
 }
 
 template<typename T>
@@ -808,7 +944,6 @@ void QueryBuilder::do_add_constraint(RLMPropertyType type, NSPredicateOperatorTy
             add_binary_constraint(operatorType, values...);
             break;
         case RLMPropertyTypeObject:
-        case RLMPropertyTypeArray:
         case RLMPropertyTypeLinkingObjects:
             add_link_constraint(operatorType, values...);
             break;
@@ -851,7 +986,13 @@ void QueryBuilder::add_constraint(RLMPropertyType type, NSPredicateOperatorType 
     }
 }
 
-ColumnReference QueryBuilder::column_reference_from_key_path(RLMObjectSchema *objectSchema, NSString *keyPath, bool isAggregate)
+struct KeyPath {
+    std::vector<RLMProperty *> links;
+    RLMProperty *property;
+    bool containsToManyRelationship;
+};
+
+KeyPath key_path_from_string(RLMSchema *schema, RLMObjectSchema *objectSchema, NSString *keyPath)
 {
     RLMProperty *property;
     std::vector<RLMProperty *> links;
@@ -864,32 +1005,42 @@ ColumnReference QueryBuilder::column_reference_from_key_path(RLMObjectSchema *ob
         NSString *propertyName = [keyPath substringWithRange:{start, end == NSNotFound ? length - start : end - start}];
         property = objectSchema[propertyName];
         RLMPrecondition(property, @"Invalid property name",
-                        @"Property '%@' not found in object of type '%@'", propertyName, objectSchema.className);
+                        @"Property '%@' not found in object of type '%@'",
+                        propertyName, objectSchema.className);
 
-        if (property.type == RLMPropertyTypeArray || property.type == RLMPropertyTypeLinkingObjects)
+        if (property.array)
             keyPathContainsToManyRelationship = true;
 
         if (end != NSNotFound) {
-            RLMPrecondition(property.type == RLMPropertyTypeObject || property.type == RLMPropertyTypeArray || property.type == RLMPropertyTypeLinkingObjects,
-                            @"Invalid value", @"Property '%@' is not a link in object of type '%@'", propertyName, objectSchema.className);
+            RLMPrecondition(property.type == RLMPropertyTypeObject || property.type == RLMPropertyTypeLinkingObjects,
+                            @"Invalid value", @"Property '%@' is not a link in object of type '%@'",
+                            propertyName, objectSchema.className);
 
             links.push_back(property);
             REALM_ASSERT(property.objectClassName);
-            objectSchema = m_schema[property.objectClassName];
+            objectSchema = schema[property.objectClassName];
         }
 
         start = end + 1;
     } while (end != NSNotFound);
 
-    if (isAggregate && !keyPathContainsToManyRelationship) {
+    return {std::move(links), property, keyPathContainsToManyRelationship};
+}
+
+ColumnReference QueryBuilder::column_reference_from_key_path(RLMObjectSchema *objectSchema,
+                                                             NSString *keyPathString, bool isAggregate)
+{
+    auto keyPath = key_path_from_string(m_schema, objectSchema, keyPathString);
+
+    if (isAggregate && !keyPath.containsToManyRelationship) {
         @throw RLMPredicateException(@"Invalid predicate",
                                      @"Aggregate operations can only be used on key paths that include an array property");
-    } else if (!isAggregate && keyPathContainsToManyRelationship) {
+    } else if (!isAggregate && keyPath.containsToManyRelationship) {
         @throw RLMPredicateException(@"Invalid predicate",
                                      @"Key paths that include an array property must use aggregate operations");
     }
 
-    return ColumnReference(m_query, m_group, m_schema, property, std::move(links));
+    return ColumnReference(m_query, m_group, m_schema, keyPath.property, std::move(keyPath.links));
 }
 
 void validate_property_value(const ColumnReference& column,
@@ -898,7 +1049,7 @@ void validate_property_value(const ColumnReference& column,
                              __unsafe_unretained RLMObjectSchema *const objectSchema,
                              __unsafe_unretained NSString *const keyPath) {
     RLMProperty *prop = column.property();
-    if (prop.type == RLMPropertyTypeArray) {
+    if (prop.array) {
         RLMPrecondition([RLMObjectBaseObjectSchema(RLMDynamicCast<RLMObjectBase>(value)).className isEqualToString:prop.objectClassName],
                         @"Invalid value", err, prop.objectClassName, keyPath, objectSchema.className, value);
     }
@@ -1000,7 +1151,8 @@ bool key_path_contains_collection_operator(NSString *keyPath) {
     return [keyPath rangeOfString:@"@"].location != NSNotFound;
 }
 
-NSString *get_collection_operation_name_from_key_path(NSString *keyPath, NSString **leadingKeyPath, NSString **trailingKey) {
+NSString *get_collection_operation_name_from_key_path(NSString *keyPath, NSString **leadingKeyPath,
+                                                      NSString **trailingKey) {
     NSRange at  = [keyPath rangeOfString:@"@"];
     if (at.location == NSNotFound || at.location >= keyPath.length - 1) {
         @throw RLMPredicateException(@"Invalid key path", @"'%@' is not a valid key path'", keyPath);
@@ -1313,33 +1465,6 @@ void QueryBuilder::apply_predicate(NSPredicate *predicate, RLMObjectSchema *obje
                                      @"Only support compound, comparison, and constant predicates");
     }
 }
-
-size_t RLMValidatedColumnForSort(Table& table, NSString *propName) {
-    RLMPrecondition([propName rangeOfString:@"."].location == NSNotFound,
-                    @"Invalid sort property", @"Cannot sort on '%@': sorting on key paths is not supported.", propName);
-    size_t column = table.get_column_index(propName.UTF8String);
-    RLMPrecondition(column != npos, @"Invalid sort property",
-                    @"Cannot sort on property '%@' on object of type '%s': property not found.",
-                    propName, ObjectStore::object_type_for_table_name(table.get_name()).data());
-
-    switch (auto type = static_cast<RLMPropertyType>(table.get_column_type(column))) {
-        case RLMPropertyTypeBool:
-        case RLMPropertyTypeDate:
-        case RLMPropertyTypeDouble:
-        case RLMPropertyTypeFloat:
-        case RLMPropertyTypeInt:
-        case RLMPropertyTypeString:
-            break;
-
-        default:
-            @throw RLMPredicateException(@"Invalid sort property type",
-                                         @"Cannot sort on property '%@' on object of type '%s': sorting is only supported on bool, date, double, float, integer, and string properties, but property is of type %@.",
-                                         propName, ObjectStore::object_type_for_table_name(table.get_name()).data(),
-                                         RLMTypeToString(type));
-    }
-    return column;
-}
-
 } // namespace
 
 realm::Query RLMPredicateToQuery(NSPredicate *predicate, RLMObjectSchema *objectSchema,
@@ -1361,18 +1486,4 @@ realm::Query RLMPredicateToQuery(NSPredicate *predicate, RLMObjectSchema *object
     RLMPrecondition(validateMessage.empty(), @"Invalid query", @"%.*s",
                     (int)validateMessage.size(), validateMessage.c_str());
     return query;
-}
-
-realm::SortDescriptor RLMSortDescriptorFromDescriptors(realm::Table& table, NSArray<RLMSortDescriptor *> *descriptors) {
-    std::vector<std::vector<size_t>> columnIndices;
-    std::vector<bool> ascending;
-    columnIndices.reserve(descriptors.count);
-    ascending.reserve(descriptors.count);
-
-    for (RLMSortDescriptor *descriptor in descriptors) {
-        columnIndices.push_back({RLMValidatedColumnForSort(table, descriptor.property)});
-        ascending.push_back(descriptor.ascending);
-    }
-
-    return {table, std::move(columnIndices), std::move(ascending)};
 }

@@ -61,9 +61,8 @@ std::error_code make_error_code(basic_system_errors) noexcept;
 
 namespace std {
 
-template<>
-class is_error_code_enum<realm::util::error::basic_system_errors>
-{
+template <>
+class is_error_code_enum<realm::util::error::basic_system_errors> {
 public:
     static const bool value = true;
 };
@@ -74,8 +73,6 @@ namespace realm {
 namespace util {
 
 std::error_code make_basic_system_error_code(int) noexcept;
-
-
 
 
 // implementation

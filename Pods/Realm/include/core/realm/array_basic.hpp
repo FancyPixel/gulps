@@ -25,11 +25,17 @@ namespace realm {
 
 /// A BasicArray can currently only be used for simple unstructured
 /// types like float, double.
-template<class T>
-class BasicArray: public Array {
+template <class T>
+class BasicArray : public Array {
 public:
     explicit BasicArray(Allocator&) noexcept;
-    ~BasicArray() noexcept override {}
+    ~BasicArray() noexcept override
+    {
+    }
+
+    // Disable copying, this is not allowed.
+    BasicArray& operator=(const BasicArray&) = delete;
+    BasicArray(const BasicArray&) = delete;
 
     T get(size_t ndx) const noexcept;
     bool is_null(size_t ndx) const noexcept;
@@ -41,9 +47,8 @@ public:
     void truncate(size_t size);
     void clear();
 
-    size_t find_first(T value, size_t begin = 0 , size_t end = npos) const;
-    void find_all(IntegerColumn* result, T value, size_t add_offset = 0,
-                  size_t begin = 0, size_t end = npos) const;
+    size_t find_first(T value, size_t begin = 0, size_t end = npos) const;
+    void find_all(IntegerColumn* result, T value, size_t add_offset = 0, size_t begin = 0, size_t end = npos) const;
 
     size_t count(T value, size_t begin = 0, size_t end = npos) const;
     bool maximum(T& result, size_t begin = 0, size_t end = npos) const;
@@ -68,8 +73,7 @@ public:
     /// initialized to `T()`.
     static MemRef create_array(size_t size, Allocator&);
 
-    static MemRef create_array(Array::Type leaf_type, bool context_flag, size_t size, T value,
-                               Allocator&);
+    static MemRef create_array(Array::Type leaf_type, bool context_flag, size_t size, T value, Allocator&);
 
     /// Create a new empty array and attach this accessor to it. This
     /// does not modify the parent reference information of this
@@ -94,7 +98,7 @@ private:
     size_t calc_byte_len(size_t count, size_t width) const override;
     virtual size_t calc_item_count(size_t bytes, size_t width) const noexcept override;
 
-    template<bool find_max>
+    template <bool find_max>
     bool minmax(T& result, size_t begin, size_t end) const;
 
     /// Calculate the total number of bytes needed for a basic array

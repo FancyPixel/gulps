@@ -34,10 +34,12 @@ namespace realm {
 /// The individual values in the column are either refs to Columns containing
 /// the row indexes in the origin table that links to it, or in the case where
 /// there is a single link, a tagged ref encoding the origin row position.
-class BacklinkColumn: public IntegerColumn, public ArrayParent {
+class BacklinkColumn : public IntegerColumn, public ArrayParent {
 public:
     BacklinkColumn(Allocator&, ref_type, size_t col_ndx = npos);
-    ~BacklinkColumn() noexcept override {}
+    ~BacklinkColumn() noexcept override
+    {
+    }
 
     static ref_type create(Allocator&, size_t size = 0);
 
@@ -48,10 +50,8 @@ public:
     void add_backlink(size_t row_ndx, size_t origin_row_ndx);
     void remove_one_backlink(size_t row_ndx, size_t origin_row_ndx);
     void remove_all_backlinks(size_t num_rows);
-    void update_backlink(size_t row_ndx, size_t old_origin_row_ndx,
-                         size_t new_origin_row_ndx);
-    void swap_backlinks(size_t row_ndx, size_t origin_row_ndx_1,
-                        size_t origin_row_ndx_2);
+    void update_backlink(size_t row_ndx, size_t old_origin_row_ndx, size_t new_origin_row_ndx);
+    void swap_backlinks(size_t row_ndx, size_t origin_row_ndx_1, size_t origin_row_ndx_2);
 
     void add_row();
 
@@ -71,6 +71,8 @@ public:
     void adj_acc_erase_row(size_t) noexcept override;
     void adj_acc_move_over(size_t, size_t) noexcept override;
     void adj_acc_swap_rows(size_t, size_t) noexcept override;
+    void adj_acc_move_row(size_t, size_t) noexcept override;
+    void adj_acc_merge_rows(size_t, size_t) noexcept override;
     void adj_acc_clear_root_table() noexcept override;
     void mark(int) noexcept override;
 
@@ -81,9 +83,9 @@ public:
 
     int compare_values(size_t, size_t) const noexcept override;
 
-#ifdef REALM_DEBUG
     void verify() const override;
     void verify(const Table&, size_t) const override;
+#ifdef REALM_DEBUG
     struct VerifyPair {
         size_t origin_row_ndx, target_row_ndx;
         bool operator<(const VerifyPair&) const noexcept;
@@ -96,25 +98,21 @@ protected:
     void update_child_ref(size_t child_ndx, ref_type new_ref) override;
     ref_type get_child_ref(size_t child_ndx) const noexcept override;
 
-#ifdef REALM_DEBUG
     std::pair<ref_type, size_t> get_to_dot_parent(size_t) const override;
-#endif
 
 private:
-    TableRef        m_origin_table;
+    TableRef m_origin_table;
     LinkColumnBase* m_origin_column = nullptr;
 
-    template<typename Func>
+    template <typename Func>
     size_t for_each_link(size_t row_ndx, bool do_destroy, Func&& f);
 };
 
 
-
-
 // Implementation
 
-inline BacklinkColumn::BacklinkColumn(Allocator& alloc, ref_type ref, size_t col_ndx):
-    IntegerColumn(alloc, ref, col_ndx) // Throws
+inline BacklinkColumn::BacklinkColumn(Allocator& alloc, ref_type ref, size_t col_ndx)
+    : IntegerColumn(alloc, ref, col_ndx) // Throws
 {
 }
 
@@ -159,8 +157,7 @@ inline void BacklinkColumn::add_row()
     IntegerColumn::add(0);
 }
 
-inline void BacklinkColumn::adj_acc_insert_rows(size_t row_ndx,
-                                                size_t num_rows) noexcept
+inline void BacklinkColumn::adj_acc_insert_rows(size_t row_ndx, size_t num_rows) noexcept
 {
     IntegerColumn::adj_acc_insert_rows(row_ndx, num_rows);
 
@@ -176,8 +173,7 @@ inline void BacklinkColumn::adj_acc_erase_row(size_t row_ndx) noexcept
     tf::mark(*m_origin_table);
 }
 
-inline void BacklinkColumn::adj_acc_move_over(size_t from_row_ndx,
-                                              size_t to_row_ndx) noexcept
+inline void BacklinkColumn::adj_acc_move_over(size_t from_row_ndx, size_t to_row_ndx) noexcept
 {
     IntegerColumn::adj_acc_move_over(from_row_ndx, to_row_ndx);
 
@@ -188,6 +184,22 @@ inline void BacklinkColumn::adj_acc_move_over(size_t from_row_ndx,
 inline void BacklinkColumn::adj_acc_swap_rows(size_t row_ndx_1, size_t row_ndx_2) noexcept
 {
     Column::adj_acc_swap_rows(row_ndx_1, row_ndx_2);
+
+    using tf = _impl::TableFriend;
+    tf::mark(*m_origin_table);
+}
+
+inline void BacklinkColumn::adj_acc_move_row(size_t from_ndx, size_t to_ndx) noexcept
+{
+    Column::adj_acc_move_row(from_ndx, to_ndx);
+
+    using tf = _impl::TableFriend;
+    tf::mark(*m_origin_table);
+}
+
+inline void BacklinkColumn::adj_acc_merge_rows(size_t old_row_ndx, size_t new_row_ndx) noexcept
+{
+    Column::adj_acc_merge_rows(old_row_ndx, new_row_ndx);
 
     using tf = _impl::TableFriend;
     tf::mark(*m_origin_table);

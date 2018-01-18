@@ -26,21 +26,21 @@ namespace realm {
 // <realm/data_type.hpp>.
 enum ColumnType {
     // Column types
-    col_type_Int         =  0,
-    col_type_Bool        =  1,
-    col_type_String      =  2,
-    col_type_StringEnum  =  3, // double refs
-    col_type_Binary      =  4,
-    col_type_Table       =  5,
-    col_type_Mixed       =  6,
-    col_type_OldDateTime =  7,
-    col_type_Timestamp   =  8,
-    col_type_Float       =  9,
-    col_type_Double      = 10,
-    col_type_Reserved4   = 11, // Decimal
-    col_type_Link        = 12,
-    col_type_LinkList    = 13,
-    col_type_BackLink    = 14
+    col_type_Int = 0,
+    col_type_Bool = 1,
+    col_type_String = 2,
+    col_type_StringEnum = 3, // double refs
+    col_type_Binary = 4,
+    col_type_Table = 5,
+    col_type_Mixed = 6,
+    col_type_OldDateTime = 7,
+    col_type_Timestamp = 8,
+    col_type_Float = 9,
+    col_type_Double = 10,
+    col_type_Reserved4 = 11, // Decimal
+    col_type_Link = 12,
+    col_type_LinkList = 13,
+    col_type_BackLink = 14
 };
 
 

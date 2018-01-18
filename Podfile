@@ -1,36 +1,32 @@
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '9.0'
+use_frameworks!
+inhibit_all_warnings!
 
-def common_pods
-  pod 'RealmSwift'
+target 'Gulps' do
+
+  pod 'RealmSwift', '~> 3.1.0'
   pod 'AMWaveTransition', '~> 0.5'
   pod 'AHKActionSheet', '~> 0.5'
   pod 'pop', '~> 1.0'
-  pod 'AMPopTip', '~> 0.7'
+  pod 'AMPopTip', '~> 3.1.1'
   pod 'UICountingLabel', '~> 1.2'
-  pod 'JTCalendar', git: 'https://github.com/andreamazz/JTCalendar', branch: 'develop'
+  pod 'CVCalendar', '~> 1.6.0'
   pod 'BAFluidView', '~> 0.2.3'
   pod 'BubbleTransition', '~> 2.0.0'
-end
 
-target 'Gulps' do
-  common_pods
+  target 'GulpsTests' do
+    inherit! :search_paths
+    pod 'Nimble', '~> 7.0.3'
+    pod 'Quick', '~> 1.2.0'
+    pod 'Nimble-Snapshots', '~> 6.3.0'
+    pod 'FBSnapshotTestCase', '2.1.4'
+  end
 end
 
 target 'GulpsToday' do
-  pod 'RealmSwift'
+  pod 'RealmSwift', '~> 3.1.0'
 end
-
-target 'GulpsTests' do
-  common_pods
-  pod 'Nimble', '~> 5.0.0'
-  pod 'Quick', '~> 0.10.0'
-  pod 'Nimble-Snapshots', '~> 4.2.0'
-  pod 'FBSnapshotTestCase', '2.1.3'
-end
-
-inhibit_all_warnings!
-use_frameworks!
 
 post_install do |installer|
   installer.pods_project.targets.each do |target|

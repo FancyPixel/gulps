@@ -31,34 +31,34 @@ namespace util {
 // report over 70 functions in this file, with only 6.6% function coverage,
 // even though line coverage is at 100%.
 
-template<class OS, class T>
+template <class OS, class T>
 void inspect_value(OS& os, const T& value)
 {
     os << value;
 }
 
-template<class OS>
+template <class OS>
 void inspect_value(OS& os, const std::string& value)
 {
     // FIXME: Escape the string.
     os << "\"" << value << "\"";
 }
 
-template<class OS>
+template <class OS>
 void inspect_value(OS& os, const char* value)
 {
     // FIXME: Escape the string.
     os << "\"" << value << "\"";
 }
 
-template<class OS>
+template <class OS>
 void inspect_all(OS&)
 {
     // No-op
 }
 
 /// Convert all arguments to strings, and quote string arguments.
-template<class OS, class First, class... Args>
+template <class OS, class First, class... Args>
 void inspect_all(OS& os, First&& first, Args&&... args)
 {
     inspect_value(os, std::forward<First>(first));

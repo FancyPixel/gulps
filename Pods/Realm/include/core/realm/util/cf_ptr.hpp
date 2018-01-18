@@ -28,16 +28,16 @@
 namespace realm {
 namespace util {
 
-template<class Ref>
+template <class Ref>
 class CFPtr {
 public:
-    explicit CFPtr(Ref ref = nullptr) noexcept:
-        m_ref(ref)
+    explicit CFPtr(Ref ref = nullptr) noexcept
+        : m_ref(ref)
     {
     }
 
-    CFPtr(CFPtr&& rg) noexcept:
-        m_ref(rg.m_ref)
+    CFPtr(CFPtr&& rg) noexcept
+        : m_ref(rg.m_ref)
     {
         rg.m_ref = nullptr;
     }
@@ -87,18 +87,18 @@ private:
     Ref m_ref;
 };
 
-template<class Ref>
-CFPtr<Ref> adoptCF(Ref ptr) {
+template <class Ref>
+CFPtr<Ref> adoptCF(Ref ptr)
+{
     return CFPtr<Ref>(ptr);
 }
 
-template<class Ref>
-CFPtr<Ref> retainCF(Ref ptr) {
+template <class Ref>
+CFPtr<Ref> retainCF(Ref ptr)
+{
     CFRetain(ptr);
     return CFPtr<Ref>(ptr);
 }
-
-
 }
 }
 

@@ -33,7 +33,7 @@
 #ifndef _MSC_VER
 
 #ifdef REALM_COMPILER_SSE
-    #include <emmintrin.h> // SSE2 (using __m128i)
+#include <emmintrin.h> // SSE2 (using __m128i)
 #endif
 
 namespace realm {

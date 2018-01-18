@@ -24,7 +24,6 @@
 #include <realm/column.hpp>
 #include <realm/column_type.hpp>
 #include <realm/column_table.hpp>
-#include <realm/column_binary.hpp>
 #include <realm/table.hpp>
 #include <realm/utilities.hpp>
 
@@ -43,10 +42,16 @@ class BinaryColumn;
 /// column (BinaryColumn) and stores additional data for values of type string
 /// or binary data. The last subcolumn is optional. The root of a mixed column
 /// is an array node of type Array that stores the root refs of the subcolumns.
-class MixedColumn: public ColumnBaseSimple {
+class MixedColumn : public ColumnBaseSimple {
 public:
     /// Create a mixed column wrapper and attach it to a preexisting
     /// underlying structure of arrays.
+    ///
+    /// \param alloc The memory allocator to change the underlying
+    /// structure in memory.
+    ///
+    /// \param ref The memory reference of the MixedColumn for which
+    /// this accessor should be creator for.
     ///
     /// \param table If this column is used as part of a table you
     /// must pass a pointer to that table. Otherwise you must pass
@@ -55,13 +60,19 @@ public:
     /// \param column_ndx If this column is used as part of a table
     /// you must pass the logical index of the column within that
     /// table. Otherwise you should pass zero.
-    MixedColumn(Allocator&, ref_type, Table* table, size_t column_ndx);
+    MixedColumn(Allocator& alloc, ref_type ref, Table* table, size_t column_ndx);
 
     ~MixedColumn() noexcept override;
 
     DataType get_type(size_t ndx) const noexcept;
-    size_t size() const noexcept final { return m_types->size(); }
-    bool is_empty() const noexcept { return size() == 0; }
+    size_t size() const noexcept final
+    {
+        return m_types->size();
+    }
+    bool is_empty() const noexcept
+    {
+        return size() == 0;
+    }
 
     int64_t get_int(size_t ndx) const noexcept;
     bool get_bool(size_t ndx) const noexcept;
@@ -81,20 +92,17 @@ public:
     /// contain a subtable.
     size_t get_subtable_size(size_t row_ndx) const noexcept;
 
-    Table* get_subtable_accessor(size_t row_ndx) const noexcept override;
+    TableRef get_subtable_accessor(size_t row_ndx) const noexcept override;
 
     void discard_subtable_accessor(size_t row_ndx) noexcept override;
 
     /// If the value at the specified index is a subtable, return a
-    /// pointer to that accessor for that subtable. Otherwise return
+    /// TableRef to that accessor for that subtable. Otherwise return
     /// null. The accessor will be created if it does not already
     /// exist.
-    ///
-    /// The returned table pointer must **always** end up being
-    /// wrapped in some instantiation of BasicTableRef<>.
-    Table* get_subtable_ptr(size_t row_ndx);
+    TableRef get_subtable_tableref(size_t row_ndx);
 
-    const Table* get_subtable_ptr(size_t subtable_ndx) const;
+    ConstTableRef get_subtable_tableref(size_t subtable_ndx) const;
 
     void set_int(size_t ndx, int64_t value);
     void set_bool(size_t ndx, bool value);
@@ -106,7 +114,7 @@ public:
     void set_binary(size_t ndx, BinaryData value);
     void set_subtable(size_t ndx, const Table* value);
 
-    void insert_int(size_t ndx, int64_t value);
+    void insert_int(size_t ndx, int_fast64_t value);
     void insert_bool(size_t ndx, bool value);
     void insert_olddatetime(size_t ndx, OldDateTime value);
     void insert_timestamp(size_t ndx, Timestamp value);
@@ -132,8 +140,7 @@ public:
     static size_t get_size_from_ref(ref_type root_ref, Allocator&) noexcept;
 
     // Overriding method in ColumnBase
-    ref_type write(size_t, size_t, size_t,
-                   _impl::OutputStream&) const override;
+    ref_type write(size_t, size_t, size_t, _impl::OutputStream&) const override;
 
     void insert_rows(size_t, size_t, size_t, bool) override;
     void erase_rows(size_t, size_t, size_t, bool) override;
@@ -145,34 +152,33 @@ public:
     void adj_acc_erase_row(size_t) noexcept override;
     void adj_acc_move_over(size_t, size_t) noexcept override;
     void adj_acc_swap_rows(size_t, size_t) noexcept override;
+    void adj_acc_move_row(size_t, size_t) noexcept override;
     void adj_acc_clear_root_table() noexcept override;
     void mark(int) noexcept override;
     void refresh_accessor_tree(size_t, const Spec&) override;
 
-#ifdef REALM_DEBUG
     void verify() const override;
     void verify(const Table&, size_t) const override;
     void to_dot(std::ostream&, StringData title) const override;
     void do_dump_node_structure(std::ostream&, int) const override;
-#endif
 
 private:
     enum MixedColType {
         // NOTE: below numbers must be kept in sync with ColumnType
         // Column types used in Mixed
-        mixcol_Int         =  0,
-        mixcol_Bool        =  1,
-        mixcol_String      =  2,
+        mixcol_Int = 0,
+        mixcol_Bool = 1,
+        mixcol_String = 2,
         //                    3, used for STRING_ENUM in ColumnType
-        mixcol_Binary      =  4,
-        mixcol_Table       =  5,
-        mixcol_Mixed       =  6,
-        mixcol_OldDateTime =  7,
-        mixcol_Timestamp   =  8,
-        mixcol_Float       =  9,
-        mixcol_Double      = 10, // Positive Double
-        mixcol_DoubleNeg   = 11, // Negative Double
-        mixcol_IntNeg      = 12  // Negative Integers
+        mixcol_Binary = 4,
+        mixcol_Table = 5,
+        mixcol_Mixed = 6,
+        mixcol_OldDateTime = 7,
+        mixcol_Timestamp = 8,
+        mixcol_Float = 9,
+        mixcol_Double = 10,    // Positive Double
+        mixcol_DoubleNeg = 11, // Negative Double
+        mixcol_IntNeg = 12     // Negative Integers
     };
 
     class RefsColumn;
@@ -216,15 +222,14 @@ private:
 
     void insert_value(size_t row_ndx, int_fast64_t types_value, int_fast64_t data_value);
     void insert_int(size_t ndx, int_fast64_t value, MixedColType type);
-    void insert_pos_neg(size_t ndx, int_fast64_t value, MixedColType pos_type,
-                        MixedColType neg_type);
+    void insert_pos_neg(size_t ndx, int_fast64_t value, MixedColType pos_type, MixedColType neg_type);
 
     void do_discard_child_accessors() noexcept override;
 
 #ifdef REALM_DEBUG
     void do_verify(const Table*, size_t col_ndx) const;
-    void leaf_to_dot(MemRef, ArrayParent*, size_t, std::ostream&) const override;
 #endif
+    void leaf_to_dot(MemRef, ArrayParent*, size_t, std::ostream&) const override;
 };
 
 // LCOV_EXCL_START
@@ -237,16 +242,12 @@ inline StringData MixedColumn::get_index_data(size_t, StringIndex::StringConvers
 // LCOV_EXCL_STOP
 
 
-class MixedColumn::RefsColumn: public SubtableColumnBase {
+class MixedColumn::RefsColumn : public SubtableColumnBase {
 public:
-    RefsColumn(Allocator& alloc, ref_type ref, Table* table, size_t column_ndx):
-        SubtableColumnBase(alloc, ref, table, column_ndx)
-    {
-    }
+    RefsColumn(Allocator& alloc, ref_type ref, Table* table, size_t column_ndx);
+    ~RefsColumn() noexcept override;
 
-    ~RefsColumn() noexcept override {}
-
-    using SubtableColumnBase::get_subtable_ptr;
+    using SubtableColumnBase::get_subtable_tableref;
 
     void refresh_accessor_tree(size_t, const Spec&) override;
 

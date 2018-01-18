@@ -20,12 +20,13 @@
 
 #import "RLMAccessor.h"
 #import "RLMObject_Private.h"
+#import "RLMObject_Private.hpp"
 #import "RLMObjectSchema_Private.hpp"
 #import "RLMObjectStore.h"
 #import "RLMProperty_Private.h"
 #import "RLMRealm_Dynamic.h"
 #import "RLMRealm_Private.hpp"
-#import "RLMResults_Private.h"
+#import "RLMResults_Private.hpp"
 #import "RLMSchema_Private.hpp"
 #import "RLMUtil.hpp"
 
@@ -55,6 +56,8 @@ using namespace realm;
 
 @implementation RLMMigration {
     realm::Schema *_schema;
+    NSMutableDictionary *deletedObjectIndices;
+    NSMutableSet *deletedClasses;
 }
 
 - (instancetype)initWithRealm:(RLMRealm *)realm oldRealm:(RLMRealm *)oldRealm schema:(realm::Schema &)schema {
@@ -64,6 +67,8 @@ using namespace realm;
         _oldRealm = oldRealm;
         _schema = &schema;
         object_setClass(_oldRealm, RLMMigrationRealm.class);
+        deletedObjectIndices = [NSMutableDictionary dictionary];
+        deletedClasses = [NSMutableSet set];
     }
     return self;
 }
@@ -77,13 +82,26 @@ using namespace realm;
 }
 
 - (void)enumerateObjects:(NSString *)className block:(RLMObjectMigrationBlock)block {
+    if ([deletedClasses containsObject:className]) {
+        return;
+    }
+    
     // get all objects
     RLMResults *objects = [_realm.schema schemaForClassName:className] ? [_realm allObjects:className] : nil;
     RLMResults *oldObjects = [_oldRealm.schema schemaForClassName:className] ? [_oldRealm allObjects:className] : nil;
 
     if (objects && oldObjects) {
+        NSArray *deletedObjects = deletedObjectIndices[className];
+        if (!deletedObjects) {
+            deletedObjects = [NSMutableArray array];
+            deletedObjectIndices[className] = deletedObjects;
+        }
+
         for (long i = oldObjects.count - 1; i >= 0; i--) {
             @autoreleasepool {
+                if ([deletedObjects containsObject:@(i)]) {
+                    continue;
+                }
                 block(oldObjects[i], objects[i]);
             }
         }
@@ -117,6 +135,9 @@ using namespace realm;
 
         block(self, _oldRealm->_realm->schema_version());
 
+        [self deleteObjectsMarkedForDeletion];
+        [self deleteDataMarkedForDeletion];
+
         _oldRealm = nil;
         _realm = nil;
     }
@@ -131,7 +152,17 @@ using namespace realm;
 }
 
 - (void)deleteObject:(RLMObject *)object {
-    [_realm deleteObject:object];
+    [deletedObjectIndices[object.objectSchema.className] addObject:@(object->_row.get_index())];
+}
+
+- (void)deleteObjectsMarkedForDeletion {
+    for (NSString *className in deletedObjectIndices.allKeys) {
+        RLMResults *objects = [_realm allObjects:className];
+        for (NSNumber *index in deletedObjectIndices[className]) {
+            RLMObject *object = objects[index.longValue];
+            [_realm deleteObject:object];
+        }
+    }
 }
 
 - (BOOL)deleteDataForClassName:(NSString *)name {
@@ -144,14 +175,23 @@ using namespace realm;
         return false;
     }
 
-    if ([_realm.schema schemaForClassName:name]) {
-        table->clear();
-    }
-    else {
-        realm::ObjectStore::delete_data_for_object(_realm.group, name.UTF8String);
-    }
-
+    [deletedClasses addObject:name];
     return true;
+}
+
+- (void)deleteDataMarkedForDeletion {
+    for (NSString *className in deletedClasses) {
+        TableRef table = ObjectStore::table_for_object_type(_realm.group, className.UTF8String);
+        if (!table) {
+            continue;
+        }
+        if ([_realm.schema schemaForClassName:className]) {
+            table->clear();
+        }
+        else {
+            realm::ObjectStore::delete_data_for_object(_realm.group, className.UTF8String);
+        }
+    }
 }
 
 - (void)renamePropertyForClass:(NSString *)className oldName:(NSString *)oldName newName:(NSString *)newName {

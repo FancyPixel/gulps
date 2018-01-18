@@ -1,6 +1,0 @@
-framework module JTCalendar {
-  umbrella header "JTCalendar-umbrella.h"
-
-  export *
-  module * { export * }
-}

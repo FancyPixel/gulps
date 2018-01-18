@@ -40,12 +40,12 @@ open class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewCon
     manager.startDeviceMotionUpdates(to: OperationQueue.main) {
       (motion, error) in
       if let motion = motion {
-        let roation = atan2(motion.gravity.x, motion.gravity.y) - M_PI
+        let roation = atan2(motion.gravity.x, motion.gravity.y) - Double.pi
         self.progressMeter?.transform = CGAffineTransform(rotationAngle: CGFloat(roation))
       }
     }
 
-    realmNotification = EntryHandler.sharedHandler.realm.addNotificationBlock { note, realm in
+    realmNotification = EntryHandler.sharedHandler.realm.observe { note, realm in
       self.updateUI()
     }
 
@@ -102,7 +102,7 @@ open class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewCon
     EntryHandler.sharedHandler.addGulp(delta)
   }
 
-  func updateUI() {
+  @objc func updateUI() {
     let percentage = EntryHandler.sharedHandler.currentPercentage()
     percentageLabel.countFromCurrentValue(to: CGFloat(round(percentage)))
     var fillTo = Double(percentage / 100.0)

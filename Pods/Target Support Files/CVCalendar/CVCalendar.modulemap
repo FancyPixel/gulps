@@ -1,0 +1,6 @@
+framework module CVCalendar {
+  umbrella header "CVCalendar-umbrella.h"
+
+  export *
+  module * { export * }
+}

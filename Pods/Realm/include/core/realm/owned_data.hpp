@@ -19,6 +19,8 @@
 #ifndef REALM_OWNED_DATA_HPP
 #define REALM_OWNED_DATA_HPP
 
+#include <realm/util/assert.hpp>
+
 #include <cstring>
 #include <memory>
 
@@ -28,10 +30,13 @@ namespace realm {
 class OwnedData {
 public:
     /// Construct a null reference.
-    OwnedData() noexcept {}
+    OwnedData() noexcept
+    {
+    }
 
     /// If \a data_to_copy is 'null', \a data_size must be zero.
-    OwnedData(const char* data_to_copy, size_t data_size) : m_size(data_size)
+    OwnedData(const char* data_to_copy, size_t data_size)
+        : m_size(data_size)
     {
         REALM_ASSERT_DEBUG(data_to_copy || data_size == 0);
         if (data_to_copy) {
@@ -41,20 +46,30 @@ public:
     }
 
     /// If \a unique_data is 'null', \a data_size must be zero.
-    OwnedData(std::unique_ptr<char[]> unique_data, size_t data_size) noexcept :
-        m_data(std::move(unique_data)), m_size(data_size)
+    OwnedData(std::unique_ptr<char[]> unique_data, size_t data_size) noexcept
+        : m_data(std::move(unique_data))
+        , m_size(data_size)
     {
         REALM_ASSERT_DEBUG(m_data || m_size == 0);
     }
 
-    OwnedData(const OwnedData& other) : OwnedData(other.m_data.get(), other.m_size) { }
+    OwnedData(const OwnedData& other)
+        : OwnedData(other.m_data.get(), other.m_size)
+    {
+    }
     OwnedData& operator=(const OwnedData& other);
 
     OwnedData(OwnedData&&) = default;
     OwnedData& operator=(OwnedData&&) = default;
 
-    const char* data() const { return m_data.get(); }
-    size_t size() const { return m_size; }
+    const char* data() const
+    {
+        return m_data.get();
+    }
+    size_t size() const
+    {
+        return m_size;
+    }
 
 private:
     std::unique_ptr<char[]> m_data;
@@ -67,7 +82,8 @@ inline OwnedData& OwnedData::operator=(const OwnedData& other)
         if (other.m_data) {
             m_data = std::unique_ptr<char[]>(new char[other.m_size]);
             memcpy(m_data.get(), other.m_data.get(), other.m_size);
-        } else {
+        }
+        else {
             m_data = nullptr;
         }
         m_size = other.m_size;

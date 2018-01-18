@@ -27,7 +27,7 @@ class BacklinkColumn;
 class Table;
 
 // Abstract base class for columns containing links
-class LinkColumnBase: public IntegerColumn {
+class LinkColumnBase : public IntegerColumn {
 public:
     // Create unattached root array aaccessor.
     LinkColumnBase(Allocator& alloc, ref_type ref, Table* table, size_t column_ndx);
@@ -37,7 +37,10 @@ public:
     void set_null(size_t) override = 0;
     bool is_null(size_t) const noexcept override = 0;
 
-    bool supports_search_index() const noexcept final { return false; }
+    bool supports_search_index() const noexcept final
+    {
+        return false;
+    }
     StringIndex* create_search_index() override;
 
     bool get_weak_links() const noexcept;
@@ -51,24 +54,21 @@ public:
     void swap_rows(size_t, size_t) override = 0;
 
     virtual void do_nullify_link(size_t row_ndx, size_t old_target_row_ndx) = 0;
-    virtual void do_update_link(size_t row_ndx, size_t old_target_row_ndx,
-                                size_t new_target_row_ndx) = 0;
-    virtual void do_swap_link(size_t row_ndx, size_t target_row_ndx_1,
-                              size_t target_row_ndx_2) = 0;
+    virtual void do_update_link(size_t row_ndx, size_t old_target_row_ndx, size_t new_target_row_ndx) = 0;
+    virtual void do_swap_link(size_t row_ndx, size_t target_row_ndx_1, size_t target_row_ndx_2) = 0;
 
     void adj_acc_insert_rows(size_t, size_t) noexcept override;
     void adj_acc_erase_row(size_t) noexcept override;
     void adj_acc_move_over(size_t, size_t) noexcept override;
     void adj_acc_swap_rows(size_t, size_t) noexcept override;
+    void adj_acc_move_row(size_t, size_t) noexcept override;
     void adj_acc_clear_root_table() noexcept override;
     void mark(int) noexcept override;
     void refresh_accessor_tree(size_t, const Spec&) override;
     void bump_link_origin_table_version() noexcept override;
 
-#ifdef REALM_DEBUG
     void verify(const Table&, size_t) const override;
     using IntegerColumn::verify;
-#endif
 
 protected:
     // A pointer to the table that this column is part of.
@@ -81,18 +81,15 @@ protected:
     /// Call Table::cascade_break_backlinks_to() for the specified target row if
     /// it is not already in \a state.rows, and the number of strong links to it
     /// has dropped to zero.
-    void check_cascade_break_backlinks_to(size_t target_table_ndx, size_t target_row_ndx,
-                                          CascadeState& state);
+    void check_cascade_break_backlinks_to(size_t target_table_ndx, size_t target_row_ndx, CascadeState& state);
 };
-
-
 
 
 // Implementation
 
-inline LinkColumnBase::LinkColumnBase(Allocator& alloc, ref_type ref, Table* table, size_t column_ndx):
-    IntegerColumn(alloc, ref, column_ndx), // Throws
-    m_table(table)
+inline LinkColumnBase::LinkColumnBase(Allocator& alloc, ref_type ref, Table* table, size_t column_ndx)
+    : IntegerColumn(alloc, ref, column_ndx) // Throws
+    , m_table(table)
 {
 }
 
@@ -136,8 +133,7 @@ inline void LinkColumnBase::set_backlink_column(BacklinkColumn& column) noexcept
     m_backlink_column = &column;
 }
 
-inline void LinkColumnBase::adj_acc_insert_rows(size_t row_ndx,
-                                                size_t num_rows) noexcept
+inline void LinkColumnBase::adj_acc_insert_rows(size_t row_ndx, size_t num_rows) noexcept
 {
     IntegerColumn::adj_acc_insert_rows(row_ndx, num_rows);
 
@@ -153,8 +149,7 @@ inline void LinkColumnBase::adj_acc_erase_row(size_t row_ndx) noexcept
     tf::mark(*m_target_table);
 }
 
-inline void LinkColumnBase::adj_acc_move_over(size_t from_row_ndx,
-                                              size_t to_row_ndx) noexcept
+inline void LinkColumnBase::adj_acc_move_over(size_t from_row_ndx, size_t to_row_ndx) noexcept
 {
     IntegerColumn::adj_acc_move_over(from_row_ndx, to_row_ndx);
 
@@ -167,6 +162,14 @@ inline void LinkColumnBase::adj_acc_swap_rows(size_t row_ndx_1, size_t row_ndx_2
     IntegerColumn::adj_acc_swap_rows(row_ndx_1, row_ndx_2);
 
     typedef _impl::TableFriend tf;
+    tf::mark(*m_target_table);
+}
+
+inline void LinkColumnBase::adj_acc_move_row(size_t from_ndx, size_t to_ndx) noexcept
+{
+    IntegerColumn::adj_acc_move_row(from_ndx, to_ndx);
+
+    using tf = _impl::TableFriend;
     tf::mark(*m_target_table);
 }
 
@@ -196,7 +199,6 @@ inline void LinkColumnBase::bump_link_origin_table_version() noexcept
         tf::bump_version(*m_target_table, bump_global);
     }
 }
-
 
 
 } // namespace realm

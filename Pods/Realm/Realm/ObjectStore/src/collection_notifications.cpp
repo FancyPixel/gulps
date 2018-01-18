@@ -23,7 +23,7 @@
 using namespace realm;
 using namespace realm::_impl;
 
-NotificationToken::NotificationToken(std::shared_ptr<_impl::CollectionNotifier> notifier, size_t token)
+NotificationToken::NotificationToken(std::shared_ptr<_impl::CollectionNotifier> notifier, uint64_t token)
 : m_notifier(std::move(notifier)), m_token(token)
 {
 }
@@ -53,4 +53,9 @@ NotificationToken& NotificationToken::operator=(realm::NotificationToken&& rgt)
         m_token = rgt.m_token;
     }
     return *this;
+}
+
+void NotificationToken::suppress_next()
+{
+    m_notifier.load()->suppress_next_notification(m_token);
 }
