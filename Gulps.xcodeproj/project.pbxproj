@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		04A25CC003619ECD3665587B /* Pods_Gulps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 826C81EBAB7F5F01AACA02FD /* Pods_Gulps.framework */; };
+		241EDC9A2010838C00A270C4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 241EDC982010838C00A270C4 /* LaunchScreen.storyboard */; };
 		650DCE651AF3CD4100E12764 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650DCE641AF3CD4100E12764 /* Constants.swift */; };
 		650DCE661AF3CD4100E12764 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650DCE641AF3CD4100E12764 /* Constants.swift */; };
 		650DCE671AF3CD4100E12764 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650DCE641AF3CD4100E12764 /* Constants.swift */; };
@@ -61,7 +62,6 @@
 		65F44C211AF24B440093A3E9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F44C201AF24B440093A3E9 /* AppDelegate.swift */; };
 		65F44C261AF24B440093A3E9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65F44C241AF24B440093A3E9 /* Main.storyboard */; };
 		65F44C281AF24B440093A3E9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65F44C271AF24B440093A3E9 /* Images.xcassets */; };
-		65F44C2B1AF24B440093A3E9 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65F44C291AF24B440093A3E9 /* LaunchScreen.xib */; };
 		65F44C471AF24B770093A3E9 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F44C461AF24B770093A3E9 /* NotificationCenter.framework */; };
 		65F44C4C1AF24B780093A3E9 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F44C4B1AF24B770093A3E9 /* TodayViewController.swift */; };
 		65F44C4E1AF24B780093A3E9 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65F44C4D1AF24B780093A3E9 /* MainInterface.storyboard */; };
@@ -159,8 +159,8 @@
 
 /* Begin PBXFileReference section */
 		0949E3042AD24736A6E5C665 /* Pods-GulpsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GulpsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GulpsTests/Pods-GulpsTests.release.xcconfig"; sourceTree = "<group>"; };
+		241EDC992010838C00A270C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2AB916D31E82B36600301C45 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Main.strings; sourceTree = "<group>"; };
-		2AB916D41E82B36600301C45 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		2AB916D51E82B36600301C45 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Onboarding.strings; sourceTree = "<group>"; };
 		2AB916D61E82B36600301C45 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Interface.strings; sourceTree = "<group>"; };
 		2AB916D71E82B36600301C45 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -210,7 +210,6 @@
 		65F44C201AF24B440093A3E9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		65F44C251AF24B440093A3E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		65F44C271AF24B440093A3E9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		65F44C2A1AF24B440093A3E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		65F44C441AF24B770093A3E9 /* GulpsToday.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = GulpsToday.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		65F44C461AF24B770093A3E9 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		65F44C4A1AF24B770093A3E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -290,8 +289,8 @@
 			isa = PBXGroup;
 			children = (
 				65F44C241AF24B440093A3E9 /* Main.storyboard */,
-				65F44C291AF24B440093A3E9 /* LaunchScreen.xib */,
 				6537A80B1AF24CA700EC16E9 /* Onboarding.storyboard */,
+				241EDC982010838C00A270C4 /* LaunchScreen.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -742,13 +741,13 @@
 			files = (
 				65F55F321B5F965F008653F2 /* drop.caf in Resources */,
 				65F44C261AF24B440093A3E9 /* Main.storyboard in Resources */,
-				65F44C2B1AF24B440093A3E9 /* LaunchScreen.xib in Resources */,
 				65E94C6E1BBC13BF00A65B30 /* Gulps.entitlements in Resources */,
 				6537A82C1AF24CC800EC16E9 /* KaushanScript.ttf in Resources */,
 				65F55F231B592D91008653F2 /* Localizable.strings in Resources */,
 				6537A82D1AF24CC800EC16E9 /* Lato-Light.ttf in Resources */,
 				65F44C281AF24B440093A3E9 /* Images.xcassets in Resources */,
 				65E94C6C1BBC13B400A65B30 /* InfoPlist.strings in Resources */,
+				241EDC9A2010838C00A270C4 /* LaunchScreen.storyboard in Resources */,
 				6537A80D1AF24CA700EC16E9 /* Onboarding.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1046,6 +1045,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		241EDC982010838C00A270C4 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				241EDC992010838C00A270C4 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
 		6537A80B1AF24CA700EC16E9 /* Onboarding.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1074,15 +1081,6 @@
 				2AB916D31E82B36600301C45 /* tr */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		65F44C291AF24B440093A3E9 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				65F44C2A1AF24B440093A3E9 /* Base */,
-				2AB916D41E82B36600301C45 /* tr */,
-			);
-			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
 		65F44C701AF24B8A0093A3E9 /* Interface.storyboard */ = {
