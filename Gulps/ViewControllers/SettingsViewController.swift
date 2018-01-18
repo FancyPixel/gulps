@@ -117,6 +117,10 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
       }
     }
     if let actionSheet = actionSheet {
+      if #available(iOS 11.0, *) {
+        let bottomInset = UIApplication.shared.delegate?.window??.safeAreaInsets.bottom ?? 0.0
+        actionSheet.cancelButtonHeight = 44.0 + bottomInset
+      }
       actionSheet.show()
     }
   }
