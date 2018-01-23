@@ -1,7 +1,7 @@
 ![Gulps](https://raw.githubusercontent.com/FancyPixel/gulps/master/assets/screenshot.png)
 
 [![Build Status](https://travis-ci.org/FancyPixel/gulps.svg)](https://travis-ci.org/FancyPixel/gulps)
-![Swift 3.0](https://img.shields.io/badge/swift-3.0-orange.svg)
+![Swift 4.0](https://img.shields.io/badge/swift-4.0-orange.svg)
 [![Join the chat at https://gitter.im/FancyPixel/gulps](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/FancyPixel/gulps?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Gulps lets you track your daily water intake in a simple and intuitive way: set your goal, set your usual portion, and start keeping track from within the app or the widget in your notification center.  
@@ -26,23 +26,18 @@ Feel free to edit the file, we'll include your translation in the next release a
 
 ### Contributors
 
-- Thanks to [Donny Wals](https://github.com/donnywals) for the Dutch translation. 
-- Thanks to [Alexandre Thomas](https://github.com/thomalexandre) for the French translation. 
+- Thanks to [Donny Wals](https://github.com/donnywals) for the Dutch translation.
+- Thanks to [Alexandre Thomas](https://github.com/thomalexandre) for the French translation.
 - Thanks to [Durul Dalkanat](https://github.com/durul) for the Turkish translation.
 
-# Imitation is the sincerest form of flattery
+# License and Open Source
 
-That's why we want to thank these fellow developers for the vote of confidence:  
-
-- [Water Meter for Apple Watch](https://itunes.apple.com/ca/app/water-meter-for-apple-watch/id989125882?mt=8)
-- [Coffee Meter for Apple Watch](https://itunes.apple.com/us/app/coffee-meter-for-apple-watch/id988805416?mt=8)
-- [Water Daily Free](https://itunes.apple.com/us/app/water-daily-free-drink-more/id995317367?mt=8)
-
-We are ok with that (hence the MIT license), but when cloning this we encourage you to take the [DBAA](http://urbandictionary.com/define.php?term=DBAA) clause in mind. 
+Gulps is available for free on the AppStore. We believe in open software, so we decided to open source this app under MIT license you can freely use part of it in your projects.
+We however kindly ask you to *NOT* ship this app or slight variations of it under your own name.
 
 # MIT License
 
-	Copyright (c) 2017 Fancy Pixel S.r.l. All rights reserved.
+	Copyright (c) 2016-2018 Fancy Pixel S.r.l. All rights reserved.
 
 	Permission is hereby granted, free of charge, to any person obtaining a
 	copy of this software and associated documentation files (the "Software"),
@@ -62,4 +57,3 @@ We are ok with that (hence the MIT license), but when cloning this we encourage 
 	CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 	TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 	SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-	
