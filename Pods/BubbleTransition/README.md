@@ -21,7 +21,7 @@ A custom modal transition that presents and dismiss a controller inside an expan
 # Usage
 Install through [CocoaPods](http://cocoapods.org):
 ```
-pod 'BubbleTransition', '~> 1.0.0'
+pod 'BubbleTransition', '~> 2.0.0'
 
 use_frameworks!
 ```
@@ -38,37 +38,37 @@ pod 'BubbleTransition', git: 'https://github.com/andreamazz/BubbleTransition', b
 use_frameworks!
 ```
 
-#Setup
+# Setup
 Have your viewcontroller conform to `UIViewControllerTransitioningDelegate`. Set the `transitionMode`, the `startingPoint`, the `bubbleColor` and the `duration`.
 ```swift
 let transition = BubbleTransition()
 
-   public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-       let controller = segue.destination
-       controller.transitioningDelegate = self
-       controller.modalPresentationStyle = .custom
+public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+  let controller = segue.destination
+  controller.transitioningDelegate = self
+  controller.modalPresentationStyle = .custom
 }
 
 // MARK: UIViewControllerTransitioningDelegate
 
-   public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-    transition.transitionMode = .present
-    transition.startingPoint = someButton.center
-    transition.bubbleColor = someButton.backgroundColor!
-    return transition
+public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+  transition.transitionMode = .present
+  transition.startingPoint = someButton.center
+  transition.bubbleColor = someButton.backgroundColor!
+  return transition
 }
 
-  public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-    transition.transitionMode = .dismiss
-    transition.startingPoint = someButton.center
-    transition.bubbleColor = someButton.backgroundColor!
-    return transition
+public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+  transition.transitionMode = .dismiss
+  transition.startingPoint = someButton.center
+  transition.bubbleColor = someButton.backgroundColor!
+  return transition
 }
 ```
 
 You can find the Objective-C equivalent [here](https://gist.github.com/andreamazz/9b0d6c7db065555ec0d7).
 
-#Properties
+# Properties
 ```swift
 var startingPoint = CGPointZero
 ```
@@ -91,17 +91,17 @@ The color of the bubble. Make sure that it matches the destination controller's 
 
 Checkout the sample project for the full implementation.
 
-#Author
-[Andrea Mazzini](https://twitter.com/theandreamazz). I'm available for freelance work, feel free to contact me. 
+# Author
+[Andrea Mazzini](https://twitter.com/theandreamazz). I'm available for freelance work, feel free to contact me.
 
 Want to support the development of [these free libraries](https://cocoapods.org/owners/734)? Buy me a coffee ☕️ via [Paypal](https://www.paypal.me/andreamazzini).  
 
-#Contributors
-Thanks to [everyone](https://github.com/andreamazz/BubbleTransition/graphs/contributors) kind enough to submit a pull request. 
+# Contributors
+Thanks to [everyone](https://github.com/andreamazz/BubbleTransition/graphs/contributors) kind enough to submit a pull request.
 
-#MIT License
+# MIT License
 
-	Copyright (c) 2015 Andrea Mazzini. All rights reserved.
+	Copyright (c) 2017 Andrea Mazzini. All rights reserved.
 
 	Permission is hereby granted, free of charge, to any person obtaining a
 	copy of this software and associated documentation files (the "Software"),
@@ -121,4 +121,3 @@ Thanks to [everyone](https://github.com/andreamazz/BubbleTransition/graphs/contr
 	CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 	TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 	SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-	

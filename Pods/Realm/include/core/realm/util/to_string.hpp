@@ -27,16 +27,62 @@ namespace util {
 
 class Printable {
 public:
-    Printable(bool value) : m_type(Type::Bool), m_uint(value) { }
-    Printable(unsigned char value) : m_type(Type::Uint), m_uint(value) { }
-    Printable(unsigned int value) : m_type(Type::Uint), m_uint(value) { }
-    Printable(unsigned long value) : m_type(Type::Uint), m_uint(value) { }
-    Printable(unsigned long long value) : m_type(Type::Uint), m_uint(value) { }
-    Printable(char value) : m_type(Type::Int), m_int(value) { }
-    Printable(int value) : m_type(Type::Int), m_int(value) { }
-    Printable(long value) : m_type(Type::Int), m_int(value) { }
-    Printable(long long value) : m_type(Type::Int), m_int(value) { }
-    Printable(const char* value) : m_type(Type::String), m_string(value) { }
+    Printable(bool value)
+        : m_type(Type::Bool)
+        , m_uint(value)
+    {
+    }
+    Printable(unsigned char value)
+        : m_type(Type::Uint)
+        , m_uint(value)
+    {
+    }
+    Printable(unsigned int value)
+        : m_type(Type::Uint)
+        , m_uint(value)
+    {
+    }
+    Printable(unsigned long value)
+        : m_type(Type::Uint)
+        , m_uint(value)
+    {
+    }
+    Printable(unsigned long long value)
+        : m_type(Type::Uint)
+        , m_uint(value)
+    {
+    }
+    Printable(char value)
+        : m_type(Type::Int)
+        , m_int(value)
+    {
+    }
+    Printable(int value)
+        : m_type(Type::Int)
+        , m_int(value)
+    {
+    }
+    Printable(long value)
+        : m_type(Type::Int)
+        , m_int(value)
+    {
+    }
+    Printable(long long value)
+        : m_type(Type::Int)
+        , m_int(value)
+    {
+    }
+    Printable(const char* value)
+        : m_type(Type::String)
+        , m_string(value)
+    {
+    }
+    Printable(std::string const& value)
+        : m_type(Type::String)
+        , m_string(value.c_str())
+    {
+    }
+
 
     void print(std::ostream& out, bool quote) const;
     std::string str() const;
@@ -48,7 +94,7 @@ private:
         Bool,
         Int,
         Uint,
-        String
+        String,
     } m_type;
 
     union {
@@ -59,11 +105,20 @@ private:
 };
 
 
-template<class T>
+template <class T>
 std::string to_string(const T& v)
 {
     return Printable(v).str();
 }
+
+std::string format(const char* fmt, std::initializer_list<Printable>);
+
+template<typename... Args>
+std::string format(const char* fmt, Args&&... args)
+{
+    return format(fmt, {Printable(args)...});
+}
+
 
 } // namespace util
 } // namespace realm

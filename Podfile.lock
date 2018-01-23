@@ -1,42 +1,43 @@
 PODS:
   - AHKActionSheet (0.5.4)
-  - AMPopTip (0.10.2)
+  - AMPopTip (3.1.3)
   - AMWaveTransition (0.6.2)
   - BAFluidView (0.2.3)
-  - BubbleTransition (2.0.0)
-  - FBSnapshotTestCase (2.1.3):
-    - FBSnapshotTestCase/SwiftSupport (= 2.1.3)
-  - FBSnapshotTestCase/Core (2.1.3)
-  - FBSnapshotTestCase/SwiftSupport (2.1.3):
+  - BubbleTransition (2.0.2)
+  - FBSnapshotTestCase (2.1.4):
+    - FBSnapshotTestCase/SwiftSupport (= 2.1.4)
+  - FBSnapshotTestCase/Core (2.1.4)
+  - FBSnapshotTestCase/SwiftSupport (2.1.4):
     - FBSnapshotTestCase/Core
   - JTCalendar (1.1.16)
-  - Nimble (5.0.0)
-  - Nimble-Snapshots (4.2.0):
+  - Nimble (7.0.3)
+  - Nimble-Snapshots (6.3.0):
+    - Nimble-Snapshots/Core (= 6.3.0)
+  - Nimble-Snapshots/Core (6.3.0):
     - FBSnapshotTestCase (~> 2.0)
-    - Nimble
-    - Quick
-  - pop (1.0.9)
-  - Quick (0.10.0)
-  - Realm (1.1.0):
-    - Realm/Headers (= 1.1.0)
-  - Realm/Headers (1.1.0)
-  - RealmSwift (1.1.0):
-    - Realm (= 1.1.0)
-  - Reveal-SDK (2)
-  - UICountingLabel (1.4.0)
+    - Nimble (~> 7.0)
+  - pop (1.0.10)
+  - Quick (1.2.0)
+  - Realm (3.1.0):
+    - Realm/Headers (= 3.1.0)
+  - Realm/Headers (3.1.0)
+  - RealmSwift (3.1.0):
+    - Realm (= 3.1.0)
+  - Reveal-SDK (13)
+  - UICountingLabel (1.4.1)
 
 DEPENDENCIES:
   - AHKActionSheet (~> 0.5)
-  - AMPopTip (~> 0.7)
+  - AMPopTip
   - AMWaveTransition (~> 0.5)
   - BAFluidView (~> 0.2.3)
   - BubbleTransition (~> 2.0.0)
-  - FBSnapshotTestCase (= 2.1.3)
+  - FBSnapshotTestCase
   - JTCalendar (from `https://github.com/andreamazz/JTCalendar`, branch `develop`)
-  - Nimble (~> 5.0.0)
-  - Nimble-Snapshots (~> 4.2.0)
+  - Nimble
+  - Nimble-Snapshots
   - pop (~> 1.0)
-  - Quick (~> 0.10.0)
+  - Quick
   - RealmSwift
   - Reveal-SDK
   - UICountingLabel (~> 1.2)
@@ -53,21 +54,21 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   AHKActionSheet: f0b312b5c689f72924d231c39dae140ecd5c1d46
-  AMPopTip: 0788a9452806049e3aa0d6d09324606fc41ea646
+  AMPopTip: 0eba2f6fe939ca06f1ba5c5db1f0d0d10f4a758a
   AMWaveTransition: 98952310574779e4ca7e7f4d89f8b1043cdad171
   BAFluidView: 5d84ef109831b97740f75b6d785e51f13fa08398
-  BubbleTransition: bdb9d71993b8d3513008e2dda6bada1ddad25d4f
-  FBSnapshotTestCase: 4607968e0dfa1e2772ec0d0098354f8b870c5753
+  BubbleTransition: 7d98ed7d56f0940e83f350a98103ad473491c769
+  FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
   JTCalendar: 4cc527e2babd446ce4b96a23c257e5a02fbdac26
-  Nimble: 56fc9f5020effa2206de22c3dd910f4fb011b92f
-  Nimble-Snapshots: 4826e3ee211d2c7af27645e35d68b9e9917882e7
-  pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
-  Quick: 5d290df1c69d5ee2f0729956dcf0fd9a30447eaa
-  Realm: ceecf1a4540c4ce9efe196fe73fa9855bce05bd8
-  RealmSwift: 838058b2db95b12cb86bd0cf209df642c33fb60a
-  Reveal-SDK: 4d36a47c7091843eee525b72219e005b90bbac0b
-  UICountingLabel: ed5ce5b6d5ef278ff40d99cfa49577a30ab0c87b
+  Nimble: 7f5a9c447a33002645a071bddafbfb24ea70e0ac
+  Nimble-Snapshots: f5459b5b091678dc942d03ec4741cacb58ba4a52
+  pop: 82ca6b068ce9278fd350fd9dd09482a0ce9492e6
+  Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
+  Realm: 09513d7c054678d65cd02ce09871f805b0d758ac
+  RealmSwift: e868fee9b10e5490ad94b6b6ecd9027944da1824
+  Reveal-SDK: ccc2b0f8014965ea448b7534a7c2c8da232b75e8
+  UICountingLabel: faf890b505d96312e324a86718f031fafffb0ccb
 
-PODFILE CHECKSUM: bd06ae46eca920e0aa9084b9378b6c61608e0726
+PODFILE CHECKSUM: e7e296fc58d427bee676b22072a261e5aade5cf2
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.4.0

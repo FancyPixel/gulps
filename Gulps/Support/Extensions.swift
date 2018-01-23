@@ -18,8 +18,8 @@ extension Double {
 
 extension NSRange {
   func toRange(_ string: String) -> Range<String.Index> {
-    let startIndex = string.characters.index(string.startIndex, offsetBy: location)
-    let endIndex = string.characters.index(startIndex, offsetBy: length)
+    let startIndex = string.index(string.startIndex, offsetBy: location)
+    let endIndex = string.index(startIndex, offsetBy: length)
     return startIndex..<endIndex
   }
 }

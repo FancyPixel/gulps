@@ -19,7 +19,7 @@
 #import "RLMClassInfo.hpp"
 
 #import "RLMRealm_Private.hpp"
-#import "RLMObjectSchema.h"
+#import "RLMObjectSchema_Private.h"
 #import "RLMSchema.h"
 #import "RLMProperty_Private.h"
 #import "RLMQueryUtil.hpp"
@@ -28,6 +28,7 @@
 #import "object_schema.hpp"
 #import "object_store.hpp"
 #import "schema.hpp"
+#import "shared_realm.hpp"
 
 #import <realm/table.hpp>
 
@@ -66,15 +67,20 @@ NSUInteger RLMClassInfo::tableColumn(RLMProperty *property) const {
     return objectSchema->persisted_properties[property.index].table_column;
 }
 
-RLMClassInfo &RLMClassInfo::linkTargetType(size_t index) {
-    if (index < m_linkTargets.size() && m_linkTargets[index]) {
-        return *m_linkTargets[index];
+RLMClassInfo &RLMClassInfo::linkTargetType(size_t propertyIndex) {
+    if (propertyIndex < m_linkTargets.size() && m_linkTargets[propertyIndex]) {
+        return *m_linkTargets[propertyIndex];
     }
-    if (m_linkTargets.size() <= index) {
-        m_linkTargets.resize(index + 1);
+    if (m_linkTargets.size() <= propertyIndex) {
+        m_linkTargets.resize(propertyIndex + 1);
     }
-    m_linkTargets[index] = &realm->_info[rlmObjectSchema.properties[index].objectClassName];
-    return *m_linkTargets[index];
+    m_linkTargets[propertyIndex] = &realm->_info[rlmObjectSchema.properties[propertyIndex].objectClassName];
+    return *m_linkTargets[propertyIndex];
+}
+
+RLMClassInfo &RLMClassInfo::linkTargetType(realm::Property const& property) {
+    REALM_ASSERT(property.type == PropertyType::Object);
+    return linkTargetType(&property - &objectSchema->persisted_properties[0]);
 }
 
 RLMSchemaInfo::impl::iterator RLMSchemaInfo::begin() noexcept { return m_objects.begin(); }
@@ -93,15 +99,32 @@ RLMClassInfo& RLMSchemaInfo::operator[](NSString *name) {
     return *&it->second;
 }
 
-RLMSchemaInfo::RLMSchemaInfo(RLMRealm *realm, RLMSchema *rlmSchema, realm::Schema const& schema) {
+RLMSchemaInfo::RLMSchemaInfo(RLMRealm *realm) {
+    RLMSchema *rlmSchema = realm.schema;
+    realm::Schema const& schema = realm->_realm->schema();
     REALM_ASSERT(rlmSchema.objectSchema.count == schema.size());
-    REALM_ASSERT(m_objects.empty());
 
     m_objects.reserve(schema.size());
     for (RLMObjectSchema *rlmObjectSchema in rlmSchema.objectSchema) {
         m_objects.emplace(std::piecewise_construct,
                           std::forward_as_tuple(rlmObjectSchema.className),
                           std::forward_as_tuple(realm, rlmObjectSchema,
-                                                &*schema.find(rlmObjectSchema.className.UTF8String)));
+                                                &*schema.find(rlmObjectSchema.objectName.UTF8String)));
     }
+}
+
+RLMSchemaInfo RLMSchemaInfo::clone(realm::Schema const& source_schema,
+                                   __unsafe_unretained RLMRealm *const target_realm) {
+    RLMSchemaInfo info;
+    info.m_objects.reserve(m_objects.size());
+
+    auto& schema = target_realm->_realm->schema();
+    for (auto& pair : m_objects) {
+        size_t idx = pair.second.objectSchema - &*source_schema.begin();
+        info.m_objects.emplace(std::piecewise_construct,
+                               std::forward_as_tuple(pair.first),
+                               std::forward_as_tuple(target_realm, pair.second.rlmObjectSchema,
+                                                     &*schema.begin() + idx));
+    }
+    return info;
 }

@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 #define RLM_EXTENSIBLE_STRING_ENUM_CASE_SWIFT_NAME(fully_qualified, _) NS_SWIFT_NAME(fully_qualified)
 #endif
 
-#if __has_attribute(ns_error_domain)
+#if __has_attribute(ns_error_domain) && (!defined(__cplusplus) || !__cplusplus || __cplusplus >= 201103L)
 #define RLM_ERROR_ENUM(type, name, domain) \
     _Pragma("clang diagnostic push") \
     _Pragma("clang diagnostic ignored \"-Wignored-attributes\"") \
@@ -47,7 +47,6 @@ NS_ASSUME_NONNULL_BEGIN
 
  For more information, see [Realm Models](https://realm.io/docs/objc/latest/#models).
  */
-// Make sure numbers match those in <realm/data_type.hpp>
 typedef NS_ENUM(int32_t, RLMPropertyType) {
 
 #pragma mark - Primitive types
@@ -57,34 +56,32 @@ typedef NS_ENUM(int32_t, RLMPropertyType) {
     /** Booleans: `BOOL`, `bool`, `Bool` (Swift) */
     RLMPropertyTypeBool   = 1,
     /** Floating-point numbers: `float`, `Float` (Swift) */
-    RLMPropertyTypeFloat  = 9,
+    RLMPropertyTypeFloat  = 5,
     /** Double-precision floating-point numbers: `double`, `Double` (Swift) */
-    RLMPropertyTypeDouble = 10,
+    RLMPropertyTypeDouble = 6,
 
 #pragma mark - Object types
 
     /** Strings: `NSString`, `String` (Swift) */
     RLMPropertyTypeString = 2,
     /** Binary data: `NSData` */
-    RLMPropertyTypeData   = 4,
-    /** 
+    RLMPropertyTypeData   = 3,
+    /**
      Any object: `id`.
-     
-     This property type is no longer supported for new models. However, old models with any-typed properties are still
-     supported for migration purposes.
-     */
-    RLMPropertyTypeAny    = 6,
-    /** Dates: `NSDate` */
-    RLMPropertyTypeDate   = 8,
 
-#pragma mark - Array/Linked object types
+     This property type is no longer supported for new models. However, old files
+     with any-typed properties are still supported for migration purposes.
+     */
+    RLMPropertyTypeAny    = 9,
+    /** Dates: `NSDate` */
+    RLMPropertyTypeDate   = 4,
+
+#pragma mark - Linked object types
 
     /** Realm model objects. See [Realm Models](https://realm.io/docs/objc/latest/#models) for more information. */
-    RLMPropertyTypeObject = 12,
-    /** Realm arrays. See [Realm Models](https://realm.io/docs/objc/latest/#models) for more information. */
-    RLMPropertyTypeArray  = 13,
+    RLMPropertyTypeObject = 7,
     /** Realm linking objects. See [Realm Models](https://realm.io/docs/objc/latest/#models) for more information. */
-    RLMPropertyTypeLinkingObjects = 14,
+    RLMPropertyTypeLinkingObjects = 8,
 };
 
 /** An error domain identifying Realm-specific errors. */
@@ -104,9 +101,9 @@ typedef RLM_ERROR_ENUM(NSInteger, RLMError, RLMErrorDomain) {
     /** Denotes a file I/O error that occurred when trying to open a Realm. */
     RLMErrorFileAccess            = 2,
 
-    /** 
+    /**
      Denotes a file permission error that ocurred when trying to open a Realm.
-     
+
      This error can occur if the user does not have permission to open or create
      the specified file in the specified access mode when opening a Realm.
      */
@@ -117,24 +114,24 @@ typedef RLM_ERROR_ENUM(NSInteger, RLMError, RLMErrorDomain) {
 
     /**
      Denotes an error that occurs if a file could not be found.
-     
+
      This error may occur if a Realm file could not be found on disk when trying to open a
      Realm as read-only, or if the directory part of the specified path was not found when
      trying to write a copy.
      */
     RLMErrorFileNotFound          = 5,
 
-    /** 
+    /**
      Denotes an error that occurs if a file format upgrade is required to open the file,
      but upgrades were explicitly disabled.
      */
     RLMErrorFileFormatUpgradeRequired = 6,
 
-    /** 
+    /**
      Denotes an error that occurs if the database file is currently open in another
      process which cannot share with the current process due to an
      architecture mismatch.
-     
+
      This error may occur if trying to share a Realm file between an i386 (32-bit) iOS
      Simulator and the Realm Browser application. In this case, please use the 64-bit
      version of the iOS Simulator.
@@ -146,6 +143,15 @@ typedef RLM_ERROR_ENUM(NSInteger, RLMError, RLMErrorDomain) {
 
     /** Denotes an error that occurs if there is a schema version mismatch, so that a migration is required. */
     RLMErrorSchemaMismatch = 10,
+
+    /** Denotes an error that occurs when attempting to open an incompatible synchronized Realm file.
+
+     This error occurs when the Realm file was created with an older version of Realm and an automatic migration
+     to the current version is not possible. When such an error occurs, the original file is moved to a backup
+     location, and future attempts to open the synchronized Realm will result in a new file being created.
+     If you wish to migrate any data from the backup Realm, you can open it using the provided Realm configuration.
+     */
+    RLMErrorIncompatibleSyncedFile = 11,
 };
 
 #pragma mark - Constants
@@ -183,6 +189,11 @@ RLM_EXTENSIBLE_STRING_ENUM_CASE_SWIFT_NAME(RLMRealmRefreshRequiredNotification, 
  */
 extern RLMNotification const RLMRealmDidChangeNotification
 RLM_EXTENSIBLE_STRING_ENUM_CASE_SWIFT_NAME(RLMRealmDidChangeNotification, DidChange);
+
+#pragma mark - Error keys
+
+/** Key to identify the associated backup Realm configuration in an error's `userInfo` dictionary */
+extern NSString * const RLMBackupRealmConfigurationErrorKey;
 
 #pragma mark - Other Constants
 

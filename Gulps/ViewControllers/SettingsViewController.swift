@@ -33,8 +33,8 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
                                                           textColor: .white)
     }
 
-    if (WCSession.isSupported()) {
-      WCSession.default().activate()
+    if WCSession.isSupported() {
+      WCSession.default.activate()
     }
   }
 

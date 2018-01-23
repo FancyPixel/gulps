@@ -19,7 +19,7 @@
 #ifndef REALM_UTIL_HEX_DUMP_HPP
 #define REALM_UTIL_HEX_DUMP_HPP
 
-#include <stddef.h>
+#include <cstddef>
 #include <type_traits>
 #include <limits>
 #include <string>
@@ -31,20 +31,19 @@
 namespace realm {
 namespace util {
 
-template<class T>
+template <class T>
 std::string hex_dump(const T* data, size_t size, const char* separator = " ", int min_digits = -1)
 {
     using U = typename std::make_unsigned<T>::type;
 
     if (min_digits < 0)
-        min_digits = (std::numeric_limits<U>::digits+3) / 4;
+        min_digits = (std::numeric_limits<U>::digits + 3) / 4;
 
     std::ostringstream out;
-    for (const T* i = data; i != data+size; ++i) {
+    for (const T* i = data; i != data + size; ++i) {
         if (i != data)
             out << separator;
-        out << std::setw(min_digits)<<std::setfill('0')<<std::hex<<std::uppercase <<
-            util::promote(U(*i));
+        out << std::setw(min_digits) << std::setfill('0') << std::hex << std::uppercase << util::promote(U(*i));
     }
     return out.str();
 }

@@ -26,7 +26,7 @@ class GulpsViewController: OnboardingViewController, UITextFieldDelegate {
     NotificationCenter.default.addObserver(self, selector: #selector(GulpsViewController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
   }
 
-  func dismissAndSave() {
+  @objc func dismissAndSave() {
     let numberFormatter = NumberFormatter()
     numberFormatter.numberStyle = .decimal
 
@@ -35,11 +35,11 @@ class GulpsViewController: OnboardingViewController, UITextFieldDelegate {
     var small = 0.0
     var big = 0.0
     if let number = numberFormatter.number(from: self.smallGulpText.text ?? "0") {
-      small = number as Double
+      small = number.doubleValue
     }
 
     if let number = numberFormatter.number(from: self.bigGulpText.text ?? "0") {
-      big = number as Double
+      big = number.doubleValue
     }
 
     self.userDefaults.set(small, forKey: Constants.Gulp.small.key())
@@ -72,11 +72,11 @@ class GulpsViewController: OnboardingViewController, UITextFieldDelegate {
     _ = [self.smallGulpText, self.bigGulpText].map({$0.resignFirstResponder()})
   }
 
-  func keyboardWillShow(_ notification: Notification) {
+  @objc func keyboardWillShow(_ notification: Notification) {
     scrollViewTo(-(self.headerLabel.frame.origin.y + self.headerLabel.frame.size.height), from: 0)
   }
 
-  func keyboardWillHide(_ notification: Notification) {
+  @objc func keyboardWillHide(_ notification: Notification) {
     scrollViewTo(0, from: -(self.headerLabel.frame.origin.y + self.headerLabel.frame.size.height))
   }
 

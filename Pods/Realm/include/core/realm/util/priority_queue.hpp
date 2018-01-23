@@ -38,30 +38,28 @@ namespace util {
 /// Note: As opposed to `std::priority_queue`, this does not store elements in a heap
 /// internally. Instead, elements are stored in sorted order. Users of this class are
 /// allowed to operate on this assumption.
-template<class T, class Container = std::vector<T>,
-    class Compare = std::less<typename Container::value_type>>
+template <class T, class Container = std::vector<T>, class Compare = std::less<typename Container::value_type>>
 class PriorityQueue : private Compare {
 public:
-    using container_type  = Container;
-    using value_type      = typename Container::value_type;
-    using size_type       = typename Container::size_type;
-    using reference       = typename Container::reference;
+    using container_type = Container;
+    using value_type = typename Container::value_type;
+    using size_type = typename Container::size_type;
+    using reference = typename Container::reference;
     using const_reference = typename Container::const_reference;
     using const_reverse_iterator = typename Container::const_reverse_iterator;
-    using const_iterator         = typename Container::const_iterator;
+    using const_iterator = typename Container::const_iterator;
 
-    //{@
+    //@{
     /// Construct a PriorityQueue, optionally providing a comparator object.
     PriorityQueue(const Compare& comparator, const Container& cont);
 
     explicit PriorityQueue(const Compare& comparator = Compare{}, Container&& cont = Container{});
 
-    template<class InputIt>
+    template <class InputIt>
     PriorityQueue(InputIt first, InputIt last, const Compare& comparator, const Container& cont);
 
-    template<class InputIt>
-    PriorityQueue(InputIt first, InputIt last, const Compare& comparator = Compare{},
-                  Container&& cont = Container{});
+    template <class InputIt>
+    PriorityQueue(InputIt first, InputIt last, const Compare& comparator = Compare{}, Container&& cont = Container{});
     //@}
     // Skipping Allocator-specific template constructors.
 
@@ -73,7 +71,7 @@ public:
     bool empty() const;
     size_type size() const;
 
-    //{@
+    //@{
     /// Push an element to the priority queue.
     ///
     /// If insertion to the underlying `Container` invalidates
@@ -148,130 +146,129 @@ private:
 
 /// Implementation
 
-template<class T, class Container, class Compare>
-PriorityQueue<T, Container, Compare>::PriorityQueue(const Compare& comparator, const Container& cont):
-    Compare(comparator), m_queue(cont)
+template <class T, class Container, class Compare>
+PriorityQueue<T, Container, Compare>::PriorityQueue(const Compare& comparator, const Container& cont)
+    : Compare(comparator)
+    , m_queue(cont)
 {
 }
 
-template<class T, class Container, class Compare>
-PriorityQueue<T, Container, Compare>::PriorityQueue(const Compare& comparator, Container&& cont):
-    Compare(comparator), m_queue(std::move(cont))
+template <class T, class Container, class Compare>
+PriorityQueue<T, Container, Compare>::PriorityQueue(const Compare& comparator, Container&& cont)
+    : Compare(comparator)
+    , m_queue(std::move(cont))
 {
 }
 
-template<class T, class Container, class Compare>
-template<class InputIt>
-PriorityQueue<T, Container, Compare>::PriorityQueue(InputIt first, InputIt last,
-                                                    const Compare& comparator, const Container& cont):
-    Compare(comparator), m_queue(cont)
-{
-    for (auto it = first; it != last; ++it) {
-        push(*it);
-    }
-}
-
-template<class T, class Container, class Compare>
-template<class InputIt>
-PriorityQueue<T, Container, Compare>::PriorityQueue(InputIt first, InputIt last,
-                                                    const Compare& comparator, Container&& cont):
-    Compare(comparator), m_queue(std::move(cont))
+template <class T, class Container, class Compare>
+template <class InputIt>
+PriorityQueue<T, Container, Compare>::PriorityQueue(InputIt first, InputIt last, const Compare& comparator,
+                                                    const Container& cont)
+    : Compare(comparator)
+    , m_queue(cont)
 {
     for (auto it = first; it != last; ++it) {
         push(*it);
     }
 }
 
-template<class T, class Container, class Compare>
-typename PriorityQueue<T, Container, Compare>::size_type
-PriorityQueue<T, Container, Compare>::size() const
+template <class T, class Container, class Compare>
+template <class InputIt>
+PriorityQueue<T, Container, Compare>::PriorityQueue(InputIt first, InputIt last, const Compare& comparator,
+                                                    Container&& cont)
+    : Compare(comparator)
+    , m_queue(std::move(cont))
+{
+    for (auto it = first; it != last; ++it) {
+        push(*it);
+    }
+}
+
+template <class T, class Container, class Compare>
+typename PriorityQueue<T, Container, Compare>::size_type PriorityQueue<T, Container, Compare>::size() const
 {
     return m_queue.size();
 }
 
-template<class T, class Container, class Compare>
+template <class T, class Container, class Compare>
 bool PriorityQueue<T, Container, Compare>::empty() const
 {
     return m_queue.empty();
 }
 
-template<class T, class Container, class Compare>
+template <class T, class Container, class Compare>
 void PriorityQueue<T, Container, Compare>::push(const T& element)
 {
     auto it = std::lower_bound(m_queue.begin(), m_queue.end(), element, compare());
     m_queue.insert(it, element);
 }
 
-template<class T, class Container, class Compare>
+template <class T, class Container, class Compare>
 void PriorityQueue<T, Container, Compare>::push(T&& element)
 {
     auto it = std::lower_bound(m_queue.begin(), m_queue.end(), element, compare());
     m_queue.insert(it, std::move(element));
 }
 
-template<class T, class Container, class Compare>
+template <class T, class Container, class Compare>
 void PriorityQueue<T, Container, Compare>::pop()
 {
     m_queue.pop_back();
 }
 
-template<class T, class Container, class Compare>
-typename PriorityQueue<T, Container, Compare>::const_reference
-PriorityQueue<T, Container, Compare>::top() const
+template <class T, class Container, class Compare>
+typename PriorityQueue<T, Container, Compare>::const_reference PriorityQueue<T, Container, Compare>::top() const
 {
     return m_queue.back();
 }
 
-template<class T, class Container, class Compare>
-typename PriorityQueue<T, Container, Compare>::value_type
-PriorityQueue<T, Container, Compare>::pop_top()
+template <class T, class Container, class Compare>
+typename PriorityQueue<T, Container, Compare>::value_type PriorityQueue<T, Container, Compare>::pop_top()
 {
     value_type value = std::move(m_queue.back());
     m_queue.pop_back();
     return value;
 }
 
-template<class T, class Container, class Compare>
+template <class T, class Container, class Compare>
 Compare& PriorityQueue<T, Container, Compare>::compare()
 {
     return *this;
 }
 
-template<class T, class Container, class Compare>
+template <class T, class Container, class Compare>
 const Compare& PriorityQueue<T, Container, Compare>::compare() const
 {
     return *this;
 }
 
-template<class T, class Container, class Compare>
-typename PriorityQueue<T, Container, Compare>::const_iterator
-PriorityQueue<T, Container, Compare>::begin() const
+template <class T, class Container, class Compare>
+typename PriorityQueue<T, Container, Compare>::const_iterator PriorityQueue<T, Container, Compare>::begin() const
 {
     return m_queue.begin();
 }
 
-template<class T, class Container, class Compare>
-typename PriorityQueue<T, Container, Compare>::const_iterator
-PriorityQueue<T, Container, Compare>::end() const
+template <class T, class Container, class Compare>
+typename PriorityQueue<T, Container, Compare>::const_iterator PriorityQueue<T, Container, Compare>::end() const
 {
     return m_queue.end();
 }
 
-template<class T, class Container, class Compare>
+template <class T, class Container, class Compare>
 typename PriorityQueue<T, Container, Compare>::const_reverse_iterator
 PriorityQueue<T, Container, Compare>::rbegin() const
 {
     return m_queue.rbegin();
 }
 
-template<class T, class Container, class Compare>
+template <class T, class Container, class Compare>
 typename PriorityQueue<T, Container, Compare>::const_reverse_iterator
 PriorityQueue<T, Container, Compare>::rend() const
 {
     return m_queue.rend();
 }
 
-template<class T, class Container, class Compare>
+template <class T, class Container, class Compare>
 typename PriorityQueue<T, Container, Compare>::value_type
 PriorityQueue<T, Container, Compare>::erase(const_iterator it)
 {
@@ -282,29 +279,26 @@ PriorityQueue<T, Container, Compare>::erase(const_iterator it)
     return value;
 }
 
-template<class T, class Container, class Compare>
+template <class T, class Container, class Compare>
 void PriorityQueue<T, Container, Compare>::clear()
 {
     m_queue.clear();
 }
 
-template<class T, class Container, class Compare>
+template <class T, class Container, class Compare>
 void PriorityQueue<T, Container, Compare>::reserve(size_type sz)
 {
     m_queue.reserve(sz);
 }
 
-template<class T, class Container, class Compare>
+template <class T, class Container, class Compare>
 void PriorityQueue<T, Container, Compare>::swap(PriorityQueue& other)
 {
     using std::swap;
     swap(m_queue, other.m_queue);
     swap(compare(), other.compare());
 }
-
-
 }
 }
 
 #endif // REALM_UTIL_PRIORITY_QUEUE_HPP
-

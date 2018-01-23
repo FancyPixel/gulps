@@ -15,7 +15,7 @@ class GoalViewController: OnboardingViewController, UITextFieldDelegate {
     self.goalBackgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self.goalTextField, action: #selector(UIResponder.becomeFirstResponder)))
   }
 
-  func dismissAndSave() {
+  @objc func dismissAndSave() {
     guard let text = goalTextField.text else {
       return
     }
@@ -27,7 +27,7 @@ class GoalViewController: OnboardingViewController, UITextFieldDelegate {
 
     var goal = 0.0
     if let number = numberFormatter.number(from: text) {
-      goal = number as Double
+      goal = number.doubleValue
     }
 
     self.userDefaults.set(goal, forKey: Constants.Gulp.goal.key())

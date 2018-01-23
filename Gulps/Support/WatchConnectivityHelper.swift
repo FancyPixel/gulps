@@ -14,7 +14,7 @@ import WatchConnectivity
  `WatchConnectivityHelper` handles the connection with WatchOS2
  */
 public struct WatchConnectivityHelper {
-  fileprivate let session: WCSession? = WCSession.isSupported() ? WCSession.default() : nil
+  fileprivate let session: WCSession? = WCSession.isSupported() ? WCSession.default : nil
 
   /**
    Establishes the connection between the app and WatchOS2
@@ -35,7 +35,7 @@ public struct WatchConnectivityHelper {
    */
   public func setupWatchUpdates() -> NotificationToken {
     sendWatchData()
-    return EntryHandler.sharedHandler.realm.addNotificationBlock { note, realm in
+    return EntryHandler.sharedHandler.realm.observe { note, realm in
       // Once a change in Realm is triggered, refresh the watch data
       self.sendWatchData()
     }

@@ -30,7 +30,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, WCSessionDelegate {
       return
     }
 
-    let session  = WCSession.default()
+    let session  = WCSession.default
     session.delegate = self
     session.activate()
   }
@@ -42,7 +42,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, WCSessionDelegate {
 
     do {
       let context = WatchEntryHelper.sharedHelper.applicationContext()
-      try WCSession.default().updateApplicationContext(context)
+      try WCSession.default.updateApplicationContext(context)
     } catch {
       print("Unable to send cache data to WCSession: \(error)")
     }

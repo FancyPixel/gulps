@@ -67,7 +67,7 @@ class CalendarViewController: UIViewController, JTCalendarDataSource {
     initAnimations()
   }
 
-  func presentStats(_ sender: UIBarButtonItem) {
+  @objc func presentStats(_ sender: UIBarButtonItem) {
     animateShareView()
   }
 

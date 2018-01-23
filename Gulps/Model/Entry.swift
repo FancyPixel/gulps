@@ -5,10 +5,10 @@ import RealmSwift
  An Entry represents an entire day worth of input
  */
 open class Entry: Object {
-  dynamic open var date = Entry.defaultDate()
-  dynamic open var quantity = 0.0
-  dynamic open var percentage = 0.0
-  dynamic open var goal = 0.0
+  @objc dynamic open var date = Entry.defaultDate()
+  @objc dynamic open var quantity = 0.0
+  @objc dynamic open var percentage = 0.0
+  @objc dynamic open var goal = 0.0
   open let gulps = List<Gulp>()
 
   /**

@@ -10,17 +10,17 @@ extension DrinkViewController {
 
   func animateStarButton() {
     let rotate = POPSpringAnimation(propertyNamed: kPOPLayerRotation)
-    rotate?.toValue = 2 * M_PI - M_PI_4 / 2
+    rotate?.toValue = 2 * Double.pi - Double.pi / 8
     rotate?.springBounciness = 5
     rotate?.removedOnCompletion = true
 
     let scale = POPSpringAnimation(propertyNamed: kPOPViewScaleXY)
     scale?.toValue = NSValue(cgPoint: CGPoint(x: 0.8, y: 0.8))
     scale?.removedOnCompletion = true
-    scale?.completionBlock = {(_,_) in
+    scale?.completionBlock = { (_,_) in
       let sway = POPBasicAnimation(propertyNamed: kPOPLayerRotation)
-      sway?.fromValue = -M_PI_4 / 2
-      sway?.toValue = M_PI_4 / 2
+      sway?.fromValue = -Double.pi / 8
+      sway?.toValue = Double.pi / 8
       sway?.duration = 0.75
       sway?.repeatForever = true
       sway?.autoreverses = true
@@ -36,10 +36,10 @@ extension DrinkViewController {
 
     let rotate = POPSpringAnimation(propertyNamed: kPOPLayerRotation)
     rotate?.fromValue = 0
-    rotate?.toValue = -M_PI + M_PI_4
+    rotate?.toValue = -Double.pi + Double.pi / 4
     rotate?.springBounciness = 5
     rotate?.removedOnCompletion = true
-    rotate?.completionBlock = {(_, _) in
+    rotate?.completionBlock = { (_, _) in
       self.addButton.isUserInteractionEnabled = true
       _ = [self.smallButton, self.largeButton].map({$0.isUserInteractionEnabled = true})
       self.expanded = true
@@ -95,7 +95,7 @@ extension DrinkViewController {
     addButton.isUserInteractionEnabled = false
 
     let rotate = POPSpringAnimation(propertyNamed: kPOPLayerRotation)
-    rotate?.fromValue = -M_PI + M_PI_4
+    rotate?.fromValue = -Double.pi + Double.pi / 4
     rotate?.toValue = 0
     rotate?.springBounciness = 5
 

@@ -8,7 +8,7 @@ def common_pods
   pod 'AMWaveTransition', '~> 0.5'
   pod 'AHKActionSheet', '~> 0.5'
   pod 'pop', '~> 1.0'
-  pod 'AMPopTip', '~> 0.7'
+  pod 'AMPopTip'
   pod 'UICountingLabel', '~> 1.2'
   pod 'JTCalendar', git: 'https://github.com/andreamazz/JTCalendar', branch: 'develop'
   pod 'BAFluidView', '~> 0.2.3'
@@ -26,8 +26,8 @@ end
 
 target 'GulpsTests' do
   common_pods
-  pod 'Nimble', '~> 5.0.0'
-  pod 'Quick', '~> 0.10.0'
-  pod 'Nimble-Snapshots', '~> 4.2.0'
-  pod 'FBSnapshotTestCase', '2.1.3'
+  pod 'Nimble'
+  pod 'Quick'
+  pod 'Nimble-Snapshots'
+  pod 'FBSnapshotTestCase'
 end
