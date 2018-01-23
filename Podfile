@@ -1,5 +1,7 @@
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '9.0'
+inhibit_all_warnings!
+use_frameworks!
 
 def common_pods
   pod 'RealmSwift'
@@ -15,6 +17,7 @@ end
 
 target 'Gulps' do
   common_pods
+  pod 'Reveal-SDK', :configurations => ['Debug']
 end
 
 target 'GulpsToday' do
@@ -27,15 +30,4 @@ target 'GulpsTests' do
   pod 'Quick', '~> 0.10.0'
   pod 'Nimble-Snapshots', '~> 4.2.0'
   pod 'FBSnapshotTestCase', '2.1.3'
-end
-
-inhibit_all_warnings!
-use_frameworks!
-
-post_install do |installer|
-  installer.pods_project.targets.each do |target|
-    target.build_configurations.each do |config|
-      config.build_settings['ENABLE_BITCODE'] = 'NO'
-    end
-  end
 end

@@ -46,6 +46,17 @@ open class EntryHandler: NSObject {
     return objects.first
   }
 
+  open func createEntryForDate(_ date: Date) -> Entry {
+    let dateFormat = DateFormatter()
+    dateFormat.dateFormat = "yyyy-MM-dd"
+    let newEntry = Entry()
+    newEntry.date = dateFormat.string(from: date)
+    try! realm.write {
+      self.realm.add(newEntry, update: true)
+    }
+    return newEntry
+  }
+
   /**
    Returns the current entry if available, or creates a new one instead
    - returns: Entry
@@ -84,10 +95,18 @@ open class EntryHandler: NSObject {
    - parameter date: The sample date
    */
   open func addGulp(_ quantity: Double, date: Date?) {
-    HealthKitHelper.sharedHelper.saveSample(quantity)
-    let entry = currentEntry()
+    HealthKitHelper.sharedHelper.saveSample(quantity, date: date)
+    var entry: Entry?
+    if let date = date {
+      entry = entryForDate(date)
+      if entry == nil {
+        entry = createEntryForDate(date)
+      }
+    } else {
+      entry = currentEntry()
+    }
     try! realm.write {
-      entry.addGulp(quantity, goal: self.userDefaults.double(forKey: Constants.Gulp.goal.key()), date: date)
+      entry?.addGulp(quantity, goal: self.userDefaults.double(forKey: Constants.Gulp.goal.key()), date: date)
     }
   }
 

@@ -22,6 +22,7 @@ PODS:
   - Realm/Headers (1.1.0)
   - RealmSwift (1.1.0):
     - Realm (= 1.1.0)
+  - Reveal-SDK (2)
   - UICountingLabel (1.4.0)
 
 DEPENDENCIES:
@@ -37,6 +38,7 @@ DEPENDENCIES:
   - pop (~> 1.0)
   - Quick (~> 0.10.0)
   - RealmSwift
+  - Reveal-SDK
   - UICountingLabel (~> 1.2)
 
 EXTERNAL SOURCES:
@@ -63,8 +65,9 @@ SPEC CHECKSUMS:
   Quick: 5d290df1c69d5ee2f0729956dcf0fd9a30447eaa
   Realm: ceecf1a4540c4ce9efe196fe73fa9855bce05bd8
   RealmSwift: 838058b2db95b12cb86bd0cf209df642c33fb60a
+  Reveal-SDK: 4d36a47c7091843eee525b72219e005b90bbac0b
   UICountingLabel: ed5ce5b6d5ef278ff40d99cfa49577a30ab0c87b
 
-PODFILE CHECKSUM: 8c0ac70b44ea8464b80dbbb39aac47effe749ba0
+PODFILE CHECKSUM: bd06ae46eca920e0aa9084b9378b6c61608e0726
 
 COCOAPODS: 1.1.0.rc.2

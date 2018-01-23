@@ -2,6 +2,8 @@
 "notification text" = "Remember to drink some water!";
 "Liters" = "Liters";
 "Ounces" = "Ounces";
+"gulp.big" = "Big Gulp";
+"gulp.small" = "Small Gulp";
 
 /* Main */
 "drink title" = "Drink!";
@@ -17,6 +19,7 @@
 "share text" = "Keeping healthy! I drank %d %@ of water over %d days. https://goo.gl/reTyQU @GulpsApp";
 "unit format" = "%@ drank over";
 "goal met" = "Goal Met!";
+"portion.add" = "Add a new portion:";
 
 /* Settings */
 "settings title" = "Preferences";
@@ -39,3 +42,4 @@
 
 /* HealthKit */
 "health.poptip" = "You can enable the Apple Health export in the settings";
+

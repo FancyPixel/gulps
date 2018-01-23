@@ -2,6 +2,7 @@ import UIKit
 import JTCalendar
 import pop
 import UICountingLabel
+import AHKActionSheet
 
 class CalendarViewController: UIViewController, JTCalendarDataSource {
 
@@ -20,6 +21,18 @@ class CalendarViewController: UIViewController, JTCalendarDataSource {
   @IBOutlet weak var measureLabel: UILabel!
   @IBOutlet weak var daysLabel: UILabel!
   @IBOutlet weak var shareButton: UIButton!
+  @IBOutlet weak var addButton: UIButton?
+
+  lazy var actionSheet: AHKActionSheet = {
+    var actionSheet = AHKActionSheet(title: NSLocalizedString("portion.add", comment: ""))
+    actionSheet?.addButton(withTitle: NSLocalizedString("gulp.small", comment: ""), type: .default) { _ in
+      self.addExtraGulp(ofSize: .small)
+    }
+    actionSheet?.addButton(withTitle: NSLocalizedString("gulp.big", comment: ""), type: .default) { _ in
+      self.addExtraGulp(ofSize: .big)
+    }
+    return actionSheet!
+  }()
 
   var quantityLabelStartingConstant = 0.0
   var daysLabelStartingConstant = 0.0
@@ -72,6 +85,20 @@ class CalendarViewController: UIViewController, JTCalendarDataSource {
     dailyLabel.text = dateLabelString(calendar.currentDateSelected ?? Date())
   }
 
+  @IBAction func addExtraGulp() {
+    actionSheet.show()
+  }
+
+  func addExtraGulp(ofSize: Constants.Gulp) {
+    EntryHandler.sharedHandler.addGulp(UserDefaults.groupUserDefaults().double(forKey: ofSize.key()), date: calendar.currentDateSelected)
+    calendar.reloadData()
+    if let date = calendar.currentDateSelected {
+      dailyLabel.text = dateLabelString(date)
+    } else {
+      dailyLabel.text = dateLabelString(Date())
+    }
+  }
+
   @IBAction func shareAction(_ sender: AnyObject) {
     let quantity = Int(EntryHandler.sharedHandler.overallQuantity())
     let days = EntryHandler.sharedHandler.daysTracked()
@@ -92,6 +119,7 @@ class CalendarViewController: UIViewController, JTCalendarDataSource {
 
   func calendar(_ calendar: JTCalendar!, didSelect date: Date!) {
     dailyLabel.text = dateLabelString(date)
+    addButton?.isHidden = (date > Date())
   }
 }
 
@@ -125,12 +153,12 @@ private extension CalendarViewController {
   func dateLabelString(_ date: Date = Date()) -> String {
     if let entry = EntryHandler.sharedHandler.entryForDate(date) {
       if (entry.percentage >= 100) {
-        return NSLocalizedString("goal met", comment: "")
+        return NSLocalizedString("goal met", comment: "") + " (\(entry.formattedPercentage()))"
       } else {
         return entry.formattedPercentage()
       }
     } else {
-      return ""
+      return (date > Date() ? "" : "0%")
     }
   }
 }

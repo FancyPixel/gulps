@@ -92,6 +92,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/JTCalendar/JTCalendar.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Realm/Realm.framework"
   install_framework "$BUILT_PRODUCTS_DIR/RealmSwift/RealmSwift.framework"
+  install_framework "${PODS_ROOT}/Reveal-SDK/RevealServer-2/iOS/RevealServer.framework"
   install_framework "$BUILT_PRODUCTS_DIR/UICountingLabel/UICountingLabel.framework"
   install_framework "$BUILT_PRODUCTS_DIR/pop/pop.framework"
 fi

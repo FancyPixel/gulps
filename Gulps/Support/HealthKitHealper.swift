@@ -34,7 +34,7 @@ open class HealthKitHelper {
    - Parameter value: The sample value
    */
   @available(iOS 9.0, *)
-  func saveSample(_ value: Double) {
+  func saveSample(_ value: Double, date: Date? = nil) {
     if !UserDefaults.groupUserDefaults().bool(forKey: Constants.Health.on.key()) {
       return
     }
@@ -52,7 +52,7 @@ open class HealthKitHelper {
     if (unit == Constants.UnitsOfMeasure.ounces) {
       quantity = HKQuantity(unit: HKUnit.fluidOunceUS(), doubleValue: value)
     }
-    let sample = HKQuantitySample(type: type, quantity: quantity, start: Date(), end: Date())
+    let sample = HKQuantitySample(type: type, quantity: quantity, start: date ?? Date(), end: date ?? Date())
     healthKitStore.save(sample, withCompletion: {
       (success, error) in
       if let error = error {
