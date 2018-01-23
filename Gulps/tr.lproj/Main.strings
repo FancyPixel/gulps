@@ -1,0 +1,126 @@
+
+/* Class = "UITabBarItem"; title = "My progress"; ObjectID = "1AV-yg-enX"; */
+"1AV-yg-enX.title" = "Geçmiş";
+
+/* Class = "UILabel"; text = "Liters drank over"; ObjectID = "4E2-NO-CiF"; */
+"4E2-NO-CiF.text" = "Limitin üzerinde içtin.";
+
+/* Class = "UILabel"; text = "Export data to Health"; ObjectID = "72o-fo-Kke"; */
+"72o-fo-Kke.text" = "Veriyi dışarı aktar";
+
+/* Class = "UITabBarItem"; title = "Preferences"; ObjectID = "BBe-Kb-DPg"; */
+"BBe-Kb-DPg.title" = "Tercihler";
+
+/* Class = "UILabel"; text = "Small gulp"; ObjectID = "Brt-M3-CC4"; */
+"Brt-M3-CC4.text" = "Küçük Yudum";
+
+/* Class = "UITableViewSection"; headerTitle = "Notifications"; ObjectID = "Cqk-U1-F6w"; */
+"Cqk-U1-F6w.headerTitle" = "Bildirimler";
+
+/* Class = "UILabel"; text = "Oz"; ObjectID = "DT8-cB-ShB"; */
+"DT8-cB-ShB.text" = "Oz";
+
+/* Class = "UITextField"; text = "2"; ObjectID = "Heo-vz-8M3"; */
+"Heo-vz-8M3.text" = "2";
+
+/* Class = "UITextField"; text = "0,2"; ObjectID = "HpM-IE-rg0"; */
+"HpM-IE-rg0.text" = "0,2";
+
+/* Class = "UILabel"; text = "Liters"; ObjectID = "Jwx-tY-nJI"; */
+"Jwx-tY-nJI.text" = "Litre";
+
+/* Class = "UIButton"; normalTitle = "Nope"; ObjectID = "KcM-qN-18r"; */
+"KcM-qN-18r.normalTitle" = "Hayır";
+
+/* Class = "UITableViewSection"; headerTitle = "Settings"; ObjectID = "M6x-da-DQK"; */
+"M6x-da-DQK.headerTitle" = "Ayarlar";
+
+/* Class = "UILabel"; text = "0%"; ObjectID = "Nja-Uo-jJw"; */
+"Nja-Uo-jJw.text" = "0%";
+
+/* Class = "UILabel"; text = "From"; ObjectID = "Pnc-7E-Kee"; */
+"Pnc-7E-Kee.text" = "Bitiş";
+
+/* Class = "UIButton"; normalTitle = "Sure!"; ObjectID = "QXZ-Em-FFP"; */
+"QXZ-Em-FFP.normalTitle" = "Kesinlikle!";
+
+/* Class = "UILabel"; text = "200"; ObjectID = "R2u-Oc-VLI"; */
+"R2u-Oc-VLI.text" = "200";
+
+/* Class = "UILabel"; text = "How about rating Gulps on the AppStore? We always appreciate the feedback!"; ObjectID = "R9l-6a-fbg"; */
+"R9l-6a-fbg.text" = "App Store'da Gulps'i derecelendirmeye ne dersin? Geri bildirimleriniz bizi çok memnun eder!";
+
+/* Class = "UILabel"; text = "Oz"; ObjectID = "RVh-z0-hYc"; */
+"RVh-z0-hYc.text" = "Oz";
+
+/* Class = "UITextField"; text = "0,5"; ObjectID = "SBF-ug-rBd"; */
+"SBF-ug-rBd.text" = "0,5";
+
+/* Class = "UITableViewSection"; headerTitle = "Portions"; ObjectID = "Uhu-cr-ZJf"; */
+"Uhu-cr-ZJf.headerTitle" = "Miktar";
+
+/* Class = "UILabel"; text = "Remind me to drink"; ObjectID = "XIg-ci-rnk"; */
+"XIg-ci-rnk.text" = "Su içmeyi hatırlat";
+
+/* Class = "UILabel"; text = "8:00"; ObjectID = "aBp-Ni-lCc"; */
+"aBp-Ni-lCc.text" = "8:00";
+
+/* Class = "UITabBarItem"; title = "Drink"; ObjectID = "acW-dT-cKf"; */
+"acW-dT-cKf.title" = "Su iç";
+
+/* Class = "UILabel"; text = "Yay!"; ObjectID = "ee7-af-1yT"; */
+"ee7-af-1yT.text" = "Süper!";
+
+/* Class = "UILabel"; text = "22:00"; ObjectID = "en4-wz-CaR"; */
+"en4-wz-CaR.text" = "22:00";
+
+/* Class = "UILabel"; text = "To"; ObjectID = "f3c-OV-GHw"; */
+"f3c-OV-GHw.text" = "Başlangıç";
+
+/* Class = "UILabel"; text = "days"; ObjectID = "jpZ-Ht-zcx"; */
+"jpZ-Ht-zcx.text" = "günler";
+
+/* Class = "UITableViewSection"; headerTitle = "Apple Health"; ObjectID = "kL3-zV-Q1y"; */
+"kL3-zV-Q1y.headerTitle" = "Apple Health";
+
+/* Class = "UIButton"; normalTitle = "Contact us"; ObjectID = "lX0-8d-2KC"; */
+"lX0-8d-2KC.normalTitle" = "Bize ulaşın";
+
+/* Class = "UILabel"; text = "2 hours"; ObjectID = "llL-4J-aC6"; */
+"llL-4J-aC6.text" = "2 saat";
+
+/* Class = "UILabel"; text = "200"; ObjectID = "lon-Jb-3Cm"; */
+"lon-Jb-3Cm.text" = "200";
+
+/* Class = "UILabel"; text = "0%"; ObjectID = "mEa-Xq-QB6"; */
+"mEa-Xq-QB6.text" = "0%";
+
+/* Class = "UILabel"; text = "Unit of mesure"; ObjectID = "mud-m1-HKI"; */
+"mud-m1-HKI.text" = "Ölçü Birimi";
+
+/* Class = "UILabel"; text = "Oz"; ObjectID = "nbd-CS-kU7"; */
+"nbd-CS-kU7.text" = "Ons";
+
+/* Class = "UIButton"; normalTitle = "Close"; ObjectID = "nce-Ji-tce"; */
+"nce-Ji-tce.normalTitle" = "Kapat";
+
+/* Class = "UILabel"; text = "Daily goal"; ObjectID = "pt1-x1-O82"; */
+"pt1-x1-O82.text" = "Günlük Hedef";
+
+/* Class = "UILabel"; text = "Good job keeping healthy! \nBy the way, we’d love some feedback! How do you feel about Gulps? "; ObjectID = "q2X-D7-DBk"; */
+"q2X-D7-DBk.text" = "Harika bir iş başardınız! \nBu arada, Biz geri bildirimleri çok severiz! Gulps hakkında ne düşünüyorsun?";
+
+/* Class = "UILabel"; text = "Sorry to hear that! Is there any way we can improve your experience with Gulps? Contact us, we'd love your feedback!"; ObjectID = "upP-xB-nVY"; */
+"upP-xB-nVY.text" = "Bunu duyduğuma üzüldüm! Gulps'le deneyiminizi geliştirebilmemizin bir yolu var mı? Bize ulaşın, görüşlerinizi bilmeyi çok isteriz!";
+
+/* Class = "UILabel"; text = "Every"; ObjectID = "w1F-Cx-bRx"; */
+"w1F-Cx-bRx.text" = "Yenileme";
+
+/* Class = "UIButton"; normalTitle = "Share"; ObjectID = "xk6-tX-JQH"; */
+"xk6-tX-JQH.normalTitle" = "Paylaş";
+
+/* Class = "UILabel"; text = "Big gulp"; ObjectID = "yCk-VT-Gki"; */
+"yCk-VT-Gki.text" = "Büyük Yudum";
+
+/* Class = "UILabel"; text = "Way to go!"; ObjectID = "zyj-Gr-Ph8"; */
+"zyj-Gr-Ph8.text" = "Yürü be!";

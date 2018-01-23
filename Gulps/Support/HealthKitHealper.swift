@@ -23,7 +23,7 @@ open class HealthKitHelper {
     healthKitStore.requestAuthorization(toShare: types, read: nil) {
       (success, error) in
       if !success {
-        print(error)
+        print(error!)
       }
     }
   }
