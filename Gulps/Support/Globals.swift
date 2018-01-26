@@ -28,6 +28,10 @@ class Globals {
       AHKActionSheet.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white, NSAttributedStringKey.font: font]
       AHKActionSheet.appearance().buttonTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white, NSAttributedStringKey.font: font]
       AHKActionSheet.appearance().cancelButtonTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white, NSAttributedStringKey.font: font]
+      if #available(iOS 11.0, *) {
+        let bottomInset = UIApplication.shared.delegate?.window??.safeAreaInsets.bottom ?? 0.0
+        AHKActionSheet.appearance().cancelButtonHeight = 44.0 + bottomInset
+      }
     }
   }
 

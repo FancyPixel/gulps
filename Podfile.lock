@@ -4,12 +4,12 @@ PODS:
   - AMWaveTransition (0.6.2)
   - BAFluidView (0.2.3)
   - BubbleTransition (2.0.2)
+  - CVCalendar (1.6.0)
   - FBSnapshotTestCase (2.1.4):
     - FBSnapshotTestCase/SwiftSupport (= 2.1.4)
   - FBSnapshotTestCase/Core (2.1.4)
   - FBSnapshotTestCase/SwiftSupport (2.1.4):
     - FBSnapshotTestCase/Core
-  - JTCalendar (1.1.16)
   - Nimble (7.0.3)
   - Nimble-Snapshots (6.3.0):
     - Nimble-Snapshots/Core (= 6.3.0)
@@ -32,8 +32,8 @@ DEPENDENCIES:
   - AMWaveTransition (~> 0.5)
   - BAFluidView (~> 0.2.3)
   - BubbleTransition (~> 2.0.0)
+  - CVCalendar
   - FBSnapshotTestCase
-  - JTCalendar (from `https://github.com/andreamazz/JTCalendar`, branch `develop`)
   - Nimble
   - Nimble-Snapshots
   - pop (~> 1.0)
@@ -42,24 +42,14 @@ DEPENDENCIES:
   - Reveal-SDK
   - UICountingLabel (~> 1.2)
 
-EXTERNAL SOURCES:
-  JTCalendar:
-    :branch: develop
-    :git: https://github.com/andreamazz/JTCalendar
-
-CHECKOUT OPTIONS:
-  JTCalendar:
-    :commit: c70c46b438ef48e9dc35e7721498080c61a82e22
-    :git: https://github.com/andreamazz/JTCalendar
-
 SPEC CHECKSUMS:
   AHKActionSheet: f0b312b5c689f72924d231c39dae140ecd5c1d46
   AMPopTip: 0eba2f6fe939ca06f1ba5c5db1f0d0d10f4a758a
   AMWaveTransition: 98952310574779e4ca7e7f4d89f8b1043cdad171
   BAFluidView: 5d84ef109831b97740f75b6d785e51f13fa08398
   BubbleTransition: 7d98ed7d56f0940e83f350a98103ad473491c769
+  CVCalendar: d6da92b579dfc1e0939e324dfffd2e1045cf69b1
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
-  JTCalendar: 4cc527e2babd446ce4b96a23c257e5a02fbdac26
   Nimble: 7f5a9c447a33002645a071bddafbfb24ea70e0ac
   Nimble-Snapshots: f5459b5b091678dc942d03ec4741cacb58ba4a52
   pop: 82ca6b068ce9278fd350fd9dd09482a0ce9492e6
@@ -69,6 +59,6 @@ SPEC CHECKSUMS:
   Reveal-SDK: ccc2b0f8014965ea448b7534a7c2c8da232b75e8
   UICountingLabel: faf890b505d96312e324a86718f031fafffb0ccb
 
-PODFILE CHECKSUM: e7e296fc58d427bee676b22072a261e5aade5cf2
+PODFILE CHECKSUM: dcfe721514b02ede29cf1bcac966ad46f6b3135c
 
 COCOAPODS: 1.4.0

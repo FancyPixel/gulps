@@ -116,9 +116,7 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
         }
       }
     }
-    if let actionSheet = actionSheet {
-      actionSheet.show()
-    }
+    actionSheet?.show()
   }
 
   func updateNotificationSetting(_ key: String, value: Int) {

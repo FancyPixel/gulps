@@ -10,7 +10,7 @@ def common_pods
   pod 'pop', '~> 1.0'
   pod 'AMPopTip'
   pod 'UICountingLabel', '~> 1.2'
-  pod 'JTCalendar', git: 'https://github.com/andreamazz/JTCalendar', branch: 'develop'
+  pod 'CVCalendar'
   pod 'BAFluidView', '~> 0.2.3'
   pod 'BubbleTransition', '~> 2.0.0'
 end

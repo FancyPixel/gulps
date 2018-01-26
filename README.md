@@ -7,6 +7,7 @@
 Gulps lets you track your daily water intake in a simple and intuitive way: set your goal, set your usual portion, and start keeping track from within the app or the widget in your notification center.  
 
 This app is available in the [AppStore](https://itunes.apple.com/us/app/gulps/id979057304?ls=1&mt=8). Learn more [here](http://www.fancypixel.it/gulps/index.html).
+Please do not redistribute under your own name.
 
 # Description
 
@@ -26,6 +27,7 @@ Feel free to edit the file, we'll include your translation in the next release a
 
 ### Contributors
 
+- Thanks to [Tiago Martinho](https://github.com/tiagomartinho) for the Swift 4 update, iPhone X support and calendar overhaul.
 - Thanks to [Donny Wals](https://github.com/donnywals) for the Dutch translation.
 - Thanks to [Alexandre Thomas](https://github.com/thomalexandre) for the French translation.
 - Thanks to [Durul Dalkanat](https://github.com/durul) for the Turkish translation.
