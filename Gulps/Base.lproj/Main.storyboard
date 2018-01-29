@@ -498,13 +498,16 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nja-Uo-jJw">
-                                <rect key="frame" x="16" y="378" width="343" height="35"/>
+                                <rect key="frame" x="16" y="378" width="343" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="2t4-Qt-d7J"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="KaushanScript-Regular" family="Kaushan Script" pointSize="24"/>
                                 <color key="textColor" red="0.17367905378341675" green="0.40215393900871277" blue="0.76835298538208008" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H5r-gG-zXV">
-                                <rect key="frame" x="339" y="384.5" width="20" height="22"/>
+                                <rect key="frame" x="339" y="387" width="20" height="22"/>
                                 <state key="normal" image="tiny-add"/>
                                 <connections>
                                     <action selector="addExtraGulp" destination="BxV-3X-jF2" eventType="touchUpInside" id="fvi-tx-qYD"/>
