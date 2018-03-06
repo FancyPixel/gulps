@@ -1,0 +1,12 @@
+
+/* Class = "WKInterfaceLabel"; text = "Remember to drink some water!"; ObjectID = "XkS-y5-khE"; */
+"XkS-y5-khE.text" = "Выпейте немного воды!";
+
+/* Class = "WKInterfaceMenuItem"; title = "+ Small Gulp"; ObjectID = "bMN-XA-clU"; */
+"bMN-XA-clU.title" = "+ Маленький стакан";
+
+/* Class = "WKInterfaceMenuItem"; title = "+ Big Gulp"; ObjectID = "d2z-2A-k0p"; */
+"d2z-2A-k0p.title" = "+ Большой стакан";
+
+/* Class = "WKInterfaceLabel"; text = "DAILY GOAL: 0%"; ObjectID = "jsO-fa-6Yq"; */
+"jsO-fa-6Yq.text" = "Ежедневная цель: 0%";

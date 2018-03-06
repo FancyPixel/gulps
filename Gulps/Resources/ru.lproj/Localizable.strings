@@ -1,0 +1,44 @@
+/* Globals */
+"notification text" = "Не забудьте выпить немного воды!";
+"Liters" = "Литры";
+"Ounces" = "Унции";
+"gulp.big" = "Большой стакан";
+"gulp.small" = "Маленький стакан";
+
+/* Main */
+"drink title" = "Выпей воды!";
+"undo poptip" = "Нажми здесь, чтобы отменить последнее действие";
+"undo title" = "Отменить";
+"undo message" = "Отменить последнее действие?";
+"No" = "Нет";
+"Yes" = "Да";
+
+/* Calendar */
+"progress title" = "Мой прогресс";
+"share poptip" = "Здесь можете провериить свой общий прогресс";
+"share text" = "Оставайтесь здоровыми! Я выпиил(а) %d %@ воды в течение %d дней. https://goo.gl/reTyQU @GulpsApp";
+"unit format" = "%@ выпито";
+"goal met" = "Цель достигнута!";
+"portion.add" = "Добавь новую порцию:";
+
+/* Settings */
+"settings title" = "Предпочтения";
+"hours" = "часа(ов)";
+"hour" = "час";
+"unit of measure title" = "Единица измерения";
+"from:" = "С:";
+"to:" = "До:";
+"every:" = "Каждые:";
+
+/* Today ext */
+"way to go" = "Отлично!";
+"today extension format" = "%@ %@ выпито сегодня (%@ от твоей цели)";
+"confirm" = "Подтвердить";
+"never mind" = "Неважно";
+
+/* WatchKit */
+"daily goal:" = "Ежедневная цель: ";
+"watch.please_onboard" = "Пожалуйста, убедитесь, что Вы сначала запустили приложение на телефоне";
+
+/* HealthKit */
+"health.poptip" = "Вы можете позволить экспортировать данные в Apple Health в настройках приложения";
