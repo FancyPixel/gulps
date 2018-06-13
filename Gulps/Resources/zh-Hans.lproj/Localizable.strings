@@ -1,0 +1,45 @@
+/* Globals */
+"notification text" = "记得喝一些水!";
+"Liters" = "升";
+"Ounces" = "盎司";
+"gulp.big" = "大杯";
+"gulp.small" = "小杯";
+
+/* Main */
+"drink title" = "喝水!";
+"undo poptip" = "点击这里撤销你最后一次行为";
+"undo title" = "撤销";
+"undo message" = "撤销最后一次行为?";
+"No" = "否";
+"Yes" = "是";
+
+/* Calendar */
+"progress title" = "我的记录";
+"share poptip" = "你可以在设置里开启苹果健康导出";
+"share text" = "保持健康! 我喝了 %d %@ 水 超过 %d 天. https://goo.gl/reTyQU @GulpsApp";
+"unit format" = "%@ 完成";
+"goal met" = "太棒了!";
+"portion.add" = "增加一个新的份量:";
+
+/* Settings */
+"settings title" = "偏好";
+"hours" = "小时";
+"hour" = "小时";
+"unit of measure title" = "测量单位:";
+"from:" = "从:";
+"to:" = "到:";
+"every:" = "间隔:";
+
+/* Today ext */
+"way to go" = "加油!";
+"today extension format" = "%@ %@ 喝 天 (%@ of 你的目标)";
+"confirm" = "确认";
+"never mind" = "不再提醒";
+
+/* WatchKit */
+"daily goal:" = "每天目标: ";
+"watch.please_onboard" = "请打开手机app应用软件!";
+
+/* HealthKit */
+"health.poptip" = "你可以在设置里开启苹果健康导出";
+
