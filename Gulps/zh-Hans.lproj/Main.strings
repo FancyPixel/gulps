@@ -1,0 +1,129 @@
+
+/* Class = "UITabBarItem"; title = "My progress"; ObjectID = "1AV-yg-enX"; */
+"1AV-yg-enX.title" = "我的记录";
+
+/* Class = "UILabel"; text = "Liters drank over"; ObjectID = "4E2-NO-CiF"; */
+"4E2-NO-CiF.text" = "喝水量";
+
+/* Class = "UILabel"; text = "Export data to Health"; ObjectID = "72o-fo-Kke"; */
+"72o-fo-Kke.text" = "导出数据到健康";
+
+/* Class = "UITabBarItem"; title = "Preferences"; ObjectID = "BBe-Kb-DPg"; */
+"BBe-Kb-DPg.title" = "偏好";
+
+/* Class = "UILabel"; text = "Small gulp"; ObjectID = "Brt-M3-CC4"; */
+"Brt-M3-CC4.text" = "小杯";
+
+/* Class = "UITableViewSection"; headerTitle = "Notifications"; ObjectID = "Cqk-U1-F6w"; */
+"Cqk-U1-F6w.headerTitle" = "通知";
+
+/* Class = "UILabel"; text = "Oz"; ObjectID = "DT8-cB-ShB"; */
+"DT8-cB-ShB.text" = "Oz";
+
+/* Class = "UITextField"; text = "2"; ObjectID = "Heo-vz-8M3"; */
+"Heo-vz-8M3.text" = "2";
+
+/* Class = "UITextField"; text = "0,2"; ObjectID = "HpM-IE-rg0"; */
+"HpM-IE-rg0.text" = "0,2";
+
+/* Class = "UILabel"; text = "Liters"; ObjectID = "Jwx-tY-nJI"; */
+"Jwx-tY-nJI.text" = "升";
+
+/* Class = "UIButton"; normalTitle = "Nope"; ObjectID = "KcM-qN-18r"; */
+"KcM-qN-18r.normalTitle" = "没有";
+
+/* Class = "UITableViewSection"; headerTitle = "Settings"; ObjectID = "M6x-da-DQK"; */
+"M6x-da-DQK.headerTitle" = "设置";
+
+/* Class = "UILabel"; text = "0%"; ObjectID = "Nja-Uo-jJw"; */
+"Nja-Uo-jJw.text" = "0%";
+
+/* Class = "UILabel"; text = "From"; ObjectID = "Pnc-7E-Kee"; */
+"Pnc-7E-Kee.text" = "从";
+
+/* Class = "UIButton"; normalTitle = "Sure!"; ObjectID = "QXZ-Em-FFP"; */
+"QXZ-Em-FFP.normalTitle" = "确定!";
+
+/* Class = "UILabel"; text = "200"; ObjectID = "R2u-Oc-VLI"; */
+"R2u-Oc-VLI.text" = "200";
+
+/* Class = "UILabel"; text = "How about rating Gulps on the AppStore? We always appreciate the feedback!"; ObjectID = "R9l-6a-fbg"; */
+"R9l-6a-fbg.text" = "How about rating Gulps on the AppStore? We always appreciate the feedback!";
+
+/* Class = "UILabel"; text = "Oz"; ObjectID = "RVh-z0-hYc"; */
+"RVh-z0-hYc.text" = "Oz";
+
+/* Class = "UITextField"; text = "0,5"; ObjectID = "SBF-ug-rBd"; */
+"SBF-ug-rBd.text" = "0,5";
+
+/* Class = "UITableViewSection"; headerTitle = "Portions"; ObjectID = "Uhu-cr-ZJf"; */
+"Uhu-cr-ZJf.headerTitle" = "份量";
+
+/* Class = "UILabel"; text = "Month"; ObjectID = "W59-Vd-725"; */
+"W59-Vd-725.text" = "月";
+
+/* Class = "UILabel"; text = "Remind me to drink"; ObjectID = "XIg-ci-rnk"; */
+"XIg-ci-rnk.text" = "提醒我喝水";
+
+/* Class = "UILabel"; text = "8:00"; ObjectID = "aBp-Ni-lCc"; */
+"aBp-Ni-lCc.text" = "8:00";
+
+/* Class = "UITabBarItem"; title = "Drink"; ObjectID = "acW-dT-cKf"; */
+"acW-dT-cKf.title" = "喝水";
+
+/* Class = "UILabel"; text = "Yay!"; ObjectID = "ee7-af-1yT"; */
+"ee7-af-1yT.text" = "哇!";
+
+/* Class = "UILabel"; text = "22:00"; ObjectID = "en4-wz-CaR"; */
+"en4-wz-CaR.text" = "22:00";
+
+/* Class = "UILabel"; text = "To"; ObjectID = "f3c-OV-GHw"; */
+"f3c-OV-GHw.text" = "到";
+
+/* Class = "UILabel"; text = "days"; ObjectID = "jpZ-Ht-zcx"; */
+"jpZ-Ht-zcx.text" = "天";
+
+/* Class = "UITableViewSection"; headerTitle = "Apple Health"; ObjectID = "kL3-zV-Q1y"; */
+"kL3-zV-Q1y.headerTitle" = "苹果健康";
+
+/* Class = "UIButton"; normalTitle = "Contact us"; ObjectID = "lX0-8d-2KC"; */
+"lX0-8d-2KC.normalTitle" = "联系我们";
+
+/* Class = "UILabel"; text = "2 hours"; ObjectID = "llL-4J-aC6"; */
+"llL-4J-aC6.text" = "2 小时";
+
+/* Class = "UILabel"; text = "200"; ObjectID = "lon-Jb-3Cm"; */
+"lon-Jb-3Cm.text" = "200";
+
+/* Class = "UILabel"; text = "0%"; ObjectID = "mEa-Xq-QB6"; */
+"mEa-Xq-QB6.text" = "0%";
+
+/* Class = "UILabel"; text = "Unit of mesure"; ObjectID = "mud-m1-HKI"; */
+"mud-m1-HKI.text" = "测量单位";
+
+/* Class = "UILabel"; text = "Oz"; ObjectID = "nbd-CS-kU7"; */
+"nbd-CS-kU7.text" = "Oz";
+
+/* Class = "UIButton"; normalTitle = "Close"; ObjectID = "nce-Ji-tce"; */
+"nce-Ji-tce.normalTitle" = "关闭";
+
+/* Class = "UILabel"; text = "Daily goal"; ObjectID = "pt1-x1-O82"; */
+"pt1-x1-O82.text" = "每天目标";
+
+/* Class = "UILabel"; text = "Good job keeping healthy! \nBy the way, we’d love some feedback! How do you feel about Gulps? "; ObjectID = "q2X-D7-DBk"; */
+"q2X-D7-DBk.text" = "保持健康做的不错! \n顺便说一下, 我们想要一些反馈! 你感觉 Gulps 怎么样? ";
+
+/* Class = "UILabel"; text = "Sorry to hear that! Is there any way we can improve your experience with Gulps? Contact us, we'd love your feedback!"; ObjectID = "upP-xB-nVY"; */
+"upP-xB-nVY.text" = "抱歉!有没有什么方法可以改善你的喝水体验？联系我们，我们希望你的反馈;
+
+/* Class = "UILabel"; text = "Every"; ObjectID = "w1F-Cx-bRx"; */
+"w1F-Cx-bRx.text" = "间隔";
+
+/* Class = "UIButton"; normalTitle = "Share"; ObjectID = "xk6-tX-JQH"; */
+"xk6-tX-JQH.normalTitle" = "分享";
+
+/* Class = "UILabel"; text = "Big gulp"; ObjectID = "yCk-VT-Gki"; */
+"yCk-VT-Gki.text" = "大杯";
+
+/* Class = "UILabel"; text = "Way to go!"; ObjectID = "zyj-Gr-Ph8"; */
+"zyj-Gr-Ph8.text" = "加油!";

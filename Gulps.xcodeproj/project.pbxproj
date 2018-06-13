@@ -244,6 +244,12 @@
 		85BE9125F183E330586CDDB6 /* Pods-GulpsToday.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GulpsToday.release.xcconfig"; path = "Pods/Target Support Files/Pods-GulpsToday/Pods-GulpsToday.release.xcconfig"; sourceTree = "<group>"; };
 		8CCE464AA359610B577E6289 /* Pods_GulpsToday.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GulpsToday.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DF54771E89C4A5561E72D70 /* Pods-Gulps.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gulps.release.xcconfig"; path = "Pods/Target Support Files/Pods-Gulps/Pods-Gulps.release.xcconfig"; sourceTree = "<group>"; };
+		BAAB7C4820D1583000045B48 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		BAAB7C4920D1583000045B48 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		BAAB7C4A20D1583000045B48 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Onboarding.strings"; sourceTree = "<group>"; };
+		BAAB7C4B20D1583000045B48 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Interface.strings"; sourceTree = "<group>"; };
+		BAAB7C4C20D1583000045B48 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		BAAB7C4D20D1583100045B48 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		F8B4C7511CC6AFD599BF0ECB /* Pods-GulpsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GulpsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GulpsTests/Pods-GulpsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		FF3158CC554F243E9F4ABEB9 /* Pods-GulpsToday.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GulpsToday.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GulpsToday/Pods-GulpsToday.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -720,6 +726,7 @@
 				it,
 				tr,
 				ru,
+				"zh-Hans",
 			);
 			mainGroup = 65F44C121AF24B440093A3E9;
 			productRefGroup = 65F44C1C1AF24B440093A3E9 /* Products */;
@@ -1082,6 +1089,7 @@
 				65F55F281B593A0A008653F2 /* it */,
 				2AB916D51E82B36600301C45 /* tr */,
 				4D6006F72042B35600F17BD4 /* ru */,
+				BAAB7C4A20D1583000045B48 /* zh-Hans */,
 			);
 			name = Onboarding.storyboard;
 			sourceTree = "<group>";
@@ -1093,6 +1101,7 @@
 				65E94C6D1BBC13BF00A65B30 /* it */,
 				2AB916D81E82B36600301C45 /* tr */,
 				4D6006FA2042B35600F17BD4 /* ru */,
+				BAAB7C4D20D1583100045B48 /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1104,6 +1113,7 @@
 				65F55F261B5938BE008653F2 /* it */,
 				2AB916D31E82B36600301C45 /* tr */,
 				4D6006F52042B35600F17BD4 /* ru */,
+				BAAB7C4820D1583000045B48 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1114,6 +1124,7 @@
 				65F44C2A1AF24B440093A3E9 /* Base */,
 				2AB916D41E82B36600301C45 /* tr */,
 				4D6006F62042B35600F17BD4 /* ru */,
+				BAAB7C4920D1583000045B48 /* zh-Hans */,
 			);
 			name = LaunchScreen.xib;
 			sourceTree = "<group>";
@@ -1125,6 +1136,7 @@
 				65F55F2A1B593C16008653F2 /* it */,
 				2AB916D61E82B36600301C45 /* tr */,
 				4D6006F82042B35600F17BD4 /* ru */,
+				BAAB7C4B20D1583000045B48 /* zh-Hans */,
 			);
 			name = Interface.storyboard;
 			sourceTree = "<group>";
@@ -1136,6 +1148,7 @@
 				65F55F241B592DA2008653F2 /* en */,
 				2AB916D71E82B36600301C45 /* tr */,
 				4D6006F92042B35600F17BD4 /* ru */,
+				BAAB7C4C20D1583000045B48 /* zh-Hans */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
