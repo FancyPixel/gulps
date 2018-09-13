@@ -11,6 +11,7 @@ open class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewCon
   @IBOutlet open weak var addButton: UIButton!
   @IBOutlet open weak var smallButton: UIButton!
   @IBOutlet open weak var largeButton: UIButton!
+  @IBOutlet open weak var mediumButton: UIButton!
   @IBOutlet open weak var minusButton: UIButton!
   @IBOutlet weak var starButton: UIButton!
   @IBOutlet weak var meterContainerView: UIView!
@@ -140,8 +141,20 @@ open class DrinkViewController: UIViewController, UIAlertViewDelegate, UIViewCon
                                  popTipText: NSLocalizedString("undo poptip", comment: ""),
                                  inView: view,
                                  fromFrame: minusButton.frame)
+    
+    
+    if sender == smallButton{
+      updateCurrentEntry(userDefaults.double(forKey: Constants.Gulp.small.key()))
+    } else if sender == mediumButton{
+      updateCurrentEntry(userDefaults.double(forKey: Constants.Gulp.medium.key()))
+    } else if sender == largeButton{
+      updateCurrentEntry(userDefaults.double(forKey: Constants.Gulp.big.key()))
+    }
+    
+    /*
     let portion = smallButton == sender ? Constants.Gulp.small.key() : Constants.Gulp.big.key()
     updateCurrentEntry(userDefaults.double(forKey: portion))
+     */
   }
 
   @IBAction func removeGulpAction() {

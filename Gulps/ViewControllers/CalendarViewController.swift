@@ -28,6 +28,9 @@ class CalendarViewController: UIViewController {
     actionSheet?.addButton(withTitle: NSLocalizedString("gulp.small", comment: ""), type: .default) { _ in
       self.addExtraGulp(ofSize: .small)
     }
+    actionSheet?.addButton(withTitle: NSLocalizedString("gulp.medium", comment: ""), type: .default) { _ in
+      self.addExtraGulp(ofSize: .medium)
+    }
     actionSheet?.addButton(withTitle: NSLocalizedString("gulp.big", comment: ""), type: .default) { _ in
       self.addExtraGulp(ofSize: .big)
     }
