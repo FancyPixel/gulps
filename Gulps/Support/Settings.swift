@@ -9,6 +9,7 @@ open class Settings {
       userDefaults.set(true, forKey: "DEFAULTS_INSTALLED")
       userDefaults.set(Constants.UnitsOfMeasure.liters.rawValue, forKey: Constants.General.unitOfMeasure.key())
       userDefaults.set(0.5, forKey: Constants.Gulp.big.key())
+      userDefaults.set(0.3, forKey: Constants.Gulp.medium.key())
       userDefaults.set(0.2, forKey: Constants.Gulp.small.key())
       userDefaults.set(2, forKey: Constants.Gulp.goal.key())
       userDefaults.set(false, forKey: Constants.Health.on.key())
@@ -23,6 +24,7 @@ open class Settings {
   open class func registerDefaultsForLiter() {
     let userDefaults = UserDefaults.groupUserDefaults()
     userDefaults.set(0.5, forKey: Constants.Gulp.big.key())
+    userDefaults.set(0.3, forKey: Constants.Gulp.medium.key())
     userDefaults.set(0.2, forKey: Constants.Gulp.small.key())
     userDefaults.set(2, forKey: Constants.Gulp.goal.key())
     userDefaults.synchronize()
@@ -31,6 +33,7 @@ open class Settings {
   open class func registerDefaultsForOunces() {
     let userDefaults = UserDefaults.groupUserDefaults()
     userDefaults.set(16, forKey: Constants.Gulp.big.key())
+    userDefaults.set(12, forKey: Constants.Gulp.medium.key())
     userDefaults.set(8, forKey: Constants.Gulp.small.key())
     userDefaults.set(64, forKey: Constants.Gulp.goal.key())
     userDefaults.synchronize()
@@ -42,6 +45,7 @@ open class Settings {
       Constants.Gulp.goal.key(): userDefaults.double(forKey: Constants.Gulp.goal.key()),
       Constants.WatchContext.current.key(): current,
       Constants.Gulp.small.key(): userDefaults.double(forKey: Constants.Gulp.small.key()),
+      Constants.Gulp.medium.key(): userDefaults.double(forKey: Constants.Gulp.medium.key()),
       Constants.Gulp.big.key(): userDefaults.double(forKey: Constants.Gulp.big.key())]
   }
 }

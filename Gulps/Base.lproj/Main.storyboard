@@ -94,6 +94,25 @@
                                     <action selector="selectionButtonAction:" destination="9pv-A4-QxB" eventType="touchUpInside" id="5Lu-Gy-RKQ"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bcX-tx-Vhr" userLabel="Medium Button">
+                                <rect key="frame" x="153" y="454" width="70" height="70"/>
+                                <color key="backgroundColor" red="0.21960784310000001" green="0.49019607840000001" blue="0.81176470590000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="70" id="O5W-Vq-zMW"/>
+                                    <constraint firstAttribute="height" constant="70" id="vKO-bn-vEO"/>
+                                </constraints>
+                                <state key="normal" image="medium-icon">
+                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="35"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="selectionButtonAction:" destination="9pv-A4-QxB" eventType="touchUpInside" id="CLi-Bm-rGf"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fW6-sm-t8g" userLabel="Add Button">
                                 <rect key="frame" x="153" y="454" width="70" height="70"/>
                                 <color key="backgroundColor" red="0.2196078431372549" green="0.49019607843137253" blue="0.81176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -146,6 +165,7 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="xap-Vb-CbA" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" constant="10" id="0Kf-6v-f86"/>
+                            <constraint firstItem="bcX-tx-Vhr" firstAttribute="top" secondItem="v5a-2l-qvB" secondAttribute="top" id="0Rd-W8-Dm2"/>
                             <constraint firstItem="fW6-sm-t8g" firstAttribute="top" relation="greaterThanOrEqual" secondItem="mEa-Xq-QB6" secondAttribute="bottom" id="4AF-N9-UE2"/>
                             <constraint firstItem="mEa-Xq-QB6" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" id="5Kw-Si-2x9"/>
                             <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="fW6-sm-t8g" secondAttribute="bottom" priority="999" constant="30" id="6mW-Ks-Okm"/>
@@ -164,6 +184,7 @@
                             <constraint firstItem="mEa-Xq-QB6" firstAttribute="trailing" secondItem="tsR-hK-woN" secondAttribute="trailingMargin" id="j6h-Zi-1LS"/>
                             <constraint firstAttribute="centerX" secondItem="mEa-Xq-QB6" secondAttribute="centerX" id="oP9-VY-fG7"/>
                             <constraint firstItem="xap-Vb-CbA" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="10" id="pAa-mt-Iaf"/>
+                            <constraint firstItem="bcX-tx-Vhr" firstAttribute="leading" secondItem="v5a-2l-qvB" secondAttribute="leading" id="r3P-Qe-hG0"/>
                             <constraint firstItem="uvx-n6-xp2" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="8" id="x61-hZ-WvW"/>
                             <constraint firstItem="fW6-sm-t8g" firstAttribute="centerY" secondItem="v5a-2l-qvB" secondAttribute="centerY" id="zwb-N5-8xQ"/>
                         </constraints>
@@ -173,6 +194,7 @@
                         <outlet property="addButton" destination="fW6-sm-t8g" id="ikl-2M-eYC"/>
                         <outlet property="largeButton" destination="v5a-2l-qvB" id="dvl-3k-q65"/>
                         <outlet property="maskImage" destination="JPp-1k-zdE" id="5Xq-AA-c2u"/>
+                        <outlet property="mediumButton" destination="bcX-tx-Vhr" id="gDu-Zf-cV1"/>
                         <outlet property="meterContainerView" destination="mQX-uO-zkr" id="Xzc-Jh-LMx"/>
                         <outlet property="minusButton" destination="uvx-n6-xp2" id="Id3-s0-QqO"/>
                         <outlet property="percentageLabel" destination="mEa-Xq-QB6" id="VWN-Gf-0ip"/>
@@ -725,8 +747,51 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PreferencesCll" id="XVN-Hr-Cdk">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PreferencesCll" id="EhX-RL-Rh8">
                                         <rect key="frame" x="0.0" y="191.5" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EhX-RL-Rh8" id="7x8-j0-Y5k">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="2" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="s5F-j1-JSB" userLabel="Medium Portion Text">
+                                                    <rect key="frame" x="245" y="0.0" width="90" height="43"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="90" id="idr-Pc-lug"/>
+                                                    </constraints>
+                                                    <color key="textColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="decimalPad"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="t9K-A9-XHF" id="rat-zk-41q"/>
+                                                    </connections>
+                                                </textField>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Medium gulp" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l4S-LA-Tke">
+                                                    <rect key="frame" x="15" y="12" width="95" height="20"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Oz" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JaH-AL-TZk">
+                                                    <rect key="frame" x="341" y="13" width="19" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="l4S-LA-Tke" firstAttribute="leading" secondItem="7x8-j0-Y5k" secondAttribute="leading" constant="15" id="2nX-XA-3fg"/>
+                                                <constraint firstAttribute="bottom" secondItem="s5F-j1-JSB" secondAttribute="bottom" id="GIy-0W-kfp"/>
+                                                <constraint firstAttribute="centerY" secondItem="l4S-LA-Tke" secondAttribute="centerY" id="L37-oD-bwi"/>
+                                                <constraint firstAttribute="trailing" secondItem="s5F-j1-JSB" secondAttribute="trailing" constant="40" id="O5B-mC-Ptz"/>
+                                                <constraint firstAttribute="trailing" secondItem="JaH-AL-TZk" secondAttribute="trailing" constant="15" id="Twa-ek-Wv7"/>
+                                                <constraint firstAttribute="centerY" secondItem="JaH-AL-TZk" secondAttribute="centerY" id="atM-M1-Cwh"/>
+                                                <constraint firstItem="s5F-j1-JSB" firstAttribute="top" secondItem="7x8-j0-Y5k" secondAttribute="top" id="sbB-1K-kWs"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PreferencesCll" id="XVN-Hr-Cdk">
+                                        <rect key="frame" x="0.0" y="235.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XVN-Hr-Cdk" id="Y7x-zR-Q8Y">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -769,7 +834,7 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PreferencesCll" id="Q2W-7p-buv">
-                                        <rect key="frame" x="0.0" y="235.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="279.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Q2W-7p-buv" id="MoA-It-qj5">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -816,7 +881,7 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                             <tableViewSection headerTitle="Notifications" id="Cqk-U1-F6w">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PreferencesCll" id="Ii4-wt-fc6">
-                                        <rect key="frame" x="0.0" y="327.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="371.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ii4-wt-fc6" id="1Hn-44-t70">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -846,7 +911,7 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PreferencesCll" textLabel="Pnc-7E-Kee" detailTextLabel="aBp-Ni-lCc" style="IBUITableViewCellStyleValue1" id="dxR-vc-Rwx">
-                                        <rect key="frame" x="0.0" y="371.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="415.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dxR-vc-Rwx" id="iKk-wz-AiX">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -870,7 +935,7 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PreferencesCll" textLabel="f3c-OV-GHw" detailTextLabel="en4-wz-CaR" style="IBUITableViewCellStyleValue1" id="sFs-MK-DDj">
-                                        <rect key="frame" x="0.0" y="415.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="459.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sFs-MK-DDj" id="9UG-1o-lam">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -894,7 +959,7 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PreferencesCll" textLabel="w1F-Cx-bRx" detailTextLabel="llL-4J-aC6" style="IBUITableViewCellStyleValue1" id="8v4-HN-MkF">
-                                        <rect key="frame" x="0.0" y="459.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="503.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8v4-HN-MkF" id="wVD-TQ-jfH">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -922,7 +987,7 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                             <tableViewSection headerTitle="Apple Health" id="kL3-zV-Q1y">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PreferencesCll" id="rtu-Sv-Asn">
-                                        <rect key="frame" x="0.0" y="551.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="595.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rtu-Sv-Asn" id="NkK-Il-Fd3">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -964,6 +1029,7 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                         <outlet property="dailyGoalText" destination="Heo-vz-8M3" id="lHN-ai-OMb"/>
                         <outlet property="healthSwitch" destination="fU5-mD-m8k" id="83t-Hg-eil"/>
                         <outlet property="largePortionText" destination="SBF-ug-rBd" id="kj7-UV-Usx"/>
+                        <outlet property="mediumPortionText" destination="s5F-j1-JSB" id="rlg-b1-QZo"/>
                         <outlet property="notificationFromLabel" destination="aBp-Ni-lCc" id="LSm-ya-Pih"/>
                         <outlet property="notificationIntervalLabel" destination="llL-4J-aC6" id="GL4-VE-3Io"/>
                         <outlet property="notificationSwitch" destination="mua-Mo-rXC" id="Yto-mm-Dvj"/>
@@ -973,6 +1039,7 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
                         <outletCollection property="uomLabels" destination="nbd-CS-kU7" collectionClass="NSMutableArray" id="yn9-xJ-SuH"/>
                         <outletCollection property="uomLabels" destination="RVh-z0-hYc" collectionClass="NSMutableArray" id="sey-OP-a1C"/>
                         <outletCollection property="uomLabels" destination="DT8-cB-ShB" collectionClass="NSMutableArray" id="kN2-it-PpW"/>
+                        <outletCollection property="uomLabels" destination="JaH-AL-TZk" collectionClass="NSMutableArray" id="EH0-Cb-i7p"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gao-yG-C7y" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1020,11 +1087,12 @@ By the way, we’d love some feedback! How do you feel about Gulps? </string>
         <image name="drink-icon" width="30" height="30"/>
         <image name="drop" width="300" height="300"/>
         <image name="large-icon" width="40" height="40"/>
+        <image name="medium-icon" width="40" height="40"/>
         <image name="minus-icon" width="24" height="24"/>
         <image name="plus-icon" width="40" height="40"/>
         <image name="sad" width="100" height="100"/>
         <image name="settings-icon" width="30" height="30"/>
-        <image name="small-icon" width="40" height="40"/>
+        <image name="small-icon" width="168" height="168"/>
         <image name="smile" width="100" height="100"/>
         <image name="star" width="50" height="50"/>
         <image name="tiny-add" width="20" height="20"/>
