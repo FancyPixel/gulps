@@ -53,14 +53,7 @@ class NotificationHelper {
     smallAction.activationMode = .background
     smallAction.isAuthenticationRequired = false
     smallAction.isDestructive = false
-    
-    let mediumAction = UIMutableUserNotificationAction()
-    mediumAction.identifier = "MEDIUM_ACTION"
-    mediumAction.title = "Medium Gulp"
-    mediumAction.activationMode = .background
-    mediumAction.isAuthenticationRequired = false
-    mediumAction.isDestructive = false
-    
+
     let bigAction = UIMutableUserNotificationAction()
     bigAction.identifier = "BIG_ACTION"
     bigAction.title = "Big Gulp"
@@ -70,8 +63,8 @@ class NotificationHelper {
 
     let gulpCategory = UIMutableUserNotificationCategory()
     gulpCategory.identifier = "GULP_CATEGORY"
-    gulpCategory.setActions([smallAction,mediumAction, bigAction], for: .default)
-    gulpCategory.setActions([smallAction, mediumAction, bigAction], for: .minimal)
+    gulpCategory.setActions([smallAction, bigAction], for: .default)
+    gulpCategory.setActions([smallAction, bigAction], for: .minimal)
 
     let categories = NSSet(object: gulpCategory) as! Set<UIUserNotificationCategory>
     let settings = UIUserNotificationSettings(types: [.alert, .sound], categories: categories)
@@ -85,9 +78,6 @@ class NotificationHelper {
       }
       if (identifier == "SMALL_ACTION") {
         NotificationHelper.addGulp(Constants.Gulp.small.key())
-      }
-      if (identifier == "MEDIUM_ACTION"){
-        NotificationHelper.addGulp(Constants.Gulp.medium.key())
       }
     }
   }

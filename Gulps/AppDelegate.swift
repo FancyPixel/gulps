@@ -100,7 +100,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
 
   enum ShortcutType: String {
     case Big = "it.fancypixel.gulps.big"
-    case Medium = "it.fancypixel.gulps.medium"
     case Small = "it.fancypixel.gulps.small"
   }
 
@@ -113,8 +112,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     if let type = ShortcutType(rawValue: item.type) {
       if (type == .Small) {
         EntryHandler.sharedHandler.addGulp(UserDefaults.groupUserDefaults().double(forKey: Constants.Gulp.small.key()))
-      } else if (type == .Medium){
-        EntryHandler.sharedHandler.addGulp(UserDefaults.groupUserDefaults().double(forKey: Constants.Gulp.medium.key()))
       } else if (type == .Big) {
         EntryHandler.sharedHandler.addGulp(UserDefaults.groupUserDefaults().double(forKey: Constants.Gulp.big.key()))
       }

@@ -6,7 +6,6 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
 
   @IBOutlet weak var unitOfMesureLabel: UILabel!
   @IBOutlet weak var smallPortionText: UITextField!
-  @IBOutlet weak var mediumPortionText: UITextField!
   @IBOutlet weak var largePortionText: UITextField!
   @IBOutlet weak var dailyGoalText: UITextField!
   @IBOutlet weak var notificationSwitch: UISwitch!
@@ -55,7 +54,6 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
 
     _ = uomLabels.map({$0.text = suffix})
     largePortionText.text = numberFormatter.string(for: userDefaults.double(forKey: Constants.Gulp.big.key()))
-    mediumPortionText.text = numberFormatter.string(for: userDefaults.double(forKey: Constants.Gulp.medium.key()))
     smallPortionText.text = numberFormatter.string(for: userDefaults.double(forKey: Constants.Gulp.small.key()))
     dailyGoalText.text = numberFormatter.string(for: userDefaults.double(forKey: Constants.Gulp.goal.key()))
 
@@ -156,7 +154,7 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
     if (section == 0) {
       return 1
     } else if (section == 1) {
-      return 4
+      return 3
     } else if (section == 2) {
       if UserDefaults.groupUserDefaults().bool(forKey: Constants.Notification.on.key()) {
         return 4
@@ -174,9 +172,6 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
     }
     if (textField == largePortionText) {
       storeText(largePortionText, toKey: Constants.Gulp.big.key())
-    }
-    if (textField == mediumPortionText) {
-      storeText(mediumPortionText, toKey: Constants.Gulp.medium.key())
     }
     if (textField == dailyGoalText) {
       storeText(dailyGoalText, toKey: Constants.Gulp.goal.key())

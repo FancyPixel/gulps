@@ -53,15 +53,13 @@ public enum Constants {
   }
 
   public enum Gulp: Int {
-    case big, medium, small, goal
+    case big, small, goal
     public func key() -> String {
       switch self {
       case .big:
         return "GULP_BIG"
       case .small:
         return "GULP_SMALL"
-      case .medium:
-        return "GULP_MEDIUM"
       case .goal:
         return "PORTION_GOAL"
       }
