@@ -5,8 +5,10 @@
 [![Join the chat at https://gitter.im/FancyPixel/gulps](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/FancyPixel/gulps?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 # Read-only
-We believe in open software, that's why we shared Gulp's codebase from the start. However, some bad actors decided to take the code and republish the same app as is, putting a price tag on it. As much as we would love to keep adding new features in conjunction with the new iOS features released every year, we can't afford to fuel this kind of behaviour. This is why the public repository is now read only and it will no longer be updated. 
-We'd also like to thank everyone that contributed in these years, your help was deeply appreciated. 
+We believe in open software, that's why we shared Gulp's codebase from the start. However, some bad actors decided to take the code and republish the same app as is, putting a price tag on it. As much as we would love to keep adding new features in conjunction with the new iOS features released every year, we can't afford to fuel this kind of behaviour. This is why the public repository is now read only and it will no longer be updated.  
+
+We'd also like to thank everyone that contributed in these years, your help was deeply appreciated.  
+
 If you whant to contact us, feel free to send us an email [here](https://www.fancypixel.it/contact/), we're always open for freelance work or for just a chat.
 
 # Info
