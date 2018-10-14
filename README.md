@@ -4,26 +4,17 @@
 ![Swift 4.0](https://img.shields.io/badge/swift-4.0-orange.svg)
 [![Join the chat at https://gitter.im/FancyPixel/gulps](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/FancyPixel/gulps?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+# Read-only
+We believe in open software, that's why we shared Gulp's codebase from the start. However, some bad actors decided to take the code and republish the same app as is, putting a price tag on it. As much as we would love to keep adding new features in conjunction with the new iOS features released every year, we can't afford to fuel this kind of behaviour. This is why the public repository is now read only and it will no longer be updated. 
+We'd also like to thank everyone that contributed in these years, your help was deeply appreciated. 
+If you whant to contact us, feel free to send us an email [here](https://www.fancypixel.it/contact/), we're always open for freelance work or for just a chat.
+
+# Info
+
 Gulps lets you track your daily water intake in a simple and intuitive way: set your goal, set your usual portion, and start keeping track from within the app or the widget in your notification center.  
 
 This app is available in the [AppStore](https://itunes.apple.com/us/app/gulps/id979057304?ls=1&mt=8). Learn more [here](http://www.fancypixel.it/gulps/index.html).
 Please do not redistribute under your own name.
-
-# Description
-
-You can learn how to share data between an iOS app and its extension using Realm.  
-
-# Setup
-* Run ```pod install```
-* Run ```open Gulps.xcworkspace```
-* Run `bundle`
-* Run `ruby change_bundle.rb your.bundle.identifier.BigGulp`
-* Match the bundle identifier in `Constants.swift`
-
-# Contribute
-Want to contribute? We would really appreciate a hand with the localization in other languages. You can find a spreadsheet with all the strings in the project [here](https://docs.google.com/spreadsheets/d/1vh_b1VNcrsiV3mtwOY1V7tW0LR18wHoE1xCMuigc8pg/edit?usp=sharing).  
-
-Feel free to edit the file, we'll include your translation in the next release and attribute your work.  
 
 ### Contributors
 
